@@ -1,12 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.zephyr.aire</groupId>
-    <artifactId>zephyr-aire</artifactId>
-    <name>zephyr-aire</name>
+    <artifactId>aire</artifactId>
+    <name>aire</name>
     <version>2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.0.RELEASE</version>
+        <relativePath/>
+    </parent>
     <properties>
+
+        <zephyr.version>2.0.0-SNAPSHOT</zephyr.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -14,12 +24,6 @@
 
         <vaadin.version>15.0.0.beta2</vaadin.version>
     </properties>
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.0.RELEASE</version>
-    </parent>
 
     <repositories>
         <!-- The order of definitions matters. Explicitly defining central here to make sure it has the highest priority. -->
@@ -74,6 +78,64 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>io.zephyr</groupId>
+                <artifactId>kernel-api</artifactId>
+                <version>${zephyr.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.github.zafarkhaja</groupId>
+                <artifactId>java-semver</artifactId>
+                <version>0.9.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.zephyr</groupId>
+                <artifactId>kernel-core</artifactId>
+                <version>${zephyr.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.zephyr</groupId>
+                <artifactId>spring-embedded-plugin</artifactId>
+                <version>${zephyr.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.esotericsoftware.yamlbeans/yamlbeans -->
+            <dependency>
+                <groupId>com.esotericsoftware.yamlbeans</groupId>
+                <artifactId>yamlbeans</artifactId>
+                <version>1.13</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-test</artifactId>
+                <version>2.2.3.RELEASE</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.zephyr</groupId>
+                <artifactId>kernel-test-common</artifactId>
+                <version>${zephyr.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.zephyr</groupId>
+                <artifactId>kernel-test</artifactId>
+                <version>${zephyr.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.zephyr</groupId>
+                <artifactId>sunshower-yaml-reader</artifactId>
+                <version>${zephyr.version}</version>
+                <scope>compile</scope>
+            </dependency>
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-bom</artifactId>
@@ -81,10 +143,66 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+
+            <dependency>
+                <groupId>org.jboss.modules</groupId>
+                <artifactId>jboss-modules</artifactId>
+                <version>1.9.2.Final</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <version>2.2.3.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.esotericsoftware.yamlbeans</groupId>
+            <artifactId>yamlbeans</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.modules</groupId>
+            <artifactId>jboss-modules</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>kernel-test-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>kernel-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>sunshower-yaml-reader</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>kernel-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.zafarkhaja</groupId>
+            <artifactId>java-semver</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>kernel-core</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>spring-embedded-plugin</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.vaadin</groupId>
             <!-- Replace artifactId with vaadin-core to use only free components -->

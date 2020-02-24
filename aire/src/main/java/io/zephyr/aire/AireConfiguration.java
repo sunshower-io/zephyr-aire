@@ -1,5 +1,15 @@
 package io.zephyr.aire;
 
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.applayout.AppLayout;
+import com.vaadin.flow.router.Location;
+import com.vaadin.flow.router.Router;
+import com.vaadin.flow.server.RouteRegistry;
+import com.vaadin.flow.server.VaadinContext;
+import com.vaadin.flow.server.VaadinServletContext;
+import com.vaadin.flow.server.startup.ApplicationRouteRegistry;
+import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.theme.lumo.Lumo;
 import io.sunshower.gyre.Scope;
 import io.sunshower.yaml.state.YamlMemento;
 import io.zephyr.kernel.Lifecycle;
@@ -32,14 +42,6 @@ import java.util.ServiceLoader;
 @Configuration
 @Import(EmbeddedSpringConfiguration.class)
 public class AireConfiguration implements ApplicationListener<ContextRefreshedEvent> {
-
-  //
-  //    @Bean
-  //    public FileSystem createFileSystem() {
-  //
-  //
-  //    }
-
   @Bean
   public ClassLoader classLoader(ApplicationContext context) {
     return context.getClassLoader();
@@ -48,8 +50,6 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
   @Bean
   public Memento memento(ClassLoader classLoader) {
     return new YamlMemento();
-    //    return ServiceLoader.load(MementoProvider.class,
-    // classLoader).iterator().next().newMemento();
   }
 
   @Bean
@@ -108,4 +108,5 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
     kernel.getModuleClasspathManager().install(module);
     module.getLifecycle().setState(Lifecycle.State.Installed);
   }
+
 }

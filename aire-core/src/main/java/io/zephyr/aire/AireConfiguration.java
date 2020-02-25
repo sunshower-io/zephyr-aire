@@ -12,10 +12,13 @@ import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 import io.sunshower.gyre.Scope;
 import io.sunshower.yaml.state.YamlMemento;
+import io.zephyr.aire.api.ViewManager;
+import io.zephyr.api.ModuleActivator;
 import io.zephyr.kernel.Lifecycle;
 import io.zephyr.kernel.Module;
 import io.zephyr.kernel.core.*;
 import io.zephyr.kernel.dependencies.DependencyGraph;
+import io.zephyr.kernel.launch.KernelLauncher;
 import io.zephyr.kernel.launch.KernelOptions;
 import io.zephyr.kernel.memento.Memento;
 import io.zephyr.spring.embedded.EmbeddedModuleClasspath;
@@ -29,6 +32,7 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.event.ContextRefreshedEvent;
 
+import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -42,6 +46,7 @@ import java.util.ServiceLoader;
 @Configuration
 @Import(EmbeddedSpringConfiguration.class)
 public class AireConfiguration implements ApplicationListener<ContextRefreshedEvent> {
+
   @Bean
   public ClassLoader classLoader(ApplicationContext context) {
     return context.getClassLoader();
@@ -62,6 +67,12 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
     opts.setHomeDirectory(file);
     SunshowerKernel.setKernelOptions(opts);
     return file;
+  }
+
+
+  @Bean
+  public VaadinContext vaadinContext(ServletContext context) {
+    return new VaadinServletContext(context);
   }
 
   @Bean
@@ -98,15 +109,37 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
     return mgr;
   }
 
+  @Bean
+  public ModuleActivator moduleActivator() {
+    return new AireModuleActivator();
+  }
+
+  @Bean
+  public ViewManager viewManager() {
+    return new VaadinViewManager();
+  }
+
   @Override
   public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
     ApplicationContext context = contextRefreshedEvent.getApplicationContext();
     Module module = context.getBean(Module.class);
     Kernel kernel = context.getBean(Kernel.class);
+    ViewManager viewManager = context.getBean(ViewManager.class);
+    kernel.start();
     DependencyGraph graph = kernel.getModuleManager().getDependencyGraph();
     graph.add(module);
     kernel.getModuleClasspathManager().install(module);
     module.getLifecycle().setState(Lifecycle.State.Installed);
+    kernel
+        .getScheduler()
+        .getKernelExecutor()
+        .submit(
+            () -> {
+              KernelLauncher.main(
+                  new String[] {
+                    "--scan", "--watch", "/home/josiah/sunshower/watch", "--install-on-start"
+                  });
+            });
+    kernel.createContext(module).register(ViewManager.class, viewManager);
   }
-
 }

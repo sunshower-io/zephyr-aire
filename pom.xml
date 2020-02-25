@@ -11,7 +11,9 @@
 
 
     <modules>
-        <module>aire</module>
+        <module>aire-api</module>
+        <module>aire-core</module>
+        <module>zephyr-admin</module>
     </modules>
 
 

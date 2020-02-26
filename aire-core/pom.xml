@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.zephyr.aire</groupId>
-    <artifactId>aire-core</artifactId>
-    <name>aire-core</name>
+    <artifactId>aire</artifactId>
+    <name>aire</name>
     <version>2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -15,37 +15,19 @@
         <relativePath>../aire-parent</relativePath>
     </parent>
 
-    <properties>
-
-        <zephyr.version>2.0.0-SNAPSHOT</zephyr.version>
-        <maven.compiler.source>12</maven.compiler.source>
-        <maven.compiler.target>12</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${vaadin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
-
-        <!--
-        Common dependendcies
-        -->
-
-
-        <dependency>
-            <groupId>io.zephyr</groupId>
-            <artifactId>kernel-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zephyr</groupId>
-            <artifactId>kernel-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-spring-boot-starter</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>aire-api</artifactId>
@@ -54,434 +36,73 @@
 
         <dependency>
             <groupId>io.zephyr</groupId>
-            <artifactId>spring-embedded-plugin</artifactId>
+            <artifactId>zephyr-main</artifactId>
+            <version>${zephyr.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.esotericsoftware.yamlbeans</groupId>
+            <artifactId>yamlbeans</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.modules</groupId>
+            <artifactId>jboss-modules</artifactId>
         </dependency>
 
         <dependency>
             <groupId>io.zephyr</groupId>
-            <artifactId>zephyr-main</artifactId>
-            <version>${zephyr.version}</version>
+            <artifactId>kernel-test-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>kernel-test</artifactId>
         </dependency>
 
         <dependency>
             <groupId>io.zephyr</groupId>
             <artifactId>sunshower-yaml-reader</artifactId>
-            <version>${zephyr.version}</version>
         </dependency>
-
-        <!--
-        End common dependencies
-        -->
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>kernel-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.zafarkhaja</groupId>
+            <artifactId>java-semver</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>io.zephyr</groupId>
-            <artifactId>kernel-test</artifactId>
-            <version>${zephyr.version}</version>
-            <scope>test</scope>
+            <artifactId>kernel-core</artifactId>
         </dependency>
 
 
-    </dependencies>
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>spring-embedded-plugin</artifactId>
+        </dependency>
 
-
-    <!--    <dependencyManagement>-->
-<!--        <dependencies>-->
-<!--            <dependency>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-devtools</artifactId>-->
-<!--                <optional>true</optional>-->
-<!--            </dependency>-->
-
-<!--            <dependency>-->
-<!--                <groupId>io.zephyr</groupId>-->
-<!--                <artifactId>zephyr-main</artifactId>-->
-<!--                <version>${zephyr.version}</version>-->
-<!--                <scope>compile</scope>-->
-<!--            </dependency>-->
-
-<!--            <dependency>-->
-<!--                <groupId>io.zephyr</groupId>-->
-<!--                <artifactId>kernel-api</artifactId>-->
-<!--                <version>${zephyr.version}</version>-->
-<!--                <scope>compile</scope>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>com.github.zafarkhaja</groupId>-->
-<!--                <artifactId>java-semver</artifactId>-->
-<!--                <version>0.9.0</version>-->
-<!--            </dependency>-->
-
-<!--            <dependency>-->
-<!--                <groupId>io.zephyr</groupId>-->
-<!--                <artifactId>kernel-core</artifactId>-->
-<!--                <version>${zephyr.version}</version>-->
-<!--                <scope>compile</scope>-->
-<!--            </dependency>-->
-
-<!--            <dependency>-->
-<!--                <groupId>io.zephyr</groupId>-->
-<!--                <artifactId>spring-embedded-plugin</artifactId>-->
-<!--                <version>${zephyr.version}</version>-->
-<!--                <scope>compile</scope>-->
-<!--            </dependency>-->
-<!--            &lt;!&ndash; https://mvnrepository.com/artifact/com.esotericsoftware.yamlbeans/yamlbeans &ndash;&gt;-->
-<!--            <dependency>-->
-<!--                <groupId>com.esotericsoftware.yamlbeans</groupId>-->
-<!--                <artifactId>yamlbeans</artifactId>-->
-<!--                <version>1.13</version>-->
-<!--            </dependency>-->
-
-<!--            <dependency>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-test</artifactId>-->
-<!--                <version>2.2.3.RELEASE</version>-->
-<!--                <scope>test</scope>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>io.zephyr</groupId>-->
-<!--                <artifactId>zephyr-directory-scanner</artifactId>-->
-<!--                <version>${zephyr.version}</version>-->
-<!--                <optional>true</optional>-->
-<!--            </dependency>-->
-
-<!--            <dependency>-->
-<!--                <groupId>io.zephyr</groupId>-->
-<!--                <artifactId>kernel-test-common</artifactId>-->
-<!--                <version>${zephyr.version}</version>-->
-<!--                <scope>test</scope>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>io.zephyr</groupId>-->
-<!--                <artifactId>kernel-test</artifactId>-->
-<!--                <version>${zephyr.version}</version>-->
-<!--                <scope>test</scope>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>io.zephyr</groupId>-->
-<!--                <artifactId>sunshower-yaml-reader</artifactId>-->
-<!--                <version>${zephyr.version}</version>-->
-<!--                <scope>compile</scope>-->
-<!--            </dependency>-->
-
-
-<!--            <dependency>-->
-<!--                <groupId>org.jboss.modules</groupId>-->
-<!--                <artifactId>jboss-modules</artifactId>-->
-<!--                <version>1.9.2.Final</version>-->
-<!--            </dependency>-->
-
-<!--        </dependencies>-->
-<!--    </dependencyManagement>-->
-
-<!--    <dependencies>-->
-
-
-<!--        <dependency>-->
-<!--            <groupId>io.zephyr</groupId>-->
-<!--            <artifactId>zephyr-directory-scanner</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>io.zephyr.aire</groupId>-->
-<!--            <artifactId>aire-api</artifactId>-->
-<!--            <version>${project.version}</version>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-test</artifactId>-->
-<!--            <version>2.2.3.RELEASE</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.esotericsoftware.yamlbeans</groupId>-->
-<!--            <artifactId>yamlbeans</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.jboss.modules</groupId>-->
-<!--            <artifactId>jboss-modules</artifactId>-->
-<!--        </dependency>-->
-
-<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <groupId>io.zephyr</groupId>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <artifactId>kernel-test-common</artifactId>&ndash;&gt;-->
-<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
-<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <groupId>io.zephyr</groupId>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <artifactId>kernel-test</artifactId>&ndash;&gt;-->
-<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
-
-<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <groupId>io.zephyr</groupId>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <artifactId>sunshower-yaml-reader</artifactId>&ndash;&gt;-->
-<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
-
-<!--        <dependency>-->
-<!--            <groupId>io.zephyr</groupId>-->
-<!--            <artifactId>zephyr-main</artifactId>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>io.zephyr</groupId>-->
-<!--            <artifactId>kernel-api</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.github.zafarkhaja</groupId>-->
-<!--            <artifactId>java-semver</artifactId>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>io.zephyr</groupId>-->
-<!--            <artifactId>kernel-core</artifactId>-->
-<!--        </dependency>-->
-
-
-<!--        <dependency>-->
-<!--            <groupId>io.zephyr</groupId>-->
-<!--            <artifactId>spring-embedded-plugin</artifactId>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>com.vaadin</groupId>-->
-<!--            <artifactId>vaadin</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.vaadin</groupId>-->
-<!--            <artifactId>vaadin-spring-boot-starter</artifactId>-->
-<!--        </dependency>-->
-
-<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <groupId>org.springframework.boot</groupId>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <artifactId>spring-boot-devtools</artifactId>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <optional>true</optional>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <version>2.2.3.RELEASE</version>&ndash;&gt;-->
-<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.vaadin</groupId>-->
-<!--            <artifactId>vaadin-testbench</artifactId>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>io.github.bonigarcia</groupId>-->
-<!--            <artifactId>webdrivermanager</artifactId>-->
-<!--            <version>3.8.1</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-
-
-<!--        &lt;!&ndash; Vaadin dependencies &ndash;&gt;-->
-
-<!--        <dependency>-->
-<!--            <groupId>com.vaadin</groupId>-->
-<!--            <artifactId>vaadin</artifactId>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>com.vaadin.webjar</groupId>-->
-<!--                    <artifactId>*</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.webjars.bowergithub.insites</groupId>-->
-<!--                    <artifactId>*</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.webjars.bowergithub.polymer</groupId>-->
-<!--                    <artifactId>*</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.webjars.bowergithub.polymerelements</groupId>-->
-<!--                    <artifactId>*</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.webjars.bowergithub.vaadin</groupId>-->
-<!--                    <artifactId>*</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.webjars.bowergithub.webcomponents</groupId>-->
-<!--                    <artifactId>*</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.vaadin</groupId>-->
-<!--            <artifactId>vaadin-spring-boot-starter</artifactId>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>com.vaadin</groupId>-->
-<!--                    <artifactId>vaadin-core</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spring-boot-starter</artifactId>
+        </dependency>
 
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.boot</groupId>-->
 <!--            <artifactId>spring-boot-devtools</artifactId>-->
 <!--            <optional>true</optional>-->
 <!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.vaadin</groupId>-->
-<!--            <artifactId>vaadin-testbench</artifactId>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-
-<!--    </dependencies>-->
-
-<!--    <build>-->
-<!--        <pluginManagement>-->
-<!--            <plugins>-->
-<!--                <plugin>-->
-<!--                    <groupId>nl.geodienstencentrum.maven</groupId>-->
-<!--                    <artifactId>sass-maven-plugin</artifactId>-->
-<!--                    <version>3.7.2</version>-->
-<!--                </plugin>-->
-<!--            </plugins>-->
-<!--        </pluginManagement>-->
-
-<!--        <defaultGoal>spring-boot:run</defaultGoal>-->
-<!--        <plugins>-->
-<!--            <plugin>-->
-<!--                <groupId>nl.geodienstencentrum.maven</groupId>-->
-<!--                <artifactId>sass-maven-plugin</artifactId>-->
-
-
-<!--                <configuration>-->
-<!--                    <resources>-->
-<!--                        <resource>-->
-<!--                            <source>-->
-<!--                                <directory>${basedir}/src/main/resources/styles</directory>-->
-<!--                                <includes>-->
-<!--                                    <include>defaults.sass</include>-->
-<!--                                </includes>-->
-<!--                            </source>-->
-<!--                            <destination>${basedir}/frontend/styles</destination>-->
-<!--                        </resource>-->
-<!--                    </resources>-->
-<!--                </configuration>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>generate-css-using-sass</id>-->
-<!--                        <goals>-->
-<!--                            <goal>update-stylesheets</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <wait>500</wait>-->
-<!--                    <maxAttempts>240</maxAttempts>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-
-<!--            &lt;!&ndash;-->
-<!--                Take care of synchronizing java dependencies and imports in-->
-<!--                package.json and main.js files.-->
-<!--                It also creates webpack.config.js if not exists yet.-->
-<!--            &ndash;&gt;-->
-<!--            <plugin>-->
-<!--                <groupId>com.vaadin</groupId>-->
-<!--                <artifactId>vaadin-maven-plugin</artifactId>-->
-<!--                <version>${vaadin.version}</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <goals>-->
-<!--                            <goal>prepare-frontend</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
-<!--    </build>-->
-
-<!--    <profiles>-->
-<!--        <profile>-->
-<!--            &lt;!&ndash; Production mode is activated using -Pproduction &ndash;&gt;-->
-<!--            <id>production</id>-->
-<!--            <properties>-->
-<!--                <vaadin.productionMode>true</vaadin.productionMode>-->
-<!--            </properties>-->
-
-<!--            <dependencies>-->
-<!--                <dependency>-->
-<!--                    <groupId>com.vaadin</groupId>-->
-<!--                    <artifactId>flow-server-production-mode</artifactId>-->
-<!--                </dependency>-->
-<!--            </dependencies>-->
-
-<!--            <build>-->
-<!--                <plugins>-->
-<!--                    <plugin>-->
-<!--                        <groupId>org.springframework.boot</groupId>-->
-<!--                        <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--                        <configuration>-->
-<!--                            <jvmArguments>-Dvaadin.productionMode=false -Xdebug-->
-<!--                                -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000-->
-<!--                            </jvmArguments>-->
-<!--                        </configuration>-->
-<!--                    </plugin>-->
-<!--                    <plugin>-->
-<!--                        <groupId>com.vaadin</groupId>-->
-<!--                        <artifactId>vaadin-maven-plugin</artifactId>-->
-<!--                        <version>${vaadin.version}</version>-->
-<!--                        <executions>-->
-<!--                            <execution>-->
-<!--                                <goals>-->
-<!--                                    <goal>build-frontend</goal>-->
-<!--                                </goals>-->
-<!--                                <phase>compile</phase>-->
-<!--                            </execution>-->
-<!--                        </executions>-->
-<!--                    </plugin>-->
-<!--                </plugins>-->
-<!--            </build>-->
-<!--        </profile>-->
-
-<!--        <profile>-->
-<!--            <id>integration-tests</id>-->
-<!--            <build>-->
-<!--                <plugins>-->
-<!--                    <plugin>-->
-<!--                        <groupId>org.springframework.boot</groupId>-->
-<!--                        <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--                        <executions>-->
-<!--                            <execution>-->
-<!--                                <id>start-spring-boot</id>-->
-<!--                                <phase>pre-integration-test</phase>-->
-<!--                                <goals>-->
-<!--                                    <goal>start</goal>-->
-<!--                                </goals>-->
-<!--                            </execution>-->
-<!--                            <execution>-->
-<!--                                <id>stop-spring-boot</id>-->
-<!--                                <phase>post-integration-test</phase>-->
-<!--                                <goals>-->
-<!--                                    <goal>stop</goal>-->
-<!--                                </goals>-->
-<!--                            </execution>-->
-<!--                        </executions>-->
-<!--                    </plugin>-->
-
-<!--                    &lt;!&ndash; Runs the integration tests (*IT) after the server is started &ndash;&gt;-->
-<!--                    <plugin>-->
-<!--                        <groupId>org.apache.maven.plugins</groupId>-->
-<!--                        <artifactId>maven-failsafe-plugin</artifactId>-->
-<!--                        <executions>-->
-<!--                            <execution>-->
-<!--                                <goals>-->
-<!--                                    <goal>integration-test</goal>-->
-<!--                                    <goal>verify</goal>-->
-<!--                                </goals>-->
-<!--                            </execution>-->
-<!--                        </executions>-->
-<!--                        <configuration>-->
-<!--                            <trimStackTrace>false</trimStackTrace>-->
-<!--                            <enableAssertions>true</enableAssertions>-->
-<!--                        </configuration>-->
-<!--                    </plugin>-->
-<!--                </plugins>-->
-<!--            </build>-->
-<!--        </profile>-->
-
-<!--    </profiles>-->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-testbench</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>

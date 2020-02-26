@@ -20,11 +20,10 @@
         <!--
         project build properties
         -->
-        <maven.compiler.source>12</maven.compiler.source>
-        <maven.compiler.target>12</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
 
 
         <!--
@@ -267,7 +266,9 @@
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-maven-plugin</artifactId>
                         <configuration>
-                            <jvmArguments>-Dvaadin.productionMode</jvmArguments>
+                            <jvmArguments>-Dvaadin.productionMode
+                                -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000
+                            </jvmArguments>
                         </configuration>
                     </plugin>
                     <plugin>

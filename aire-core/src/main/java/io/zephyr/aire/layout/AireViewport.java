@@ -1,6 +1,7 @@
 package io.zephyr.aire.layout;
 
 import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Main;
 
@@ -15,5 +16,7 @@ public class AireViewport extends Composite<Main> implements Viewport {
     header = new AireHeader();
     content = new AireContent();
     getContent().add(header, content);
+
+    getContent().add(new Button("hi"));
   }
 }

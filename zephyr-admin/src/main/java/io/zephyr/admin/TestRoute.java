@@ -8,5 +8,6 @@ import com.vaadin.flow.router.Route;
 public class TestRoute extends VerticalLayout {
 
   public TestRoute() {
+
   }
 }

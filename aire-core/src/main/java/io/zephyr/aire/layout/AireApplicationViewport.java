@@ -35,18 +35,18 @@ public class AireApplicationViewport extends Composite<Main>
 
   private Article main;
 
-  //  private final ComponentFactory<Region> factory;
-  //
-  //  private final EnumMap<Region, Component> components;
+  private final ComponentFactory<Region> factory;
+
+  private final EnumMap<Region, Component> components;
 
   public AireApplicationViewport() {
     this(new AireApplicationViewport.ViewportComponentFactory());
   }
 
   public AireApplicationViewport(ComponentFactory<Region> factory) {
-    //    this.factory = factory;
-    //    this.components = new EnumMap<>(Region.class);
-    //    configureStyles();
+    this.factory = factory;
+    this.components = new EnumMap<>(Region.class);
+    configureStyles();
     configureComponents(factory);
   }
 

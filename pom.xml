@@ -11,6 +11,7 @@
 
 
     <modules>
+        <module>aire-parent</module>
         <module>aire-api</module>
         <module>aire-core</module>
         <module>zephyr-admin</module>

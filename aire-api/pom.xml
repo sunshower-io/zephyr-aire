@@ -8,6 +8,13 @@
     <version>2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
+    <parent>
+        <groupId>io.zephyr.aire</groupId>
+        <artifactId>aire-parent</artifactId>
+        <version>2.0-SNAPSHOT</version>
+        <relativePath>../aire-parent</relativePath>
+    </parent>
+
     <properties>
 
         <zephyr.version>2.0.0-SNAPSHOT</zephyr.version>
@@ -17,6 +24,5 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     </properties>
-
 
 </project>

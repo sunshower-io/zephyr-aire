@@ -1,16 +1,7 @@
 package io.zephyr.aire;
 
-import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.applayout.AppLayout;
-import com.vaadin.flow.router.Location;
-import com.vaadin.flow.router.Router;
-import com.vaadin.flow.server.RouteRegistry;
 import com.vaadin.flow.server.VaadinContext;
 import com.vaadin.flow.server.VaadinServletContext;
-import com.vaadin.flow.server.startup.ApplicationRouteRegistry;
-import com.vaadin.flow.theme.Theme;
-import com.vaadin.flow.theme.lumo.Lumo;
-import io.sunshower.gyre.Scope;
 import io.sunshower.yaml.state.YamlMemento;
 import io.zephyr.aire.api.ViewManager;
 import io.zephyr.api.ModuleActivator;

@@ -6,3 +6,8 @@ html, body {
   box-sizing: border-box;
 }
 
+
+article, article.horizontal {
+  display: flex;
+  flex-direction: row;
+}

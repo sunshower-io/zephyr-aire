@@ -12,6 +12,7 @@ import io.zephyr.aire.elements.*;
 
 import java.util.EnumMap;
 
+@CssImport("./styles/aire/components/layout/aire-nav.css")
 @CssImport("./styles/aire/components/layout/aire-viewport.css")
 public class AireApplicationViewport extends Composite<Main>
     implements AireLayout<AireApplicationViewport.Region> {
@@ -81,9 +82,12 @@ public class AireApplicationViewport extends Composite<Main>
   private void configureComponents(ComponentFactory<Region> factory) {
     header = (Component) factory.create(Region.Header);
     footer = (Component) factory.create(Region.Footer);
-    content = (Component) factory.create(Region.Content);
+    content = (AirePanel) factory.create(Region.Content);
     primaryNavigation = (Component) factory.create(Region.PrimaryNavigation);
     secondaryNavigation = (Component) factory.create(Region.SecondaryNavigation);
+
+
+
     main = new Article();
     main.add(primaryNavigation, content, secondaryNavigation);
     getContent().add(header, main, footer);

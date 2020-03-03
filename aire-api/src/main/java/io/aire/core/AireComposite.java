@@ -1,4 +1,5 @@
 package io.aire.core;
 
-public interface AireComposite extends AireComponent {
+public interface AireComposite extends AireContainer {
+
 }

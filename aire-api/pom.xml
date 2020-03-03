@@ -20,5 +20,13 @@
         <zephyr.version>2.0.0-SNAPSHOT</zephyr.version>
 
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>kernel-api</artifactId>
+            <scope>provided</scope>
+            <version>${zephyr.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>

@@ -1,20 +1,19 @@
 package io.zephyr.aire.layout;
 
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Composite;
-import com.vaadin.flow.component.HasComponents;
+import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.*;
 import io.aire.core.AireComponent;
 import io.aire.core.AireLayout;
 import io.aire.core.ComponentFactory;
+import io.zephyr.aire.api.ViewDecoratorManager;
 import io.zephyr.aire.elements.*;
 
 import java.util.EnumMap;
 
 @CssImport("./styles/aire/components/layout/aire-nav.css")
 @CssImport("./styles/aire/components/layout/aire-viewport.css")
-public class AireApplicationViewport extends Composite<Main>
+public class AireApplicationViewport extends AbstractAireComposite<Main>
     implements AireLayout<AireApplicationViewport.Region> {
 
   /** public state */
@@ -85,8 +84,6 @@ public class AireApplicationViewport extends Composite<Main>
     content = (AirePanel) factory.create(Region.Content);
     primaryNavigation = (Component) factory.create(Region.PrimaryNavigation);
     secondaryNavigation = (Component) factory.create(Region.SecondaryNavigation);
-
-
 
     main = new Article();
     main.add(primaryNavigation, content, secondaryNavigation);

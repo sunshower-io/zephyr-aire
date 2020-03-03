@@ -1,5 +1,6 @@
 package io.zephyr.aire.elements;
 
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Header;
 
@@ -9,4 +10,5 @@ public class AireHeader extends AbstractAireComposite<Header> {
   public AireHeader() {
     getContent().setClassName("aire-header");
   }
+
 }

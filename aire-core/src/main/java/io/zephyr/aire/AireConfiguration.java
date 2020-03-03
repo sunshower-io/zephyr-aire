@@ -3,6 +3,8 @@ package io.zephyr.aire;
 import com.vaadin.flow.server.VaadinContext;
 import com.vaadin.flow.server.VaadinServletContext;
 import io.sunshower.yaml.state.YamlMemento;
+import io.zephyr.aire.api.Session;
+import io.zephyr.aire.api.ViewDecoratorManager;
 import io.zephyr.aire.api.ViewManager;
 import io.zephyr.api.ModuleActivator;
 import io.zephyr.kernel.Lifecycle;
@@ -39,6 +41,11 @@ import java.util.ServiceLoader;
 public class AireConfiguration implements ApplicationListener<ContextRefreshedEvent> {
 
   @Bean
+  public Session session() {
+    return new Session() {};
+  }
+
+  @Bean
   public ClassLoader classLoader(ApplicationContext context) {
     return context.getClassLoader();
   }
@@ -59,7 +66,6 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
     SunshowerKernel.setKernelOptions(opts);
     return file;
   }
-
 
   @Bean
   public VaadinContext vaadinContext(ServletContext context) {
@@ -109,6 +115,11 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
   public ViewManager viewManager() {
     return new VaadinViewManager();
   }
+
+//  @Bean
+//  public ViewDecoratorManager viewDecoratorManager(ViewManager manager) {
+//    return (VaadinViewManager) manager;
+//  }
 
   @Override
   public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {

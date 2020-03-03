@@ -41,20 +41,25 @@ public class ModuleActivator
   public void onEvent(EventType eventType, Event<ServiceReference<ViewManager>> event) {
     ViewManager vm = event.getTarget().getDefinition().get();
     vm.register("aire.views.primary", this);
+    vm.register(TestRoute.class);
   }
 
   @Override
   public void decorate(AireApplicationViewport value, Session session) {
-    Button button = new Button("Sup bitches");
+    Button button = new Button("Hello");
     button.addClickListener(
         (ComponentEventListener<ClickEvent<Button>>)
             buttonClickEvent -> {
               Dialog dialog = new Dialog();
-              dialog.add(new Button("Frapper"));
+              Button close = new Button("close me wab");
+              close.addClickListener(
+                  (ComponentEventListener<ClickEvent<Button>>) buttonClickEvent1 -> dialog.close());
+              dialog.add(close);
               dialog.open();
             });
 
+
     value.add(AireApplicationViewport.Region.Header, button);
-//    value.get(AireApplicationViewport.Region.Header).add(button);
+    //    value.get(AireApplicationViewport.Region.Header).add(button);
   }
 }

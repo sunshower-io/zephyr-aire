@@ -1,13 +1,8 @@
 package io.aire.core;
 
-public interface AireLayout<E extends Enum<E>> extends AireComposite {
+import com.vaadin.flow.component.Component;
 
+public interface AireLayout<Options> extends AireComponent {
 
-  boolean contains(E location);
-
-  AireComponent get(E location);
-
-  AireComponent remove(E location);
-
-  void set(E location, AireComponent component);
+  void add(Options o, Component component);
 }

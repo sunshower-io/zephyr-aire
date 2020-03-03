@@ -6,14 +6,13 @@ import com.vaadin.flow.component.html.*;
 import io.aire.core.AireComponent;
 import io.aire.core.AireLayout;
 import io.aire.core.ComponentFactory;
-import io.zephyr.aire.api.ViewDecoratorManager;
 import io.zephyr.aire.elements.*;
 
 import java.util.EnumMap;
 
 @CssImport("./styles/aire/components/layout/aire-nav.css")
 @CssImport("./styles/aire/components/layout/aire-viewport.css")
-public class AireApplicationViewport extends AbstractAireComposite<Main>
+public class AireApplicationViewport extends AbstractAireContainer<Main>
     implements AireLayout<AireApplicationViewport.Region> {
 
   /** public state */
@@ -26,7 +25,7 @@ public class AireApplicationViewport extends AbstractAireComposite<Main>
   }
 
   /** private state */
-  private Component header;
+  private AireHeader header;
 
   private Component footer;
   private Component content;
@@ -51,24 +50,14 @@ public class AireApplicationViewport extends AbstractAireComposite<Main>
   }
 
   @Override
-  public boolean contains(Region location) {
-    return false;
-    //    return components.containsKey(location);
+  public void add(Region region, Component component) {
+    switch (region) {
+      case Header:
+        {
+          header.add(component);
+        }
+    }
   }
-
-  @Override
-  public AireComponent get(Region location) {
-    return null;
-    //    return components.get(location);
-  }
-
-  @Override
-  public AireComponent remove(Region location) {
-    return null;
-  }
-
-  @Override
-  public void set(Region location, AireComponent component) {}
 
   private void doSet(Region region, AireComponent component, HasComponents target) {
     target.add((Component) component);
@@ -79,7 +68,7 @@ public class AireApplicationViewport extends AbstractAireComposite<Main>
   }
 
   private void configureComponents(ComponentFactory<Region> factory) {
-    header = (Component) factory.create(Region.Header);
+    header = (AireHeader) factory.create(Region.Header);
     footer = (Component) factory.create(Region.Footer);
     content = (AirePanel) factory.create(Region.Content);
     primaryNavigation = (Component) factory.create(Region.PrimaryNavigation);

@@ -2,15 +2,12 @@ package io.zephyr.admin;
 
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
-import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
-import com.vaadin.flow.component.html.Main;
-import io.aire.core.AireComponent;
-import io.aire.core.AireContainer;
 import io.zephyr.aire.api.Session;
 import io.zephyr.aire.api.ViewDecorator;
 import io.zephyr.aire.api.ViewManager;
+import io.zephyr.aire.layout.AireApplicationViewport;
 import io.zephyr.api.ModuleContext;
 import io.zephyr.api.ServiceReference;
 import io.zephyr.api.ServiceTracker;
@@ -23,7 +20,7 @@ import static io.zephyr.api.ServiceEvents.REGISTERED;
 public class ModuleActivator
     implements io.zephyr.api.ModuleActivator,
         EventListener<ServiceReference<ViewManager>>,
-        ViewDecorator<AireComponent> {
+        ViewDecorator<AireApplicationViewport> {
 
   ServiceTracker tracker;
 
@@ -47,8 +44,7 @@ public class ModuleActivator
   }
 
   @Override
-  public void decorate(AireComponent value, Session session) {
-    Composite<Main> result = (Composite<Main>) value;
+  public void decorate(AireApplicationViewport value, Session session) {
     Button button = new Button("Sup bitches");
     button.addClickListener(
         (ComponentEventListener<ClickEvent<Button>>)
@@ -57,6 +53,8 @@ public class ModuleActivator
               dialog.add(new Button("Frapper"));
               dialog.open();
             });
-    result.getContent().add(button);
+
+    value.add(AireApplicationViewport.Region.Header, button);
+//    value.get(AireApplicationViewport.Region.Header).add(button);
   }
 }

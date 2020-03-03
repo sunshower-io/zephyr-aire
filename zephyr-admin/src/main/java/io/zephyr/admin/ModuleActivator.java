@@ -4,6 +4,7 @@ import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.router.RouterLink;
 import io.zephyr.aire.api.Session;
 import io.zephyr.aire.api.ViewDecorator;
 import io.zephyr.aire.api.ViewManager;
@@ -42,24 +43,15 @@ public class ModuleActivator
     ViewManager vm = event.getTarget().getDefinition().get();
     vm.register("aire.views.primary", this);
     vm.register(TestRoute.class);
+    vm.register(TestRoute2.class);
   }
 
   @Override
   public void decorate(AireApplicationViewport value, Session session) {
-    Button button = new Button("Hello");
-    button.addClickListener(
-        (ComponentEventListener<ClickEvent<Button>>)
-            buttonClickEvent -> {
-              Dialog dialog = new Dialog();
-              Button close = new Button("close me wab");
-              close.addClickListener(
-                  (ComponentEventListener<ClickEvent<Button>>) buttonClickEvent1 -> dialog.close());
-              dialog.add(close);
-              dialog.open();
-            });
 
-
-    value.add(AireApplicationViewport.Region.Header, button);
-    //    value.get(AireApplicationViewport.Region.Header).add(button);
+    RouterLink link = new RouterLink("sup", TestRoute.class);
+    RouterLink link2 = new RouterLink("sup2", TestRoute2.class);
+    value.add(AireApplicationViewport.Region.PrimaryNavigation, link);
+    value.add(AireApplicationViewport.Region.PrimaryNavigation, link2);
   }
 }

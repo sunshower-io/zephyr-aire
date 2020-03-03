@@ -1,0 +1,14 @@
+plugin:
+  name: zephyr-admin
+  group: io.zephyr.aire
+  version: 1.0.0
+  order: 1
+  type: plugin
+  description: Aire Plugin for Zephyr
+  dependencies:
+    - dependency:
+        type: service
+        required: true
+        group: io.zephyr.aire
+        name: zephyr-aire
+        version: 1.0.0

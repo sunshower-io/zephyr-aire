@@ -1,12 +1,7 @@
 package io.aire.core;
 
-import com.vaadin.flow.component.Component;
+import io.zephyr.aire.api.Placement;
 
-public interface AireLayout<Options> extends AireComponent {
+public interface AireLayout<Options extends Placement> extends AireComponent {
 
-  Component get(Options o);
-
-  boolean contains(Options o);
-
-  void add(Options o, Component component);
 }

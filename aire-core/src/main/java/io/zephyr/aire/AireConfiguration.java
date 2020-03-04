@@ -9,6 +9,7 @@ import io.zephyr.aire.api.ViewManager;
 import io.zephyr.api.ModuleActivator;
 import io.zephyr.kernel.Lifecycle;
 import io.zephyr.kernel.Module;
+import io.zephyr.kernel.concurrency.ModuleThread;
 import io.zephyr.kernel.core.*;
 import io.zephyr.kernel.dependencies.DependencyGraph;
 import io.zephyr.kernel.launch.KernelLauncher;
@@ -116,16 +117,17 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
     return new VaadinViewManager();
   }
 
-//  @Bean
-//  public ViewDecoratorManager viewDecoratorManager(ViewManager manager) {
-//    return (VaadinViewManager) manager;
-//  }
+  //  @Bean
+  //  public ViewDecoratorManager viewDecoratorManager(ViewManager manager) {
+  //    return (VaadinViewManager) manager;
+  //  }
 
   @Override
   public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
     ApplicationContext context = contextRefreshedEvent.getApplicationContext();
     Module module = context.getBean(Module.class);
     Kernel kernel = context.getBean(Kernel.class);
+    ModuleThread moduleThread = context.getBean(ModuleThread.class);
     ViewManager viewManager = context.getBean(ViewManager.class);
     kernel.start();
     DependencyGraph graph = kernel.getModuleManager().getDependencyGraph();
@@ -142,6 +144,7 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
                     "--scan", "--watch", "/home/josiah/sunshower/watch", "--install-on-start"
                   });
             });
-    kernel.createContext(module).register(ViewManager.class, viewManager);
+    kernel.getVolatileStorage().set(ApplicationContext.class, context);
+    kernel.createContext(module, moduleThread).register(ViewManager.class, viewManager);
   }
 }

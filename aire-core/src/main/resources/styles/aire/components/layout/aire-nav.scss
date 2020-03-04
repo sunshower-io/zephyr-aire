@@ -15,7 +15,25 @@ article {
   nav {
     width: $primary-nav-width;
     height: 100%;
-    border: 1px solid blue;
+
+    a {
+      width: $primary-nav-width;
+      height: $primary-nav-width;
+      background-color: $primary-nav-background;
+      display:flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      color: $primary-nav-foreground;
+
+      ::content {
+        display:none;
+      }
+
+      iron-icon, i {
+        width:16px;
+        height:16px;
+      }
+    }
   }
 
   aside {

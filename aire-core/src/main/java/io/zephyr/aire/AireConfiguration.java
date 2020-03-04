@@ -3,6 +3,7 @@ package io.zephyr.aire;
 import com.vaadin.flow.server.VaadinContext;
 import com.vaadin.flow.server.VaadinServletContext;
 import io.sunshower.yaml.state.YamlMemento;
+import io.zephyr.aire.annotation.ServiceLoaderAwareAnnotationPostProcessor;
 import io.zephyr.aire.api.Session;
 import io.zephyr.aire.api.ViewDecoratorManager;
 import io.zephyr.aire.api.ViewManager;
@@ -38,6 +39,7 @@ import java.util.ServiceLoader;
 @Configuration
 @Import(EmbeddedSpringConfiguration.class)
 public class AireConfiguration implements ApplicationListener<ContextRefreshedEvent> {
+
 
   @Bean
   public Session session() {
@@ -115,11 +117,6 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
   public ViewManager viewManager() {
     return new VaadinViewManager();
   }
-
-  //  @Bean
-  //  public ViewDecoratorManager viewDecoratorManager(ViewManager manager) {
-  //    return (VaadinViewManager) manager;
-  //  }
 
   @Override
   public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {

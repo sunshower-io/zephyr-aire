@@ -2,6 +2,7 @@ package io.zephyr.aire;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.router.RouteConfiguration;
+import com.vaadin.flow.router.RouteData;
 import com.vaadin.flow.server.VaadinContext;
 import com.vaadin.flow.server.startup.ApplicationRouteRegistry;
 import io.aire.core.AireComponent;
@@ -32,6 +33,13 @@ public class VaadinViewManager implements ViewManager, ViewDecoratorManager {
   }
 
   @Override
+  @SuppressWarnings("unchecked")
+  public void register(String path, Class<?> route) {
+    ApplicationRouteRegistry ctx = ApplicationRouteRegistry.getInstance(context);
+    RouteConfiguration.forRegistry(ctx).setRoute(path, (Class<? extends Component>) route);
+  }
+
+  @Override
   public <T> ViewDecoratorRegistration register(Class<T> viewType, ViewDecorator<T> decorator) {
     ViewDecoratorRegistration registration =
         new DefaultViewDecoratorRegistration(this, viewType, decorator);
@@ -45,6 +53,19 @@ public class VaadinViewManager implements ViewManager, ViewDecoratorManager {
         new DefaultViewDecoratorRegistration(this, key, decorator);
     addRegistration(key, decorator);
     return registration;
+  }
+
+  @Override
+  public List<RouteData> getRoutes() {
+    ApplicationRouteRegistry ctx = ApplicationRouteRegistry.getInstance(context);
+    return RouteConfiguration.forRegistry(ctx).getAvailableRoutes();
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public <T> void unregister(Class<T> type) {
+    ApplicationRouteRegistry ctx = ApplicationRouteRegistry.getInstance(context);
+    RouteConfiguration.forRegistry(ctx).removeRoute((Class) type);
   }
 
   private <T> void addRegistration(String key, ViewDecorator<T> decorator) {

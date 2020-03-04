@@ -37,6 +37,8 @@
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
         <sass-maven-plugin.version>3.7.2</sass-maven-plugin.version>
         <maven-war-plugin.version>3.2.3</maven-war-plugin.version>
+        <lombok.version>1.18.12</lombok.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -47,7 +49,12 @@
                 <version>${vaadin-html-components.version}</version>
                 <scope>provided</scope>
             </dependency>
-
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
             <!--
             Since we package some of Zephyr's dependencies, we want
             to ensure that we're getting the correct versions
@@ -191,6 +198,21 @@
     <build>
         <pluginManagement>
             <plugins>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
                 <plugin>
                     <groupId>nl.geodienstencentrum.maven</groupId>
                     <artifactId>sass-maven-plugin</artifactId>

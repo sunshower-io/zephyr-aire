@@ -18,12 +18,10 @@ import io.zephyr.kernel.memento.Memento;
 import io.zephyr.spring.embedded.EmbeddedModuleClasspath;
 import io.zephyr.spring.embedded.EmbeddedModuleLoader;
 import io.zephyr.spring.embedded.EmbeddedSpringConfiguration;
+import net.bytebuddy.implementation.bind.annotation.Default;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
 import org.springframework.context.event.ContextRefreshedEvent;
 
 import javax.servlet.ServletContext;
@@ -99,6 +97,7 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
   }
 
   @Bean
+  @Primary
   public ModuleClasspathManager moduleClasspathManager(
       DependencyGraph graph, ApplicationContext context, Kernel kernel) {
     ModuleClasspathManager mgr =

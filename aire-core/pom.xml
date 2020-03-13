@@ -28,6 +28,15 @@
     </dependencyManagement>
 
     <dependencies>
+
+
+        <dependency>
+            <groupId>io.sunshower.aire</groupId>
+            <artifactId>aire-designer</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>aire-api</artifactId>

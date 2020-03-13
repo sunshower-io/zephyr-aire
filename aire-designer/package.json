@@ -1,0 +1,45 @@
+{
+  "name": "no-name",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@polymer/polymer": "3.2.0",
+    "@webcomponents/webcomponentsjs": "^2.2.10",
+    "@vaadin/flow-deps": "./target/frontend",
+    "@vaadin/router": "^1.6.0"
+  },
+  "devDependencies": {
+    "webpack": "4.42.0",
+    "webpack-cli": "3.3.11",
+    "webpack-dev-server": "3.10.3",
+    "webpack-babel-multi-target-plugin": "2.3.3",
+    "copy-webpack-plugin": "5.1.1",
+    "webpack-merge": "4.2.2",
+    "raw-loader": "4.0.0",
+    "compression-webpack-plugin": "3.1.0",
+    "html-webpack-plugin": "3.2.0",
+    "script-ext-html-webpack-plugin": "2.1.4",
+    "awesome-typescript-loader": "5.2.1",
+    "typescript": "3.8.3"
+  },
+  "vaadinAppPackageHash": "888a37da66f4bfcf33230f9fba832f143ea825874ff4f7517d0964985e689767",
+  "vaadin": {
+    "dependencies": {
+      "@vaadin/router": "^1.6.0",
+      "@polymer/polymer": "3.2.0"
+    },
+    "devDependencies": {
+      "copy-webpack-plugin": "5.1.1",
+      "compression-webpack-plugin": "3.1.0",
+      "raw-loader": "4.0.0",
+      "webpack-cli": "3.3.11",
+      "webpack": "4.42.0",
+      "html-webpack-plugin": "3.2.0",
+      "script-ext-html-webpack-plugin": "2.1.4",
+      "awesome-typescript-loader": "5.2.1",
+      "typescript": "3.8.3",
+      "webpack-merge": "4.2.2",
+      "webpack-dev-server": "3.10.3"
+    },
+    "hash": ""
+  }
+}

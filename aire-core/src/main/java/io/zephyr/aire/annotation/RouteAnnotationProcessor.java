@@ -21,8 +21,12 @@ public final class RouteAnnotationProcessor implements AnnotationProcessor {
     val fragment = Coordinates.toFragment(coordinate);
     val annotationAttributes = type.getAnnotation(Route.class);
     val routeValue = String.format("%s/%s", fragment, annotationAttributes.value());
-    log.info("Binding {} to route {} from module {}", type, routeValue, coordinate);
-    viewManager.register(routeValue, type);
+    if (!viewManager.containsRoute(routeValue)) {
+      log.info("Binding {} to route {} from module {}", type, routeValue, coordinate);
+      viewManager.register(routeValue, type);
+    } else {
+      log.debug("Route {} is already bound--not doing anything", routeValue);
+    }
   }
 
   @Override

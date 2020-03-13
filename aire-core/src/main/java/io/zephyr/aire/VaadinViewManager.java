@@ -7,6 +7,7 @@ import com.vaadin.flow.server.VaadinContext;
 import com.vaadin.flow.server.startup.ApplicationRouteRegistry;
 import io.aire.core.AireComponent;
 import io.zephyr.aire.api.*;
+import lombok.val;
 import org.springframework.aop.support.AopUtils;
 
 import javax.inject.Inject;
@@ -17,10 +18,12 @@ public class VaadinViewManager implements ViewManager, ViewDecoratorManager {
   @Inject private Session session;
   @Inject private VaadinContext context;
 
+  private final Set<String> registeredRoutes;
   private final Map<Class<?>, List<ViewDecorator<?>>> registrations;
   private final Map<String, List<ViewDecorator<?>>> namedRegistrations;
 
   public VaadinViewManager() {
+    registeredRoutes = new TreeSet<>(String::compareTo);
     registrations = new HashMap<>();
     namedRegistrations = new HashMap<>();
   }
@@ -35,6 +38,7 @@ public class VaadinViewManager implements ViewManager, ViewDecoratorManager {
   @Override
   @SuppressWarnings("unchecked")
   public void register(String path, Class<?> route) {
+    registeredRoutes.add(path);
     ApplicationRouteRegistry ctx = ApplicationRouteRegistry.getInstance(context);
     RouteConfiguration.forRegistry(ctx).setRoute(path, (Class<? extends Component>) route);
   }
@@ -66,6 +70,19 @@ public class VaadinViewManager implements ViewManager, ViewDecoratorManager {
   public <T> void unregister(Class<T> type) {
     ApplicationRouteRegistry ctx = ApplicationRouteRegistry.getInstance(context);
     RouteConfiguration.forRegistry(ctx).removeRoute((Class) type);
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public <T> void unregister(String path, Class<T> type) {
+    ApplicationRouteRegistry ctx = ApplicationRouteRegistry.getInstance(context);
+    RouteConfiguration.forRegistry(ctx).removeRoute(path, (Class) type);
+    registeredRoutes.remove(path);
+  }
+
+  @Override
+  public boolean containsRoute(String routeValue) {
+    return registeredRoutes.contains(routeValue);
   }
 
   private <T> void addRegistration(String key, ViewDecorator<T> decorator) {

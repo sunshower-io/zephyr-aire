@@ -1,7 +1,9 @@
 package io.sunshower.aire;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
 
@@ -16,6 +18,7 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 public class PaperSlider extends Component {
 
     public PaperSlider() {
+
     }
 
 }

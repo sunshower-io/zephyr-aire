@@ -8,6 +8,7 @@ import com.vaadin.flow.server.VaadinContext;
 import io.aire.core.AireContainer;
 import io.aire.core.AireLayout;
 import io.sunshower.aire.PaperSlider;
+import io.sunshower.aire.designer.Designer;
 import io.zephyr.aire.api.ViewDecoratorManager;
 import io.zephyr.aire.elements.*;
 
@@ -36,6 +37,7 @@ public abstract class AireApplicationViewport extends AbstractAireContainer<Main
     configureStyles();
 
     add(new PaperSlider());
+    add(new Designer());
   }
 
   public void showRouterLayoutContent(HasElement content) {

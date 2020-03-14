@@ -8,7 +8,7 @@
     "sourceMap": true,
     "inlineSources": true,
     "module": "esNext",
-    "target": "es2017",
+    "target": "ES2017",
     "moduleResolution": "node",
     "strict": true,
     "noFallthroughCasesInSwitch": true,
@@ -17,10 +17,16 @@
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "src/main/typescript/definitions"
+    ]
+//    "outDir": "target/frontend"
   },
   "include": [
     "frontend/**/*.ts", "frontend/index.js"
   ],
+
   "exclude": []
 }

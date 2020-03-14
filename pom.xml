@@ -13,7 +13,6 @@
         <module>aire-parent</module>
         <module>aire-api</module>
         <module>aire-core</module>
-        <module>aire-designer</module>
         <module>zephyr-admin</module>
     </modules>
 

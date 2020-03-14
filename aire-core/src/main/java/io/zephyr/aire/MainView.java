@@ -2,6 +2,7 @@ package io.zephyr.aire;
 
 import com.vaadin.flow.router.*;
 import io.zephyr.aire.api.ViewDecoratorManager;
+import io.zephyr.aire.designer.AireDesigner;
 import io.zephyr.aire.layout.AireApplicationViewport;
 import com.vaadin.flow.component.dependency.CssImport;
 

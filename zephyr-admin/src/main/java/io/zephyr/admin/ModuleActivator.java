@@ -1,9 +1,11 @@
 package io.zephyr.admin;
 
+import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.RouterLink;
+import io.zephyr.admin.ui.UploadPage;
 import io.zephyr.aire.api.Session;
 import io.zephyr.aire.api.ViewDecorator;
 import io.zephyr.aire.api.ViewManager;
@@ -38,9 +40,10 @@ public class ModuleActivator
 
     ApplicationContext parentContext = moduleContext.get(ApplicationContext.class);
 
+
     ViewManager viewManager = parentContext.getBean(ViewManager.class);
+    viewManager.register(UploadPage.class);
     context = new AnnotationConfigApplicationContext(ZephyrAdminConfiguration.class);
-//    context.addBeanFactoryPostProcessor(new AireAnnotationProcessor(viewManager));
     context.setParent(parentContext);
     context.start();
     log.info("zephyr-admin started successfully");
@@ -54,25 +57,8 @@ public class ModuleActivator
   }
 
   @Override
-  public void decorate(AireApplicationViewport value, Session session) {}
+  public void decorate(AireApplicationViewport value, Session session) {
+    value.setHeader(new H1("Sup"));
+  }
 
-  //  @Override
-  //  public void onEvent(EventType eventType, Event<ServiceReference<ViewManager>> event) {
-  //    ViewManager vm = event.getTarget().getDefinition().get();
-  //    vm.register("aire.views.primary", this);
-  //    vm.register(TestRoute.class);
-  //    vm.register(TestRoute2.class);
-  //  }
-  //
-  //  @Override
-  //  public void decorate(AireApplicationViewport value, Session session) {
-  //
-  //    RouterLink link = new RouterLink("", TestRoute.class);
-  //    link.add(new Span("hello"));
-  //    Icon icon = new Icon(VaadinIcon.ABACUS);
-  //    link.add(icon);
-  //    RouterLink link2 = new RouterLink("sup2", TestRoute2.class);
-  //    value.add(AireApplicationViewport.Region.PrimaryNavigation, link);
-  //    value.add(AireApplicationViewport.Region.PrimaryNavigation, link2);
-  //  }
 }

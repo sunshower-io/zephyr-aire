@@ -8,7 +8,7 @@ import com.vaadin.flow.component.dependency.CssImport;
 import javax.inject.Inject;
 
 @Route
-@CssImport("./styles/aire/components/layout/aire-structure.css")
+@CssImport("./styles/aire/layout/aire-structure.css")
 public class MainView extends AireApplicationViewport {
 
   @Inject

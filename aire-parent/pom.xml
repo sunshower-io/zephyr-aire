@@ -223,12 +223,12 @@
                         <resources>
                             <resource>
                                 <source>
-                                    <directory>${basedir}/src/main/resources/styles</directory>
+                                    <directory>${basedir}/src/main/scss</directory>
                                     <includes>
                                         <include>defaults.sass</include>
                                     </includes>
                                 </source>
-                                <destination>${basedir}/frontend/styles</destination>
+                                <destination>${basedir}/src/main/frontend/styles</destination>
                             </resource>
                         </resources>
                     </configuration>
@@ -277,6 +277,9 @@
                             </goals>
                         </execution>
                     </executions>
+                    <configuration>
+                        <frontendDirectory>${project.basedir}/src/main/frontend</frontendDirectory>
+                    </configuration>
                 </plugin>
 
             </plugins>

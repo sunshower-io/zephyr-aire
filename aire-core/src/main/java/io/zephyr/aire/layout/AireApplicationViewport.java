@@ -4,18 +4,15 @@ import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.router.RouterLayout;
-import com.vaadin.flow.server.VaadinContext;
 import io.aire.core.AireContainer;
 import io.aire.core.AireLayout;
-import io.sunshower.aire.PaperSlider;
-import io.sunshower.aire.designer.Designer;
 import io.zephyr.aire.api.ViewDecoratorManager;
 import io.zephyr.aire.elements.*;
 
 import javax.inject.Inject;
 
-@CssImport("./styles/aire/components/layout/aire-nav.css")
-@CssImport("./styles/aire/components/layout/aire-viewport.css")
+@CssImport("./styles/aire/layout/aire-nav.css")
+@CssImport("./styles/aire/layout/aire-viewport.css")
 public abstract class AireApplicationViewport extends AbstractAireContainer<Main>
     implements AireLayout<Region>, RouterLayout {
 
@@ -36,8 +33,6 @@ public abstract class AireApplicationViewport extends AbstractAireContainer<Main
     manager.decorate(key, this);
     configureStyles();
 
-    add(new PaperSlider());
-    add(new Designer());
   }
 
   public void showRouterLayoutContent(HasElement content) {

@@ -47,22 +47,23 @@
     "@vaadin/vaadin-time-picker": "2.0.5",
     "@vaadin/vaadin-upload": "4.2.2",
     "simple-button": "github:SimpleElements/simple-button",
-    "mxgraph": "^4.1.0",
-    "@polymer/paper-slider": "^3.0.1"
+    "mxgraph": "^4.1.0"
   },
   "devDependencies": {
+    "awesome-typescript-loader": "5.2.1",
+    "compression-webpack-plugin": "3.0.1",
+    "copy-webpack-plugin": "5.1.0",
+    "exports-loader": "^0.7.0",
+    "html-webpack-plugin": "3.2.0",
+    "raw-loader": "3.0.0",
+    "script-ext-html-webpack-plugin": "2.1.4",
+    "ts-loader": "^6.2.1",
+    "typescript": "3.7.3",
     "webpack": "4.30.0",
+    "webpack-babel-multi-target-plugin": "2.3.3",
     "webpack-cli": "3.3.10",
     "webpack-dev-server": "3.9.0",
-    "webpack-babel-multi-target-plugin": "2.3.3",
-    "copy-webpack-plugin": "5.1.0",
-    "webpack-merge": "4.2.2",
-    "raw-loader": "3.0.0",
-    "compression-webpack-plugin": "3.0.1",
-    "html-webpack-plugin": "3.2.0",
-    "script-ext-html-webpack-plugin": "2.1.4",
-    "awesome-typescript-loader": "5.2.1",
-    "typescript": "3.7.3"
+    "webpack-merge": "4.2.2"
   },
   "vaadinAppPackageHash": "29b4162103ca40e4c423a71278e60ec9aceb9aca2e2069778853913396be2a70",
   "vaadin": {
@@ -127,6 +128,6 @@
       "webpack-merge": "4.2.2",
       "webpack-dev-server": "3.9.0"
     },
-    "hash": "fd3fa8b5eb85122b04274101f17442edc15873c5d0da4a9f2e82ac7fa0e22848"
+    "hash": "18fd71c1bbe47bee6fcf68666b62151192d54b052aeecde17276657401d49a60"
   }
 }

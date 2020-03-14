@@ -1,7 +1,7 @@
 import {
   mxGraph,
   mxRubberband,
-} from "mxgraph/javascript/mxClient";
+} from "mxgraph/javascript/mxClient.js";
 
 import {html, PolymerElement} from "@polymer/polymer/polymer-element";
 
@@ -11,13 +11,13 @@ class AireDesigner extends PolymerElement {
     super();
   }
 
-  static get template() : HTMLTemplateElement {
+  static get template() {
     return html`
     <div style="width:100px; height:100px"></div>
     `;
   }
 
-  ready() : void {
+  ready() {
     super.ready();
     let graph = new mxGraph(this);
     new mxRubberband(graph);

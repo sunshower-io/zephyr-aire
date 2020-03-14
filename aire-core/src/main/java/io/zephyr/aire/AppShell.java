@@ -5,5 +5,5 @@ import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.server.PWA;
 
 @PWA(name = "Aire Core", shortName = "aire")
-@CssImport("./styles/aire/components/layout/aire-structure.css")
+@CssImport("./styles/aire/layout/aire-structure.css")
 public class AppShell implements AppShellConfigurator {}

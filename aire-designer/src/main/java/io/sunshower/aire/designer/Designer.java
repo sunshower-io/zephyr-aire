@@ -7,7 +7,7 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 
 @Tag("aire-designer")
 @JsModule("mxgraph/javascript/mxClient.js")
-@JsModule("designer/designer.ts")
+@JsModule("designer/designer.js")
 @NpmPackage(value = "mxgraph", version = "^4.1.0")
 public class Designer extends Component {
 

@@ -1,7 +1,6 @@
 package io.zephyr.aire.layout;
 
 import com.vaadin.flow.component.*;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.router.RouterLayout;
@@ -33,8 +32,6 @@ public abstract class AireApplicationViewport extends AbstractAireContainer<Main
     configureStyles();
     content = new AirePanel();
     add(content);
-
-    add(new Button("hello world"));
   }
 
   public void showRouterLayoutContent(HasElement content) {

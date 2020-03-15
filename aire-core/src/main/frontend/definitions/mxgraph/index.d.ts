@@ -1,4 +1,5 @@
 declare module "mxgraph/javascript/mxClient" {
+
   export class mxGraph {
     constructor(el : HTMLElement);
   }

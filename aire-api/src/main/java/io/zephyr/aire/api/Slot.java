@@ -1,11 +1,15 @@
 package io.zephyr.aire.api;
 
-import java.lang.annotation.*;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-@Inherited
-@Documented
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Slot {
-  Class<? extends Placement> value();
+
+  int order() default 0;
+
+  Class<? extends ViewDecorator<?>> location();
 }

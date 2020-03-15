@@ -3,10 +3,11 @@ package io.zephyr.aire;
 import com.vaadin.flow.server.VaadinContext;
 import com.vaadin.flow.server.VaadinServletContext;
 import io.sunshower.yaml.state.YamlMemento;
-import io.zephyr.aire.annotation.ServiceLoaderAwareAnnotationPostProcessor;
+import io.zephyr.aire.annotation.ExtensionPointPostProcessor;
+import io.zephyr.aire.api.ExtensionPointRegistry;
 import io.zephyr.aire.api.Session;
-import io.zephyr.aire.api.ViewDecoratorManager;
 import io.zephyr.aire.api.ViewManager;
+import io.zephyr.aire.extensions.AireExtensionPointRegistry;
 import io.zephyr.api.ModuleActivator;
 import io.zephyr.kernel.Lifecycle;
 import io.zephyr.kernel.Module;
@@ -19,7 +20,7 @@ import io.zephyr.kernel.memento.Memento;
 import io.zephyr.spring.embedded.EmbeddedModuleClasspath;
 import io.zephyr.spring.embedded.EmbeddedModuleLoader;
 import io.zephyr.spring.embedded.EmbeddedSpringConfiguration;
-import net.bytebuddy.implementation.bind.annotation.Default;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.*;
@@ -40,6 +41,10 @@ import java.util.ServiceLoader;
 @Import(EmbeddedSpringConfiguration.class)
 public class AireConfiguration implements ApplicationListener<ContextRefreshedEvent> {
 
+  @Bean
+  public BeanPostProcessor extensionPointPostProcessor() {
+    return new ExtensionPointPostProcessor();
+  }
 
   @Bean
   public Session session() {
@@ -114,8 +119,13 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
   }
 
   @Bean
-  public ViewManager viewManager() {
-    return new VaadinViewManager();
+  public ExtensionPointRegistry extensionPointRegistry() {
+    return new AireExtensionPointRegistry();
+  }
+
+  @Bean
+  public ViewManager viewManager(ExtensionPointRegistry registry) {
+    return new VaadinViewManager(registry);
   }
 
   @Override

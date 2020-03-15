@@ -1,27 +1,9 @@
 package io.zephyr.aire.layout;
 
-import com.vaadin.flow.component.Component;
-import io.zephyr.aire.api.Placement;
+import io.zephyr.aire.api.ViewDecorator;
+import io.zephyr.aire.elements.AireHeader;
 
-public abstract class Region implements Placement {
+public class Region {
 
-
-  public static final class Header extends Region {
-    @Override
-    public void update(Component self, Component target) {}
-  }
-
-  public static final class Content extends Region {
-    @Override
-    public void update(Component self, Component target) {
-      ((AireApplicationViewport) target).setContent(self);
-    }
-  }
-
-  public static final class Footer extends Region {
-    @Override
-    public void update(Component self, Component target) {
-      ((AireApplicationViewport) target).setFooter(self);
-    }
-  }
+  public static class Header implements ViewDecorator<AireHeader> {}
 }

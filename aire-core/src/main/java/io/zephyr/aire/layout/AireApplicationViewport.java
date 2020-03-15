@@ -1,20 +1,20 @@
 package io.zephyr.aire.layout;
 
 import com.vaadin.flow.component.*;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.router.RouterLayout;
 import io.aire.core.AireContainer;
 import io.aire.core.AireLayout;
-import io.zephyr.aire.api.ViewDecoratorManager;
+import io.zephyr.aire.api.ExtensionPoint;
 import io.zephyr.aire.elements.*;
 
-import javax.inject.Inject;
-
+@ExtensionPoint(AireApplicationViewport.key)
 @CssImport("./styles/aire/layout/aire-nav.css")
 @CssImport("./styles/aire/layout/aire-viewport.css")
 public abstract class AireApplicationViewport extends AbstractAireContainer<Main>
-    implements AireLayout<Region>, RouterLayout {
+    implements AireLayout, RouterLayout {
 
   /** private state */
   private AireHeader header;
@@ -26,13 +26,15 @@ public abstract class AireApplicationViewport extends AbstractAireContainer<Main
 
   private Article main;
 
-  static final String key = "aire.views.primary";
+  public static final String key = "aire.views.primary";
 
-  @Inject
-  public AireApplicationViewport(final ViewDecoratorManager manager) {
-    manager.decorate(key, this);
+  public AireApplicationViewport() {
+    setHeader(new AireHeader());
     configureStyles();
+    content = new AirePanel();
+    add(content);
 
+    add(new Button("hello world"));
   }
 
   public void showRouterLayoutContent(HasElement content) {
@@ -47,11 +49,25 @@ public abstract class AireApplicationViewport extends AbstractAireContainer<Main
     ((AireContainer) content).add(newContent);
   }
 
-  public void setFooter(Component content) {}
+  public void setFooter(Component content) {
+    footer = content;
+    add(content);
+  }
 
-  public void setHeader(Component content) {}
+  public void setHeader(Component content) {
+    add(content);
+    this.header = (AireHeader) content;
+  }
 
-  public void setPrimaryNavigation(Component primaryNavigation) {}
+  public Component getHeader() {
+    return header;
+  }
 
-  public void setSecondaryNavigation(Component secondaryNavigation) {}
+  public void setPrimaryNavigation(Component primaryNavigation) {
+    add(primaryNavigation);
+  }
+
+  public void setSecondaryNavigation(Component secondaryNavigation) {
+    add(secondaryNavigation);
+  }
 }

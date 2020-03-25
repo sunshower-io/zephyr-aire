@@ -4,8 +4,16 @@ import java.lang.annotation.*;
 
 @Documented
 @Inherited
-@Target(ElementType.TYPE)
+@Target({ElementType.TYPE, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ExtensionPoint {
-  String value();
+
+  String urn();
+
+  Mode mode() default Mode.Absolute;
+
+  enum Mode {
+    Relative,
+    Absolute
+  }
 }

@@ -9,7 +9,7 @@ import io.aire.core.AireLayout;
 import io.zephyr.aire.api.ExtensionPoint;
 import io.zephyr.aire.elements.*;
 
-@ExtensionPoint(AireApplicationViewport.key)
+@ExtensionPoint(urn = "ui:main")
 @CssImport("./styles/aire/layout/aire-nav.css")
 @CssImport("./styles/aire/layout/aire-viewport.css")
 public abstract class AireApplicationViewport extends AbstractAireContainer<Main>
@@ -18,14 +18,19 @@ public abstract class AireApplicationViewport extends AbstractAireContainer<Main
   /** private state */
   private AireHeader header;
 
+  @ExtensionPoint(urn = "footer", mode = ExtensionPoint.Mode.Relative)
   private Component footer;
+
+  @ExtensionPoint(urn = "content", mode = ExtensionPoint.Mode.Relative)
   private Component content;
+
+  @ExtensionPoint(urn = "navigation/primary", mode = ExtensionPoint.Mode.Relative)
   private Component primaryNavigation;
+
+  @ExtensionPoint(urn = "navigation/secondary", mode = ExtensionPoint.Mode.Relative)
   private Component secondaryNavigation;
 
   private Article main;
-
-  public static final String key = "aire.views.primary";
 
   public AireApplicationViewport() {
     setHeader(new AireHeader());

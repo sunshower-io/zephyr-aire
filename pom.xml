@@ -9,7 +9,6 @@
     </properties>
 
 
-
     <modules>
         <module>aire-parent</module>
         <module>aire-api</module>

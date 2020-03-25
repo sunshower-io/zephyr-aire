@@ -30,13 +30,16 @@
         project dependency properties
         -->
 
-        <vaadin.version>15.0.0.beta2</vaadin.version>
+        <vaadin.version>15.0.1</vaadin.version>
         <zephyr.version>2.0.0-SNAPSHOT</zephyr.version>
-        <vaadin-html-components.version>3.0.0</vaadin-html-components.version>
-        <vaadin-flow-server.version>3.0.0.beta2</vaadin-flow-server.version>
+        <vaadin-html-components.version>3.0.1</vaadin-html-components.version>
+        <vaadin-flow-server.version>3.0.1</vaadin-flow-server.version>
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
         <sass-maven-plugin.version>3.7.2</sass-maven-plugin.version>
         <maven-war-plugin.version>3.2.3</maven-war-plugin.version>
+        <lombok.version>1.18.12</lombok.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <karibu.version>1.2.0</karibu.version>
     </properties>
 
     <dependencyManagement>
@@ -47,7 +50,19 @@
                 <version>${vaadin-html-components.version}</version>
                 <scope>provided</scope>
             </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
 
+            <dependency>
+                <groupId>com.github.mvysny.kaributesting</groupId>
+                <artifactId>karibu-testing-v10</artifactId>
+                <version>${karibu.version}</version>
+                <scope>test</scope>
+            </dependency>
             <!--
             Since we package some of Zephyr's dependencies, we want
             to ensure that we're getting the correct versions
@@ -191,6 +206,21 @@
     <build>
         <pluginManagement>
             <plugins>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
                 <plugin>
                     <groupId>nl.geodienstencentrum.maven</groupId>
                     <artifactId>sass-maven-plugin</artifactId>
@@ -201,12 +231,12 @@
                         <resources>
                             <resource>
                                 <source>
-                                    <directory>${basedir}/src/main/resources/styles</directory>
+                                    <directory>${basedir}/src/main/scss</directory>
                                     <includes>
                                         <include>defaults.sass</include>
                                     </includes>
                                 </source>
-                                <destination>${basedir}/frontend/styles</destination>
+                                <destination>${basedir}/src/main/frontend/styles</destination>
                             </resource>
                         </resources>
                     </configuration>
@@ -255,6 +285,9 @@
                             </goals>
                         </execution>
                     </executions>
+                    <configuration>
+                        <frontendDirectory>${project.basedir}/src/main/frontend</frontendDirectory>
+                    </configuration>
                 </plugin>
 
             </plugins>

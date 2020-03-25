@@ -12,10 +12,15 @@
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "src/main/frontend/definitions"
+    ]
   },
   "include": [
-    "frontend/**/*.ts", "frontend/index.js"
+    "src/main/application/**/*.ts"
+//    "frontend/**/*.ts", "frontend/index.js"
   ],
   "exclude": []
 }

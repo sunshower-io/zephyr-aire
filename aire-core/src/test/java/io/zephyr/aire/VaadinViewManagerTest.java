@@ -2,8 +2,6 @@ package io.zephyr.aire;
 
 import com.vaadin.flow.component.icon.Icon;
 import io.zephyr.aire.api.ViewManager;
-import io.zephyr.aire.elements.AireHeader;
-import io.zephyr.aire.layout.Region;
 import io.zephyr.aire.test.AireTestConfiguration;
 import io.zephyr.aire.test.AireTestContext;
 import io.zephyr.kernel.core.Kernel;
@@ -55,12 +53,11 @@ class VaadinViewManagerTest {
     assertNotNull(page, "must exist");
   }
 
-
   @Test
   void ensureExtensionPointIsRegistered() {
     context.resolveFirst(MainView.class);
     assertEquals(
-        1,
+        6,
         viewManager.getExtensionPointRegistry().getExtensionPoints().size(),
         "must have one extension point registered");
   }

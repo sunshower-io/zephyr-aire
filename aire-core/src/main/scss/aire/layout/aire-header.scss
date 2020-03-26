@@ -1,6 +1,13 @@
 @import "aire-layout-variables";
 
+@import "aire-layout-variables";
+header.aire-header {
 
-.aire-viewport {
-
+  vaadin-button {
+    img {
+      width:$header-height;
+      height: $header-height;
+    }
+  }
 }
+

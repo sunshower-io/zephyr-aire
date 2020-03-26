@@ -10,7 +10,9 @@ import io.zephyr.aire.api.ExtensionPoint;
 import io.zephyr.aire.elements.*;
 
 @ExtensionPoint(location = ":ui:main")
+
 @CssImport("./styles/aire/layout/aire-nav.css")
+@CssImport("./styles/aire/layout/aire-button.css")
 @CssImport("./styles/aire/layout/aire-viewport.css")
 public abstract class AireApplicationViewport extends AbstractAireContainer<Main>
     implements AireLayout, RouterLayout {
@@ -34,10 +36,14 @@ public abstract class AireApplicationViewport extends AbstractAireContainer<Main
   private Article main;
 
   public AireApplicationViewport() {
-    setHeader(new AireHeader());
+    add(header = new AireHeader());
+    add(primaryNavigation = new AirePrimaryNavigation());
     configureStyles();
     content = new AirePanel();
-    add(content);
+    add(main = new Article());
+    main.add(content);
+    add(secondaryNavigation = new AireSecondaryNavigation());
+    add(footer = new AireFooter());
   }
 
   public void showRouterLayoutContent(HasElement content) {
@@ -62,7 +68,7 @@ public abstract class AireApplicationViewport extends AbstractAireContainer<Main
     this.header = (AireHeader) content;
   }
 
-  public Component getHeader() {
+  public AireHeader getHeader() {
     return header;
   }
 

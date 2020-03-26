@@ -11,6 +11,7 @@ import io.zephyr.aire.annotation.ExtensionScanner;
 import io.zephyr.aire.api.ExtensionPointRegistry;
 import io.zephyr.aire.api.Session;
 import io.zephyr.aire.api.ViewManager;
+import io.zephyr.aire.decorators.DefaultMainViewDecorator;
 import io.zephyr.aire.ext.MutableExtensionPointRegistry;
 import io.zephyr.aire.extensions.AireExtensionPointRegistry;
 import io.zephyr.api.ModuleActivator;
@@ -25,6 +26,7 @@ import io.zephyr.kernel.memento.Memento;
 import io.zephyr.spring.embedded.EmbeddedModuleClasspath;
 import io.zephyr.spring.embedded.EmbeddedModuleLoader;
 import io.zephyr.spring.embedded.EmbeddedSpringConfiguration;
+import lombok.val;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
@@ -125,7 +127,9 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
 
   @Bean
   public MutableExtensionPointRegistry extensionPointRegistry(ApplicationContext context) {
-    return new AireExtensionPointRegistry(context);
+    val result = new AireExtensionPointRegistry(context);
+    result.register(DefaultMainViewDecorator.class);
+    return result;
   }
 
   @Bean

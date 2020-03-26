@@ -6,17 +6,14 @@ import io.zephyr.aire.ext.DefaultExtensionPointDefinition;
 import io.zephyr.aire.ext.MutableExtensionPointRegistry;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import org.springframework.context.annotation.Bean;
 
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 
-import static java.lang.String.format;
-
 @Slf4j
 public class ExtensionPointScanner {
 
-  final MutableExtensionPointRegistry registry;
+  private final MutableExtensionPointRegistry registry;
 
   public ExtensionPointScanner(MutableExtensionPointRegistry registry) {
     this.registry = registry;
@@ -38,7 +35,7 @@ public class ExtensionPointScanner {
       val parentName = resolveParentName(parent);
       val name = resolveAbsoluteName(parentName, extensionPoint);
       if (registry.containsDefinition(name)) {
-        return null;
+        return registry.getDefinition(name);
       }
 
       val definition = new DefaultExtensionPointDefinition<T>(type, name);

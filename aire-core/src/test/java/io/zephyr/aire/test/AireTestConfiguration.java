@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 public class AireTestConfiguration {
 
 
+
   @Bean
   public AireTestContext aireTestContext() {
     return new AireTestContext();

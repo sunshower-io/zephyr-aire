@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface ExtensionPointRegistry {
 
-  void registerExtensionPoint(ExtensionPointDefinition definition);
+  List<ExtensionPointDefinition<?>> getExtensionPoints();
 
-  void unregisterExtensionPoint(ExtensionPointDefinition definition);
+  boolean containsDefinition(String name);
 
-  List<ExtensionPointDefinition> getExtensionPoints();
+  <T> ExtensionPointDefinition<T> getDefinition(String name);
 
-  boolean containsDefinition(String beanName);
+  List<ExtensionPointDefinition<?>> getChildren(String s);
 }

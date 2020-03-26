@@ -1,5 +1,7 @@
 package io.zephyr.aire.api;
 
-public interface ExtensionPointDefinition {
-    String getId();
+public interface ExtensionPointDefinition<T> {
+  String getLocation();
+
+  Class<T> getType();
 }

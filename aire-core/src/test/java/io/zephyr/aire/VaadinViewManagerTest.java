@@ -75,7 +75,5 @@ class VaadinViewManagerTest {
   void ensureMainViewHeaderCanHaveIconPlacedInIt() {
     val icon = context.resolveFirst(Icon.class);
     assertNull(icon, "must not have an icon");
-
-
   }
 }

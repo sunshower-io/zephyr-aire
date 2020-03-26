@@ -1,41 +1,50 @@
 package io.zephyr.aire.extensions;
 
+import io.sunshower.gyre.CompactTrieMap;
+import io.sunshower.gyre.RegexStringAnalyzer;
+import io.sunshower.gyre.TrieMap;
 import io.zephyr.aire.api.ExtensionPointDefinition;
-import io.zephyr.aire.api.ExtensionPointRegistry;
+import io.zephyr.aire.ext.MutableExtensionPointRegistry;
 import lombok.val;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
-public class AireExtensionPointRegistry implements ExtensionPointRegistry {
+public class AireExtensionPointRegistry implements MutableExtensionPointRegistry {
 
-  private final List<ExtensionPointDefinition> definitions;
+  final TrieMap<String, ExtensionPointDefinition<?>> definitions;
 
   public AireExtensionPointRegistry() {
-    definitions = new ArrayList<>();
+    definitions = new CompactTrieMap<>(new RegexStringAnalyzer(":"));
   }
 
   @Override
-  public void registerExtensionPoint(ExtensionPointDefinition definition) {
-    definitions.add(definition);
+  public <T> void register(ExtensionPointDefinition<T> definition) {
+    synchronized (definitions) {
+      System.out.println("ADDING " + definition.getLocation());
+      definitions.put(definition.getLocation(), definition);
+    }
   }
 
   @Override
-  public void unregisterExtensionPoint(ExtensionPointDefinition definition) {}
-
-  @Override
-  public List<ExtensionPointDefinition> getExtensionPoints() {
-    return definitions;
+  public List<ExtensionPointDefinition<?>> getExtensionPoints() {
+    return new ArrayList<>(definitions.values());
   }
 
   @Override
   public boolean containsDefinition(String beanName) {
-    for(val def : definitions) {
-      if(def.getId().equals(beanName)) {
-        return true;
-      }
+    synchronized (definitions) {
+      return definitions.containsKey(beanName);
     }
-    return false;
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public <T> ExtensionPointDefinition<T> getDefinition(String name) {
+    return (ExtensionPointDefinition<T>) definitions.get(name);
+  }
+
+  @Override
+  public List<ExtensionPointDefinition<?>> getChildren(String s) {
+    return definitions.level(s);
   }
 }

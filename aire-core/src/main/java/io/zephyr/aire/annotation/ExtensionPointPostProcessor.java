@@ -2,6 +2,7 @@ package io.zephyr.aire.annotation;
 
 import io.zephyr.aire.api.ExtensionPoint;
 import io.zephyr.aire.api.ExtensionPointRegistry;
+import io.zephyr.aire.ext.MutableExtensionPointRegistry;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.aop.support.AopUtils;
@@ -15,33 +16,26 @@ import java.beans.Introspector;
 @Slf4j
 public class ExtensionPointPostProcessor implements BeanPostProcessor {
 
-  @Inject private ExtensionPointRegistry registry;
+  private final ExtensionPointRegistry registry;
+
+  @Inject
+  public ExtensionPointPostProcessor(final ExtensionPointRegistry registry) {
+    this.registry = registry;
+  }
 
   @Override
   public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 
-    val type = AopUtils.getTargetClass(bean);
-    if (type.isAnnotationPresent(ExtensionPoint.class)) {
+    val scanner = new ExtensionPointScanner((MutableExtensionPointRegistry) registry);
 
-      val extensionPoint = type.getAnnotation(ExtensionPoint.class);
-
-
-      if (!registry.containsDefinition(beanName)) {
-
-        try {
-          scanDefinition(beanName, type);
-        } catch (IntrospectionException ex) {
-        }
+    try {
+      val type = AopUtils.getTargetClass(bean);
+      if (type.isAnnotationPresent(ExtensionPoint.class)) {
+        scanner.scan(type, type.getAnnotation(ExtensionPoint.class));
       }
+    } catch (IntrospectionException ex) {
+      log.warn("Failed to register");
     }
     return bean;
-  }
-
-  private void scanDefinition(String beanName, Class<?> type) throws IntrospectionException {
-    val descriptor = Introspector.getBeanInfo(type);
-
-    for(val propertyDescriptor : descriptor.getPropertyDescriptors()) {
-
-    }
   }
 }

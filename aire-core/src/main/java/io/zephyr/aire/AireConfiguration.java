@@ -42,8 +42,8 @@ import java.util.ServiceLoader;
 public class AireConfiguration implements ApplicationListener<ContextRefreshedEvent> {
 
   @Bean
-  public BeanPostProcessor extensionPointPostProcessor() {
-    return new ExtensionPointPostProcessor();
+  public BeanPostProcessor extensionPointPostProcessor(ExtensionPointRegistry registry) {
+    return new ExtensionPointPostProcessor(registry);
   }
 
   @Bean

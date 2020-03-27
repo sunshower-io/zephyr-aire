@@ -3,7 +3,9 @@ package io.zephyr.aire;
 import com.vaadin.flow.di.Instantiator;
 import com.vaadin.flow.server.VaadinContext;
 import com.vaadin.flow.server.VaadinService;
+import com.vaadin.flow.server.VaadinServlet;
 import com.vaadin.flow.server.VaadinServletContext;
+import com.vaadin.flow.spring.SpringVaadinServletService;
 import io.sunshower.yaml.state.YamlMemento;
 import io.zephyr.aire.annotation.ExtensionPointPostProcessor;
 import io.zephyr.aire.annotation.ExtensionPointScanner;
@@ -132,6 +134,7 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
     result.register(DefaultMainViewDecorator.class);
     return result;
   }
+
 
   @Bean
   public ViewManager viewManager(ExtensionPointRegistry registry) {

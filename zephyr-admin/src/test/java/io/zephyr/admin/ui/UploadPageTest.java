@@ -1,6 +1,7 @@
 package io.zephyr.admin.ui;
 
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.html.H1;
 import io.zephyr.admin.ZephyrAdminConfiguration;
 import io.zephyr.aire.AireConfiguration;
 import io.zephyr.aire.AireTest;
@@ -14,6 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import javax.inject.Inject;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @AireTest
@@ -22,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
     classes = {
       AireConfiguration.class,
       AireTestConfiguration.class,
-      ZephyrAdminConfiguration.class
     })
 class UploadPageTest {
 
@@ -31,9 +32,11 @@ class UploadPageTest {
 
   @Test
   void ensureNavigatingToRouteWorks() {
-    viewManager.registerRoute(UploadPage.class);
     UI.getCurrent().navigate("plugins");
     val page = context.resolveFirst(UploadPage.class);
     assertNotNull(page);
+
+    val h1 = context.resolveFirst(H1.class);
+    assertEquals(h1.getText().trim(), "zephyr-aire");
   }
 }

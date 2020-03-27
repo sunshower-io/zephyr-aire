@@ -76,7 +76,7 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
         new File(
             AireConfiguration.class.getProtectionDomain().getCodeSource().getLocation().getFile());
     KernelOptions opts = new KernelOptions();
-    opts.setHomeDirectory(file);
+    opts.setHomeDirectory(file.getParentFile());
     SunshowerKernel.setKernelOptions(opts);
     return file;
   }

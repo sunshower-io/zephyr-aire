@@ -1,6 +1,7 @@
 package io.zephyr.aire;
 
 import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.server.VaadinService;
 import io.zephyr.aire.api.ViewManager;
 import io.zephyr.aire.test.AireTestConfiguration;
 import io.zephyr.aire.test.AireTestContext;
@@ -68,9 +69,14 @@ class VaadinViewManagerTest {
     assertNotNull(page.getHeader(), "header must not be null");
   }
 
-//  @Test
-//  void ensureMainViewHeaderCanHaveIconPlacedInIt() {
-//    val icon = context.resolveFirst(Icon.class);
-//    assertNull(icon, "must not have an icon");
-//  }
+  @Test
+  void ensureVaadinContextIsSet() {
+    assertNotNull(VaadinService.getCurrent());
+  }
+
+  //  @Test
+  //  void ensureMainViewHeaderCanHaveIconPlacedInIt() {
+  //    val icon = context.resolveFirst(Icon.class);
+  //    assertNull(icon, "must not have an icon");
+  //  }
 }

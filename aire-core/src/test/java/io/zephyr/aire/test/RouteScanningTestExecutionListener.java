@@ -2,6 +2,7 @@ package io.zephyr.aire.test;
 
 import com.github.mvysny.kaributesting.v10.MockVaadin;
 import com.github.mvysny.kaributesting.v10.Routes;
+import com.vaadin.flow.server.VaadinService;
 import io.zephyr.aire.ScanRoutes;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -31,11 +32,18 @@ public class RouteScanningTestExecutionListener implements TestExecutionListener
   }
 
   public void beforeTestMethod(TestContext testContext) throws Exception {
+
     MockVaadin.setup(
-        routes, (t, u) -> new TestVaadinService(t, u, testContext.getApplicationContext()));
+        routes,
+        (t, u) -> {
+          val service = new TestVaadinService(t, u, testContext.getApplicationContext());
+          VaadinService.setCurrent(service);
+          return service;
+        });
   }
 
   public void afterTestClass(TestContext context) {
     MockVaadin.tearDown();
+    VaadinService.setCurrent(null);
   }
 }

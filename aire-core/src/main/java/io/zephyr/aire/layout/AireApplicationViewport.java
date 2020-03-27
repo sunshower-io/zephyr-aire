@@ -8,21 +8,22 @@ import io.aire.core.AireContainer;
 import io.aire.core.AireLayout;
 import io.zephyr.aire.api.ExtensionPoint;
 import io.zephyr.aire.elements.*;
+import lombok.Getter;
 
 @ExtensionPoint(location = ":ui:main")
-
 @CssImport("./styles/aire/layout/aire-nav.css")
-@CssImport("./styles/aire/layout/aire-button.css")
 @CssImport("./styles/aire/layout/aire-viewport.css")
-public abstract class AireApplicationViewport extends AbstractAireContainer<Main>
+public class AireApplicationViewport extends AbstractAireContainer<Main>
     implements AireLayout, RouterLayout {
 
   /** private state */
+  @Getter
   @ExtensionPoint(location = "header")
   private AireHeader header;
 
+  @Getter
   @ExtensionPoint(location = "footer")
-  private Component footer;
+  private AireFooter footer;
 
   @ExtensionPoint(location = "content")
   private Component content;
@@ -37,12 +38,14 @@ public abstract class AireApplicationViewport extends AbstractAireContainer<Main
 
   public AireApplicationViewport() {
     add(header = new AireHeader());
-    add(primaryNavigation = new AirePrimaryNavigation());
     configureStyles();
     content = new AirePanel();
     add(main = new Article());
+
+    main.add(primaryNavigation = new AirePrimaryNavigation());
     main.add(content);
-    add(secondaryNavigation = new AireSecondaryNavigation());
+
+    main.add(secondaryNavigation = new AireSecondaryNavigation());
     add(footer = new AireFooter());
   }
 
@@ -56,27 +59,5 @@ public abstract class AireApplicationViewport extends AbstractAireContainer<Main
 
   public void setContent(Component newContent) {
     ((AireContainer) content).add(newContent);
-  }
-
-  public void setFooter(Component content) {
-    footer = content;
-    add(content);
-  }
-
-  public void setHeader(Component content) {
-    add(content);
-    this.header = (AireHeader) content;
-  }
-
-  public AireHeader getHeader() {
-    return header;
-  }
-
-  public void setPrimaryNavigation(Component primaryNavigation) {
-    add(primaryNavigation);
-  }
-
-  public void setSecondaryNavigation(Component secondaryNavigation) {
-    add(secondaryNavigation);
   }
 }

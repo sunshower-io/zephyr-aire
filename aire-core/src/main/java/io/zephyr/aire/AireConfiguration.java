@@ -8,6 +8,7 @@ import io.sunshower.yaml.state.YamlMemento;
 import io.zephyr.aire.annotation.ExtensionPointPostProcessor;
 import io.zephyr.aire.annotation.ExtensionPointScanner;
 import io.zephyr.aire.annotation.ExtensionScanner;
+import io.zephyr.aire.api.ComponentRegistry;
 import io.zephyr.aire.api.ExtensionPointRegistry;
 import io.zephyr.aire.api.Session;
 import io.zephyr.aire.api.ViewManager;
@@ -134,7 +135,7 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
 
   @Bean
   public ViewManager viewManager(ExtensionPointRegistry registry) {
-    return new VaadinViewManager(registry);
+    return new VaadinViewManager((ComponentRegistry) registry, registry);
   }
 
   @Override

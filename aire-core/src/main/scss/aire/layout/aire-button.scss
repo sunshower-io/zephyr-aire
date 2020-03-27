@@ -1,0 +1,15 @@
+@import "aire-layout-variables";
+
+
+header.aire-header, footer.aire-footer {
+  .aire-button {
+    background-color: $secondary-nav-background;
+    margin: 0px;
+    padding: 0px;
+    border-radius: 0px;
+    width: $primary-nav-width;
+
+    color: $primary-nav-foreground;
+  }
+}
+

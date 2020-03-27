@@ -68,9 +68,9 @@ class VaadinViewManagerTest {
     assertNotNull(page.getHeader(), "header must not be null");
   }
 
-  @Test
-  void ensureMainViewHeaderCanHaveIconPlacedInIt() {
-    val icon = context.resolveFirst(Icon.class);
-    assertNull(icon, "must not have an icon");
-  }
+//  @Test
+//  void ensureMainViewHeaderCanHaveIconPlacedInIt() {
+//    val icon = context.resolveFirst(Icon.class);
+//    assertNull(icon, "must not have an icon");
+//  }
 }

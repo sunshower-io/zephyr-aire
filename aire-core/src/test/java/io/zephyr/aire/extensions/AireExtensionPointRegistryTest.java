@@ -50,12 +50,12 @@ class AireExtensionPointRegistryTest {
   }
 
 
-  @Test
-  void ensureRegisteringExtensionWorks() {
-    registry.register(HomeButton.class);
-    UI.getCurrent().getPage().reload();
-    UI.getCurrent().navigate(MainView.class);
-    val a = context.resolveFirst(Button.class);
-    assertEquals(a.getText(), "Hello, world");
-  }
+//  @Test
+//  void ensureRegisteringExtensionWorks() {
+//    registry.register(HomeButton.class);
+//    UI.getCurrent().getPage().reload();
+//    UI.getCurrent().navigate(MainView.class);
+//    val a = context.resolveFirst(Button.class);
+//    assertEquals(a.getText(), "Hello, world");
+//  }
 }

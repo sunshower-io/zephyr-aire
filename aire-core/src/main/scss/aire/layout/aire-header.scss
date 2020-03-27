@@ -3,11 +3,28 @@
 @import "aire-layout-variables";
 header.aire-header {
 
-  vaadin-button {
+  display:flex;
+  flex-direction: row;
+
+  vaadin-button.aire-button {
+    width:64px;
+    height:64px;
+    padding:0;
+
     img {
-      width:$header-height;
-      height: $header-height;
+      width: 48px;
+      height:48px;
     }
+
+
   }
+
+  //img.aire-logo {
+  //  background-color: $primary-nav-background;
+  //  width:48px;
+  //  height:48px;
+  //  margin:4px;
+  //}
+
 }
 

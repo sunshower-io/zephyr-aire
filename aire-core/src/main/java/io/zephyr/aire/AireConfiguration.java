@@ -1,12 +1,17 @@
 package io.zephyr.aire;
 
+import com.vaadin.flow.di.Instantiator;
 import com.vaadin.flow.server.VaadinContext;
+import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.server.VaadinServletContext;
 import io.sunshower.yaml.state.YamlMemento;
 import io.zephyr.aire.annotation.ExtensionPointPostProcessor;
+import io.zephyr.aire.annotation.ExtensionPointScanner;
+import io.zephyr.aire.annotation.ExtensionScanner;
 import io.zephyr.aire.api.ExtensionPointRegistry;
 import io.zephyr.aire.api.Session;
 import io.zephyr.aire.api.ViewManager;
+import io.zephyr.aire.ext.MutableExtensionPointRegistry;
 import io.zephyr.aire.extensions.AireExtensionPointRegistry;
 import io.zephyr.api.ModuleActivator;
 import io.zephyr.kernel.Lifecycle;
@@ -42,8 +47,8 @@ import java.util.ServiceLoader;
 public class AireConfiguration implements ApplicationListener<ContextRefreshedEvent> {
 
   @Bean
-  public BeanPostProcessor extensionPointPostProcessor() {
-    return new ExtensionPointPostProcessor();
+  public BeanPostProcessor extensionPointPostProcessor(MutableExtensionPointRegistry registry) {
+    return new ExtensionPointPostProcessor(registry, new ExtensionPointScanner(registry));
   }
 
   @Bean
@@ -119,8 +124,8 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
   }
 
   @Bean
-  public ExtensionPointRegistry extensionPointRegistry() {
-    return new AireExtensionPointRegistry();
+  public MutableExtensionPointRegistry extensionPointRegistry(ApplicationContext context) {
+    return new AireExtensionPointRegistry(context);
   }
 
   @Bean

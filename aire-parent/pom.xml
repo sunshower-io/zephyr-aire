@@ -30,6 +30,7 @@
         project dependency properties
         -->
 
+        <commons-collections.version>4.4</commons-collections.version>
         <vaadin.version>15.0.1</vaadin.version>
         <zephyr.version>2.0.0-SNAPSHOT</zephyr.version>
         <vaadin-html-components.version>3.0.1</vaadin-html-components.version>

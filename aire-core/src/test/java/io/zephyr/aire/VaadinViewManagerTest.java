@@ -1,14 +1,15 @@
 package io.zephyr.aire;
 
+import com.vaadin.flow.component.icon.Icon;
 import io.zephyr.aire.api.ViewManager;
+import io.zephyr.aire.elements.AireHeader;
+import io.zephyr.aire.layout.Region;
 import io.zephyr.aire.test.AireTestConfiguration;
 import io.zephyr.aire.test.AireTestContext;
 import io.zephyr.kernel.core.Kernel;
 import io.zephyr.kernel.core.KernelLifecycle;
 import lombok.val;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.test.context.ContextConfiguration;
 
 import javax.inject.Inject;
@@ -68,7 +69,11 @@ class VaadinViewManagerTest {
   void ensureMainViewHasAHeader() {
     val page = context.resolveFirst(MainView.class);
     assertNotNull(page.getHeader(), "header must not be null");
+  }
 
-    System.out.println("" + context.resolveFirst(t -> t.getElement().getText().contains("world")));
+  @Test
+  void ensureMainViewHeaderCanHaveIconPlacedInIt() {
+    val icon = context.resolveFirst(Icon.class);
+    assertNull(icon, "must not have an icon");
   }
 }

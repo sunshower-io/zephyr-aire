@@ -9,23 +9,29 @@ import io.aire.core.AireLayout;
 import io.zephyr.aire.api.ExtensionPoint;
 import io.zephyr.aire.elements.*;
 
-@ExtensionPoint(AireApplicationViewport.key)
+@ExtensionPoint(location = ":ui:main")
 @CssImport("./styles/aire/layout/aire-nav.css")
 @CssImport("./styles/aire/layout/aire-viewport.css")
 public abstract class AireApplicationViewport extends AbstractAireContainer<Main>
     implements AireLayout, RouterLayout {
 
   /** private state */
+  @ExtensionPoint(location = "header")
   private AireHeader header;
 
+  @ExtensionPoint(location = "footer")
   private Component footer;
+
+  @ExtensionPoint(location = "content")
   private Component content;
+
+  @ExtensionPoint(location = "navigation:primary")
   private Component primaryNavigation;
+
+  @ExtensionPoint(location = "navigation:secondary")
   private Component secondaryNavigation;
 
   private Article main;
-
-  public static final String key = "aire.views.primary";
 
   public AireApplicationViewport() {
     setHeader(new AireHeader());

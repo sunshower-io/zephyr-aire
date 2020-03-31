@@ -1,5 +1,6 @@
 package io.zephyr.admin;
 
+import io.zephyr.aire.api.ViewManager;
 import io.zephyr.api.ModuleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +16,13 @@ public class ModuleActivator implements io.zephyr.api.ModuleActivator {
   public void start(ModuleContext moduleContext) {
     log.info("zephyr-admin starting...");
     ApplicationContext parentContext = moduleContext.get(ApplicationContext.class);
-    context = new AnnotationConfigApplicationContext(ZephyrAdminConfiguration.class);
+    ViewManager vm = parentContext.getBean(ViewManager.class);
+
+    context = new AnnotationConfigApplicationContext();
     context.setParent(parentContext);
-    context.start();
+    context.register(ZephyrAdminConfiguration.class);
+
+    context.refresh();
     log.info("zephyr-admin started successfully");
   }
 

@@ -28,7 +28,6 @@ public class ExtensionPointPostProcessor implements BeanPostProcessor {
 
   @Override
   public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-
     val type = AopUtils.getTargetClass(bean);
     if (scanForExtensionPoints(type, bean)) {
       log.info("Successfully registered extension point with type: {}", type);

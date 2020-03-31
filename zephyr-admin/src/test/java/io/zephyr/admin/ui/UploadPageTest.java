@@ -2,7 +2,6 @@ package io.zephyr.admin.ui;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.H1;
-import io.zephyr.admin.ZephyrAdminConfiguration;
 import io.zephyr.aire.AireConfiguration;
 import io.zephyr.aire.AireTest;
 import io.zephyr.aire.ScanRoutes;

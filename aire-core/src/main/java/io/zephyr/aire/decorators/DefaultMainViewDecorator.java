@@ -10,7 +10,6 @@ import io.zephyr.aire.api.ViewDecorator;
 import io.zephyr.aire.api.ViewManager;
 import io.zephyr.aire.elements.AireButton;
 import io.zephyr.aire.layout.AireApplicationViewport;
-import io.zephyr.aire.layout.TestRoute;
 import lombok.val;
 
 import javax.inject.Inject;
@@ -31,8 +30,6 @@ public class DefaultMainViewDecorator implements ViewDecorator<AireApplicationVi
     val button = new AireButton(new Icon(VaadinIcon.QUESTION_CIRCLE_O));
     component.getFooter().add(button);
 
-
-    viewManager.registerRoute(TestRoute.class);
 
     button
         .getContent()

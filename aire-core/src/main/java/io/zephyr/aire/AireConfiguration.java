@@ -135,10 +135,9 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
     return result;
   }
 
-
   @Bean
-  public ViewManager viewManager(ExtensionPointRegistry registry) {
-    return new VaadinViewManager((ComponentRegistry) registry, registry);
+  public ViewManager viewManager(ExtensionPointRegistry registry, VaadinContext context) {
+    return new VaadinViewManager(context, (ComponentRegistry) registry, registry);
   }
 
   @Override

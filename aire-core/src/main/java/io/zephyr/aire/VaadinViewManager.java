@@ -13,12 +13,15 @@ import lombok.val;
 
 public class VaadinViewManager implements ViewManager {
 
+  private final VaadinContext context;
   private final ComponentRegistry componentRegistry;
   private final ExtensionPointRegistry extensionPointRegistry;
 
   public VaadinViewManager(
+      final VaadinContext context,
       final ComponentRegistry componentRegistry,
       final ExtensionPointRegistry extensionPointRegistry) {
+    this.context = context;
     this.componentRegistry = componentRegistry;
     this.extensionPointRegistry = extensionPointRegistry;
   }
@@ -35,8 +38,7 @@ public class VaadinViewManager implements ViewManager {
   public boolean registerRoute(Class<?> route) {
 
     try {
-      val routeRegistry =
-          ApplicationRouteRegistry.getInstance(VaadinService.getCurrent().getContext());
+      val routeRegistry = ApplicationRouteRegistry.getInstance(context);
       RouteConfiguration.forRegistry(routeRegistry)
           .setAnnotatedRoute((Class<? extends Component>) route);
     } catch (AmbiguousRouteConfigurationException ex) {
@@ -49,7 +51,7 @@ public class VaadinViewManager implements ViewManager {
   @SuppressWarnings("unchecked")
   public boolean unregisterRoute(Class<?> route) {
     val routeRegistry =
-        ApplicationRouteRegistry.getInstance(VaadinService.getCurrent().getContext());
+        ApplicationRouteRegistry.getInstance(context);
     RouteConfiguration.forRegistry(routeRegistry).removeRoute((Class<? extends Component>) route);
     return true;
   }

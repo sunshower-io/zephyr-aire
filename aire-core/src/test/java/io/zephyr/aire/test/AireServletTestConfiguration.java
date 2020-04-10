@@ -9,7 +9,4 @@ import javax.servlet.http.HttpServletResponse;
 
 @ContextConfiguration
 public class AireServletTestConfiguration {
-
-    @Bean
-    public ModuleResourceServlet moduleResourceServlet(HttpServletRequest request, HttpServletResponse )
 }

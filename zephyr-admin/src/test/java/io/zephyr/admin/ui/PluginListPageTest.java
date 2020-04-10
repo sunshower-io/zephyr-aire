@@ -9,6 +9,7 @@ import io.zephyr.aire.api.ViewManager;
 import io.zephyr.aire.test.AireTestConfiguration;
 import io.zephyr.aire.test.AireTestContext;
 import lombok.val;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -24,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
       AireConfiguration.class,
       AireTestConfiguration.class,
     })
+@Disabled
 class PluginListPageTest {
 
   @Inject private AireTestContext context;

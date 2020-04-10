@@ -2,6 +2,7 @@ package io.zephyr.aire.servlet;
 
 import io.zephyr.aire.test.AireServletTest;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
+@Disabled
 @AireServletTest
 class ModuleResourceServletTest {
 

@@ -132,6 +132,15 @@
             <artifactId>vaadin-testbench</artifactId>
             <scope>test</scope>
         </dependency>
+
+
+        <!--        <dependency>-->
+        <!--            <groupId>${project.groupId}</groupId>-->
+        <!--            <artifactId>zephyr-admin</artifactId>-->
+        <!--            <scope>system</scope>-->
+        <!--            <version>${project.version}</version>-->
+        <!--            <systemPath>${project.basedir}/../zephyr-admin/zephyr-admin-2.0-SNAPSHOT.jar</systemPath>-->
+        <!--        </dependency>-->
     </dependencies>
 
 
@@ -139,6 +148,33 @@
 
         <plugins>
 
+
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/deployments</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/../zephyr-admin/target/</directory>
+                                    <filtering>false</filtering>
+                                    <includes>zephyr-admin-${project.version}.jar</includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+            </plugin>
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
             </plugin>

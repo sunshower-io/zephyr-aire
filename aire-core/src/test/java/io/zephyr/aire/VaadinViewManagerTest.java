@@ -1,10 +1,11 @@
 package io.zephyr.aire;
 
-import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.server.VaadinService;
 import io.zephyr.aire.api.ViewManager;
+import io.zephyr.aire.test.AireTest;
 import io.zephyr.aire.test.AireTestConfiguration;
 import io.zephyr.aire.test.AireTestContext;
+import io.zephyr.aire.test.ScanRoutes;
 import io.zephyr.kernel.core.Kernel;
 import io.zephyr.kernel.core.KernelLifecycle;
 import lombok.val;

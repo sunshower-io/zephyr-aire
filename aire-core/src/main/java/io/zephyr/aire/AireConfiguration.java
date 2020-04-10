@@ -1,22 +1,16 @@
 package io.zephyr.aire;
 
-import com.vaadin.flow.di.Instantiator;
 import com.vaadin.flow.server.VaadinContext;
-import com.vaadin.flow.server.VaadinService;
-import com.vaadin.flow.server.VaadinServlet;
 import com.vaadin.flow.server.VaadinServletContext;
-import com.vaadin.flow.spring.SpringVaadinServletService;
+import com.vaadin.flow.spring.annotation.EnableVaadin;
 import io.sunshower.yaml.state.YamlMemento;
 import io.zephyr.aire.annotation.ExtensionPointPostProcessor;
 import io.zephyr.aire.annotation.ExtensionPointScanner;
-import io.zephyr.aire.annotation.ExtensionScanner;
-import io.zephyr.aire.api.ComponentRegistry;
-import io.zephyr.aire.api.ExtensionPointRegistry;
-import io.zephyr.aire.api.Session;
-import io.zephyr.aire.api.ViewManager;
+import io.zephyr.aire.api.*;
 import io.zephyr.aire.decorators.DefaultMainViewDecorator;
 import io.zephyr.aire.ext.MutableExtensionPointRegistry;
 import io.zephyr.aire.extensions.AireExtensionPointRegistry;
+import io.zephyr.aire.servlet.ModuleResourceServlet;
 import io.zephyr.api.ModuleActivator;
 import io.zephyr.kernel.Lifecycle;
 import io.zephyr.kernel.Module;
@@ -31,6 +25,7 @@ import io.zephyr.spring.embedded.EmbeddedModuleLoader;
 import io.zephyr.spring.embedded.EmbeddedSpringConfiguration;
 import lombok.val;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.*;
@@ -47,6 +42,7 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.ServiceLoader;
 
+@EnableVaadin
 @Configuration
 @Import(EmbeddedSpringConfiguration.class)
 public class AireConfiguration implements ApplicationListener<ContextRefreshedEvent> {
@@ -54,6 +50,12 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
   @Bean
   public BeanPostProcessor extensionPointPostProcessor(MutableExtensionPointRegistry registry) {
     return new ExtensionPointPostProcessor(registry, new ExtensionPointScanner(registry));
+  }
+
+  @Bean
+  public ServletRegistrationBean<ModuleResourceServlet>
+      moduleResourceServletServletRegistrationBean() {
+    return new ServletRegistrationBean<>(new ModuleResourceServlet(), "/modules/*");
   }
 
   @Bean

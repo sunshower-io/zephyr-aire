@@ -1,5 +1,6 @@
 package io.zephyr.aire.annotation;
 
+import com.vaadin.flow.component.UI;
 import io.zephyr.aire.api.ExtensionPoint;
 import io.zephyr.aire.api.ExtensionPointDefinition;
 import io.zephyr.aire.ext.MutableExtensionPointRegistry;
@@ -29,6 +30,8 @@ public class ExtensionPointPostProcessor implements BeanPostProcessor {
   @Override
   public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
     val type = AopUtils.getTargetClass(bean);
+
+
     if (scanForExtensionPoints(type, bean)) {
       log.info("Successfully registered extension point with type: {}", type);
     }

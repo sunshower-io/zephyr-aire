@@ -3,7 +3,6 @@ package io.zephyr.aire.test;
 import com.github.mvysny.kaributesting.v10.MockVaadin;
 import com.github.mvysny.kaributesting.v10.Routes;
 import com.vaadin.flow.server.VaadinService;
-import io.zephyr.aire.ScanRoutes;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.test.context.TestContext;

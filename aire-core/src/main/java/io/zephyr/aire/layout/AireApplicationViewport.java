@@ -3,6 +3,8 @@ package io.zephyr.aire.layout;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterListener;
 import com.vaadin.flow.router.RouterLayout;
 import io.aire.core.AireContainer;
 import io.aire.core.AireLayout;
@@ -29,7 +31,7 @@ public class AireApplicationViewport extends AbstractAireContainer<Main>
   private Component content;
 
   @ExtensionPoint(location = "navigation:primary")
-  private Component primaryNavigation;
+  private AirePrimaryNavigation primaryNavigation;
 
   @ExtensionPoint(location = "navigation:secondary")
   private Component secondaryNavigation;
@@ -47,6 +49,14 @@ public class AireApplicationViewport extends AbstractAireContainer<Main>
 
     main.add(secondaryNavigation = new AireSecondaryNavigation());
     add(footer = new AireFooter());
+  }
+
+  public void addContent(Component content) {
+    ((AireContainer) this.content).add(content);
+  }
+
+  public AirePrimaryNavigation getPrimaryNavigation() {
+    return primaryNavigation;
   }
 
   public void showRouterLayoutContent(HasElement content) {

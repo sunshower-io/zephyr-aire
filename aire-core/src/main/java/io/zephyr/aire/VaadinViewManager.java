@@ -2,6 +2,7 @@ package io.zephyr.aire;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.router.RouteConfiguration;
+import com.vaadin.flow.router.Router;
 import com.vaadin.flow.server.AmbiguousRouteConfigurationException;
 import com.vaadin.flow.server.VaadinContext;
 import com.vaadin.flow.server.VaadinService;
@@ -36,7 +37,6 @@ public class VaadinViewManager implements ViewManager {
   @Override
   @SuppressWarnings("unchecked")
   public boolean registerRoute(Class<?> route) {
-
     try {
       val routeRegistry = ApplicationRouteRegistry.getInstance(context);
       RouteConfiguration.forRegistry(routeRegistry)

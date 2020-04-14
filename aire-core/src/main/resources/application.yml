@@ -1,0 +1,16 @@
+server:
+  port: 8080
+vaadin:
+  compatibilityMode: false
+  productionMode: false
+logging:
+  level:
+    org.atmosphere: warn
+deployment:
+  locations: "deployments/"
+
+spring:
+  application:
+    name: zephyr-aire
+
+

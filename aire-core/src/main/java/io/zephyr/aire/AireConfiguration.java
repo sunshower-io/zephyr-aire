@@ -32,6 +32,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.*;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.ContextStoppedEvent;
+import org.springframework.context.event.EventListener;
 
 import javax.servlet.ServletContext;
 import java.io.File;
@@ -151,6 +153,12 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
     return new VaadinViewManager(context, (ComponentRegistry) registry, registry);
   }
 
+  @EventListener(classes = ContextStoppedEvent.class)
+  public void onContextStopped(ContextStoppedEvent event) {
+    val thread = event.getApplicationContext().getBean(ModuleThread.class);
+    thread.stop();
+  }
+
   @Override
   public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 
@@ -163,6 +171,7 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
       ModuleThread moduleThread = context.getBean(ModuleThread.class);
       ViewManager viewManager = context.getBean(ViewManager.class);
       kernel.start();
+      moduleThread.start();
 
       register(context, module, kernel, scanner, moduleThread, viewManager);
     }

@@ -27,10 +27,8 @@ public class PluginListPage extends VerticalLayout {
     val plugins = kernel.getModuleManager().getModules();
     for (val plugin : plugins) {
       val card = new AireCard();
-      val icon = VaadinIcon.QUESTION_CIRCLE_O;
-      val header = new Icon(icon);
-      card.setHeader(header);
 
+      val imag = new Image();
       add(card);
     }
     UI.getCurrent().getPage().addStyleSheet("/modules/whatever/test");

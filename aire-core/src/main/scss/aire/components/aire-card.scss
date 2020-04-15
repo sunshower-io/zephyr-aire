@@ -1,4 +1,34 @@
+@import "../layout/aire-layout-variables";
+$aire-card-width: 344px;
+$aire-card-min-height: 148px;
+$aire-card-header-height: 72px;
 
-.aire-card {
+aire-card, .aire-card {
+
+  /**
+  layout
+   */
+  display: block;
+
+  /**
+  dimensions
+   */
+  width: $aire-card-width;
+  min-height: $aire-card-min-height;
+
+
+  /**
+  colors
+   */
+  background-color: $primary-nav-foreground;
+
+
+  header, .aire-header {
+    display:block;
+    height: $aire-card-header-height;
+    width: 100%;
+    border-bottom: 1px solid $secondary-nav-background;
+  }
+
 
 }

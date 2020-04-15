@@ -1,13 +1,14 @@
 package io.zephyr.admin.ui;
 
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.AbstractStreamResource;
-import io.zephyr.aire.elements.AireCard;
+import io.zephyr.aire.components.AireCard;
 import io.zephyr.aire.layout.AireApplicationViewport;
 import io.zephyr.kernel.core.Kernel;
 import lombok.val;
@@ -26,7 +27,10 @@ public class PluginListPage extends VerticalLayout {
     val plugins = kernel.getModuleManager().getModules();
     for (val plugin : plugins) {
       val card = new AireCard();
-      Image img = new Image();
+      val icon = VaadinIcon.QUESTION_CIRCLE_O;
+      val header = new Icon(icon);
+      card.setHeader(header);
+
       add(card);
     }
     UI.getCurrent().getPage().addStyleSheet("/modules/whatever/test");

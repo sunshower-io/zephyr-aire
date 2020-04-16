@@ -1,6 +1,5 @@
 package io.zephyr.admin.ui;
 
-import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.router.ParentLayout;
 import com.vaadin.flow.router.RoutePrefix;
 import io.zephyr.aire.components.AireTabPane;

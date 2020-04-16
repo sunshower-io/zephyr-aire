@@ -12,6 +12,9 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.Command;
+import io.sunshower.gyre.CompactTrieMap;
+import io.sunshower.gyre.RegexStringAnalyzer;
+import io.sunshower.gyre.TrieMap;
 import lombok.AllArgsConstructor;
 import lombok.val;
 
@@ -36,6 +39,7 @@ public class AireTabPane extends Article
 
   private final Section contents;
   private final Nav tabContainer;
+  private final TrieMap<String, Tab> locations;
   private final Map<Tab, ComponentDescriptor> components;
 
   /** mutable state */
@@ -56,6 +60,7 @@ public class AireTabPane extends Article
     setTabPlacement(placement);
 
     this.components = new HashMap<>();
+    this.locations = new CompactTrieMap<>(new RegexStringAnalyzer("/"));
   }
 
   public AireTabPane() {
@@ -72,11 +77,13 @@ public class AireTabPane extends Article
   public Tab addTab(String title, Class<? extends Component> componentType) {
     val route = isRoute(componentType);
     if (route) {
+      val url = getTargetUrl(componentType);
       val link = new RouterLink(title, componentType);
       val tab = new Tab(link);
       val descriptor = new ComponentDescriptor(true, null, componentType);
       components.put(tab, descriptor);
       tabs.add(tab);
+      locations.put(url, tab);
       return tab;
     } else {
       val tab = new Tab(title);
@@ -94,6 +101,7 @@ public class AireTabPane extends Article
     }
     this.placement = placement;
     classlist.add(placement.name().toLowerCase());
+    updateTabOrientation(placement);
   }
 
   @Override
@@ -138,10 +146,38 @@ public class AireTabPane extends Article
 
   private void decorate(Tabs tabs) {
     tabs.addSelectedChangeListener(this);
+    tabs.addAttachListener(new ActivateListener());
   }
 
   private boolean isRoute(Class<? extends Component> componentType) {
     return componentType.isAnnotationPresent(Route.class);
+  }
+
+  private void updateTabOrientation(TabPlacement placement) {
+    switch (placement) {
+      case LEFT:
+      case RIGHT:
+        tabs.setOrientation(Tabs.Orientation.VERTICAL);
+        break;
+      case TOP:
+      case BOTTOM:
+        tabs.setOrientation(Tabs.Orientation.HORIZONTAL);
+    }
+  }
+
+  private String getTargetUrl(Class<? extends Component> type) {
+    val current = UI.getCurrent();
+    val router = current.getRouter();
+    val registry = router.getRegistry();
+    val result = registry.getTargetUrl(type);
+    return result.get();
+  }
+
+  private String getCurrentLocation() {
+    val ui = UI.getCurrent();
+    val internals = ui.getInternals();
+    val viewLocation = internals.getActiveViewLocation();
+    return viewLocation.getPath();
   }
 
   @AllArgsConstructor
@@ -149,5 +185,16 @@ public class AireTabPane extends Article
     final boolean isRoute;
     final Component instance;
     final Class<? extends Component> componentType;
+  }
+
+  final class ActivateListener implements ComponentEventListener<AttachEvent> {
+    @Override
+    public void onComponentEvent(AttachEvent event) {
+      val current = getCurrentLocation();
+      val tab = locations.get(current);
+      if (tab != null) {
+        tabs.setSelectedTab(tab);
+      }
+    }
   }
 }

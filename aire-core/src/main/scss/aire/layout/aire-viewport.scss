@@ -1,7 +1,10 @@
 @import "aire-layout-variables";
 
+
+
+
 .aire-viewport {
-  height:100%;
+  height: 100%;
   width: 100%;
 
   display: flex;
@@ -13,20 +16,15 @@
 
   > footer, .aire-footer {
     height: $footer-height;
-    border: 1px solid turquoise;
   }
 
   > header, .aire-header {
-    height:$header-height;
-    border: 1px solid blue;
+    height: $header-height;
   }
 
   > article, .aire-panel {
-    border: 1px solid red;
     height: 100%;
   }
 
 }
-.mxRubberband {
-  color: red;
-}
+

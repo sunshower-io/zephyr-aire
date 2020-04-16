@@ -46,7 +46,8 @@
     "@vaadin/vaadin-text-field": "2.5.4",
     "@vaadin/vaadin-time-picker": "2.0.6",
     "@vaadin/vaadin-upload": "4.2.2",
-    "simple-button": "github:SimpleElements/simple-button"
+    "simple-button": "github:SimpleElements/simple-button",
+    "lit-element": "^2.3.1"
   },
   "devDependencies": {
     "awesome-typescript-loader": "5.2.1",
@@ -113,7 +114,9 @@
       "@vaadin/vaadin-rich-text-editor": "1.1.1",
       "@vaadin/vaadin-custom-field": "1.0.11",
       "@polymer/paper-slider": "^3.0.1",
-      "mxgraph": "^4.1.0"
+      "mxgraph": "^4.1.0",
+      "@polymer/polymer-element": "^3.0.1",
+      "lit-element": "^2.3.1"
     },
     "devDependencies": {
       "webpack-babel-multi-target-plugin": "2.3.3",
@@ -129,6 +132,6 @@
       "webpack-merge": "4.2.2",
       "webpack-dev-server": "3.10.3"
     },
-    "hash": "c10fbac13095eb1bd1c774a9f83b379ecac9097efbd2932221263a06425223f8"
+    "hash": "5c1b5195d57be8e99a8979aad8e7363850265cbcd3766a1df634ba04f5c74c45"
   }
 }

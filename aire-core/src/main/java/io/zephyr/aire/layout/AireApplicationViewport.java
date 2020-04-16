@@ -3,30 +3,35 @@ package io.zephyr.aire.layout;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterListener;
 import com.vaadin.flow.router.RouterLayout;
 import io.aire.core.AireContainer;
 import io.aire.core.AireLayout;
 import io.zephyr.aire.api.ExtensionPoint;
 import io.zephyr.aire.elements.*;
+import lombok.Getter;
 
 @ExtensionPoint(location = ":ui:main")
 @CssImport("./styles/aire/layout/aire-nav.css")
 @CssImport("./styles/aire/layout/aire-viewport.css")
-public abstract class AireApplicationViewport extends AbstractAireContainer<Main>
+public class AireApplicationViewport extends AbstractAireContainer<Main>
     implements AireLayout, RouterLayout {
 
   /** private state */
+  @Getter
   @ExtensionPoint(location = "header")
   private AireHeader header;
 
+  @Getter
   @ExtensionPoint(location = "footer")
-  private Component footer;
+  private AireFooter footer;
 
   @ExtensionPoint(location = "content")
   private Component content;
 
   @ExtensionPoint(location = "navigation:primary")
-  private Component primaryNavigation;
+  private AirePrimaryNavigation primaryNavigation;
 
   @ExtensionPoint(location = "navigation:secondary")
   private Component secondaryNavigation;
@@ -34,10 +39,24 @@ public abstract class AireApplicationViewport extends AbstractAireContainer<Main
   private Article main;
 
   public AireApplicationViewport() {
-    setHeader(new AireHeader());
+    add(header = new AireHeader());
     configureStyles();
     content = new AirePanel();
-    add(content);
+    add(main = new Article());
+
+    main.add(primaryNavigation = new AirePrimaryNavigation());
+    main.add(content);
+
+    main.add(secondaryNavigation = new AireSecondaryNavigation());
+    add(footer = new AireFooter());
+  }
+
+  public void addContent(Component content) {
+    ((AireContainer) this.content).add(content);
+  }
+
+  public AirePrimaryNavigation getPrimaryNavigation() {
+    return primaryNavigation;
   }
 
   public void showRouterLayoutContent(HasElement content) {
@@ -50,27 +69,5 @@ public abstract class AireApplicationViewport extends AbstractAireContainer<Main
 
   public void setContent(Component newContent) {
     ((AireContainer) content).add(newContent);
-  }
-
-  public void setFooter(Component content) {
-    footer = content;
-    add(content);
-  }
-
-  public void setHeader(Component content) {
-    add(content);
-    this.header = (AireHeader) content;
-  }
-
-  public Component getHeader() {
-    return header;
-  }
-
-  public void setPrimaryNavigation(Component primaryNavigation) {
-    add(primaryNavigation);
-  }
-
-  public void setSecondaryNavigation(Component secondaryNavigation) {
-    add(secondaryNavigation);
   }
 }

@@ -16,18 +16,38 @@
         <relativePath>../aire-parent</relativePath>
     </parent>
 
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${vaadin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
     <dependencies>
+
+
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>aire-api</artifactId>
             <version>${project.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>io.zephyr</groupId>
-            <artifactId>kernel-api</artifactId>
-        </dependency>
 
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>aire-core</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+            <type>test-jar</type>
+        </dependency>
 
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -37,13 +57,103 @@
             <classifier>classes</classifier>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.mvysny.kaributesting</groupId>
+            <artifactId>karibu-testing-v10</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>gyre-api</artifactId>
+            <version>${zephyr.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>zephyr-main</artifactId>
+            <version>${zephyr.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.esotericsoftware.yamlbeans</groupId>
+            <artifactId>yamlbeans</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.modules</groupId>
+            <artifactId>jboss-modules</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>kernel-test-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>kernel-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>sunshower-yaml-reader</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>kernel-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.zafarkhaja</groupId>
+            <artifactId>java-semver</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>kernel-core</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>spring-embedded-plugin</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spring-boot-starter</artifactId>
+        </dependency>
+
 
         <!--        <dependency>-->
-<!--            <groupId>io.zephyr.aire</groupId>-->
-<!--            <artifactId>aire</artifactId>-->
-<!--            <version>2.0-SNAPSHOT</version>-->
-<!--            <scope>compile</scope>-->
-<!--        </dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-devtools</artifactId>-->
+        <!--            <optional>true</optional>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-testbench</artifactId>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 

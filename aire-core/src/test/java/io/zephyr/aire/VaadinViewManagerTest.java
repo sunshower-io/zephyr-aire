@@ -1,11 +1,11 @@
 package io.zephyr.aire;
 
-import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.server.VaadinService;
 import io.zephyr.aire.api.ViewManager;
-import io.zephyr.aire.elements.AireHeader;
-import io.zephyr.aire.layout.Region;
+import io.zephyr.aire.test.AireTest;
 import io.zephyr.aire.test.AireTestConfiguration;
 import io.zephyr.aire.test.AireTestContext;
+import io.zephyr.aire.test.ScanRoutes;
 import io.zephyr.kernel.core.Kernel;
 import io.zephyr.kernel.core.KernelLifecycle;
 import lombok.val;
@@ -55,12 +55,11 @@ class VaadinViewManagerTest {
     assertNotNull(page, "must exist");
   }
 
-
   @Test
   void ensureExtensionPointIsRegistered() {
     context.resolveFirst(MainView.class);
     assertEquals(
-        1,
+        6,
         viewManager.getExtensionPointRegistry().getExtensionPoints().size(),
         "must have one extension point registered");
   }
@@ -72,8 +71,13 @@ class VaadinViewManagerTest {
   }
 
   @Test
-  void ensureMainViewHeaderCanHaveIconPlacedInIt() {
-    val icon = context.resolveFirst(Icon.class);
-    assertNull(icon, "must not have an icon");
+  void ensureVaadinContextIsSet() {
+    assertNotNull(VaadinService.getCurrent());
   }
+
+  //  @Test
+  //  void ensureMainViewHeaderCanHaveIconPlacedInIt() {
+  //    val icon = context.resolveFirst(Icon.class);
+  //    assertNull(icon, "must not have an icon");
+  //  }
 }

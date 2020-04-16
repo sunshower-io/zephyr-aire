@@ -28,9 +28,12 @@ public class ExtensionScanner {
       return registry.getExtension(id);
     }
 
-    val targets = extension.targets();
+    String[] targets = extension.targets();
 
-    if (targets.length == 0) {
+    if (targets.length == 0 || "__VALUE__".equals(targets[0])) {
+      targets = extension.value();
+    }
+    if (targets.length == 0 || "__VALUE__".equals(targets[0])) {
       throw new IllegalArgumentException("Error:  an extension must have at least 1 target");
     }
 

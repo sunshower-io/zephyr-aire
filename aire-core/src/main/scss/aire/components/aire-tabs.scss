@@ -1,0 +1,47 @@
+$nav-primary-dimension: 100%;
+$nav-secondary-dimension: auto;
+
+
+article.aire-tabs {
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  nav {
+    background-color: inherit;
+
+    a {
+      width: unset;
+      height: unset;
+    }
+  }
+
+  &.top, &.bottom {
+    nav {
+      height: $nav-secondary-dimension;
+      width: $nav-primary-dimension;
+    }
+  }
+
+  &.bottom {
+    flex-direction: column-reverse;
+  }
+
+  &.left, &.right {
+    nav {
+      width: $nav-secondary-dimension;
+      min-width: $nav-secondary-dimension;
+      height: $nav-primary-dimension;
+    }
+  }
+
+  &.right {
+    flex-direction: row-reverse;
+  }
+
+  &.left {
+    flex-direction: row;
+  }
+}

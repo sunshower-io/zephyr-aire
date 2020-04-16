@@ -19,26 +19,9 @@ public class PluginExtension implements ViewDecorator<AireApplicationViewport> {
   public void decorate(AireApplicationViewport component) {
 
     val routerLink = new RouterLink();
-    routerLink.setRoute(PluginManagementPage.class);
+    routerLink.setRoute(PluginListPage.class);
     routerLink.add(FontAwesome.Plug.icon());
+    routerLink.setHighlightCondition((t, u) -> t.getHref().contains("plugins"));
     component.getPrimaryNavigation().add(routerLink);
-    viewManager.registerRoute(PluginTopologyPage.class);
-    viewManager.registerRoute(PluginListPage.class);
-
-    //    val button = new AireButton(VaadinIcon.GROUP.create());
-    //    button
-    //        .getContent()
-    //        .addClickListener(
-    //            t -> {
-    //              t.getSource()
-    //                  .getUI()
-    //                  .ifPresent(
-    //                      u -> {
-    //                        System.out.println("Coolbeans");
-    //                        button.getContent().addClassName("frapper");
-    //                        u.navigate(UploadPage.class);
-    //                      });
-    //            });
-    //    component.getPrimaryNavigation().add(button);
   }
 }

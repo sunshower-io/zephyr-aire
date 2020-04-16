@@ -2,6 +2,8 @@ package io.zephyr.admin;
 
 import io.zephyr.admin.ui.PluginExtension;
 import io.zephyr.admin.ui.PluginListPage;
+import io.zephyr.admin.ui.PluginManagementPage;
+import io.zephyr.admin.ui.PluginTopologyPage;
 import io.zephyr.aire.api.ViewManager;
 import lombok.val;
 import org.springframework.context.ApplicationListener;
@@ -22,6 +24,7 @@ public class ZephyrAdminConfiguration implements ApplicationListener<ContextRefr
     val ctx = contextRefreshedEvent.getApplicationContext();
     val viewManager = ctx.getBean(ViewManager.class);
     viewManager.registerRoute(PluginListPage.class);
+    viewManager.registerRoute(PluginTopologyPage.class);
     viewManager.getComponentRegistry().register(PluginExtension.class);
   }
 }

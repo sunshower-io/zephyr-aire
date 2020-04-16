@@ -29,7 +29,7 @@ public class ModuleResource extends StreamResource {
         };
 
     public ModuleInputStreamFactory(String location, Module module) {
-      this.location = String.format("public/%s", location);
+      this.location = String.format("META-INF/public/%s", location);
       this.moduleReference = new WeakReference<>(module);
     }
 

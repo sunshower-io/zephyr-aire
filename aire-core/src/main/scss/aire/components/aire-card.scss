@@ -2,6 +2,11 @@
 $aire-card-width: 344px;
 $aire-card-min-height: 148px;
 $aire-card-header-height: 72px;
+$aire-card-footer-height:48px;
+
+$aire-card-content-padding: 16px;
+
+$aire-content-min-height: 96px;
 
 aire-card, .aire-card {
 
@@ -14,20 +19,58 @@ aire-card, .aire-card {
   dimensions
    */
   width: $aire-card-width;
-  min-height: $aire-card-min-height;
-
-
-  /**
-  colors
-   */
   background-color: $primary-nav-foreground;
 
+  * {
+    margin: 0;
+    padding:0;
+  }
 
-  header, .aire-header {
-    display:block;
-    height: $aire-card-header-height;
-    width: 100%;
-    border-bottom: 1px solid $secondary-nav-background;
+
+  h1, span.h1 {
+    font-weight: 400;
+    font-size: 1.2em;
+    color: $darkest-gray;
+  }
+
+  h2, span.h2 {
+    font-weight: 200;
+    font-size: 0.9em;
+    color: $dark-gray-1;
+  }
+
+  section {
+    height:$aire-content-min-height;
+    min-height:$aire-content-min-height;
+    padding:$aire-card-content-padding;
+    background-color: $primary-nav-foreground;
+
+    display: flex;
+    flex-direction: row;
+
+    div {
+      flex: 1;
+    }
+    div + div {
+      justify-self: flex-end;
+      display:flex;
+      justify-items: center;
+      align-items: center;
+      flex:0;
+    }
+    img {
+      padding:8px;
+      width:80px;
+      height:80px;
+      display:block;
+    }
+
+  }
+
+
+  footer, .aire-footer {
+    display: block;
+
   }
 
 

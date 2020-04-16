@@ -12,20 +12,18 @@ import io.zephyr.aire.elements.AirePanel;
 import lombok.val;
 
 @Tag("aire-card")
+@JsModule("lit-element")
 @CssImport("./styles/aire/components/aire-card.css")
 @JsModule("./components/aire/aire-card.ts")
-@JsModule("lit-element")
 @NpmPackage(value = "lit-element", version = "^2.3.1")
 public class AireCard extends Component implements HasComponents {
 
-  private AirePanel content;
   private Component footer;
+  private Component content;
   private Component header;
 
   public AireCard() {
     super();
-
-    createContent();
   }
 
   public void setFooter(Component footer) {
@@ -33,10 +31,10 @@ public class AireCard extends Component implements HasComponents {
     UI.getCurrent()
         .access(
             () -> {
-              if (this.header != null) {
-                this.remove(this.header);
+              if (this.footer != null) {
+                this.remove(this.footer);
               }
-              add(this.header = footer);
+              add(this.footer = footer);
             });
   }
 
@@ -53,17 +51,14 @@ public class AireCard extends Component implements HasComponents {
   }
 
   public void setContent(Component content) {
+    content.getElement().setAttribute("slot", "content");
     UI.getCurrent()
         .access(
             () -> {
-              this.content.clear();
-              this.content.add(content);
+              if (this.content != null) {
+                this.remove(this.content);
+              }
+              add(this.content = content);
             });
-  }
-
-  protected void createContent() {
-    content = new AirePanel();
-    content.getElement().setAttribute("slot", "content");
-    add(content);
   }
 }

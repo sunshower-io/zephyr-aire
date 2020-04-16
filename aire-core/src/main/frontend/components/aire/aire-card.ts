@@ -4,19 +4,12 @@ import {TemplateResult, LitElement, html, property, customElement} from 'lit-ele
 class AireCard extends LitElement {
 
 
-
-
   render() : TemplateResult {
     return html`
-      <header class="aire-header">
-        <slot name="icon"></slot>
         <slot name="header"></slot>
-      </section>
-      <slot name="content"></slot>
-      <footer class="aire-footer">
+        <slot name="content"></slot>
         <slot name="footer"></slot>
-      </section>
-    `
+    `;
   }
 
 }

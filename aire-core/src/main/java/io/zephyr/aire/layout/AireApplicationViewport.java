@@ -11,12 +11,13 @@ import io.aire.core.AireLayout;
 import io.zephyr.aire.api.ExtensionPoint;
 import io.zephyr.aire.elements.*;
 import lombok.Getter;
+import lombok.val;
 
 @ExtensionPoint(location = ":ui:main")
 @CssImport("./styles/aire/layout/aire-nav.css")
 @CssImport("./styles/aire/layout/aire-viewport.css")
 public class AireApplicationViewport extends AbstractAireContainer<Main>
-    implements AireLayout, RouterLayout {
+    implements AireLayout, RouterLayout, HasOrderedComponents {
 
   /** private state */
   @Getter
@@ -49,6 +50,15 @@ public class AireApplicationViewport extends AbstractAireContainer<Main>
 
     main.add(secondaryNavigation = new AireSecondaryNavigation());
     add(footer = new AireFooter());
+  }
+
+  public void setSecondaryNavigation(Component component) {
+    if (secondaryNavigation != null) {
+      main.remove(secondaryNavigation);
+    }
+    val el = main.getElement();
+    val size = el.getChildCount();
+    el.setChild(size, component.getElement());
   }
 
   public void addContent(Component content) {

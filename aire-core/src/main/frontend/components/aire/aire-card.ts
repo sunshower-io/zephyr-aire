@@ -1,4 +1,9 @@
-import {TemplateResult, LitElement, html, property, customElement} from 'lit-element';
+import {
+  TemplateResult,
+  LitElement,
+  html,
+  customElement
+} from 'lit-element';
 
 @customElement('aire-card')
 class AireCard extends LitElement {

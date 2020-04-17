@@ -1,0 +1,18 @@
+@import "../layout/aire-layout-variables";
+
+aire-aside, .aire-aside {
+  position: relative;
+
+
+  section {
+    position: absolute;
+    right: $secondary-nav-width;
+    height: 100%;
+    width: 360px;
+    background-color: $white;
+    border: 1px solid $ambient-background;
+    box-sizing: border-box;
+    box-shadow: 0 12px 28px 0 var(--shadow-2), 0 2px 4px 0 var(--shadow-1), inset 0 0 0 1px var(--shadow-inset);
+  }
+
+}

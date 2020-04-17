@@ -5,10 +5,13 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
+import com.vaadin.flow.component.html.Nav;
 import com.vaadin.flow.component.html.Section;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.di.Instantiator;
+import io.aire.core.AireComponent;
 import lombok.AllArgsConstructor;
 import lombok.val;
 
@@ -22,7 +25,10 @@ import java.util.Map;
 @CssImport("./styles/aire/components/aire-drawer.css")
 @CssImport("./styles/aire/components/aire-aside-drawer.css")
 public class AireAsideDrawerMenu extends Component
-    implements HasElement, HasOrderedComponents, ComponentEventListener<ClickEvent<Button>> {
+    implements HasElement,
+        AireComponent,
+        HasOrderedComponents,
+        ComponentEventListener<ClickEvent<Button>> {
 
   /** mutable state */
 
@@ -34,6 +40,10 @@ public class AireAsideDrawerMenu extends Component
   private Section contents;
   /** immutable state */
   private final Map<Button, ComponentDescriptor> components;
+
+  private final ComponentEventListener<ClickEvent<Button>> closeListener =
+      (ComponentEventListener<ClickEvent<Button>>)
+          buttonClickEvent -> close(buttonClickEvent.getSource());
 
   public AireAsideDrawerMenu() {
     components = new HashMap<>();
@@ -67,33 +77,32 @@ public class AireAsideDrawerMenu extends Component
   private void close(Button source) {
     if (contents != null) {
       open = false;
-      UI.getCurrent()
-          .access(
-              () -> {
-                source.getElement().removeAttribute("active");
-                remove(contents);
-              });
+      access(() -> doClose(source));
     }
   }
 
-  private void openDrawer(ComponentDescriptor target, Button source, Button current) {
+  private void doClose(Button source) {
+    source.getElement().removeAttribute("active");
+    remove(contents);
+  }
 
+  private void openDrawer(ComponentDescriptor target, Button source, Button current) {
     val actualContent = instantiate(target);
-    UI.getCurrent()
-        .access(
-            () -> {
-              if (contents != null) {
-                remove(contents);
-              }
-              if (current != null) {
-                current.getElement().removeAttribute("active");
-              }
-              source.getElement().setAttribute("active", "true");
-              contents = createContents();
-              contents.add(actualContent);
-              add(contents);
-              open = true;
-            });
+    access(() -> doOpen(source, current, actualContent));
+  }
+
+  private void doOpen(Button source, Button current, Component actualContent) {
+    if (contents != null) {
+      remove(contents);
+    }
+    if (current != null) {
+      current.getElement().removeAttribute("active");
+    }
+    source.getElement().setAttribute("active", "true");
+    contents = createContents(source);
+    contents.add(actualContent);
+    add(contents);
+    open = true;
   }
 
   private Component instantiate(ComponentDescriptor target) {
@@ -103,10 +112,23 @@ public class AireAsideDrawerMenu extends Component
     return Instantiator.get(UI.getCurrent()).createComponent(target.componentType);
   }
 
-  protected Section createContents() {
+  protected Section createContents(Button source) {
     val contents = new Section();
+    contents.add(createNav(source));
     contents.getElement().setAttribute("slot", "content");
     return contents;
+  }
+
+  private Nav createNav(Button source) {
+    val nav = new Nav();
+    nav.addClassNames("aire-nav");
+    val title = new Span(source.getText());
+    val close = new Button();
+    close.setIcon(new Icon(VaadinIcon.CLOSE_BIG));
+    close.addClickListener(closeListener);
+    nav.add(close);
+    nav.add(title);
+    return nav;
   }
 
   @AllArgsConstructor

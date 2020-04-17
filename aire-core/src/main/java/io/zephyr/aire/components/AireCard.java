@@ -13,8 +13,8 @@ import lombok.val;
 
 @Tag("aire-card")
 @JsModule("lit-element")
-@CssImport("./styles/aire/components/aire-card.css")
 @JsModule("./components/aire/aire-card.ts")
+@CssImport("./styles/aire/components/aire-card.css")
 @NpmPackage(value = "lit-element", version = "^2.3.1")
 public class AireCard extends Component implements HasComponents {
 

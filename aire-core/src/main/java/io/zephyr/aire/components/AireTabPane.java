@@ -12,6 +12,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.Command;
+import io.aire.core.AireComponent;
 import io.sunshower.gyre.CompactTrieMap;
 import io.sunshower.gyre.RegexStringAnalyzer;
 import io.sunshower.gyre.TrieMap;
@@ -23,7 +24,7 @@ import java.util.Map;
 
 @CssImport("./styles/aire/components/aire-tabs.css")
 public class AireTabPane extends Article
-    implements RouterLayout, ComponentEventListener<Tabs.SelectedChangeEvent> {
+    implements RouterLayout, AireComponent, ComponentEventListener<Tabs.SelectedChangeEvent> {
 
   public enum TabPlacement {
     TOP,
@@ -109,10 +110,6 @@ public class AireTabPane extends Article
     val selectedTab = selectedChangeEvent.getSelectedTab();
     val next = components.get(selectedTab);
     access(() -> updateTab(next));
-  }
-
-  private void access(Command command) {
-    UI.getCurrent().access(command);
   }
 
   private void updateTab(ComponentDescriptor next) {

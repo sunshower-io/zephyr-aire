@@ -41,12 +41,13 @@ public class AireAsideDrawerMenu extends Component
   /** immutable state */
   private final Map<Button, ComponentDescriptor> components;
 
-  private final ComponentEventListener<ClickEvent<Button>> closeListener =
-      (ComponentEventListener<ClickEvent<Button>>)
-          buttonClickEvent -> close(buttonClickEvent.getSource());
+  private final ComponentEventListener<ClickEvent<Button>> closeListener;
 
   public AireAsideDrawerMenu() {
     components = new HashMap<>();
+    closeListener =
+        (ComponentEventListener<ClickEvent<Button>>)
+            buttonClickEvent -> close(buttonClickEvent.getSource());
     getElement().getClassList().add("aire-aside");
   }
 

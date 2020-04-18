@@ -1,5 +1,7 @@
+@import "../layout/aire-layout-variables";
+
 $nav-primary-dimension: 100%;
-$nav-secondary-dimension: auto;
+$nav-secondary-dimension: $primary-nav-width/2 + $primary-nav-pip-size/2;
 
 
 article.aire-tabs {
@@ -22,6 +24,12 @@ article.aire-tabs {
     nav {
       height: $nav-secondary-dimension;
       width: $nav-primary-dimension;
+
+      vaadin-tabs, vaadin-tab, vaadin-tab a {
+        height: $nav-secondary-dimension;
+        min-height: $nav-secondary-dimension !important;
+        box-sizing: border-box;
+      }
     }
   }
 

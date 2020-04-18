@@ -1,13 +1,11 @@
 package io.zephyr.aire.components;
 
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasComponents;
-import com.vaadin.flow.component.Tag;
-import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
+import io.aire.core.AireComponent;
 import io.zephyr.aire.elements.AirePanel;
 import lombok.val;
 
@@ -16,7 +14,7 @@ import lombok.val;
 @JsModule("./components/aire/aire-card.ts")
 @CssImport("./styles/aire/components/aire-card.css")
 @NpmPackage(value = "lit-element", version = "^2.3.1")
-public class AireCard extends Component implements HasComponents {
+public class AireCard extends Component implements HasComponents, AireComponent {
 
   private Component footer;
   private Component content;
@@ -28,14 +26,14 @@ public class AireCard extends Component implements HasComponents {
 
   public void setFooter(Component footer) {
     footer.getElement().setAttribute("slot", "footer");
-    UI.getCurrent()
-        .access(
-            () -> {
-              if (this.footer != null) {
-                this.remove(this.footer);
-              }
-              add(this.footer = footer);
-            });
+    access(() -> updateFooter(footer));
+  }
+
+  private void updateFooter(Component footer) {
+    if (this.footer != null) {
+      this.remove(this.footer);
+    }
+    add(this.footer = footer);
   }
 
   public void setHeader(Component header) {

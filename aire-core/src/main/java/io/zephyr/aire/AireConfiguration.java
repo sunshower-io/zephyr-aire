@@ -18,7 +18,6 @@ import io.zephyr.kernel.Module;
 import io.zephyr.kernel.concurrency.ModuleThread;
 import io.zephyr.kernel.core.*;
 import io.zephyr.kernel.dependencies.DependencyGraph;
-import io.zephyr.kernel.launch.KernelLauncher;
 import io.zephyr.kernel.launch.KernelOptions;
 import io.zephyr.kernel.memento.Memento;
 import io.zephyr.spring.embedded.EmbeddedModuleClasspath;

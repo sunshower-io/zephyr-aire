@@ -75,6 +75,10 @@ public class AireTabPane extends Article
     return tab;
   }
 
+  public void activate(Tab tab) {
+    access(() -> updateTab(components.get(tab)));
+  }
+
   public Tab addTab(String title, Class<? extends Component> componentType) {
     val route = isRoute(componentType);
     if (route) {

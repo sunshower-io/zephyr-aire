@@ -3,6 +3,12 @@
 aire-aside, .aire-aside {
   position: relative;
 
+  /**
+  align second-to-top button with bottom border of header
+   */
+  [role=button]:first-child ~ [role=button] {
+    margin-top:-1px;
+  }
 
   section {
     position: absolute;
@@ -19,7 +25,7 @@ aire-aside, .aire-aside {
       }
       width: 100%;
       background-color: $white;
-      height: calc(#{$secondary-nav-width - 1px});
+      height: calc(#{$secondary-nav-width - 2px});
       border-bottom: 1px solid $lightest-purple;
     }
   }

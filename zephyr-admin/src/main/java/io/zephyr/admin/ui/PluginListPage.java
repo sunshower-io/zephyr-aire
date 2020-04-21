@@ -35,14 +35,32 @@ public class PluginListPage extends VerticalLayout {
   @Decorate
   public void decorate(AireApplicationViewport viewport) {
     instance = new AireAsideDrawerMenu();
-    val btn = new Button();
+    var btn = new Button();
     btn.setIcon(new Icon(VaadinIcon.ACADEMY_CAP));
+    instance.add(btn, PluginTopologyPage.class);
+    btn = new Button();
+    btn.setIcon(new Icon(VaadinIcon.INVOICE));
+    instance.add(btn, PluginTopologyPage.class);
+    viewport.setSecondaryNavigation(instance);
+
+    btn = new Button();
+    btn.setIcon(new Icon(VaadinIcon.INVOICE));
+    instance.add(btn, PluginTopologyPage.class);
+    viewport.setSecondaryNavigation(instance);
+
+    btn = new Button();
+    btn.setIcon(new Icon(VaadinIcon.INVOICE));
+    instance.add(btn, PluginTopologyPage.class);
+    viewport.setSecondaryNavigation(instance);
+
+    btn = new Button();
+    btn.setIcon(new Icon(VaadinIcon.INVOICE));
     instance.add(btn, PluginTopologyPage.class);
     viewport.setSecondaryNavigation(instance);
   }
 
   @Undecorate
   public void undecorate(AireApplicationViewport viewport) {
-      viewport.setSecondaryNavigation(null);
+    viewport.setSecondaryNavigation(null);
   }
 }

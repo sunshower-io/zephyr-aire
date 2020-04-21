@@ -1,15 +1,20 @@
 package io.zephyr.aire.decorate;
 
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.router.*;
 import io.sunshower.gyre.Pair;
 import io.zephyr.aire.api.Decorate;
+import io.zephyr.aire.api.Undecorate;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.aop.support.AopUtils;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static java.lang.String.format;
 
@@ -25,7 +30,10 @@ public class NavigationInjectionTracker
    * @param beforeLeaveEvent
    */
   @Override
-  public void beforeLeave(BeforeLeaveEvent beforeLeaveEvent) {}
+  public void beforeLeave(BeforeLeaveEvent beforeLeaveEvent) {
+    val chain = UI.getCurrent().getInternals().getActiveRouterTargetsChain();
+    applyChainDecorations(chain, Undecorate.class);
+  }
 
   @Override
   public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {}
@@ -34,6 +42,11 @@ public class NavigationInjectionTracker
   public void afterNavigation(AfterNavigationEvent afterNavigationEvent) {
 
     val chain = afterNavigationEvent.getActiveChain();
+    applyChainDecorations(chain, Decorate.class);
+  }
+
+  private void applyChainDecorations(
+      List<HasElement> chain, Class<? extends Annotation> decorateClass) {
     val bindings = new HashMap<Class<?>, Object>(chain.size());
     val decoratedChain = new ArrayList<Pair<Class<?>, Object>>(chain.size());
 
@@ -43,23 +56,29 @@ public class NavigationInjectionTracker
       decoratedChain.add(Pair.of(targetType, element));
     }
 
-    doBind(bindings, decoratedChain);
+    doBind(bindings, decoratedChain, decorateClass);
   }
 
   private void doBind(
-      HashMap<Class<?>, Object> bindings, ArrayList<Pair<Class<?>, Object>> decoratedChain) {
+      HashMap<Class<?>, Object> bindings,
+      ArrayList<Pair<Class<?>, Object>> decoratedChain,
+      Class<? extends Annotation> decoration) {
     for (val decorated : decoratedChain) {
-      doBind(decorated.fst, decorated.snd, bindings);
+      doBind(decorated.fst, decorated.snd, bindings, decoration);
     }
   }
 
-  private void doBind(Class<?> type, Object instance, HashMap<Class<?>, Object> bindings) {
+  private void doBind(
+      Class<?> type,
+      Object instance,
+      HashMap<Class<?>, Object> bindings,
+      Class<? extends Annotation> decoration) {
 
-    if (type.isAnnotationPresent(Decorate.class)) {
+    if (type.isAnnotationPresent(decoration)) {
 
       val methods = type.getMethods();
       for (val method : methods) {
-        if (method.isAnnotationPresent(Decorate.class)) {
+        if (method.isAnnotationPresent(decoration)) {
           doBind(method, type, instance, bindings);
         }
       }

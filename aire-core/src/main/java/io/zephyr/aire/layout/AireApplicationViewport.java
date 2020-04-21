@@ -54,10 +54,12 @@ public class AireApplicationViewport extends AbstractAireContainer<Main>
     if (secondaryNavigation != null) {
       main.remove(secondaryNavigation);
     }
-    secondaryNavigation = component;
-    val el = main.getElement();
-    val size = el.getChildCount();
-    el.setChild(size, component.getElement());
+    if (component != null) {
+      secondaryNavigation = component;
+      val el = main.getElement();
+      val size = el.getChildCount();
+      el.setChild(size, component.getElement());
+    }
   }
 
   public void addContent(Component content) {

@@ -71,7 +71,12 @@ public class AireAsideDrawerMenu extends Component
     if (source.componentType != null) {
       source.componentType = null;
     }
-    doActivate(button);
+
+    if (open) {
+      openDrawer(source, button, current);
+    } else {
+      doActivate(button);
+    }
   }
 
   public void setContent(Button button, Class<? extends Component> component) {
@@ -80,7 +85,12 @@ public class AireAsideDrawerMenu extends Component
     if (source.instance != null) {
       source.instance = null;
     }
-    doActivate(button);
+
+    if (open) {
+      openDrawer(source, button, current);
+    } else {
+      doActivate(button);
+    }
   }
 
   @Override

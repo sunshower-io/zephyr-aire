@@ -1,0 +1,23 @@
+@import "../layout/aire-layout-variables";
+
+
+mark.aire-pill, span.aire-pill {
+
+  color: white;
+  padding: 2px 4px;
+  font-size: 0.9rem;
+  border-radius: 2px;
+
+  &.aire-success {
+    background-color: $light-green;
+  }
+
+  &.aire-primary {
+    background-color: $purple;
+  }
+
+  &.aire-secondary {
+    background-color: $light-purple;
+  }
+
+}

@@ -18,11 +18,11 @@
     height: $footer-height;
   }
 
-  > header, .aire-header {
+  > header, > .aire-header {
     height: $header-height;
   }
 
-  > article, .aire-panel {
+  > article, > .aire-panel {
     height: 100%;
   }
 

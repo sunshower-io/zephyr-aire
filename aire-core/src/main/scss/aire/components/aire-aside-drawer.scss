@@ -7,10 +7,10 @@ aire-aside, .aire-aside {
   align second-to-top button with bottom border of header
    */
   [role=button]:first-child ~ [role=button] {
-    margin-top:-1px;
+    margin-top: -1px;
   }
 
-  section {
+  & > section {
     position: absolute;
     right: 40px;
     height: 100%;
@@ -18,11 +18,71 @@ aire-aside, .aire-aside {
     background-color: $white;
     border: 1px solid $ambient-background;
 
+
+    article {
+      height: calc(100% - #{$secondary-nav-width});
+      padding: 16px;
+      flex-direction: column;
+
+      section {
+        margin:8px 0;
+        flex:0;
+        height: fit-content;
+        background-color: white;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        transition: box-shadow 150ms linear;
+
+        div.content {
+          padding: 8px;
+          background-color: $white;
+
+          div {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+
+            span:last-child {
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            span:first-child {
+              flex:2;
+            }
+            span, mark {
+              display: block
+            }
+          }
+        }
+
+        header {
+
+
+          height: $primary-nav-width / 2;
+
+          h1 {
+            padding: 0 8px;
+            margin: 0;
+            height: 2.25rem;
+            line-height: 2.25rem;
+            color: $darkest-gray;
+            font-weight: 500;
+            font-size: 1rem;
+            width:100%;
+            background-color: $ambient-background;
+            letter-spacing: .0892857143em;
+            text-transform: uppercase;
+          }
+        }
+
+      }
+    }
+
     nav, .aire-nav {
       [role=button] {
         height: calc(#{$secondary-nav-width - 2px});
         max-height: calc(#{$secondary-nav-width - 2px});
       }
+
       width: 100%;
       background-color: $white;
       height: calc(#{$secondary-nav-width - 2px});

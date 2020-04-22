@@ -15,6 +15,7 @@ class AireCard extends LitElement {
         <slot name="content"></slot>
         <slot name="footer"></slot>
     `;
+
   }
 
 }

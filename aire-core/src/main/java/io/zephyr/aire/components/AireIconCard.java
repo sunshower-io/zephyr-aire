@@ -15,7 +15,6 @@ import com.vaadin.flow.component.icon.Icon;
 @CssImport("./styles/aire/components/aire-icon-card.css")
 public class AireIconCard extends AireCard {
 
-    private Component header;
     private Component iconHolder;
     private Div icon;
 

@@ -8,6 +8,7 @@ import com.vaadin.flow.router.*;
 import io.zephyr.aire.api.Location;
 import io.zephyr.aire.components.AireAsideDrawerMenu;
 import io.zephyr.aire.components.AireIconCard;
+import io.zephyr.aire.components.AireMediaCard;
 import io.zephyr.aire.layout.AireApplicationViewport;
 import com.vaadin.flow.component.dependency.CssImport;
 import lombok.val;
@@ -28,15 +29,5 @@ public class MainView extends AireApplicationViewport {
     drawer.add(snd, new Button("frapper"));
     setSecondaryNavigation(drawer);
 
-    val holder = new Div();
-    val iconCard = new AireIconCard();
-    iconCard.setIcon(new Icon(VaadinIcon.AIRPLANE));
-    iconCard.setHeader(new H1("No Flights For Us"));
-    iconCard.setFooter(new Span("foot me"));
-    iconCard.setContent(new Paragraph("Lorem ipsum dolor sit amet"));
-    holder.add(iconCard);
-    val h1 = new H1("Lisa testing");
-    holder.add(h1);
-    setContent(holder);
   }
 }

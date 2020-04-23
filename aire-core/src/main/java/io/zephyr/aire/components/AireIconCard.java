@@ -2,7 +2,6 @@ package io.zephyr.aire.components;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Tag;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Div;
@@ -27,27 +26,27 @@ public class AireIconCard extends AireCard {
     this.icon.getStyle().set("background-color", color);
     icon.setColor("white");
     this.icon.add(icon);
-    setIcon();
+    updateIcon();
   }
 
-  public void setIcon(Image icon, String color) {
+  public void setIcon(Component icon, String color) {
     this.icon.getStyle().set("background-color", color);
     this.icon.add(icon);
-    setIcon();
+    updateIcon();
   }
 
   public void setIcon(Icon icon) {
     icon.setColor("white");
     this.icon.add(icon);
-    setIcon();
+    updateIcon();
   }
 
-  public void setIcon(Image icon) {
+  public void setIcon(Component icon) {
     this.icon.add(icon);
-    setIcon();
+    updateIcon();
   }
 
-  void setIcon() {
+  void updateIcon() {
     this.icon.setClassName("aire-icon-holder");
     this.icon.getElement().setAttribute("slot", "icon");
     access(

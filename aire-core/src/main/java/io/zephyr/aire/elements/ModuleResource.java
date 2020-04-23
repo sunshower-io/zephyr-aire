@@ -16,10 +16,17 @@ public class ModuleResource extends StreamResource {
     super(location, new ModuleInputStreamFactory(location, module));
   }
 
-  static class ModuleInputStreamFactory implements InputStreamFactory {
+  public static boolean exists(Module module, String location) {
+    return module.getClassLoader().getResource(resolve(location)) != null;
+  }
+
+  static String resolve(String location) {
+    return String.format("META-INF/public/%s", location);
+  }
+
+  static final class ModuleInputStreamFactory implements InputStreamFactory {
     final String location;
     final WeakReference<Module> moduleReference;
-
     static final InputStream EMPTY =
         new InputStream() {
           @Override
@@ -29,7 +36,7 @@ public class ModuleResource extends StreamResource {
         };
 
     public ModuleInputStreamFactory(String location, Module module) {
-      this.location = String.format("META-INF/public/%s", location);
+      this.location = resolve(location);
       this.moduleReference = new WeakReference<>(module);
     }
 

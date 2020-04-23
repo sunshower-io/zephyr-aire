@@ -35,7 +35,7 @@ article {
   }
 
 
-  section {
+  & > section {
     flex: 1;
     height: 100%;
     background-color: $ambient-background;

@@ -7,6 +7,7 @@ import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import io.zephyr.aire.components.AireIconCard;
 import io.zephyr.aire.elements.AirePanel;
+import io.zephyr.aire.elements.FontAwesome;
 import io.zephyr.aire.elements.ModuleResource;
 import io.zephyr.kernel.Module;
 import lombok.val;
@@ -36,9 +37,14 @@ public class ModuleCard extends AireIconCard implements ClickNotifier<ModuleCard
   }
 
   private void createIcon() {
-    val icon = new Image();
-    icon.setSrc(new ModuleResource("icon.svg", module));
-    setIcon(icon);
+
+    if (ModuleResource.exists(module, "icon.svg")) {
+      val icon = new Image();
+      icon.setSrc(new ModuleResource("icon.svg", module));
+      setIcon(icon);
+    } else {
+      setIcon(FontAwesome.Plug.icon());
+    }
   }
 
   private void createHeader() {

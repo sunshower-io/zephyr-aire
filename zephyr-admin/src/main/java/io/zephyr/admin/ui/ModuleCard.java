@@ -1,7 +1,6 @@
 package io.zephyr.admin.ui;
 
 import com.vaadin.flow.component.ClickNotifier;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;

@@ -50,11 +50,11 @@ public class PluginListPage extends VerticalLayout {
     infoButton.setIcon(AireIcon.icon("info-square"));
     instance.add(infoButton, new Div());
 
-//    for (val module : kernel.getModuleManager().getModules()) {
-//      val infoButton = new Button();
-//      infoButton.setIcon(AireIcon.icon("info-square"));
-//      instance.add(infoButton, new ModuleInfoPane(module));
-//    }
+    //    for (val module : kernel.getModuleManager().getModules()) {
+    //      val infoButton = new Button();
+    //      infoButton.setIcon(AireIcon.icon("info-square"));
+    //      instance.add(infoButton, new ModuleInfoPane(module));
+    //    }
     viewport.setSecondaryNavigation(instance);
   }
 
@@ -73,7 +73,7 @@ public class PluginListPage extends VerticalLayout {
 
     @Override
     public void onComponentEvent(ClickEvent<ModuleCard> evt) {
-      instance.setContent(infoButton, new ModuleInfoPane(module));
+      instance.setContent(infoButton, new ModuleInfoPane(kernel, module));
     }
   }
 }

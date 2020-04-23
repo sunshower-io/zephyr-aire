@@ -1,21 +1,33 @@
 package io.zephyr.admin.ui;
 
-import com.vaadin.flow.component.ClickNotifier;
-import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.*;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.*;
-import io.zephyr.aire.elements.AireHeader;
-import io.zephyr.aire.elements.AirePanel;
-import io.zephyr.aire.elements.AirePill;
+import io.aire.core.AireComponent;
+import io.zephyr.aire.components.AireButtonGroup;
+import io.zephyr.aire.elements.*;
 import io.zephyr.kernel.Dependency;
 import io.zephyr.kernel.Lifecycle;
 import io.zephyr.kernel.Module;
+import io.zephyr.kernel.core.Kernel;
+import io.zephyr.kernel.module.ModuleLifecycle;
+import io.zephyr.kernel.module.ModuleLifecycleChangeGroup;
+import io.zephyr.kernel.module.ModuleLifecycleChangeRequest;
 import lombok.val;
 
-public class ModuleInfoPane extends Composite<Article> implements ClickNotifier<ModuleInfoPane> {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+public class ModuleInfoPane extends Composite<Article>
+    implements ClickNotifier<ModuleInfoPane>, AireComponent {
+
+  private AirePill statusPill;
+  private final Kernel kernel;
   private final Module module;
 
-  public ModuleInfoPane(final Module module) {
+  public ModuleInfoPane(final Kernel kernel, final Module module) {
+    this.kernel = kernel;
     this.module = module;
     doLayout();
   }
@@ -69,12 +81,79 @@ public class ModuleInfoPane extends Composite<Article> implements ClickNotifier<
 
     val status = new Div();
     status.add(new Span("Status:"));
-    status.add(statusPill(module.getLifecycle().getState()));
+    status.add(statusPill = statusPill(module.getLifecycle().getState()));
     content.add(status);
 
     infoPanel.add(content);
 
+    infoPanel.add(createControlFooter());
+
     return infoPanel;
+  }
+
+  private AireFooter createControlFooter() {
+    val footer = new AireFooter();
+    val group = new AireButtonGroup();
+
+    val buttons = new ArrayList<Button>(3);
+    val stopButton = createButton(buttons, "stop", ModuleLifecycle.Actions.Stop);
+    group.add(stopButton);
+    stopButton.addClassName("warning");
+    val startButton = createButton(buttons, "play", ModuleLifecycle.Actions.Activate);
+    group.add(startButton);
+    startButton.addClassName("success");
+    val removeButton = createButton(buttons, "minus-octagon", ModuleLifecycle.Actions.Activate);
+    removeButton.addClassName("error");
+    group.add(removeButton);
+
+    footer.add(group);
+    return footer;
+  }
+
+  private Button createButton(
+      ArrayList<Button> buttons, String iconClass, ModuleLifecycle.Actions action) {
+    val result = new Button();
+    buttons.add(result);
+    result.setIcon(AireIcon.icon(iconClass));
+    result.addClickListener(new ModuleLifecycleListener(buttons, result, action));
+    return result;
+  }
+
+  class ModuleLifecycleListener implements ComponentEventListener<ClickEvent<Button>> {
+    final Button button;
+    final List<Button> buttons;
+    final ModuleLifecycle.Actions action;
+
+    public ModuleLifecycleListener(
+        List<Button> buttons, Button button, ModuleLifecycle.Actions action) {
+      this.button = button;
+      this.action = action;
+      this.buttons = buttons;
+    }
+
+    @Override
+    public void onComponentEvent(ClickEvent<Button> buttonClickEvent) {
+      val request = new ModuleLifecycleChangeRequest(module.getCoordinate(), action);
+      val group = new ModuleLifecycleChangeGroup(request);
+      try {
+        kernel.getModuleManager().prepare(group).commit().toCompletableFuture().get();
+        access(this::toggleAll);
+      } catch (ExecutionException | InterruptedException ex) {
+
+      }
+    }
+
+    private void toggleAll() {
+      button.setEnabled(false);
+      for (val button : buttons) {
+        if (button != this.button) {
+          button.setEnabled(true);
+        }
+      }
+      val state = module.getLifecycle().getState();
+      statusPill.setVariant(variantFor(state));
+      statusPill.setText(state.name());
+    }
   }
 
   private Div createContent() {

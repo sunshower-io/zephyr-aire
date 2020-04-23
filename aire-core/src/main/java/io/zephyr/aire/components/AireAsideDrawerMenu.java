@@ -72,6 +72,10 @@ public class AireAsideDrawerMenu extends Component
       source.componentType = null;
     }
 
+    updateContent(button, source);
+  }
+
+  private void updateContent(Button button, ComponentDescriptor source) {
     if (open) {
       openDrawer(source, button, current);
     } else {
@@ -86,11 +90,7 @@ public class AireAsideDrawerMenu extends Component
       source.instance = null;
     }
 
-    if (open) {
-      openDrawer(source, button, current);
-    } else {
-      doActivate(button);
-    }
+    updateContent(button, source);
   }
 
   @Override

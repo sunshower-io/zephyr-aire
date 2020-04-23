@@ -54,12 +54,21 @@ aire-aside, .aire-aside {
           }
         }
 
+
+        footer {
+          nav {
+            border: none;
+          }
+        }
+
         header {
 
 
           height: $primary-nav-width / 2;
 
           h1 {
+            overflow: hidden;
+            text-overflow: ellipsis;
             padding: 0 8px;
             margin: 0;
             height: 2.25rem;

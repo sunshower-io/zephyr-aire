@@ -2,6 +2,16 @@
 
 
 
+.success {
+  color: $light-green !important;
+}
+
+.warning {
+  color: $orange !important;
+}
+.error {
+  color: $dark-red !important;
+}
 
 .aire-viewport {
   height: 100%;
@@ -14,7 +24,7 @@
     box-sizing: border-box;
   }
 
-  > footer, .aire-footer {
+  > footer, > .aire-footer {
     height: $footer-height;
   }
 

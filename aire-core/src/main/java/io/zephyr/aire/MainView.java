@@ -1,7 +1,6 @@
 package io.zephyr.aire;
 
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.*;

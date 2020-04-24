@@ -61,10 +61,45 @@ public class AireAsideDrawerMenu extends Component
     components.put(btn, new ComponentDescriptor(null, type));
   }
 
+  public void activate(Button button) {
+    doActivate(button);
+  }
+
+  public void setContent(Button button, Component component) {
+    val source = components.get(button);
+    source.instance = component;
+    if (source.componentType != null) {
+      source.componentType = null;
+    }
+
+    if (open) {
+      openDrawer(source, button, current);
+    } else {
+      doActivate(button);
+    }
+  }
+
+  public void setContent(Button button, Class<? extends Component> component) {
+    val source = components.get(button);
+    source.componentType = component;
+    if (source.instance != null) {
+      source.instance = null;
+    }
+
+    if (open) {
+      openDrawer(source, button, current);
+    } else {
+      doActivate(button);
+    }
+  }
+
   @Override
   public void onComponentEvent(ClickEvent<Button> clickEvent) {
-
     val source = clickEvent.getSource();
+    doActivate(source);
+  }
+
+  private void doActivate(Button source) {
     if (open && source == current) {
       close(source);
       current = null;
@@ -133,9 +168,9 @@ public class AireAsideDrawerMenu extends Component
   }
 
   @AllArgsConstructor
-  static class ComponentDescriptor {
-    final Component instance;
-    final Class<? extends Component> componentType;
+  static final class ComponentDescriptor {
+    private Component instance;
+    private Class<? extends Component> componentType;
   }
 
   private Button decorateButton(Button button) {

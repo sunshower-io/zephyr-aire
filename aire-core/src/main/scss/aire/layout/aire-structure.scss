@@ -7,6 +7,13 @@ html, body {
 }
 
 
+
+.v-system-error {
+  position: absolute;
+  top:auto;
+  bottom:0;
+  height:auto;
+}
 article, article.horizontal {
   display: flex;
   flex-direction: row;

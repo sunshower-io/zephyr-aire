@@ -5,6 +5,8 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.*;
 import io.aire.core.AireComponent;
 import io.zephyr.aire.components.AireButtonGroup;
+import io.zephyr.aire.components.AirePill;
+import io.zephyr.aire.components.AireVariant;
 import io.zephyr.aire.elements.*;
 import io.zephyr.kernel.Dependency;
 import io.zephyr.kernel.Lifecycle;
@@ -164,22 +166,22 @@ public class ModuleInfoPane extends Composite<Article>
   }
 
   private AirePill statusPill(Lifecycle.State state) {
-    AirePill.Variant variant = variantFor(state);
+    AireVariant variant = variantFor(state);
     return new AirePill(state.name(), variant);
   }
 
-  private AirePill.Variant variantFor(Lifecycle.State state) {
+  private AireVariant variantFor(Lifecycle.State state) {
     switch (state) {
       case Active:
       case Starting:
-        return AirePill.Variant.Success;
+        return AireVariant.Success;
       case Installed:
       case Resolved:
-        return AirePill.Variant.Info;
+        return AireVariant.Info;
       case Failed:
-        return AirePill.Variant.Danger;
+        return AireVariant.Danger;
       default:
-        return AirePill.Variant.Warning;
+        return AireVariant.Warning;
     }
   }
 
@@ -206,9 +208,9 @@ public class ModuleInfoPane extends Composite<Article>
     val depType = dependency.getType();
     final AirePill pill;
     if (depType == Dependency.Type.Service) {
-      pill = new AirePill("service", AirePill.Variant.Primary);
+      pill = new AirePill("service", AireVariant.Primary);
     } else {
-      pill = new AirePill("library", AirePill.Variant.Secondary);
+      pill = new AirePill("library", AireVariant.Secondary);
     }
     return pill;
   }

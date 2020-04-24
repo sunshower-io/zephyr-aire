@@ -12,6 +12,7 @@ import com.vaadin.flow.router.Route;
 import io.zephyr.aire.api.Decorate;
 import io.zephyr.aire.api.Undecorate;
 import io.zephyr.aire.components.AireAsideDrawerMenu;
+import io.zephyr.aire.components.AireFab;
 import io.zephyr.aire.elements.AireIcon;
 import io.zephyr.aire.layout.AireApplicationViewport;
 import io.zephyr.kernel.Module;
@@ -41,6 +42,8 @@ public class PluginListPage extends HorizontalLayout {
       card.addClickListener(new CardClickListener(plugin));
       add(card);
     }
+
+    add(createUploadPluginsFab());
   }
 
   @Decorate
@@ -50,18 +53,25 @@ public class PluginListPage extends HorizontalLayout {
     infoButton = new Button();
     infoButton.setIcon(AireIcon.icon("info-square"));
     instance.add(infoButton, new Div());
-
-    //    for (val module : kernel.getModuleManager().getModules()) {
-    //      val infoButton = new Button();
-    //      infoButton.setIcon(AireIcon.icon("info-square"));
-    //      instance.add(infoButton, new ModuleInfoPane(module));
-    //    }
     viewport.setSecondaryNavigation(instance);
   }
 
   @Undecorate
   public void undecorate(AireApplicationViewport viewport) {
     viewport.setSecondaryNavigation(null);
+  }
+
+  private AireFab createUploadPluginsFab() {
+    val fab = new AireFab();
+    fab.add(AireIcon.icon("plus"));
+    fab.addClickListener(
+        (ComponentEventListener<ClickEvent<AireFab>>)
+            aireFabClickEvent -> {
+              val dialog = new UploadModuleDialog(kernel);
+              dialog.open();
+            });
+
+    return fab;
   }
 
   final class CardClickListener implements ComponentEventListener<ClickEvent<ModuleCard>> {

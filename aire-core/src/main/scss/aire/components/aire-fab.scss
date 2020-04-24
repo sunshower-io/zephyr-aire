@@ -1,0 +1,61 @@
+@import "../util/aire-ripple";
+@import "../layout/aire-layout-variables";
+
+@mixin fab($size, $bgcolor, $ripple-color, $color, $hover-color) {
+  width: $size;
+  height: $size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color;
+  border-radius: 50%;
+  background-color: $bgcolor;
+
+
+  @include ripple($ripple-color, $bgcolor, $hover-color);
+}
+
+$large-size: 56px;
+$small-size: 40px;
+aire-fab, .aire-fab {
+
+  position: absolute;
+  top: 16px;
+  left: 16px;
+
+  &.bottom {
+    top: unset;
+    bottom: 16px;
+  }
+
+  &.top {
+    top: 16px;
+    bottom: unset;
+  }
+
+  &.left {
+    left: 16px;
+    right: unset;
+  }
+
+  &.right {
+    left: unset;
+    right: 16px;
+  }
+
+
+  &.aire-primary {
+    @include fab($large-size, $primary-nav-background, $secondary-nav-background, white, $tertiary-nav-background);
+    &.small {
+      @include fab($small-size, $primary-nav-background, $secondary-nav-background, white, $tertiary-nav-background);
+    }
+  }
+
+  &.aire-secondary {
+    &.small {
+
+    }
+  }
+
+
+}

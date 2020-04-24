@@ -51,8 +51,23 @@ $light-green: lighten($green, 0.5);
 $primary: $primary-nav-background;
 $secondary: $purple;
 $tertiary: $blue;
+$success: $green;
 $warning: $orange;
 $alert: $light-red;
 $link: $blue; //probably not correct
 $background: $ambient-background;
 $none: $white;
+$dark: $darkest-gray;
+
+$variants: (
+  "aire-primary": $primary,
+  "aire-secondary": $secondary,
+  "aire-tertiary": $tertiary,
+  "aire-success": $success,
+  "aire-danger": $alert,
+  "aire-warning": $warning,
+  "aire-info": $link,
+  "aire-link": $link,
+  "aire-light": $background,
+  "aire-dark": $dark
+)

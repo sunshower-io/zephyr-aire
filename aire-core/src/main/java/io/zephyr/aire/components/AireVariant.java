@@ -5,10 +5,12 @@ import com.vaadin.flow.component.HasElement;
 public enum AireVariant {
   Primary,
   Secondary,
+  Tertiary,
   Success,
   Danger,
   Warning,
   Info,
+  Link,
   Light,
   Dark;
 

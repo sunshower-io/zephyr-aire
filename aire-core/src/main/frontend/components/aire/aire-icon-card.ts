@@ -2,12 +2,21 @@ import {
   TemplateResult,
   LitElement,
   html,
-  customElement
+  customElement, css
 } from 'lit-element';
 
 @customElement('aire-icon-card')
 class AireIconCard extends LitElement {
 
+
+  static get styles() {
+    return css`
+    .aire-icon-card .aire-icon-card-upper {
+      display: flex;
+      justify-content: space-between; 
+    }
+    `
+  }
 
   render() : TemplateResult {
     return html`

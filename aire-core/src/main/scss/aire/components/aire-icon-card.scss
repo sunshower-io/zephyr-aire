@@ -1,16 +1,22 @@
 @import "./aire-card";
 
 $aire-icon-holder-size: $primary-nav-width;
-$aire-icon-padding: $primary-nav-pip-size;
+$aire-icon-padding: $aire-card-content-padding;
+$aire-icon-padding-double: 2*$aire-icon-padding;
+$aire-icon-border: 1px solid $dark-gray-1;
 
+$inset-shadow: inset 0 -1px 0 0 var(--lumo-contrast-10pct); //same thing that's in tabs
 $box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.08), 0 0 15px 0 rgba(0, 0, 0, 0.02), 0 0 20px 4px rgba(0, 0, 0, 0.06);
 
 aire-icon-card, .aire-icon-card {
   @extend .aire-card;
 
-  margin: 2*$aire-icon-padding;
+  margin: $aire-icon-padding-double 0 0 $aire-icon-padding-double;
   padding: $aire-icon-padding;
-  box-shadow: $box-shadow;
+  box-sizing:border-box;
+  box-shadow: $inset-shadow;
+  transition: box-shadow 0.5s ease-in-out;
+
 
   .aire-icon-card-upper {
     display: flex;
@@ -18,27 +24,44 @@ aire-icon-card, .aire-icon-card {
   }
 
   .aire-icon-holder {
-    background-color: $light-blue;
+    background-color: $none;
     width: $aire-icon-holder-size;
     height: $aire-icon-holder-size;
     line-height: $aire-icon-holder-size;
     text-align: center;
-    margin-top: -2*$aire-icon-padding;
-    box-shadow: $box-shadow;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    img {
-      display:block;
-      width:50%;
-      height:50%;
+    margin-top: -$aire-icon-padding-double;
+    box-shadow: $inset-shadow;
+    box-sizing: border-box;
+    display:flex;
+    align-content:center;
+
+
+    &.aire-icon-image-holder {
+      padding: $aire-icon-padding;
+      img {
+        width:100%;
+      }
     }
+  }
+
+  //also in aire-icon-card.ts
+  .aire-icon-card-upper {
+    display:flex;
+    justify-content: space-between;
+  }
+
+  [slot="header"], [slot="content"] {
+    text-align: right;
   }
 
   [slot="footer"] {
     display: block;
-    border-top: 1px solid $dark-gray-1;
+    border-top: $aire-icon-border;
     color: $dark-gray-1;
     margin-top: $aire-icon-padding;
+  }
+
+  &:hover, &:active {
+    box-shadow: $box-shadow;
   }
 }

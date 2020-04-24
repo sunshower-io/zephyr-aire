@@ -5,7 +5,6 @@ import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.icon.Icon;
 
 @Tag("aire-icon-card")
@@ -22,32 +21,33 @@ public class AireIconCard extends AireCard {
     this.icon = new Div();
   }
 
-  public void setIcon(Icon icon, String color) {
-    this.icon.getStyle().set("background-color", color);
-    icon.setColor("white");
-    this.icon.add(icon);
-    updateIcon();
-  }
-
-  public void setIcon(Component icon, String color) {
-    this.icon.getStyle().set("background-color", color);
-    this.icon.add(icon);
-    updateIcon();
-  }
+//  public void setIcon(Icon icon, String color) {
+//    setColor(color);
+//    setIcon(icon);
+//  }
+//
+//  public void setIcon(Component icon, String color) {
+//    setColor(color);
+//    setIcon(icon);
+//  }
 
   public void setIcon(Icon icon) {
-    icon.setColor("white");
     this.icon.add(icon);
     updateIcon();
   }
 
   public void setIcon(Component icon) {
+    this.icon.addClassName("aire-icon-image-holder");
     this.icon.add(icon);
     updateIcon();
   }
 
+  public void setColor(String color) {
+    this.icon.getStyle().set("background-color", color);
+  }
+
   void updateIcon() {
-    this.icon.setClassName("aire-icon-holder");
+    this.icon.addClassName("aire-icon-holder");
     this.icon.getElement().setAttribute("slot", "icon");
     access(
         () -> {

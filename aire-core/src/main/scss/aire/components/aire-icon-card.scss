@@ -6,7 +6,6 @@ $aire-icon-padding-double: 2*$aire-icon-padding;
 $aire-icon-border: 1px solid $dark-gray-1;
 
 $inset-shadow: inset 0 -1px 0 0 var(--lumo-contrast-10pct); //same thing that's in tabs
-$box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.08), 0 0 15px 0 rgba(0, 0, 0, 0.02), 0 0 20px 4px rgba(0, 0, 0, 0.06);
 
 aire-icon-card, .aire-icon-card {
   @extend .aire-card;
@@ -59,9 +58,5 @@ aire-icon-card, .aire-icon-card {
     border-top: $aire-icon-border;
     color: $dark-gray-1;
     margin-top: $aire-icon-padding;
-  }
-
-  &:hover, &:active {
-    box-shadow: $box-shadow;
   }
 }

@@ -1,14 +1,6 @@
 package io.zephyr.aire.api;
 
 public interface ViewManager {
+    ViewContext newContext();
 
-  boolean hasRoute(Class<?> route);
-
-  boolean registerRoute(Class<?> route);
-
-  boolean unregisterRoute(Class<?> route);
-
-  ComponentRegistry getComponentRegistry();
-
-  ExtensionPointRegistry getExtensionPointRegistry();
 }

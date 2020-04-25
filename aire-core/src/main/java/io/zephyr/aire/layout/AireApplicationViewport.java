@@ -11,7 +11,6 @@ import io.zephyr.aire.elements.*;
 import lombok.Getter;
 import lombok.val;
 
-@ExtensionPoint(location = ":ui:main")
 @CssImport("./styles/aire/layout/aire-nav.css")
 @CssImport("./styles/aire/layout/aire-viewport.css")
 public class AireApplicationViewport extends AbstractAireContainer<Main>
@@ -19,20 +18,15 @@ public class AireApplicationViewport extends AbstractAireContainer<Main>
 
   /** private state */
   @Getter
-  @ExtensionPoint(location = "header")
   private AireHeader header;
 
   @Getter
-  @ExtensionPoint(location = "footer")
   private AireFooter footer;
 
-  @ExtensionPoint(location = "content")
   private Component content;
 
-  @ExtensionPoint(location = "navigation:primary")
   private AirePrimaryNavigation primaryNavigation;
 
-  @ExtensionPoint(location = "navigation:secondary")
   private Component secondaryNavigation;
 
   private Article main;

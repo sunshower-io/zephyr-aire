@@ -4,13 +4,8 @@ import com.vaadin.flow.server.VaadinContext;
 import com.vaadin.flow.server.VaadinServletContext;
 import com.vaadin.flow.spring.annotation.EnableVaadin;
 import io.sunshower.yaml.state.YamlMemento;
-import io.zephyr.aire.annotation.ExtensionPointPostProcessor;
-import io.zephyr.aire.annotation.ExtensionPointScanner;
 import io.zephyr.aire.api.*;
 import io.zephyr.aire.core.deployments.DeploymentScanner;
-import io.zephyr.aire.decorators.DefaultMainViewDecorator;
-import io.zephyr.aire.ext.MutableExtensionPointRegistry;
-import io.zephyr.aire.extensions.AireExtensionPointRegistry;
 import io.zephyr.aire.servlet.ModuleResourceServlet;
 import io.zephyr.api.ModuleActivator;
 import io.zephyr.kernel.Lifecycle;
@@ -25,7 +20,6 @@ import io.zephyr.spring.embedded.EmbeddedModuleLoader;
 import io.zephyr.spring.embedded.EmbeddedSpringConfiguration;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
@@ -57,10 +51,10 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
     return new DeploymentScanner(kernel, locations);
   }
 
-  @Bean
-  public BeanPostProcessor extensionPointPostProcessor(MutableExtensionPointRegistry registry) {
-    return new ExtensionPointPostProcessor(registry, new ExtensionPointScanner(registry));
-  }
+  //  @Bean
+  //  public BeanPostProcessor extensionPointPostProcessor(MutableExtensionPointRegistry registry) {
+  //    return new ExtensionPointPostProcessor(registry, new ExtensionPointScanner(registry));
+  //  }
 
   @Bean
   public ServletRegistrationBean<ModuleResourceServlet>
@@ -140,16 +134,17 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
     return new AireModuleActivator();
   }
 
-  @Bean
-  public MutableExtensionPointRegistry extensionPointRegistry(ApplicationContext context) {
-    val result = new AireExtensionPointRegistry(context);
-    result.register(DefaultMainViewDecorator.class);
-    return result;
-  }
+  //  @Bean
+  //  public MutableExtensionPointRegistry extensionPointRegistry(ApplicationContext context) {
+  //    val result = new AireExtensionPointRegistry(context);
+  //    result.register(DefaultMainViewDecorator.class);
+  //    return result;
+  //  }
 
   @Bean
-  public ViewManager viewManager(ExtensionPointRegistry registry, VaadinContext context) {
-    return new VaadinViewManager(context, (ComponentRegistry) registry, registry);
+  public ViewManager viewManager(VaadinContext context) {
+    return new VaadinViewManager();
+    //    return new VaadinViewManager(context, (ComponentRegistry) registry, registry);
   }
 
   @EventListener(classes = ContextStoppedEvent.class)

@@ -62,10 +62,6 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
     return new ServletRegistrationBean<>(new ModuleResourceServlet(), "/modules/*");
   }
 
-  @Bean
-  public Session session() {
-    return new Session() {};
-  }
 
   @Bean
   public ClassLoader classLoader(ApplicationContext context) {

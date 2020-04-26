@@ -6,7 +6,6 @@ import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.router.RouterLayout;
 import io.aire.core.AireContainer;
 import io.aire.core.AireLayout;
-import io.zephyr.aire.api.ExtensionPoint;
 import io.zephyr.aire.elements.*;
 import lombok.Getter;
 import lombok.val;

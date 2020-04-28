@@ -61,7 +61,7 @@ aire-icon-card, .aire-icon-card {
   }
 
   @each $name, $color in $variants {
-    &.#{$color} {
+    &.aire-#{$color} {
 
       iron-icon {
         color: $color;

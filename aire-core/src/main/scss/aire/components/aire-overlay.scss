@@ -1,0 +1,39 @@
+@import "../layout/aire-layout-variables";
+
+aire-overlay, .aire-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: $none;
+  padding: 16px;
+  border: 1px solid $background;
+
+
+  display: none;
+  &.aire-overlay-open {
+    display:block;
+  }
+
+
+  //also in aire-overlay.ts
+  .aire-overlay-upper {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  //also in aire-overlay.ts
+  [slot="header"] {
+    margin: 0 !important;
+  }
+
+  [slot="close"] {
+    align-self: flex-end;
+  }
+
+  [slot="content"] {
+
+  }
+}

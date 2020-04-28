@@ -60,14 +60,14 @@ $none: $white;
 $dark: $darkest-gray;
 
 $variants: (
-  "aire-primary": $primary,
-  "aire-secondary": $secondary,
-  "aire-tertiary": $tertiary,
-  "aire-success": $success,
-  "aire-danger": $alert,
-  "aire-warning": $warning,
-  "aire-info": $link,
-  "aire-link": $link,
-  "aire-light": $background,
-  "aire-dark": $dark
+  "primary": $primary,
+  "secondary": $secondary,
+  "tertiary": $tertiary,
+  "success": $success,
+  "danger": $alert,
+  "warning": $warning,
+  "info": $link,
+  "link": $link,
+  "light": $background,
+  "dark": $dark
 )

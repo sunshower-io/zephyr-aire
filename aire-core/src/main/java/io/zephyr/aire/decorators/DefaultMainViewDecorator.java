@@ -17,7 +17,6 @@ import lombok.val;
 
 import javax.inject.Inject;
 
-@Extension(":ui:main")
 public class DefaultMainViewDecorator implements ViewDecorator<AireApplicationViewport> {
 
   @Override

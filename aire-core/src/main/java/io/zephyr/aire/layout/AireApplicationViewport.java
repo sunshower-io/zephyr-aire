@@ -6,10 +6,13 @@ import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.router.RouterLayout;
 import io.aire.core.AireContainer;
 import io.aire.core.AireLayout;
+import io.zephyr.aire.api.Container;
+import io.zephyr.aire.api.Slot;
 import io.zephyr.aire.elements.*;
 import lombok.Getter;
 import lombok.val;
 
+@Container(":main")
 @CssImport("./styles/aire/layout/aire-nav.css")
 @CssImport("./styles/aire/layout/aire-viewport.css")
 public class AireApplicationViewport extends AbstractAireContainer<Main>
@@ -17,10 +20,10 @@ public class AireApplicationViewport extends AbstractAireContainer<Main>
 
   /** private state */
   @Getter
+  @Slot(":header")
   private AireHeader header;
 
-  @Getter
-  private AireFooter footer;
+  @Getter private AireFooter footer;
 
   private Component content;
 

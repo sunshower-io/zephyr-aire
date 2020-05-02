@@ -83,6 +83,8 @@ public class AireApplicationViewport extends AbstractAireContainer<Main>
   }
 
   public void setContent(Component newContent) {
-    ((AireContainer) content).add(newContent);
+    if (newContent != null) {
+      ((AireContainer) content).add(newContent);
+    }
   }
 }

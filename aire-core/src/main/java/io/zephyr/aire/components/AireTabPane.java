@@ -11,7 +11,6 @@ import com.vaadin.flow.di.Instantiator;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.server.Command;
 import io.aire.core.AireComponent;
 import io.sunshower.gyre.CompactTrieMap;
 import io.sunshower.gyre.RegexStringAnalyzer;

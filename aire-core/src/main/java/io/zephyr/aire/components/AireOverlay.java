@@ -3,12 +3,14 @@ package io.zephyr.aire.components;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.router.*;
 import io.aire.core.AireComponent;
 import lombok.val;
 
@@ -16,7 +18,7 @@ import lombok.val;
 @JsModule("./components/aire/aire-overlay.ts")
 @CssImport("./styles/aire/components/aire-overlay.css")
 @NpmPackage(value = "lit-element", version = "^2.3.1")
-public class AireOverlay extends Component implements AireComponent, HasComponents {
+public class AireOverlay extends Component implements RouterLayout, AireComponent, HasComponents {
 
     private Component header;
     private Component content;
@@ -29,18 +31,16 @@ public class AireOverlay extends Component implements AireComponent, HasComponen
         setClose();
     }
 
-
-
-
     private void setClose() {
-        val close = new Button();
-        close.setIcon(new Icon(VaadinIcon.CLOSE_BIG));
-        close.addClickListener(event -> close());
-        close.getElement().setAttribute("slot", "close");
+        val button = new Button();
+        button.setIcon(new Icon(VaadinIcon.CLOSE_BIG));
+        button.addClickListener(event -> close());
+
+        button.getElement().setAttribute("slot", "close");
         if (this.close != null) {
             this.remove(this.close);
         }
-        add(this.close = close);
+        add(this.close = button);
     }
 
     public void setContent(Component content) {
@@ -67,21 +67,37 @@ public class AireOverlay extends Component implements AireComponent, HasComponen
         add(this.footer = footer);
     }
 
+    @SuppressWarnings("unchecked")
     public void close() {
-        getElement().setAttribute("active", false);
-        getElement().getClassList().set(showClass, false);
+        if (isRoute(this.getClass())) {
+            val route = (Class<? extends Component>) this.getClass().getAnnotation(Route.class).layout();
+
+            UI.getCurrent().navigate(route);
+        } else {
+            toggle(false);
+        }
     }
 
     public void open(Component outer) {
-        getElement().setAttribute("active", true);
-        getElement().getClassList().set(showClass, true);
-
         val holder = outer.getElement();
         if (!holder.getStyle().has("position")) {
             holder.getStyle().set("position", "relative");
         }
-        //should we actually be adding this to "outer"? Time will tell!
+        open();
+    }
 
+    public void open() {
+        toggle(true);
+    }
+
+
+    private void toggle(boolean status) {
+        getElement().setAttribute("active", status);
+        getElement().getClassList().set(showClass, status);
+    }
+
+    private boolean isRoute(Class<? extends Component> componentType) {
+        return componentType.isAnnotationPresent(Route.class);
     }
 
 }

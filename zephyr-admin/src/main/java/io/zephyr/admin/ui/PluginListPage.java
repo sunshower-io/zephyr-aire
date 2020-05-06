@@ -8,6 +8,7 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import io.zephyr.aire.api.Decorate;
 import io.zephyr.aire.api.Undecorate;
@@ -25,6 +26,7 @@ import javax.inject.Inject;
 @Decorate
 @Undecorate
 @Component
+@PageTitle("Plugin List")
 @Route(value = "list", layout = PluginManagementPage.class)
 public class PluginListPage extends HorizontalLayout {
 

@@ -3,6 +3,7 @@ package io.zephyr.admin.ui;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.ParentLayout;
 import com.vaadin.flow.router.RoutePrefix;
 import com.vaadin.flow.router.RouterLayout;
@@ -14,6 +15,7 @@ import lombok.val;
 import org.springframework.stereotype.Component;
 
 @Component
+@PageTitle("Plugins")
 @RoutePrefix("plugins")
 @ParentLayout(AireApplicationViewport.class)
 public class PluginManagementPage extends AireTabPane implements RouterLayout {

@@ -1,5 +1,5 @@
 package io.zephyr.aire.api;
 
-public interface Session {
+public interface Permission {
 
 }

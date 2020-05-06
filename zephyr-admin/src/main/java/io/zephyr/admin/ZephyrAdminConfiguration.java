@@ -21,10 +21,10 @@ public class ZephyrAdminConfiguration implements ApplicationListener<ContextRefr
 
   @Override
   public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-    val ctx = contextRefreshedEvent.getApplicationContext();
-    val viewManager = ctx.getBean(ViewManager.class);
-    viewManager.registerRoute(PluginListPage.class);
-    viewManager.registerRoute(PluginTopologyPage.class);
-    viewManager.getComponentRegistry().register(PluginExtension.class);
+//    val ctx = contextRefreshedEvent.getApplicationContext();
+//    val viewManager = ctx.getBean(ViewManager.class);
+//    viewManager.registerRoute(PluginListPage.class);
+//    viewManager.registerRoute(PluginTopologyPage.class);
+//    viewManager.getComponentRegistry().register(PluginExtension.class);
   }
 }

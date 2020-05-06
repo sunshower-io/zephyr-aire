@@ -2,6 +2,7 @@ package io.zephyr.aire.test;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
+import io.zephyr.aire.MainView;
 import lombok.val;
 
 import java.util.Stack;
@@ -35,5 +36,9 @@ public class AireTestContext {
     while (childiter.hasNext()) {
       c.push(childiter.next());
     }
+  }
+
+  public void navigate(Class<MainView> mainViewClass) {
+
   }
 }

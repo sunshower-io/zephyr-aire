@@ -4,6 +4,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.*;
+import io.zephyr.aire.api.Container;
 import io.zephyr.aire.api.Location;
 import io.zephyr.aire.components.AireAsideDrawerMenu;
 import io.zephyr.aire.components.AireFab;
@@ -14,6 +15,7 @@ import lombok.val;
 
 @Route
 @Location("home")
+@Container(":main")
 @CssImport("./styles/aire/layout/aire-structure.css")
 public class MainView extends AireApplicationViewport {
 

@@ -1,8 +1,7 @@
 package io.zephyr.aire.api;
 
-import com.vaadin.flow.component.Component;
 
-public interface ViewDecorator<T extends Component> {
+public interface ViewDecorator {
 
-  void decorate(T component);
+  <T> T decorate(Class<T> type, T instance);
 }

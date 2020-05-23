@@ -30,7 +30,7 @@ public class RouteScanningTestExecutionListener implements TestExecutionListener
     }
   }
 
-  public void beforeTestMethod(TestContext testContext) throws Exception {
+  public void beforeTestExecution(TestContext testContext) throws Exception {
 
     MockVaadin.setup(
         routes,
@@ -41,7 +41,7 @@ public class RouteScanningTestExecutionListener implements TestExecutionListener
         });
   }
 
-  public void afterTestClass(TestContext context) {
+  public void afterTestExecution(TestContext context) {
     MockVaadin.tearDown();
     VaadinService.setCurrent(null);
   }

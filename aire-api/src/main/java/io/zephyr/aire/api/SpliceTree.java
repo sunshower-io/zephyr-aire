@@ -1,5 +1,4 @@
 package io.zephyr.aire.api;
 
-public interface Permission {
-
+public interface SpliceTree {
 }

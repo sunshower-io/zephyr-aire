@@ -6,6 +6,8 @@ import com.vaadin.flow.spring.annotation.EnableVaadin;
 import io.sunshower.yaml.state.YamlMemento;
 import io.zephyr.aire.api.*;
 import io.zephyr.aire.core.deployments.DeploymentScanner;
+import io.zephyr.aire.core.ui.ModuleViewRegistrationPostProcessor;
+import io.zephyr.aire.core.ui.VaadinViewManager;
 import io.zephyr.aire.servlet.ModuleResourceServlet;
 import io.zephyr.api.ModuleActivator;
 import io.zephyr.kernel.Lifecycle;
@@ -20,6 +22,7 @@ import io.zephyr.spring.embedded.EmbeddedModuleLoader;
 import io.zephyr.spring.embedded.EmbeddedSpringConfiguration;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
@@ -61,7 +64,6 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
       moduleResourceServletServletRegistrationBean() {
     return new ServletRegistrationBean<>(new ModuleResourceServlet(), "/modules/*");
   }
-
 
   @Bean
   public ClassLoader classLoader(ApplicationContext context) {
@@ -116,6 +118,11 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
   }
 
   @Bean
+  public BeanPostProcessor moduleViewRegistrationPostProcessor(ViewManager viewManager) {
+    return new ModuleViewRegistrationPostProcessor(viewManager);
+  }
+
+  @Bean
   @Primary
   public ModuleClasspathManager moduleClasspathManager(
       DependencyGraph graph, ApplicationContext context, Kernel kernel) {
@@ -129,13 +136,6 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
   public ModuleActivator moduleActivator() {
     return new AireModuleActivator();
   }
-
-  //  @Bean
-  //  public MutableExtensionPointRegistry extensionPointRegistry(ApplicationContext context) {
-  //    val result = new AireExtensionPointRegistry(context);
-  //    result.register(DefaultMainViewDecorator.class);
-  //    return result;
-  //  }
 
   @Bean
   public ViewManager viewManager(VaadinContext context) {

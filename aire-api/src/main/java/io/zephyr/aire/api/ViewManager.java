@@ -1,6 +1,9 @@
 package io.zephyr.aire.api;
 
-public interface ViewManager {
-    ViewContext newContext();
+import io.zephyr.kernel.Module;
 
+public interface ViewManager extends Registration {
+  ViewContext newContext(Module module, Instantiator instantiator);
+
+  Object decorate(Class<?> type, Object instance);
 }

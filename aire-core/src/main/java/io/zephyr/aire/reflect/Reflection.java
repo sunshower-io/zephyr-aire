@@ -17,82 +17,104 @@ public class Reflection {
   private static final Pattern BOOLEAN_GETTER_PREFIX = Pattern.compile("^(is)\\p{Lu}");
   private static final Pattern SETTER_PREFIX = Pattern.compile("^set\\p{Lu}");
 
+  public static <T> void traverseProperties(
+      Iterable<Class<?>> traversal,
+      Class<? extends Annotation> annotation,
+      Function<? super Annotation, String> aliasExtractor,
+      PropertyTraversalCallback<T> callback) {
+
+    callback.onTraversalStart();
+
+    for (val type : traversal) {
+      callback.onRootOpen(type);
+      val propertyDescriptors = new HashMap<String, UnreconciledPropertyDescriptor>();
+
+      collectFields(type, propertyDescriptors, annotation, aliasExtractor);
+      collectMethods(type, propertyDescriptors, annotation, aliasExtractor);
+
+      val iter = propertyDescriptors.entrySet().iterator();
+      while (iter.hasNext()) {
+        val next = iter.next();
+
+        val unreconciledPropertyDescriptor = next.getValue();
+        val ann = getAnnotation(unreconciledPropertyDescriptor);
+
+        if (ann != null) {
+          PropertyDescriptor descriptor = null;
+          if (!(unreconciledPropertyDescriptor.field == null
+              || unreconciledPropertyDescriptor.getter == null
+              || unreconciledPropertyDescriptor.setter == null)) {
+            descriptor =
+                new CompletePropertyDescriptor(
+                    getName(unreconciledPropertyDescriptor),
+                    getAlias(unreconciledPropertyDescriptor),
+                    getType(unreconciledPropertyDescriptor),
+                    unreconciledPropertyDescriptor.field,
+                    unreconciledPropertyDescriptor.getter,
+                    unreconciledPropertyDescriptor.setter);
+          } else if (!(unreconciledPropertyDescriptor.getter == null
+              || unreconciledPropertyDescriptor.setter == null)) {
+            descriptor =
+                new MutatorExclusivePropertyDescriptor(
+                    getName(unreconciledPropertyDescriptor),
+                    getAlias(unreconciledPropertyDescriptor),
+                    getType(unreconciledPropertyDescriptor),
+                    unreconciledPropertyDescriptor.getter,
+                    unreconciledPropertyDescriptor.setter);
+          } else if (!(unreconciledPropertyDescriptor.setter == null
+              || unreconciledPropertyDescriptor.field == null)) {
+            descriptor =
+                new MutateBySetterRetrieveByFieldPropertyDescriptor(
+                    getName(unreconciledPropertyDescriptor),
+                    getAlias(unreconciledPropertyDescriptor),
+                    getType(unreconciledPropertyDescriptor),
+                    unreconciledPropertyDescriptor.field,
+                    unreconciledPropertyDescriptor.setter);
+          } else if (!(unreconciledPropertyDescriptor.getter == null
+              || unreconciledPropertyDescriptor.field == null)) {
+            descriptor =
+                new MutateByFieldRetrieveByGetterPropertyDescriptor(
+                    getName(unreconciledPropertyDescriptor),
+                    getAlias(unreconciledPropertyDescriptor),
+                    getType(unreconciledPropertyDescriptor),
+                    unreconciledPropertyDescriptor.field,
+                    unreconciledPropertyDescriptor.getter);
+          } else if (unreconciledPropertyDescriptor.field != null) {
+            descriptor =
+                new FieldAccessPropertyDescriptor(
+                    getName(unreconciledPropertyDescriptor),
+                    getAlias(unreconciledPropertyDescriptor),
+                    getType(unreconciledPropertyDescriptor),
+                    unreconciledPropertyDescriptor.field);
+          } else {
+            callback.onInvalidProperty(type, next.getKey(), annotation);
+          }
+
+          callback.onProperty(descriptor);
+        }
+      }
+      callback.onRootClose(type);
+    }
+    callback.onTraversalComplete();
+  }
+
+  public static <T> void traverseProperties(
+      Class<?> startClass,
+      Class<?> stopClass,
+      Class<? extends Annotation> annotation,
+      Function<? super Annotation, String> aliasExtractor,
+      PropertyTraversalCallback<T> callback) {
+    traverseProperties(
+        new ClassHierarchy(startClass, stopClass), annotation, aliasExtractor, callback);
+  }
+
   public static AnnotatedPropertySet getAnnotatedProperties(
       Class<?> type,
       Class<? extends Annotation> annotation,
       Function<? super Annotation, String> aliasExtractor) {
-
-    val propertyDescriptors = new HashMap<String, UnreconciledPropertyDescriptor>();
-
-    collectFields(type, propertyDescriptors, annotation, aliasExtractor);
-    collectMethods(type, propertyDescriptors, annotation, aliasExtractor);
-
-    val iter = propertyDescriptors.entrySet().iterator();
-
-    val propertySet = new MutableAnnotatedPropertySet();
-    while (iter.hasNext()) {
-      val next = iter.next();
-
-      val unreconciledPropertyDescriptor = next.getValue();
-      val ann = getAnnotation(unreconciledPropertyDescriptor);
-
-      PropertyDescriptor descriptor;
-      if (ann != null) {
-        if (!(unreconciledPropertyDescriptor.field == null
-            || unreconciledPropertyDescriptor.getter == null
-            || unreconciledPropertyDescriptor.setter == null)) {
-          descriptor =
-              new CompletePropertyDescriptor(
-                  getName(unreconciledPropertyDescriptor),
-                  getAlias(unreconciledPropertyDescriptor),
-                  getType(unreconciledPropertyDescriptor),
-                  unreconciledPropertyDescriptor.field,
-                  unreconciledPropertyDescriptor.getter,
-                  unreconciledPropertyDescriptor.setter);
-        } else if (!(unreconciledPropertyDescriptor.getter == null
-            || unreconciledPropertyDescriptor.setter == null)) {
-          descriptor =
-              new MutatorExclusivePropertyDescriptor(
-                  getName(unreconciledPropertyDescriptor),
-                  getAlias(unreconciledPropertyDescriptor),
-                  getType(unreconciledPropertyDescriptor),
-                  unreconciledPropertyDescriptor.getter,
-                  unreconciledPropertyDescriptor.setter);
-        } else if (!(unreconciledPropertyDescriptor.setter == null
-            || unreconciledPropertyDescriptor.field == null)) {
-          descriptor =
-              new MutateBySetterRetrieveByFieldPropertyDescriptor(
-                  getName(unreconciledPropertyDescriptor),
-                  getAlias(unreconciledPropertyDescriptor),
-                  getType(unreconciledPropertyDescriptor),
-                  unreconciledPropertyDescriptor.field,
-                  unreconciledPropertyDescriptor.setter);
-        } else if (!(unreconciledPropertyDescriptor.getter == null
-            || unreconciledPropertyDescriptor.field == null)) {
-          descriptor =
-              new MutateByFieldRetrieveByGetterPropertyDescriptor(
-                  getName(unreconciledPropertyDescriptor),
-                  getAlias(unreconciledPropertyDescriptor),
-                  getType(unreconciledPropertyDescriptor),
-                  unreconciledPropertyDescriptor.field,
-                  unreconciledPropertyDescriptor.getter);
-        } else if (unreconciledPropertyDescriptor.field != null) {
-          descriptor =
-              new FieldAccessPropertyDescriptor(
-                  getName(unreconciledPropertyDescriptor),
-                  getAlias(unreconciledPropertyDescriptor),
-                  getType(unreconciledPropertyDescriptor),
-                  unreconciledPropertyDescriptor.field);
-        } else {
-          throw new IllegalArgumentException(
-              String.format(
-                  "Somehow all of (field, getter, setter) were null for property %s on type %s (searching for annotation %s)",
-                  next.getKey(), type, annotation));
-        }
-        propertySet.add(descriptor);
-      }
-    }
-    return propertySet;
+    val callback = new AnnotatedPropertySetProducingPropertyTraversalCallback();
+    traverseProperties(type, type.getSuperclass(), annotation, aliasExtractor, callback);
+    return callback.getResult();
   }
 
   private static String getAlias(UnreconciledPropertyDescriptor unreconciledPropertyDescriptor) {
@@ -181,10 +203,7 @@ public class Reflection {
           descriptor.fieldAnnotation = field.getAnnotation(annotationType);
           descriptor.alias = aliasExtractor.apply(descriptor.fieldAnnotation);
         }
-
         propertyDescriptors.put(field.getName(), descriptor);
-        propertyDescriptors.put(descriptor.predictedGetterName, descriptor);
-        propertyDescriptors.put(descriptor.predictedSetterName, descriptor);
       }
     }
   }
@@ -312,5 +331,33 @@ public class Reflection {
     private Annotation fieldAnnotation;
     private Annotation getterAnnotation;
     private Annotation setterAnnotation;
+  }
+
+  static final class AnnotatedPropertySetProducingPropertyTraversalCallback
+      implements PropertyTraversalCallback<AnnotatedPropertySet> {
+    final MutableAnnotatedPropertySet result;
+
+    AnnotatedPropertySetProducingPropertyTraversalCallback() {
+      result = new MutableAnnotatedPropertySet();
+    }
+
+    @Override
+    public void onInvalidProperty(
+        Class<?> owner, String propertyName, Class<? extends Annotation> annotationType) {
+      throw new IllegalArgumentException(
+          String.format(
+              "Somehow all of (field, getter, setter) were null for property %s on type %s (searching for annotation %s)",
+              propertyName, owner, annotationType));
+    }
+
+    @Override
+    public void onProperty(PropertyDescriptor descriptor) {
+      result.add(descriptor);
+    }
+
+    @Override
+    public AnnotatedPropertySet getResult() {
+      return result;
+    }
   }
 }

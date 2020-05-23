@@ -6,7 +6,6 @@ import io.zephyr.aire.api.Registration;
 import io.zephyr.aire.api.ViewContext;
 import io.zephyr.kernel.Module;
 import lombok.val;
-import org.springframework.context.ApplicationContext;
 
 public class VaadinViewContext implements ViewContext {
 

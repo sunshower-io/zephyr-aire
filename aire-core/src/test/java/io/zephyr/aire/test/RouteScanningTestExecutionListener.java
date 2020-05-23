@@ -12,12 +12,16 @@ import org.springframework.test.context.TestExecutionListener;
 public class RouteScanningTestExecutionListener implements TestExecutionListener {
 
   private Routes routes;
+  private ScanRoutes routeAnnotation;
 
   public void beforeTestClass(TestContext testContext) throws Exception {
     val type = testContext.getTestClass();
     if (type.isAnnotationPresent(ScanRoutes.class)) {
-      val toScan = type.getAnnotation(ScanRoutes.class);
-      val routes = toScan.value();
+      routeAnnotation = type.getAnnotation(ScanRoutes.class);
+      if (routeAnnotation.mockStrategy() == ScanRoutes.MockStrategy.None) {
+        return;
+      }
+      val routes = routeAnnotation.value();
       if (routes.equals("__DEFAULT__")) {
         log.info("Scanning package: " + type.getPackageName());
         this.routes = new Routes().autoDiscoverViews(type.getPackageName());
@@ -32,17 +36,23 @@ public class RouteScanningTestExecutionListener implements TestExecutionListener
 
   public void beforeTestExecution(TestContext testContext) throws Exception {
 
-    MockVaadin.setup(
-        routes,
-        (t, u) -> {
-          val service = new TestVaadinService(t, u, testContext.getApplicationContext());
-          VaadinService.setCurrent(service);
-          return service;
-        });
+    if (routeAnnotation != null
+        && routeAnnotation.mockStrategy() == ScanRoutes.MockStrategy.AroundTestMethod) {
+      MockVaadin.setup(
+          routes,
+          (t, u) -> {
+            val service = new TestVaadinService(t, u, testContext.getApplicationContext());
+            VaadinService.setCurrent(service);
+            return service;
+          });
+    }
   }
 
   public void afterTestExecution(TestContext context) {
-    MockVaadin.tearDown();
-    VaadinService.setCurrent(null);
+    if (routeAnnotation != null
+        && routeAnnotation.mockStrategy() == ScanRoutes.MockStrategy.AroundTestMethod) {
+      MockVaadin.tearDown();
+      VaadinService.setCurrent(null);
+    }
   }
 }

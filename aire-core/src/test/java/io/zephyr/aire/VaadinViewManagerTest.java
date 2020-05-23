@@ -24,9 +24,11 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @AireTest
-@ScanRoutes("io.zephyr.aire")
+@ScanRoutes(value = "io.zephyr.aire", mockStrategy = ScanRoutes.MockStrategy.None)
 @ContextConfiguration(classes = {AireConfiguration.class, AireTestConfiguration.class})
 class VaadinViewManagerTest {
 
@@ -52,11 +54,11 @@ class VaadinViewManagerTest {
   @Test
   void ensureButtonIsAppendedToBody() {
     viewContext = viewManager.newContext(module, new VaadinBridge(applicationContext));
-    val definition =
-        new PropertyBasedComponentDefinition<>(new Append(), Arrays.asList(":main:header"));
+    val append = spy(new Append());
+    val definition = new PropertyBasedComponentDefinition<>(append, Arrays.asList(":main:header"));
     viewContext.register(definition);
 
-    context.inView(
+    context.withComponentRoute(
         MainView.class,
         () -> {
           context.navigate(MainView.class);
@@ -67,6 +69,7 @@ class VaadinViewManagerTest {
           assertEquals(child.getText(), "hello");
           viewContext.close();
         });
+    verify(append, times(1)).apply(any(), any());
   }
 
   static class Append implements Operation<AireHeader> {

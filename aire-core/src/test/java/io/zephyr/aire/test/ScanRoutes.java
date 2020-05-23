@@ -8,8 +8,11 @@ public @interface ScanRoutes {
 
   String value() default "__DEFAULT__";
 
-  enum Mode {
-      AroundTest,
-      Around
+  MockStrategy mockStrategy() default MockStrategy.AroundTestMethod;
+
+  enum MockStrategy {
+    None,
+    AroundTestMethod,
+    AroundTestClass
   }
 }

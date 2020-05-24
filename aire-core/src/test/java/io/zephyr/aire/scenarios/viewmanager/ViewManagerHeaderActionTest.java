@@ -1,21 +1,17 @@
 package io.zephyr.aire.scenarios.viewmanager;
 
 import io.zephyr.aire.AireConfiguration;
-import io.zephyr.aire.MainView;
 import io.zephyr.aire.api.ViewContext;
 import io.zephyr.aire.api.ViewManager;
 import io.zephyr.aire.test.AireTest;
-import io.zephyr.aire.test.AireTestConfiguration;
-import io.zephyr.aire.test.AireTestContext;
+import io.zephyr.aire.test.core.AireTestConfiguration;
+import io.zephyr.aire.test.core.AireTestContext;
 import io.zephyr.aire.test.ScanRoutes;
-import lombok.val;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ContextConfiguration;
 
 import javax.inject.Inject;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

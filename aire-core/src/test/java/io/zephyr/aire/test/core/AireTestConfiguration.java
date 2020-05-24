@@ -1,14 +1,8 @@
-package io.zephyr.aire.test;
+package io.zephyr.aire.test.core;
 
-import io.zephyr.kernel.Module;
-import io.zephyr.kernel.concurrency.ModuleThread;
-import io.zephyr.kernel.core.Kernel;
-import io.zephyr.spring.embedded.EmbeddedModule;
-import lombok.val;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class AireTestConfiguration {

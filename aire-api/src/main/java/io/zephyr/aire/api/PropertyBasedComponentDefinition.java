@@ -1,11 +1,8 @@
-package io.zephyr.aire.reflect;
+package io.zephyr.aire.api;
 
 import io.zephyr.api.security.AccessControlList;
 import io.zephyr.api.security.Role;
 import io.zephyr.api.security.Session;
-import io.zephyr.aire.api.ComponentDefinition;
-import io.zephyr.aire.api.Instantiator;
-import io.zephyr.aire.api.Operation;
 
 import java.util.Collection;
 import java.util.Collections;

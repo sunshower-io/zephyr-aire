@@ -1,14 +1,11 @@
 package io.zephyr.admin.ui;
 
-import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.html.H1;
 import io.zephyr.aire.AireConfiguration;
 import io.zephyr.aire.test.AireTest;
 import io.zephyr.aire.test.ScanRoutes;
 import io.zephyr.aire.api.ViewManager;
-import io.zephyr.aire.test.AireTestConfiguration;
-import io.zephyr.aire.test.AireTestContext;
-import lombok.val;
+import io.zephyr.aire.test.core.AireTestConfiguration;
+import io.zephyr.aire.test.core.AireTestContext;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ContextConfiguration;

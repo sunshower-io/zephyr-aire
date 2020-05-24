@@ -1,8 +1,8 @@
 package io.zephyr.aire.api;
 
-import io.io.zephyr.api.security.AccessControlList;
-import io.io.zephyr.api.security.Role;
-import io.io.zephyr.api.security.Session;
+import io.zephyr.api.security.AccessControlList;
+import io.zephyr.api.security.Role;
+import io.zephyr.api.security.Session;
 
 import java.util.Set;
 

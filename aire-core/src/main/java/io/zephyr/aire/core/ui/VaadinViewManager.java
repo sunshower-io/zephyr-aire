@@ -1,6 +1,6 @@
 package io.zephyr.aire.core.ui;
 
-import io.io.zephyr.api.security.Session;
+import io.zephyr.api.security.Session;
 import io.zephyr.aire.api.*;
 import io.zephyr.aire.reflect.PropertyDescriptor;
 import io.zephyr.aire.reflect.PropertyTraversalCallback;
@@ -12,7 +12,9 @@ import lombok.val;
 import java.lang.annotation.Annotation;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class VaadinViewManager implements ViewManager {
 
@@ -63,9 +65,19 @@ public class VaadinViewManager implements ViewManager {
   }
 
   public <T> void registerDefinition(
-      String location, ComponentDefinition<T> componentDefinition, Instantiator instantiator) {
+      String location,
+      ComponentDefinition<T> componentDefinition,
+      Instantiator instantiator,
+      Coordinate host) {
     componentDefinitions.put(
-        location, new InstantiableComponent(instantiator, componentDefinition));
+        location, new InstantiableComponent(instantiator, componentDefinition, host));
+  }
+
+  public Set<ComponentDefinition<?>> getDefinitions(Coordinate coordinate) {
+    return componentDefinitions.values().stream()
+        .filter(t -> coordinate.equals(t.host))
+        .map(t -> t.definition)
+        .collect(Collectors.toSet());
   }
 
   //  private final VaadinContext context;
@@ -122,12 +134,15 @@ public class VaadinViewManager implements ViewManager {
   //  }
 
   static final class InstantiableComponent {
+    final Coordinate host;
     final Instantiator instantiator;
     final ComponentDefinition<?> definition;
 
-    InstantiableComponent(Instantiator instantiator, ComponentDefinition<?> definition) {
-      this.instantiator = instantiator;
+    InstantiableComponent(
+        Instantiator instantiator, ComponentDefinition<?> definition, Coordinate host) {
+      this.host = host;
       this.definition = definition;
+      this.instantiator = instantiator;
     }
 
     public void apply(Object property, Session o) {

@@ -1,4 +1,4 @@
-package io.io.zephyr.api.security;
+package io.zephyr.api.security;
 
 public interface AccessControlList {
 }

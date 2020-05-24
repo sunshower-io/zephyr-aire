@@ -1,4 +1,4 @@
-package io.zephyr.aire.test;
+package io.zephyr.aire.test.core;
 
 import com.github.mvysny.kaributesting.v10.MockInstantiator;
 import com.github.mvysny.kaributesting.v10.MockService;

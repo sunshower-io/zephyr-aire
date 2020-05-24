@@ -7,6 +7,8 @@ import io.zephyr.aire.api.ViewContext;
 import io.zephyr.kernel.Module;
 import lombok.val;
 
+import java.util.Set;
+
 public class VaadinViewContext implements ViewContext {
 
   private final Module host;
@@ -30,9 +32,15 @@ public class VaadinViewContext implements ViewContext {
   }
 
   @Override
+  public Set<ComponentDefinition<?>> getComponentDefinitions() {
+    return viewManager.getDefinitions(host.getCoordinate());
+  }
+
+  @Override
   public <T> Registration register(ComponentDefinition<T> componentDefinition) {
     for (val location : componentDefinition.extensionPointLocations()) {
-      viewManager.registerDefinition(location, componentDefinition, instantiator);
+      viewManager.registerDefinition(
+          location, componentDefinition, instantiator, host.getCoordinate());
     }
     return null;
   }

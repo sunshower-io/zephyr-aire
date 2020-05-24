@@ -1,10 +1,9 @@
-package io.zephyr.aire.test;
+package io.zephyr.aire.test.core;
 
 import com.github.mvysny.kaributesting.v10.MockVaadin;
 import com.github.mvysny.kaributesting.v10.Routes;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.server.VaadinService;
 import lombok.val;
 import org.springframework.context.ApplicationContext;

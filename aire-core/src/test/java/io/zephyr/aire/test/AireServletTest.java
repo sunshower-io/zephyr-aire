@@ -1,5 +1,6 @@
 package io.zephyr.aire.test;
 
+import io.zephyr.aire.test.core.AireServletTestConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 
 import java.lang.annotation.Documented;

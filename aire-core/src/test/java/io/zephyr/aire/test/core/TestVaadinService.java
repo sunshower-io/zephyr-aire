@@ -23,6 +23,7 @@ public class TestVaadinService extends MockService {
     this.context = context;
   }
 
+
   @Override
   protected Instantiator createInstantiator() throws ServiceException {
     return new MockInstantiator(new SpringInstantiator(this, context));

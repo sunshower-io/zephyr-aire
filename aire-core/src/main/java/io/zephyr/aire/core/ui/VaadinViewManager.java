@@ -10,16 +10,13 @@ import io.zephyr.kernel.Module;
 import lombok.val;
 
 import java.lang.annotation.Annotation;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class VaadinViewManager implements ViewManager {
 
   private final Map<Coordinate, ViewContext> registeredContexts;
-  private final Map<String, InstantiableComponent> componentDefinitions;
+  private final Map<String, List<InstantiableComponent>> componentDefinitions;
 
   public VaadinViewManager() {
     this.registeredContexts = new HashMap<>();
@@ -57,6 +54,16 @@ public class VaadinViewManager implements ViewManager {
   public void unregister(ViewContext viewContext) {
     val host = viewContext.getHost();
     registeredContexts.remove(host.getCoordinate());
+
+    for (val definition : componentDefinitions.entrySet()) {
+      val iter = definition.getValue().iterator();
+      while (iter.hasNext()) {
+        val next = iter.next();
+        if (next.host.equals(host.getCoordinate())) {
+          iter.remove();
+        }
+      }
+    }
   }
 
   @Override
@@ -69,12 +76,22 @@ public class VaadinViewManager implements ViewManager {
       ComponentDefinition<T> componentDefinition,
       Instantiator instantiator,
       Coordinate host) {
-    componentDefinitions.put(
-        location, new InstantiableComponent(instantiator, componentDefinition, host));
+
+    var definitionSet = componentDefinitions.get(location);
+    if (definitionSet == null) {
+      definitionSet = new ArrayList<>();
+      definitionSet.add(new InstantiableComponent(instantiator, componentDefinition, host));
+      componentDefinitions.put(location, definitionSet);
+    } else {
+      componentDefinitions
+          .get(location)
+          .add(new InstantiableComponent(instantiator, componentDefinition, host));
+    }
   }
 
   public Set<ComponentDefinition<?>> getDefinitions(Coordinate coordinate) {
     return componentDefinitions.values().stream()
+        .flatMap(Collection::stream)
         .filter(t -> coordinate.equals(t.host))
         .map(t -> t.definition)
         .collect(Collectors.toSet());
@@ -166,13 +183,15 @@ public class VaadinViewManager implements ViewManager {
     public void onProperty(PropertyDescriptor descriptor) {
       try {
         segments.push(descriptor.getName());
-        val definition = componentDefinitions.get(String.join(":", segments));
+        val definitions = componentDefinitions.get(String.join(":", segments));
         var previousInstance = currentInstance;
 
-        if (definition != null) {
+        if (definitions != null) {
+
           val value = descriptor.get(currentInstance);
-          definition.apply(value, null);
-          //          ((ComponentDefinition) definition).apply(value, null);
+          for (val definition : definitions) {
+            definition.apply(value, null);
+          }
           currentInstance = value;
         }
 

@@ -24,7 +24,7 @@ import java.lang.annotation.RetentionPolicy;
 @ExtendWith(ViewContextParameterResolver.class)
 // this must come after ViewContextParameterResolver
 @ExtendWith(EditViewParameterResolver.class)
-@ExtendWith({MockitoExtension.class, ContextParameterResolver.class, ViewMockingExtenstion.class})
+@ExtendWith({MockitoExtension.class, ContextParameterResolver.class, ViewMockingExtension.class})
 @ContextConfiguration(classes = {AireConfiguration.class, AireTestConfiguration.class})
 @TestExecutionListeners(
     listeners = ApplicationTrackerListener.class,

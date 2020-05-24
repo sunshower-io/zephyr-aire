@@ -2,29 +2,49 @@ package io.zephyr.aire;
 
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.Header;
 import io.zephyr.aire.api.*;
 import io.zephyr.aire.test.*;
-import io.zephyr.aire.test.core.AireTestConfiguration;
-import org.springframework.test.context.ContextConfiguration;
+import lombok.val;
+
+import java.util.List;
 
 import static io.zephyr.aire.api.Views.append;
+import static io.zephyr.aire.api.Views.appendInstance;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @AireTest
-@ContextConfiguration(classes = {AireConfiguration.class, AireTestConfiguration.class})
 class VaadinViewManagerTest {
 
-  private ComponentDefinition<HasComponents> append = append(Button.class).to(":main:header");
-
   @ViewTest(MainView.class)
-  @EditView(withField = "append")
   void ensureViewManagerHasViewRegistered(@Context ViewContext context) {
     assertEquals(context.getComponentDefinitions().size(), 1);
   }
 
   @ViewTest(MainView.class)
-  @EditView(withField = "append")
+  @EditView(withMethod = "appendInstantiated")
   void ensureAppendingButtonInstanceResultsInButtonAppendedToHeader(@Element Button button) {
     assertEquals(button.getText().trim(), "");
+  }
+
+  @ViewTest(MainView.class)
+  void ensureHeaderHasCorrectClass(@Element Header header) {
+    assertTrue(header.getClassNames().contains("aire-header"));
+  }
+
+  @ViewTest(MainView.class)
+  void ensureButtonIsAppendedWithInstance(@Elements List<Button> buttons) {
+    val button = buttons.stream().filter(t -> t.getText().equals("Hello!")).findAny();
+    assertTrue(button.isPresent());
+  }
+
+  private ComponentDefinition<HasComponents> appendInstantiated() {
+    return append(Button.class).to(":main:header");
+  }
+
+  @EditView
+  private ComponentDefinition<HasComponents> instance() {
+    return appendInstance(new Button("Hello!")).to(":main:header");
   }
 }

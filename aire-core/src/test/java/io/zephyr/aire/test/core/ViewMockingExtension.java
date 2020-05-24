@@ -5,18 +5,20 @@ import com.github.mvysny.kaributesting.v10.Routes;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.VaadinService;
+import com.vaadin.flow.server.VaadinServletService;
 import io.zephyr.aire.test.Element;
+import io.zephyr.aire.test.Elements;
 import io.zephyr.aire.test.ViewTest;
 import lombok.val;
 import org.junit.jupiter.api.extension.*;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.lang.reflect.Parameter;
+import java.lang.reflect.ParameterizedType;
+import java.util.*;
 
 import static io.zephyr.aire.test.core.ApplicationTrackerListener.getContext;
 
-public class ViewMockingExtenstion
+public class ViewMockingExtension
     implements BeforeEachCallback, AfterEachCallback, ParameterResolver {
 
   @Override
@@ -25,7 +27,8 @@ public class ViewMockingExtenstion
       throws ParameterResolutionException {
 
     val parameter = parameterContext.getParameter();
-    return parameter.isAnnotationPresent(Element.class);
+    return parameter.isAnnotationPresent(Element.class)
+        || parameter.isAnnotationPresent(Elements.class);
   }
 
   @Override
@@ -34,12 +37,35 @@ public class ViewMockingExtenstion
       throws ParameterResolutionException {
     val parameter = parameterContext.getParameter();
     val testContext = getContext().getBean(AireTestContext.class);
-    return testContext.resolveFirst(parameter.getType());
+
+    if (parameter.isAnnotationPresent(Element.class)) {
+      return testContext.resolveFirst(parameter.getType());
+    }
+
+    if (parameter.isAnnotationPresent(Elements.class)) {
+      val type = parameter.getType();
+
+      if (Set.class.isAssignableFrom(type)) {
+        return new HashSet<>(testContext.resolveAll(typeOf(parameter)));
+      }
+      if (List.class.isAssignableFrom(type)) {
+        return testContext.resolveAll(typeOf(parameter));
+      }
+    }
+
+    throw new IllegalArgumentException("Can't process parameter " + parameter);
+  }
+
+  static Class<?> typeOf(Parameter type) {
+    val ptype = (ParameterizedType) type.getParameterizedType();
+    return (Class<?>) ptype.getActualTypeArguments()[0];
   }
 
   @Override
   public void afterEach(ExtensionContext extensionContext) throws Exception {
+    UI.setCurrent(null);
     MockVaadin.tearDown();
+    VaadinService.setCurrent(null);
   }
 
   @Override
@@ -76,7 +102,8 @@ public class ViewMockingExtenstion
     collectRoutes(results, viewTest);
 
     val context = getContext();
-    val routes = new Routes(results, Collections.emptySet(), false);
+    val routes = new Routes(results, Collections.emptySet(), true);
+
     MockVaadin.setup(
         routes,
         (t, u) -> {

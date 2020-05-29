@@ -11,17 +11,22 @@ import lombok.val;
 import javax.inject.Inject;
 
 @Extension(":ui:main")
-public class PluginExtension implements ViewDecorator<AireApplicationViewport> {
+public class PluginExtension implements ViewDecorator{
 
   @Inject private ViewManager viewManager;
 
-  @Override
-  public void decorate(AireApplicationViewport component) {
+//  @Override
+//  public void decorate(AireApplicationViewport component) {
+//
+//    val routerLink = new RouterLink();
+//    routerLink.setRoute(PluginListPage.class);
+//    routerLink.add(FontAwesome.Plug.icon());
+//    routerLink.setHighlightCondition((t, u) -> t.getHref().contains("plugins"));
+//    component.getPrimaryNavigation().add(routerLink);
+//  }
 
-    val routerLink = new RouterLink();
-    routerLink.setRoute(PluginListPage.class);
-    routerLink.add(FontAwesome.Plug.icon());
-    routerLink.setHighlightCondition((t, u) -> t.getHref().contains("plugins"));
-    component.getPrimaryNavigation().add(routerLink);
-  }
+    @Override
+    public <T> T decorate(Class<T> type, T instance) {
+        return null;
+    }
 }

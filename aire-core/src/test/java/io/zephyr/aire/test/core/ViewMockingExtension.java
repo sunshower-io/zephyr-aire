@@ -5,7 +5,6 @@ import com.github.mvysny.kaributesting.v10.Routes;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.VaadinService;
-import com.vaadin.flow.server.VaadinServletService;
 import io.zephyr.aire.test.Element;
 import io.zephyr.aire.test.Elements;
 import io.zephyr.aire.test.ViewTest;
@@ -39,21 +38,56 @@ public class ViewMockingExtension
     val testContext = getContext().getBean(AireTestContext.class);
 
     if (parameter.isAnnotationPresent(Element.class)) {
-      return testContext.resolveFirst(parameter.getType());
+      val path = getPath(parameter.getAnnotation(Element.class));
+      if (path == null) {
+        return testContext.resolveFirst(parameter.getType());
+      }
+      return testContext.resolveFirstAtPath(path);
     }
 
     if (parameter.isAnnotationPresent(Elements.class)) {
       val type = parameter.getType();
+      val path = getPath(parameter.getAnnotation(Elements.class));
 
       if (Set.class.isAssignableFrom(type)) {
-        return new HashSet<>(testContext.resolveAll(typeOf(parameter)));
+        if (path == null) {
+          return new HashSet<>(testContext.resolveAll(typeOf(parameter)));
+        } else {
+          return new HashSet<>(testContext.resolveAtPath(path));
+        }
       }
       if (List.class.isAssignableFrom(type)) {
-        return testContext.resolveAll(typeOf(parameter));
+        if (path == null) {
+          return testContext.resolveAll(typeOf(parameter));
+        } else {
+          return testContext.resolveAtPath(path);
+        }
       }
     }
 
     throw new IllegalArgumentException("Can't process parameter " + parameter);
+  }
+
+  private String getPath(Elements annotation) {
+    if (!Constants.NONE.equals(annotation.path())) {
+      return annotation.path();
+    }
+    if (!Constants.NONE.equals(annotation.value())) {
+      return annotation.value();
+    }
+
+    return null;
+  }
+
+  private String getPath(Element annotation) {
+    if (!Constants.NONE.equals(annotation.path())) {
+      return annotation.path();
+    }
+    if (!Constants.NONE.equals(annotation.value())) {
+      return annotation.value();
+    }
+
+    return null;
   }
 
   static Class<?> typeOf(Parameter type) {
@@ -62,14 +96,14 @@ public class ViewMockingExtension
   }
 
   @Override
-  public void afterEach(ExtensionContext extensionContext) throws Exception {
+  public void afterEach(ExtensionContext extensionContext) {
     UI.setCurrent(null);
     MockVaadin.tearDown();
     VaadinService.setCurrent(null);
   }
 
   @Override
-  public void beforeEach(ExtensionContext extensionContext) throws Exception {
+  public void beforeEach(ExtensionContext extensionContext) {
     setUp(extensionContext);
     activate(extensionContext);
   }
@@ -117,9 +151,7 @@ public class ViewMockingExtension
 
   private void collectRoutes(Set<Class<? extends Component>> results, ViewTest viewTest) {
     if (viewTest != null) {
-      for (val type : viewTest.value()) {
-        results.add(type);
-      }
+      results.addAll(Arrays.asList(viewTest.value()));
     }
   }
 }

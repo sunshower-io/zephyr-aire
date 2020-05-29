@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.*;
 import org.junit.platform.commons.util.ReflectionUtils;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,7 +29,7 @@ public class EditViewParameterResolver implements BeforeEachCallback, AfterEachC
     val method = extensionContext.getRequiredTestMethod();
     val type = extensionContext.getRequiredTestClass();
     val editView = method.getAnnotation(EditView.class);
-    register(method, editView, extensionContext, type);
+    register(editView, extensionContext, type);
 
     val methods =
         ReflectionUtils.findMethods(
@@ -56,8 +55,7 @@ public class EditViewParameterResolver implements BeforeEachCallback, AfterEachC
     return store.get(ViewContextParameterResolver.VIEW_CONTEXT, ViewContext.class);
   }
 
-  private void register(
-      Method method, EditView editView, ExtensionContext extensionContext, Class<?> type)
+  private void register(EditView editView, ExtensionContext extensionContext, Class<?> type)
       throws ReflectiveOperationException {
 
     registerField(editView, extensionContext, type);
@@ -70,37 +68,48 @@ public class EditViewParameterResolver implements BeforeEachCallback, AfterEachC
       return;
     }
 
-    if ("__none__".equals(editView.withMethod())) {
-      return;
+    val methods = new HashSet<String>();
+
+    include(methods, editView.withMethod());
+
+    for (val view : editView.withMethods()) {
+      include(methods, view);
     }
 
-    val viewContext = getViewContext(extensionContext);
-    val method = type.getDeclaredMethod(editView.withMethod());
-
-    if (!ComponentDefinition.class.isAssignableFrom(method.getReturnType())) {
-      throw new IllegalArgumentException(
-          String.format(
-              "Error:   method named '%s' on type '%s' is not an instance of PropertyDefinition",
-              method, type));
+    for (val methodName : methods) {
+      decorateMethod(methodName, type, extensionContext);
     }
+  }
 
-    val instance = extensionContext.getRequiredTestInstance();
-    method.trySetAccessible();
-    registrations.add(viewContext.register((ComponentDefinition) method.invoke(instance)));
+  private void include(Set<String> methods, String view) {
+    if (!Constants.NONE.equals(view)) {
+      methods.add(view);
+    }
   }
 
   private void registerField(EditView editView, ExtensionContext extensionContext, Class<?> type)
-      throws NoSuchFieldException, IllegalAccessException {
+      throws ReflectiveOperationException {
     if (editView == null) {
       return;
     }
 
-    if ("__none__".equals(editView.withField())) {
-      return;
+    val fieldNames = new HashSet<String>();
+
+    include(fieldNames, editView.withField());
+
+    for (val fieldName : editView.withFields()) {
+      include(fieldNames, fieldName);
     }
 
+    for (val fieldName : fieldNames) {
+      decorateField(fieldName, extensionContext, type);
+    }
+  }
+
+  private void decorateField(String fieldName, ExtensionContext extensionContext, Class<?> type)
+      throws ReflectiveOperationException {
     val viewContext = getViewContext(extensionContext);
-    val field = type.getDeclaredField(editView.withField());
+    val field = type.getDeclaredField(fieldName);
 
     if (!ComponentDefinition.class.isAssignableFrom(field.getType())) {
       throw new IllegalArgumentException(
@@ -111,6 +120,23 @@ public class EditViewParameterResolver implements BeforeEachCallback, AfterEachC
 
     val instance = extensionContext.getRequiredTestInstance();
     field.trySetAccessible();
-    registrations.add(viewContext.register((ComponentDefinition) field.get(instance)));
+    registrations.add(viewContext.register((ComponentDefinition<?>) field.get(instance)));
+  }
+
+  private void decorateMethod(String methodName, Class<?> type, ExtensionContext extensionContext)
+      throws ReflectiveOperationException {
+
+    val viewContext = getViewContext(extensionContext);
+    val method = type.getDeclaredMethod(methodName);
+
+    if (!ComponentDefinition.class.isAssignableFrom(method.getReturnType())) {
+      throw new IllegalArgumentException(
+          String.format(
+              "Error:   method named '%s' on type '%s' is not an instance of PropertyDefinition",
+              method, type));
+    }
+    val instance = extensionContext.getRequiredTestInstance();
+    method.trySetAccessible();
+    registrations.add(viewContext.register((ComponentDefinition<?>) method.invoke(instance)));
   }
 }

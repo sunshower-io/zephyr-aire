@@ -6,13 +6,11 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.VaadinService;
+import io.zephyr.aire.test.xpath.ElementXPathMatcher;
 import lombok.val;
 import org.springframework.context.ApplicationContext;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -57,6 +55,31 @@ public class AireTestContext {
       enqueue(next.getChildren(), c);
     }
     return results;
+  }
+
+  public HasElement resolveFirstAtPath(String path) {
+
+    val component = UI.getCurrent().getElement().getComponent();
+    if (component.isPresent()) {
+      val compiler = new ElementXPathMatcher(path);
+      val results = compiler.match(component.get());
+
+      if (results == null || results.isEmpty()) {
+        return null;
+      }
+      return results.get(0);
+    }
+    return null;
+  }
+
+  public List<? extends HasElement> resolveAtPath(String path) {
+
+    val component = UI.getCurrent().getElement().getComponent();
+    if (component.isPresent()) {
+      val compiler = new ElementXPathMatcher(path);
+      return compiler.match(component.get());
+    }
+    return Collections.emptyList();
   }
 
   public <T> T resolveFirst(Class<T> type) {

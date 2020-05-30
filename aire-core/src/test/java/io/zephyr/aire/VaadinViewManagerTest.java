@@ -1,14 +1,12 @@
 package io.zephyr.aire;
 
 import com.vaadin.flow.component.HasComponents;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Header;
 import io.zephyr.aire.api.*;
 import io.zephyr.aire.elements.AireHeader;
 import io.zephyr.aire.test.*;
 import lombok.val;
-import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -32,6 +30,7 @@ class VaadinViewManagerTest {
   }
 
   @ViewTest(MainView.class)
+  @EditView(withMethods = {"appendInstantiated", "instance"})
   void ensureValueIsSelectable(@Element("//*[@class='aire-header']") AireHeader header) {
     assertTrue(header.getElement().getClassList().contains("aire-header"));
   }

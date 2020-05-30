@@ -10,6 +10,7 @@ import io.zephyr.aire.api.Container;
 import io.zephyr.aire.api.Slot;
 import io.zephyr.aire.elements.*;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.val;
 
 @Container(":main")
@@ -20,30 +21,35 @@ public class AireApplicationViewport extends AbstractAireContainer<Main>
 
   /** private state */
   @Getter
+  @Setter
   @Slot(":header")
   private AireHeader header;
 
-  @Getter private AireFooter footer;
+  @Setter
+  @Getter
+  @Slot(":footer")
+  private AireFooter footer;
 
+  @Slot(":content")
   private Component content;
 
+  private Article main;
+  private Component secondaryNavigation;
   private AirePrimaryNavigation primaryNavigation;
 
-  private Component secondaryNavigation;
-
-  private Article main;
-
   public AireApplicationViewport() {
-    add(header = new AireHeader());
     configureStyles();
-    content = new AirePanel();
+    add(header = new AireHeader());
+
     add(main = new Article());
+    content = new AirePanel();
+    main.add(content);
 
     main.add(primaryNavigation = new AirePrimaryNavigation());
     main.add(content);
 
-    main.add(secondaryNavigation = new AireSecondaryNavigation());
-    add(footer = new AireFooter());
+//    main.add(secondaryNavigation = new AireSecondaryNavigation());
+//    add(footer = new AireFooter());
   }
 
   public void setSecondaryNavigation(Component component) {

@@ -26,7 +26,7 @@ class VaadinViewManagerTest {
   @ViewTest(MainView.class)
   @EditView(withMethod = "appendInstantiated")
   void ensureAppendingButtonInstanceResultsInButtonAppendedToHeader(@Element Button button) {
-    assertEquals(button.getText().trim(), "");
+    assertEquals(button.getText().trim(), "Hello!");
   }
 
   @ViewTest(MainView.class)

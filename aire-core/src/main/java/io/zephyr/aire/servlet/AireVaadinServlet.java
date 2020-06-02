@@ -35,6 +35,14 @@ public class AireVaadinServlet extends SpringServlet
     return instance.get();
   }
 
+  public static void setInstance(VaadinServlet servlet) {
+    instance.set(servlet);
+  }
+
+  public static void clear() {
+    instance.set(null);
+  }
+
   public void destroy() {
     super.destroy();
     destroyRegistration.remove();

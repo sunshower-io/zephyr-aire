@@ -5,6 +5,7 @@ import com.github.mvysny.kaributesting.v10.Routes;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.VaadinService;
+import io.zephyr.aire.servlet.AireVaadinServlet;
 import io.zephyr.aire.test.Element;
 import io.zephyr.aire.test.Elements;
 import io.zephyr.aire.test.ViewTest;
@@ -100,6 +101,7 @@ public class ViewMockingExtension
     UI.setCurrent(null);
     MockVaadin.tearDown();
     VaadinService.setCurrent(null);
+    AireVaadinServlet.clear();
   }
 
   @Override
@@ -142,6 +144,7 @@ public class ViewMockingExtension
         routes,
         (t, u) -> {
           val svc = new TestVaadinService(t, u, context);
+          AireVaadinServlet.setInstance(t);
           VaadinService.setCurrent(svc);
           return svc;
         });

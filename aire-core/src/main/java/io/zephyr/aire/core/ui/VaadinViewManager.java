@@ -63,24 +63,8 @@ public class VaadinViewManager implements ViewManager {
     val host = viewContext.getHost();
     registeredContexts.remove(host.getCoordinate());
 
-    val routes = registeredRoutes.remove(host.getCoordinate());
-
-    val svc = AireVaadinServlet.getInstance().getService();
-    val registry = ApplicationRouteRegistry.getInstance(svc.getContext());
-    val configuration = RouteConfiguration.forRegistry(registry);
-
-    for (val route : routes) {
-      configuration.removeRoute((Class<? extends Component>) route.type);
-    }
-    for (val definition : componentDefinitions.entrySet()) {
-      val iter = definition.getValue().iterator();
-      while (iter.hasNext()) {
-        val next = iter.next();
-        if (next.host.equals(host.getCoordinate())) {
-          iter.remove();
-        }
-      }
-    }
+    unregisterRoutes(host);
+    unregisterComponentDefinitions(host);
   }
 
   @Override
@@ -131,6 +115,33 @@ public class VaadinViewManager implements ViewManager {
     } catch (AmbiguousRouteConfigurationException ex) {
       routes.remove(definition);
       throw ex;
+    }
+  }
+
+  private void unregisterComponentDefinitions(Module host) {
+    for (val definition : componentDefinitions.entrySet()) {
+      val iter = definition.getValue().iterator();
+      while (iter.hasNext()) {
+        val next = iter.next();
+        if (next.host.equals(host.getCoordinate())) {
+          iter.remove();
+        }
+      }
+    }
+  }
+
+  private void unregisterRoutes(Module host) {
+    val routes = registeredRoutes.remove(host.getCoordinate());
+
+    if (routes != null) {
+
+      val svc = AireVaadinServlet.getInstance().getService();
+      val registry = ApplicationRouteRegistry.getInstance(svc.getContext());
+      val configuration = RouteConfiguration.forRegistry(registry);
+
+      for (val route : routes) {
+        configuration.removeRoute((Class<? extends Component>) route.type);
+      }
     }
   }
 

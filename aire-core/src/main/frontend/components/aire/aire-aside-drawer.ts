@@ -5,6 +5,7 @@ import {
   customElement
 } from 'lit-element';
 
+// @ts-ignore
 @customElement('aire-aside')
 class AireAsideDrawer extends LitElement {
 

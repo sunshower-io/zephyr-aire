@@ -6,7 +6,7 @@
     <artifactId>aire-core</artifactId>
     <name>aire-core</name>
     <version>2.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <parent>
         <groupId>io.zephyr.aire</groupId>

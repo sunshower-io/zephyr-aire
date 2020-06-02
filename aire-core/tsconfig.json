@@ -18,6 +18,10 @@
       "src/main/frontend/definitions"
     ]
   },
+
+  "awesomeTypescriptLoaderOptions": {
+    "ignoreDiagnostics": [6196]
+  },
   "include": [
     "src/main/application/**/*.ts"
 //    "frontend/**/*.ts", "frontend/index.js"

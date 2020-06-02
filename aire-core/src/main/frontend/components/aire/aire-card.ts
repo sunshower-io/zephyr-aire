@@ -5,6 +5,7 @@ import {
   customElement
 } from 'lit-element';
 
+/// TS_IGNORE
 @customElement('aire-card')
 class AireCard extends LitElement {
 

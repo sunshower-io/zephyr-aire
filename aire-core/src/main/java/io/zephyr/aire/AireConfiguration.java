@@ -1,6 +1,7 @@
 package io.zephyr.aire;
 
 import com.vaadin.flow.server.VaadinContext;
+import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.server.VaadinServletContext;
 import com.vaadin.flow.spring.annotation.EnableVaadin;
 import io.sunshower.yaml.state.YamlMemento;
@@ -8,6 +9,7 @@ import io.zephyr.aire.api.*;
 import io.zephyr.aire.core.deployments.DeploymentScanner;
 import io.zephyr.aire.core.ui.ModuleViewRegistrationPostProcessor;
 import io.zephyr.aire.core.ui.VaadinViewManager;
+import io.zephyr.aire.servlet.AireVaadinServlet;
 import io.zephyr.aire.servlet.ModuleResourceServlet;
 import io.zephyr.api.ModuleActivator;
 import io.zephyr.kernel.Lifecycle;
@@ -21,7 +23,6 @@ import io.zephyr.spring.embedded.EmbeddedModuleClasspath;
 import io.zephyr.spring.embedded.EmbeddedModuleLoader;
 import io.zephyr.spring.embedded.EmbeddedSpringConfiguration;
 import lombok.val;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -31,7 +32,6 @@ import org.springframework.context.annotation.*;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.ContextStoppedEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.web.context.ServletContextAware;
 
 import javax.servlet.ServletContext;
 import java.io.File;
@@ -48,10 +48,7 @@ import java.util.ServiceLoader;
 @EnableVaadin
 @Configuration
 @Import(EmbeddedSpringConfiguration.class)
-public class AireConfiguration
-    implements ApplicationListener<ContextRefreshedEvent>, ServletContextAware {
-
-  private ServletContext servletContext;
+public class AireConfiguration implements ApplicationListener<ContextRefreshedEvent> {
 
   @Bean
   public DeploymentScanner deploymentScanner(
@@ -90,11 +87,6 @@ public class AireConfiguration
     opts.setHomeDirectory(file.getParentFile());
     SunshowerKernel.setKernelOptions(opts);
     return file;
-  }
-
-  @Bean
-  public VaadinContext vaadinContext() {
-    return new VaadinServletContext(servletContext);
   }
 
   @Bean
@@ -143,7 +135,7 @@ public class AireConfiguration
   }
 
   @Bean
-  public ViewManager viewManager(VaadinContext context) {
+  public ViewManager viewManager() {
     return new VaadinViewManager();
     //    return new VaadinViewManager(context, (ComponentRegistry) registry, registry);
   }
@@ -192,10 +184,5 @@ public class AireConfiguration
     val ctx = contextRefreshedEvent.getApplicationContext();
     val classloader = ctx.getClassLoader();
     return classloader == AireConfiguration.class.getClassLoader();
-  }
-
-  @Override
-  public void setServletContext(ServletContext servletContext) {
-    this.servletContext = servletContext;
   }
 }

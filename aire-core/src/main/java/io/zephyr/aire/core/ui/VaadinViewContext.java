@@ -1,12 +1,10 @@
 package io.zephyr.aire.core.ui;
 
-import io.zephyr.aire.api.ComponentDefinition;
-import io.zephyr.aire.api.Instantiator;
-import io.zephyr.aire.api.Registration;
-import io.zephyr.aire.api.ViewContext;
+import io.zephyr.aire.api.*;
 import io.zephyr.kernel.Module;
 import lombok.val;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 public class VaadinViewContext implements ViewContext {
@@ -38,10 +36,17 @@ public class VaadinViewContext implements ViewContext {
 
   @Override
   public <T> Registration register(ComponentDefinition<T> componentDefinition) {
+    val registrations = new ArrayList<Registration>();
     for (val location : componentDefinition.extensionPointLocations()) {
-      viewManager.registerDefinition(
-          location, componentDefinition, instantiator, host.getCoordinate());
+      registrations.add(
+          viewManager.registerDefinition(
+              location, componentDefinition, instantiator, host.getCoordinate()));
     }
-    return null;
+    return Registrations.aggregate(registrations);
+  }
+
+  @Override
+  public <T> Registration registerRoute(Scope scope, Class<T> route) {
+    return viewManager.registerRoute(scope, route, host.getCoordinate());
   }
 }

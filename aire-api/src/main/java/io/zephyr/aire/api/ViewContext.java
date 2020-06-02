@@ -2,10 +2,14 @@ package io.zephyr.aire.api;
 
 import io.zephyr.kernel.Module;
 
-import java.util.List;
 import java.util.Set;
 
 public interface ViewContext extends Registration {
+
+  enum Scope {
+    Session,
+    Application
+  }
 
   Module getHost();
 
@@ -14,4 +18,6 @@ public interface ViewContext extends Registration {
   Set<ComponentDefinition<?>> getComponentDefinitions();
 
   <T> Registration register(ComponentDefinition<T> componentDefinition);
+
+  <T> Registration registerRoute(Scope scope, Class<T> route);
 }

@@ -35,6 +35,8 @@ public class AireApplicationViewport extends AbstractAireContainer<Main>
 
   private Article main;
   private Component secondaryNavigation;
+
+  @Slot(":primary-navigation")
   private AirePrimaryNavigation primaryNavigation;
 
   public AireApplicationViewport() {

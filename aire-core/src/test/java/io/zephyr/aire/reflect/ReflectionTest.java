@@ -1,6 +1,8 @@
 package io.zephyr.aire.reflect;
 
+import io.zephyr.aire.MainView;
 import io.zephyr.aire.api.Slot;
+import io.zephyr.aire.layout.AireApplicationViewport;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +22,12 @@ class ReflectionTest {
   void ensureFieldNameToGetterNameWorksComplex() {
     val getter = Reflection.toGetter("helloWorld", Reflection.class);
     assertEquals(getter, "getHelloWorld");
+  }
+
+  @Test
+  void ensureFieldNameIsCorrectForPrimaryNavigation() {
+    val results = scan(AireApplicationViewport.class, Slot.class);
+    assertNotNull(results.getAliased(":primary-navigation"));
   }
 
   @Test

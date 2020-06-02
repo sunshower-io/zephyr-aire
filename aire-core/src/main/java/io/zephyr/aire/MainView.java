@@ -23,6 +23,7 @@ public class MainView extends AireApplicationViewport {
 
   @Inject
   public MainView(Kernel kernel) {
+    super();
     this.kernel = kernel;
     checkDefaults();
     addIcon();

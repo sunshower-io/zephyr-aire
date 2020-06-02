@@ -1,5 +1,10 @@
 package io.zephyr.aire.core.ui;
 
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.router.RouteConfiguration;
+import com.vaadin.flow.server.AmbiguousRouteConfigurationException;
+import com.vaadin.flow.server.startup.ApplicationRouteRegistry;
+import io.zephyr.aire.servlet.AireVaadinServlet;
 import io.zephyr.api.security.Session;
 import io.zephyr.aire.api.*;
 import io.zephyr.aire.reflect.PropertyDescriptor;
@@ -7,8 +12,8 @@ import io.zephyr.aire.reflect.PropertyTraversalCallback;
 import io.zephyr.aire.reflect.Reflection;
 import io.zephyr.kernel.Coordinate;
 import io.zephyr.kernel.Module;
+import lombok.EqualsAndHashCode;
 import lombok.val;
-
 import java.lang.annotation.Annotation;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -16,9 +21,11 @@ import java.util.stream.Collectors;
 public class VaadinViewManager implements ViewManager {
 
   private final Map<Coordinate, ViewContext> registeredContexts;
+  private final Map<Coordinate, Set<ScopedViewDefinition>> registeredRoutes;
   private final Map<String, List<InstantiableComponent>> componentDefinitions;
 
   public VaadinViewManager() {
+    this.registeredRoutes = new HashMap<>();
     this.registeredContexts = new HashMap<>();
     this.componentDefinitions = new HashMap<>();
   }
@@ -51,10 +58,20 @@ public class VaadinViewManager implements ViewManager {
     return instance;
   }
 
+  @SuppressWarnings("unchecked")
   public void unregister(ViewContext viewContext) {
     val host = viewContext.getHost();
     registeredContexts.remove(host.getCoordinate());
 
+    val routes = registeredRoutes.remove(host.getCoordinate());
+
+    val svc = AireVaadinServlet.getInstance().getService();
+    val registry = ApplicationRouteRegistry.getInstance(svc.getContext());
+    val configuration = RouteConfiguration.forRegistry(registry);
+
+    for (val route : routes) {
+      configuration.removeRoute((Class<? extends Component>) route.type);
+    }
     for (val definition : componentDefinitions.entrySet()) {
       val iter = definition.getValue().iterator();
       while (iter.hasNext()) {
@@ -71,7 +88,7 @@ public class VaadinViewManager implements ViewManager {
     registeredContexts.clear();
   }
 
-  public <T> void registerDefinition(
+  public <T> Registration registerDefinition(
       String location,
       ComponentDefinition<T> componentDefinition,
       Instantiator instantiator,
@@ -87,6 +104,7 @@ public class VaadinViewManager implements ViewManager {
           .get(location)
           .add(new InstantiableComponent(instantiator, componentDefinition, host));
     }
+    return new ComponentDefinitionRegistration(location);
   }
 
   public Set<ComponentDefinition<?>> getDefinitions(Coordinate coordinate) {
@@ -95,6 +113,25 @@ public class VaadinViewManager implements ViewManager {
         .filter(t -> coordinate.equals(t.host))
         .map(t -> t.definition)
         .collect(Collectors.toSet());
+  }
+
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  public <T> Registration registerRoute(
+      ViewContext.Scope scope, Class<T> route, Coordinate coordinate) {
+
+    val definition = new ScopedViewDefinition(route, scope);
+    val routes = registeredRoutes.computeIfAbsent(coordinate, (key) -> new HashSet<>());
+    try {
+
+      routes.add(definition);
+      val svc = AireVaadinServlet.getInstance().getService();
+      val registry = ApplicationRouteRegistry.getInstance(svc.getContext());
+      RouteConfiguration.forRegistry(registry).setAnnotatedRoute((Class) route);
+      return new ScopedViewRegistration(definition);
+    } catch (AmbiguousRouteConfigurationException ex) {
+      routes.remove(definition);
+      throw ex;
+    }
   }
 
   //  private final VaadinContext context;
@@ -182,7 +219,7 @@ public class VaadinViewManager implements ViewManager {
     @SuppressWarnings({"rawtypes", "unchecked"})
     public void onProperty(PropertyDescriptor descriptor) {
       try {
-        segments.push(descriptor.getName());
+        segments.push(normalize(descriptor.getAlias()));
         val definitions = componentDefinitions.get(String.join(":", segments));
         var previousInstance = currentInstance;
 
@@ -207,6 +244,50 @@ public class VaadinViewManager implements ViewManager {
       } finally {
         segments.pop();
       }
+    }
+
+    private String normalize(String alias) {
+      if (alias.charAt(0) == ':') {
+        return alias.substring(1);
+      }
+      return alias;
+    }
+  }
+
+  class ComponentDefinitionRegistration implements Registration {
+    final String location;
+
+    ComponentDefinitionRegistration(String location) {
+      this.location = location;
+    }
+
+    @Override
+    public void close() {
+      componentDefinitions.remove(location);
+    }
+  }
+
+  final class ScopedViewRegistration implements Registration {
+    final ScopedViewDefinition definition;
+
+    ScopedViewRegistration(ScopedViewDefinition definition) {
+      this.definition = definition;
+    }
+
+    @Override
+    public void close() {
+      registeredRoutes.remove(definition);
+    }
+  }
+
+  @EqualsAndHashCode
+  static final class ScopedViewDefinition {
+    final Class<?> type;
+    final ViewContext.Scope scope;
+
+    ScopedViewDefinition(Class<?> type, ViewContext.Scope scope) {
+      this.type = type;
+      this.scope = scope;
     }
   }
 }

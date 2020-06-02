@@ -11,9 +11,11 @@ import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.MultiFileMemoryBuffer;
 import io.zephyr.aire.elements.AireCallToAction;
 import io.zephyr.common.io.Files;
+import io.zephyr.kernel.Coordinate;
+import io.zephyr.kernel.Module;
 import io.zephyr.kernel.core.Kernel;
-import io.zephyr.kernel.module.ModuleInstallationGroup;
-import io.zephyr.kernel.module.ModuleInstallationRequest;
+import io.zephyr.kernel.core.LifecycleAction;
+import io.zephyr.kernel.module.*;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import java.io.File;
@@ -23,6 +25,8 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 import static java.nio.file.Files.copy;
 
@@ -54,6 +58,10 @@ public class UploadPluginCallToAction extends AireCallToAction
     val upload = new Upload(buffer);
     upload.addSucceededListener(this);
     add(upload);
+
+    val button = new Button("Install");
+    button.addClickListener(this::onSuccess);
+    add(button);
   }
 
   private Path createOutputDirectory() throws IOException {
@@ -72,22 +80,46 @@ public class UploadPluginCallToAction extends AireCallToAction
       log.warn("Failed to install module.  Reason: {} ", ex.getMessage());
       log.debug("Full trace: ", ex);
     } finally {
-      buffer = null;
+      //      buffer = null;
     }
   }
 
   private void installFiles(Set<Path> uploaded) {
+    val existingModules =
+        kernel.getModuleManager().getModules().stream()
+            .map(Module::getCoordinate)
+            .collect(Collectors.toSet());
 
     val group = new ModuleInstallationGroup();
     try {
       for (val upload : uploaded) {
         val request = new ModuleInstallationRequest();
         request.setLocation(upload.toUri().toURL());
+        group.add(request);
       }
-    } catch (MalformedURLException ex) {
+
+      kernel.getModuleManager().prepare(group).commit().toCompletableFuture().get();
+
+      startAll(existingModules);
+
+    } catch (MalformedURLException | InterruptedException | ExecutionException ex) {
       log.warn("Somehow a local filesystem URL was malformed.  Reason at debug");
       log.debug("Reason: ", ex);
     }
+  }
+
+  private void startAll(Set<Coordinate> existingModules)
+      throws ExecutionException, InterruptedException {
+    val group = new ModuleLifecycleChangeGroup();
+    for (val module : kernel.getModuleManager().getModules()) {
+      if (!existingModules.contains(module.getCoordinate())) {
+        val request =
+            new ModuleLifecycleChangeRequest(
+                module.getCoordinate(), ModuleLifecycle.Actions.Activate);
+        group.addRequest(request);
+      }
+    }
+    kernel.getModuleManager().prepare(group).commit().toCompletableFuture().get();
   }
 
   private void copyFiles(Set<Path> uploaded, File directory) throws IOException {

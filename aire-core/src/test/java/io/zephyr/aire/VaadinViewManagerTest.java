@@ -1,83 +1,57 @@
 package io.zephyr.aire;
 
-import com.vaadin.flow.server.VaadinService;
-import io.zephyr.aire.api.ViewManager;
-import io.zephyr.aire.test.AireTest;
-import io.zephyr.aire.test.AireTestConfiguration;
-import io.zephyr.aire.test.AireTestContext;
-import io.zephyr.aire.test.ScanRoutes;
-import io.zephyr.kernel.core.Kernel;
-import io.zephyr.kernel.core.KernelLifecycle;
+import com.vaadin.flow.component.HasComponents;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.Header;
+import io.zephyr.aire.api.*;
+import io.zephyr.aire.elements.AireHeader;
+import io.zephyr.aire.test.*;
 import lombok.val;
-import org.junit.jupiter.api.Test;
-import org.springframework.test.context.ContextConfiguration;
 
-import javax.inject.Inject;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static io.zephyr.aire.api.Views.append;
+import static io.zephyr.aire.api.Views.appendInstance;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @AireTest
-@ScanRoutes
-@ContextConfiguration(classes = {AireConfiguration.class, AireTestConfiguration.class})
 class VaadinViewManagerTest {
 
-  @Inject AireTestContext context;
-
-  @Inject private Kernel kernel;
-
-  @Inject private ViewManager viewManager;
-
-  @Test
-  void ensureKernelIsInjectable() {
-    assertNotNull(kernel, "kernel must be injectable");
+  @ViewTest(MainView.class)
+  void ensureViewManagerHasViewRegistered(@Context ViewContext context) {
+    assertEquals(context.getComponentDefinitions().size(), 1);
   }
 
-  @Test
-  void ensureKernelIsRunning() {
-    assertEquals(
-        kernel.getLifecycle().getState(), KernelLifecycle.State.Running, "state must be RUNNING");
+  @ViewTest(MainView.class)
+  @EditView(withMethod = "appendInstantiated")
+  void ensureAppendingButtonInstanceResultsInButtonAppendedToHeader(@Element Button button) {
+    assertEquals(button.getText().trim(), "Hello!");
   }
 
-  @Test
-  void ensureViewmanagerIsInjected() {
-    assertNotNull(viewManager, "view manager must be injected");
+  @ViewTest(MainView.class)
+  @EditView(withMethods = {"appendInstantiated", "instance"})
+  void ensureValueIsSelectable(@Element("//*[@class='aire-header']") AireHeader header) {
+    assertTrue(header.getElement().getClassList().contains("aire-header"));
   }
 
-  @Test
-  void ensureExtensionPointRegistryIsDefined() {
-    assertNotNull(
-        viewManager.getExtensionPointRegistry(), "extension point registry must not be null");
+  @ViewTest(MainView.class)
+  void ensureHeaderHasCorrectClass(@Element Header header) {
+    assertTrue(header.getClassNames().contains("aire-header"));
   }
 
-  @Test
-  void ensureFirstViewIsMain() {
-    val page = context.resolveFirst(MainView.class);
-    assertNotNull(page, "must exist");
+  @ViewTest(MainView.class)
+  void ensureButtonIsAppendedWithInstance(@Elements List<Button> buttons) {
+    val button = buttons.stream().filter(t -> t.getText().equals("Hello!")).findAny();
+    assertTrue(button.isPresent());
   }
 
-  @Test
-  void ensureExtensionPointIsRegistered() {
-    context.resolveFirst(MainView.class);
-    assertEquals(
-        6,
-        viewManager.getExtensionPointRegistry().getExtensionPoints().size(),
-        "must have one extension point registered");
+  private ComponentDefinition<HasComponents> appendInstantiated() {
+    return append(Button.class).to(":main:header");
   }
 
-  @Test
-  void ensureMainViewHasAHeader() {
-    val page = context.resolveFirst(MainView.class);
-    assertNotNull(page.getHeader(), "header must not be null");
+  @EditView
+  private ComponentDefinition<HasComponents> instance() {
+    return appendInstance(new Button("Hello!")).to(":main:header");
   }
-
-  @Test
-  void ensureVaadinContextIsSet() {
-    assertNotNull(VaadinService.getCurrent());
-  }
-
-  //  @Test
-  //  void ensureMainViewHeaderCanHaveIconPlacedInIt() {
-  //    val icon = context.resolveFirst(Icon.class);
-  //    assertNull(icon, "must not have an icon");
-  //  }
 }

@@ -10,4 +10,9 @@ public interface AireComponent {
   default Future<Void> access(Command command) {
     return UI.getCurrent().access(command);
   }
+
+
+
+
+
 }

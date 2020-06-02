@@ -6,12 +6,14 @@ import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.router.RouterLayout;
 import io.aire.core.AireContainer;
 import io.aire.core.AireLayout;
-import io.zephyr.aire.api.ExtensionPoint;
+import io.zephyr.aire.api.Container;
+import io.zephyr.aire.api.Slot;
 import io.zephyr.aire.elements.*;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.val;
 
-@ExtensionPoint(location = ":ui:main")
+@Container(":main")
 @CssImport("./styles/aire/layout/aire-nav.css")
 @CssImport("./styles/aire/layout/aire-viewport.css")
 public class AireApplicationViewport extends AbstractAireContainer<Main>
@@ -19,35 +21,37 @@ public class AireApplicationViewport extends AbstractAireContainer<Main>
 
   /** private state */
   @Getter
-  @ExtensionPoint(location = "header")
+  @Setter
+  @Slot(":header")
   private AireHeader header;
 
+  @Setter
   @Getter
-  @ExtensionPoint(location = "footer")
+  @Slot(":footer")
   private AireFooter footer;
 
-  @ExtensionPoint(location = "content")
+  @Slot(":content")
   private Component content;
 
-  @ExtensionPoint(location = "navigation:primary")
-  private AirePrimaryNavigation primaryNavigation;
-
-  @ExtensionPoint(location = "navigation:secondary")
+  private Article main;
   private Component secondaryNavigation;
 
-  private Article main;
+  @Slot(":primary-navigation")
+  private AirePrimaryNavigation primaryNavigation;
 
   public AireApplicationViewport() {
-    add(header = new AireHeader());
     configureStyles();
-    content = new AirePanel();
+    add(header = new AireHeader());
+
     add(main = new Article());
+    content = new AirePanel();
+    main.add(content);
 
     main.add(primaryNavigation = new AirePrimaryNavigation());
     main.add(content);
 
-    main.add(secondaryNavigation = new AireSecondaryNavigation());
-    add(footer = new AireFooter());
+//    main.add(secondaryNavigation = new AireSecondaryNavigation());
+//    add(footer = new AireFooter());
   }
 
   public void setSecondaryNavigation(Component component) {

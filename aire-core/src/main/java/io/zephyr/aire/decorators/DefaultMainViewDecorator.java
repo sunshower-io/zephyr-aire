@@ -17,10 +17,8 @@ import lombok.val;
 
 import javax.inject.Inject;
 
-@Extension(":ui:main")
-public class DefaultMainViewDecorator implements ViewDecorator<AireApplicationViewport> {
+public class DefaultMainViewDecorator {
 
-  @Override
   public void decorate(AireApplicationViewport component) {
     addHomeButton(component);
     addFooterButton(component);

@@ -1,0 +1,35 @@
+@import "../layout/aire-layout-variables";
+
+
+.aire-call-to-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+
+  vaadin-upload {
+    min-width: 550px;
+  }
+
+  div {
+    margin-bottom:2em;
+  }
+
+  h1, h2 {
+    margin:0;
+  }
+
+  h1 {
+    font-size: 2em;
+    color: $primary-nav-background;
+  }
+
+  h2 {
+    font-size: 1.3em;
+    color: $dark-blue-gray;
+  }
+
+
+}

@@ -1,0 +1,18 @@
+@import "./aire-icon-card";
+
+aire-media-card, .aire-media-card {
+  @extend .aire-icon-card;
+
+  [slot="media"] {
+    background-color: $secondary-nav-background;
+    width: 100%;
+    text-align: center;
+    margin-top: -2*$aire-icon-padding;
+    box-shadow: $box-shadow;
+    color: white;
+    padding: $aire-icon-padding;
+    box-sizing: border-box;
+    margin-bottom: $aire-icon-padding;
+  }
+
+}

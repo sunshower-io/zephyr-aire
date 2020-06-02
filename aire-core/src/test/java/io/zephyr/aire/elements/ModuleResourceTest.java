@@ -3,7 +3,7 @@ package io.zephyr.aire.elements;
 import com.vaadin.flow.server.VaadinSession;
 import io.zephyr.aire.AireConfiguration;
 import io.zephyr.aire.test.AireTest;
-import io.zephyr.aire.test.AireTestConfiguration;
+import io.zephyr.aire.test.core.AireTestConfiguration;
 import io.zephyr.kernel.Module;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;

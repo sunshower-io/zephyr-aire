@@ -1,18 +1,18 @@
 package io.zephyr.admin.ui;
 
 import com.vaadin.flow.component.ClickNotifier;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
-import io.zephyr.aire.components.AireCard;
+import io.zephyr.aire.components.AireIconCard;
 import io.zephyr.aire.elements.AirePanel;
+import io.zephyr.aire.elements.FontAwesome;
 import io.zephyr.aire.elements.ModuleResource;
 import io.zephyr.kernel.Module;
 import lombok.val;
 
-public class ModuleCard extends AireCard implements ClickNotifier<ModuleCard> {
+public class ModuleCard extends AireIconCard implements ClickNotifier<ModuleCard> {
 
   final Module module;
 
@@ -37,9 +37,14 @@ public class ModuleCard extends AireCard implements ClickNotifier<ModuleCard> {
   }
 
   private void createIcon() {
-    val icon = new Image();
-    icon.setSrc(new ModuleResource("icon.svg", module));
-    right.add(icon);
+
+    if (ModuleResource.exists(module, "icon.svg")) {
+      val icon = new Image();
+      icon.setSrc(new ModuleResource("icon.svg", module));
+      setIcon(icon);
+    } else {
+      setIcon(FontAwesome.Plug.icon());
+    }
   }
 
   private void createHeader() {

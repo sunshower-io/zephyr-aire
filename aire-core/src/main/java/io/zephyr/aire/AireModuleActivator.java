@@ -19,5 +19,6 @@ public class AireModuleActivator implements ModuleActivator {
   public void stop(ModuleContext moduleContext) throws Exception {
     log.info("zephyr-aire is shutting down");
     log.info("zephyr-aire has successfully shut down");
+    Application.stop();
   }
 }

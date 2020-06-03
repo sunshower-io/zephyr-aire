@@ -5,6 +5,7 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.router.*;
 import io.zephyr.aire.api.Container;
 import io.zephyr.aire.api.Location;
+import io.zephyr.aire.components.AireTabPane;
 import io.zephyr.aire.layout.AireApplicationViewport;
 import com.vaadin.flow.component.dependency.CssImport;
 import io.zephyr.aire.views.UploadPluginCallToAction;
@@ -27,6 +28,10 @@ public class MainView extends AireApplicationViewport {
     this.kernel = kernel;
     checkDefaults();
     addIcon();
+
+    val tabs = new AireTabPane();
+    tabs.addTab("Hello", UploadPluginCallToAction.class);
+    addContent(tabs);
   }
 
   private void addIcon() {

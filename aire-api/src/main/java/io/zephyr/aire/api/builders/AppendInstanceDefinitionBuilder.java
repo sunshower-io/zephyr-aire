@@ -7,11 +7,12 @@ import io.zephyr.aire.api.PropertyBasedComponentDefinition;
 import io.zephyr.aire.api.operations.AppendInstanceHasComponents;
 
 import java.util.Set;
+import java.util.function.Supplier;
 
 public class AppendInstanceDefinitionBuilder<T extends Component> {
-  private final T instance;
+  private final Supplier<T> instance;
 
-  public AppendInstanceDefinitionBuilder(T instance) {
+  public AppendInstanceDefinitionBuilder(Supplier<T> instance) {
     this.instance = instance;
   }
 

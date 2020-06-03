@@ -364,6 +364,7 @@
                     <groupId>com.vaadin</groupId>
                     <artifactId>flow-server-production-mode</artifactId>
                 </dependency>
+                <!-- https://mvnrepository.com/artifact/com.vaadin/flow-maven-plugin -->
 
                 <dependency>
                     <groupId>com.vaadin</groupId>
@@ -380,14 +381,43 @@
                             <jvmArguments>-Dvaadin.productionMode</jvmArguments>
                         </configuration>
                     </plugin>
+
                     <plugin>
                         <groupId>com.vaadin</groupId>
-                        <artifactId>vaadin-maven-plugin</artifactId>
-                        <version>${vaadin.version}</version>
+                        <artifactId>flow-maven-plugin</artifactId>
+                        <version>3.1.1</version>
+                        <configuration>
+                            <frontendDirectory>${project.basedir}/src/main/frontend</frontendDirectory>
+                            <frontendResourcesDirectory>${project.basedir}/src/main/frontend
+                            </frontendResourcesDirectory>
+                        </configuration>
+
                         <executions>
                             <execution>
                                 <goals>
                                     <goal>build-frontend</goal>
+                                    <goal>prepare-frontend</goal>
+                                </goals>
+                                <phase>compile</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+
+                    <plugin>
+                        <groupId>com.vaadin</groupId>
+                        <artifactId>vaadin-maven-plugin</artifactId>
+                        <version>${vaadin.version}</version>
+                        <configuration>
+                            <frontendDirectory>${project.basedir}/src/main/frontend</frontendDirectory>
+                            <frontendResourcesDirectory>${project.basedir}/src/main/frontend
+                            </frontendResourcesDirectory>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>build-frontend</goal>
+                                    <goal>prepare-frontend</goal>
                                 </goals>
                                 <phase>compile</phase>
                             </execution>

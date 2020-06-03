@@ -1,0 +1,7 @@
+plugin:
+  name: zephyr-aire
+  group: io.zephyr.aire
+  version: 1.0.0
+  order: 1
+  type: plugin
+  description: Aire Plugin for Zephyr

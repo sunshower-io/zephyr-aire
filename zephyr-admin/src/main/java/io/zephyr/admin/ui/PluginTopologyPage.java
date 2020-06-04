@@ -5,6 +5,7 @@ import com.vaadin.flow.component.html.Article;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.Route;
+import io.zephyr.aire.MainView;
 import io.zephyr.aire.api.Decorate;
 import io.zephyr.aire.api.Undecorate;
 import io.zephyr.aire.components.AireAsideDrawerMenu;
@@ -24,7 +25,8 @@ public class PluginTopologyPage extends Article {
   }
 
   @Decorate
-  public void decorate(AireApplicationViewport viewport) {
+  public void decorate(MainView viewport) {
+
     instance = new AireAsideDrawerMenu();
     val btn = new Button();
     btn.setIcon(new Icon(VaadinIcon.QUESTION_CIRCLE));
@@ -33,7 +35,7 @@ public class PluginTopologyPage extends Article {
   }
 
   @Undecorate
-  public void undecorate(AireApplicationViewport viewport) {
+  public void undecorate(MainView viewport) {
     viewport.setSecondaryNavigation(null);
   }
 }

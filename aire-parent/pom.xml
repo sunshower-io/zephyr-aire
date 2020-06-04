@@ -5,7 +5,7 @@
     <groupId>io.zephyr.aire</groupId>
     <artifactId>aire-parent</artifactId>
     <name>aire-parent</name>
-    <version>2.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
 
@@ -31,10 +31,10 @@
         -->
 
         <commons-collections.version>4.4</commons-collections.version>
-        <vaadin.version>15.0.1</vaadin.version>
+        <vaadin.version>16.0.0</vaadin.version>
         <zephyr.version>2.0.0-SNAPSHOT</zephyr.version>
-        <vaadin-html-components.version>3.0.1</vaadin-html-components.version>
-        <vaadin-flow-server.version>3.0.1</vaadin-flow-server.version>
+        <vaadin-html-components.version>3.1.1</vaadin-html-components.version>
+        <vaadin-flow-server.version>3.1.1</vaadin-flow-server.version>
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
         <sass-maven-plugin.version>3.7.2</sass-maven-plugin.version>
         <maven-war-plugin.version>3.2.3</maven-war-plugin.version>

@@ -45,6 +45,12 @@
             <artifactId>zephyr-admin</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.izpack</groupId>
+            <artifactId>izpack-native</artifactId>
+            <version>${izpack-maven-plugin.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -59,6 +65,30 @@
                         <resource>
                             <directory>${project.basedir}/src/main/resources</directory>
                             <filtering>true</filtering>
+                            <includes>
+                                <include>**/*.txt</include>
+                                <include>**/*.xml</include>
+                                <include>**/*.html</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/*.ico</exclude>
+                                <exclude>**/*.png</exclude>
+                            </excludes>
+                        </resource>
+
+                        <resource>
+                            <directory>${project.basedir}/src/main/resources</directory>
+                            <filtering>false</filtering>
+
+                            <includes>
+                                <include>**/*.ico</include>
+                                <include>**/*.png</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/*.txt</exclude>
+                                <exclude>**/*.xml</exclude>
+                                <exclude>**/*.html</exclude>
+                            </excludes>
                         </resource>
                     </resources>
 
@@ -75,7 +105,7 @@
                 <executions>
 
                     <execution>
-                        <phase>package</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>izpack</goal>
                         </goals>
@@ -195,7 +225,7 @@
                             <jre>
                                 <path>jre</path>
                             </jre>
-                            <icon>${project.basedir}/src/main/resources/assets/icon.ico</icon>
+                            <icon>${project.basedir}/src/main/resources/assets/mark_QfY_icon.ico</icon>
                             <versionInfo>
                                 <fileVersion>1.2.3.4</fileVersion>
                                 <txtFileVersion>txt file version?</txtFileVersion>

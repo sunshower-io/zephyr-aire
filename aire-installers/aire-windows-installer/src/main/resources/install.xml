@@ -7,10 +7,12 @@
         <authors>
             <author name="sunshower.io" email="hello@sunshower.io.com"/>
         </authors>
+        <requiresjdk>no</requiresjdk>
+        <javaversion>11</javaversion>
+        <tempdir/>
     </info>
     <guiprefs height="430" resizable="no" width="640">
         <splash>assets/mark.png</splash>
-
         <modifier key="useButtonIcons" value="yes"/>
         <modifier key="useLabelIcons" value="no"/>
         <modifier key="labelGap" value="2"/>
@@ -31,9 +33,10 @@
         <res id="InfoPanel.info" src="Readme.txt"/>
         <res id="HTMLHelloPanel.welcome" src="welcome.html"/>
         <res id="HTMLInfoPanel.welcome" src="welcome.html"/>
+        <res id="shortcutSpec.xml" src="shortcut.xml"/>
         <res id="Installer.image" src="assets/wizard.png"/>
-        <res id="TargetPanel.dir.windows" src="TargetDirWindows.txt"/>
-        <res id="TargetPanel.dir.unix" src="TargetDirUnix.txt"/>
+        <!--        <res id="TargetPanel.dir.windows" src="TargetDirWindows.txt"/>-->
+        <!--        <res id="TargetPanel.dir.unix" src="TargetDirUnix.txt"/>-->
     </resources>
     <variables>
         <variable name="InstallerFrame.logfilePath" value="Default"/>
@@ -55,21 +58,42 @@
         <panel classname="TargetPanel" id="install_dir"/>
         <panel classname="PacksPanel" id="sdk_pack_select"/>
         <panel classname="InstallPanel" id="install"/>
+        <panel classname="ShortcutPanel" id="shortcut"/>
         <panel classname="FinishPanel" id="finish"/>
     </panels>
 
     <packs>
+
+        <pack name="Assets" preselected="yes" required="yes">
+            <file src="${project.build.outputDirectory}/assets" targetdir="$INSTALL_PATH"/>
+            <description>Misc. Assets</description>
+        </pack>
         <pack name="Java Runtime Environment" preselected="yes" required="yes">
-            <file src="${project.build.directory}/windows-x64/jre" targetdir="$INSTALL_PATH/jre"></file>
+            <file src="${project.build.directory}/windows-x64/jre" targetdir="$INSTALL_PATH"/>
             <description>Required Java Runtime Environment</description>
         </pack>
-        <!--        <pack name="ColoradoPics" preselected="yes" required="no">-->
-        <!--            <description>Some nice pictures of the Maroon Bells in Aspen Colorado.</description>-->
-        <!--            <file src="pack1_content/pack1_content.zip" targetdir="$INSTALL_PATH/docs" unpack="true"/>-->
-        <!--        </pack>-->
-        <!--        <pack name="DirtBikes" required="yes">-->
-        <!--            <description>Some pictures of dirt bikes because I wanted another pack in the example.</description>-->
-        <!--            <file src="pack2_content/adave_willet_jim_davies.jpg" targetdir="$INSTALL_PATH"/>-->
-        <!--        </pack>-->
+        <pack name="Zephyr Core" preselected="yes" required="yes">
+            <file src="${project.build.directory}/windows-x64/bin" targetdir="$INSTALL_PATH"/>
+            <description>Zephyr Kernel</description>
+        </pack>
+
+        <pack name="Default Zephyr Plugins" preselected="yes" required="no">
+            <file src="${project.build.directory}/windows-x64/data" targetdir="$INSTALL_PATH"/>
+            <description>A set of default Zephyr plugins</description>
+        </pack>
+
+        <pack name="General" required="true" preselected="true">
+            <description>Core Controller Files</description>
+            <fileset dir="${project.build.directory}/windows-x64" targetdir="$INSTALL_PATH">
+                <os family="windows"/>
+                <include name="sunshower.exe"/>
+            </fileset>
+        </pack>
+
     </packs>
+
+    <natives>
+        <native type="izpack" name="ShellLink_x64.dll" uninstaller="true"/>
+    </natives>
+
 </installation>

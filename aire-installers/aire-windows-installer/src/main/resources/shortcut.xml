@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--&lt;!&ndash;-->
+<!--This is the shortcut specification for windows. Its considered default so on-->
+<!--Systems that are not shortcut compatible the information is taken from here.-->
+<!--&ndash;&gt;-->
+<!--<programGroup defaultName="Sunshower.io" location="applications"/>-->
+<!--<shortcut-->
+<!--name="Sunshower.io"-->
+<!--target="$INSTALL_PATH\sunshower.exe"-->
+<!--commandLine=""-->
+<!--workingDirectory="$INSTALL_PATH"-->
+<!--description="Sunshower Cloud Management Platform"-->
+<!--iconFile="$INSTALL_PATH\assets\icon.ico"-->
+<!--iconIndex="0"-->
+<!--initialState="noShow"-->
+<!--programGroup="yes"-->
+<!--desktop="yes"-->
+<!--applications="yes"-->
+<!--startMenu="yes"-->
+<!--startup="yes"/>-->
+
+<izpack:shortcuts version="5.0"
+                  xmlns:izpack="http://izpack.org/schema/shortcuts"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://izpack.org/schema/shortcuts http://izpack.org/schema/5.0/izpack-shortcuts-5.0.xsd">
+    <skipIfNotSupported/>
+    <programGroup defaultName="Sunshower"
+                  location="startMenu"/>
+
+    <shortcut
+            name="Start Sunshower"
+            target="$INSTALL_PATH\sunshower.exe"
+            commandLine=""
+            workingDirectory="$INSTALL_PATH"
+            description="Start Sunshower.io Cloud Application Management"
+            iconFile="$INSTALL_PATH\assets\mark_Qfy_icon.ico"
+            initialState="normal"
+            programGroup="yes"
+            desktop="yes"
+            applications="yes"
+            startMenu="yes"
+            startup="yes">
+        <os family="windows"/>
+    </shortcut>
+</izpack:shortcuts>

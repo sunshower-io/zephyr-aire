@@ -14,7 +14,7 @@
     <fileSets>
         <fileSet>
             <directory>${project.basedir}/src/main/resources/scripts</directory>
-            <outputDirectory></outputDirectory>
+            <outputDirectory/>
         </fileSet>
     </fileSets>
     <dependencySets>

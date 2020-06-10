@@ -1,0 +1,241 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>io.zephyr.aire</groupId>
+    <artifactId>aire-windows-installer</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <properties>
+        <zephyr.version>2.0.0-SNAPSHOT</zephyr.version>
+        <launch4j-plugin.version>1.7.25</launch4j-plugin.version>
+        <maven-dependency-plugin.version>3.1.2</maven-dependency-plugin.version>
+        <download-maven-plugin.version>1.6.0</download-maven-plugin.version>
+
+        <!--
+        installer stuff
+        -->
+        <staging.dir>${project.build.directory}/staging</staging.dir>
+        <izpack.dir.app>${basedir}/src/main/resources</izpack.dir.app>
+        <staging.dir.app>${staging.dir}/appfiles</staging.dir.app>
+
+        <!--
+        JRE Links
+        -->
+        <jre.windows.x64>
+            https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.7%2B10.2/OpenJDK11U-jre_x64_windows_hotspot_11.0.7_10.zip
+        </jre.windows.x64>
+        <jre.windows.x64.signature>22d873b52f7915afc132c568e61afa00fcec155184361f1dc0a6766ff1ecbcc7
+        </jre.windows.x64.signature>
+        <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
+        <zephyr-maven-plugin.version>2.0.0-SNAPSHOT</zephyr-maven-plugin.version>
+        <izpack-maven-plugin.version>5.1.3</izpack-maven-plugin.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>aire-core</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
+
+
+        <dependency>
+            <groupId>io.zephyr.aire</groupId>
+            <artifactId>zephyr-admin</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.codehaus.izpack</groupId>
+                <artifactId>izpack-maven-plugin</artifactId>
+                <version>${izpack-maven-plugin.version}</version>
+                <extensions>true</extensions>
+
+                <executions>
+
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>izpack</goal>
+                        </goals>
+                        <configuration>
+                            <baseDir>${basedir}/target/classes</baseDir>
+                            <installFile>${izpack.dir.app}/install.xml</installFile>
+                            <outputDirectory>${project.build.directory}/windows-x64/installer</outputDirectory>
+                            <finalName>installer</finalName>
+                            <classifier>win</classifier>
+                            <enableOverrideArtifact>true</enableOverrideArtifact>
+                            <mkdirs>true</mkdirs>
+                            <autoIncludeUrl>false</autoIncludeUrl>
+                            <autoIncludeDevelopers>false</autoIncludeDevelopers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>io.zephyr.maven</groupId>
+                <artifactId>zephyr-maven-plugin</artifactId>
+                <version>${zephyr-maven-plugin.version}</version>
+                <executions>
+
+                    <execution>
+                        <id>generate-windows</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>generate-sfx</goal>
+                        </goals>
+                        <configuration>
+                            <platform>windows</platform>
+                            <archive-directory>${project.build.directory}/windows-x64</archive-directory>
+                            <archive-base>${project.build.directory}/sunshower-installer-windows-x64</archive-base>
+                            <executable-file>launch.cmd</executable-file>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>
+                <groupId>com.googlecode.maven-download-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <version>${download-maven-plugin.version}</version>
+
+                <executions>
+                    <execution>
+                        <id>windows-x64-jre-download</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>${jre.windows.x64}</url>
+                            <unpack>true</unpack>
+                            <outputFileName>jre.zip</outputFileName>
+                            <outputDirectory>${project.build.directory}/jre/windows-x64</outputDirectory>
+                            <sha256>${jre.windows.x64.signature}</sha256>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <target>
+                                <!--
+                                    Make installer directories
+                                -->
+                                <mkdir dir="target/windows-x64"/>
+
+
+                                <!--
+                                copy JREs and remove top-level paths
+                                -->
+                                <copy todir="target/windows-x64/jre">
+                                    <fileset dir="target/jre/windows-x64"/>
+                                    <cutdirsmapper dirs="1"/>
+                                </copy>
+
+                                <copy todir="target/windows-x64">
+                                    <fileset dir="target/assembly"/>
+                                </copy>
+
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>${launch4j-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>l4j-windows-x64</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>gui</headerType>
+                            <outfile>target/windows-x64/sunshower.exe</outfile>
+                            <jar>bin/aire-core.jar</jar>
+                            <errTitle>Sunshower</errTitle>
+                            <dontWrapJar>true</dontWrapJar>
+                            <jre>
+                                <path>jre</path>
+                            </jre>
+                            <icon>${project.basedir}/src/main/resources/assets/icon.ico</icon>
+                            <versionInfo>
+                                <fileVersion>1.2.3.4</fileVersion>
+                                <txtFileVersion>txt file version?</txtFileVersion>
+                                <fileDescription>a description</fileDescription>
+                                <copyright>my copyright</copyright>
+                                <productVersion>4.3.2.1</productVersion>
+                                <txtProductVersion>txt product version</txtProductVersion>
+                                <productName>E-N-C-C</productName>
+                                <internalName>ccne</internalName>
+                                <originalFilename>Sunshower.exe</originalFilename>
+                            </versionInfo>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${maven-assembly-plugin.version}</version>
+
+                <executions>
+
+                    <execution>
+                        <id>assemble-zips</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>assembly</finalName>
+                            <appendAssemblyId>true</appendAssemblyId>
+                            <descriptors>
+                                <descriptor>assembly/assembly-windows-x64.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+
+
+                    <execution>
+                        <id>assemble-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>assembly</finalName>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptors>
+                                <descriptor>assembly/assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+
+</project>

@@ -6,6 +6,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.ParentLayout;
 import com.vaadin.flow.router.RoutePrefix;
 import com.vaadin.flow.router.RouterLayout;
+import io.zephyr.aire.MainView;
 import io.zephyr.aire.api.Decorate;
 import io.zephyr.aire.components.AireAsideDrawerMenu;
 import io.zephyr.aire.components.AireTabPane;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RoutePrefix("plugins")
-@ParentLayout(AireApplicationViewport.class)
+@ParentLayout(MainView.class)
 public class PluginManagementPage extends AireTabPane implements RouterLayout {
 
   private AireAsideDrawerMenu drawer;
@@ -32,7 +33,7 @@ public class PluginManagementPage extends AireTabPane implements RouterLayout {
   }
 
   @Decorate
-  public void decorate(AireApplicationViewport viewport) {
+  public void decorate(MainView viewport) {
     val instance = new AireAsideDrawerMenu();
     val btn = new Button();
     btn.setIcon(new Icon(VaadinIcon.ACADEMY_CAP));

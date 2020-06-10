@@ -6,6 +6,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.VaadinService;
+import io.zephyr.aire.servlet.AireVaadinServlet;
 import io.zephyr.aire.test.xpath.ElementXPathMatcher;
 import lombok.val;
 import org.springframework.context.ApplicationContext;
@@ -28,6 +29,7 @@ public class AireTestContext {
         routes,
         (t, u) -> {
           val service = new TestVaadinService(t, u, applicationContext);
+          AireVaadinServlet.setInstance(t);
           VaadinService.setCurrent(service);
           return service;
         });

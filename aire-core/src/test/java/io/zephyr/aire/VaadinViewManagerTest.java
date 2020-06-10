@@ -10,8 +10,7 @@ import lombok.val;
 
 import java.util.List;
 
-import static io.zephyr.aire.api.Views.append;
-import static io.zephyr.aire.api.Views.appendInstance;
+import static io.zephyr.aire.api.Views.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -21,12 +20,6 @@ class VaadinViewManagerTest {
   @ViewTest(MainView.class)
   void ensureViewManagerHasViewRegistered(@Context ViewContext context) {
     assertEquals(context.getComponentDefinitions().size(), 1);
-  }
-
-  @ViewTest(MainView.class)
-  @EditView(withMethod = "appendInstantiated")
-  void ensureAppendingButtonInstanceResultsInButtonAppendedToHeader(@Element Button button) {
-    assertEquals(button.getText().trim(), "Hello!");
   }
 
   @ViewTest(MainView.class)
@@ -52,6 +45,6 @@ class VaadinViewManagerTest {
 
   @EditView
   private ComponentDefinition<HasComponents> instance() {
-    return appendInstance(new Button("Hello!")).to(":main:header");
+    return appendWith(() -> new Button("Hello!")).to(":main:header");
   }
 }

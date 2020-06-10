@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAKI,sBAAI;EACF,MAAM,EAAE,IAAI;EACZ,KAAK,ECHS,IAAqB",
-"sources": ["../../../../../src/main/resources/styles/themes/aire/components/navigation.scss","../../../../../src/main/resources/styles/themes/aire/components/variables.scss"],
-"names": [],
-"file": "navigation.css"
-}

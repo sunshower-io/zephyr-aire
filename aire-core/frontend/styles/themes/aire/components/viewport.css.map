@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AACA,cAAe;EACb,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,MAAM,EAAC,IAAI;;AAEX,kBAAI;EACF,OAAO,EAAC,IAAI;EACZ,cAAc,EAAE,GAAG;EACnB,MAAM,EAAE,iBAAsC;;AAG9C,0BAAQ;EACN,KAAK,EAAC,IAAI;EACV,MAAM,EAAC,IAAI;EACX,UAAU,EAAE,UAAU",
-"sources": ["../../../../../src/main/resources/styles/themes/aire/components/viewport.scss"],
-"names": [],
-"file": "viewport.css"
-}

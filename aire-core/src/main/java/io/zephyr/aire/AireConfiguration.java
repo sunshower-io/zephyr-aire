@@ -1,15 +1,11 @@
 package io.zephyr.aire;
 
-import com.vaadin.flow.server.VaadinContext;
-import com.vaadin.flow.server.VaadinService;
-import com.vaadin.flow.server.VaadinServletContext;
 import com.vaadin.flow.spring.annotation.EnableVaadin;
 import io.sunshower.yaml.state.YamlMemento;
 import io.zephyr.aire.api.*;
 import io.zephyr.aire.core.deployments.DeploymentScanner;
 import io.zephyr.aire.core.ui.ModuleViewRegistrationPostProcessor;
 import io.zephyr.aire.core.ui.VaadinViewManager;
-import io.zephyr.aire.servlet.AireVaadinServlet;
 import io.zephyr.aire.servlet.ModuleResourceServlet;
 import io.zephyr.api.ModuleActivator;
 import io.zephyr.kernel.Lifecycle;
@@ -22,6 +18,7 @@ import io.zephyr.kernel.memento.Memento;
 import io.zephyr.spring.embedded.EmbeddedModuleClasspath;
 import io.zephyr.spring.embedded.EmbeddedModuleLoader;
 import io.zephyr.spring.embedded.EmbeddedSpringConfiguration;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -33,18 +30,17 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.ContextStoppedEvent;
 import org.springframework.context.event.EventListener;
 
-import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URL;
 import java.nio.file.FileSystem;
+import java.nio.file.FileSystemAlreadyExistsException;
 import java.nio.file.FileSystems;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.ServiceLoader;
+import java.nio.file.ProviderNotFoundException;
+import java.nio.file.spi.FileSystemProvider;
+import java.util.*;
 
+@Slf4j
 @EnableVaadin
 @Configuration
 @Import(EmbeddedSpringConfiguration.class)
@@ -55,11 +51,6 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
       Kernel kernel, @Value("${deployment.locations}") List<String> locations) throws IOException {
     return new DeploymentScanner(kernel, locations);
   }
-
-  //  @Bean
-  //  public BeanPostProcessor extensionPointPostProcessor(MutableExtensionPointRegistry registry) {
-  //    return new ExtensionPointPostProcessor(registry, new ExtensionPointScanner(registry));
-  //  }
 
   @Bean
   public ServletRegistrationBean<ModuleResourceServlet>
@@ -80,19 +71,54 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
   @Bean
   public File rootFile() {
 
-    File file =
-        new File(
-            AireConfiguration.class.getProtectionDomain().getCodeSource().getLocation().getFile());
+    //    File file =
+    //        new File(
+    //
+    // AireConfiguration.class.getProtectionDomain().getCodeSource().getLocation().getFile());
+    val file = new File(System.getProperty("user.dir"));
     KernelOptions opts = new KernelOptions();
-    opts.setHomeDirectory(file.getParentFile());
+    opts.setHomeDirectory(file);
     SunshowerKernel.setKernelOptions(opts);
     return file;
   }
 
   @Bean
   @DependsOn("rootFile")
-  public FileSystem aireFileSystem() throws IOException {
-    return FileSystems.newFileSystem(URI.create("droplet://aire"), Collections.emptyMap());
+  public FileSystem aireFileSystem(Kernel kernel) throws IOException {
+    log.info("Attempting to resolve kernel filesystem");
+    URI uri = URI.create("droplet://aire");
+    FileSystem fs = null;
+    try {
+      log.info("Attempting to create filesystem...");
+      fs = FileSystems.newFileSystem(uri, Collections.emptyMap());
+      log.info("Successfully created filesystem");
+      ((SunshowerKernel) kernel).setFileSystem(fs);
+      return fs;
+    } catch (FileSystemAlreadyExistsException ex) {
+      log.info("Filesystem already existed--returning it");
+      fs = FileSystems.getFileSystem(uri);
+    } catch (ProviderNotFoundException | ServiceConfigurationError ex) {
+      log.info(
+          "Couldn't create new filesystem or resolve existing filesystem...resolving from context");
+      ServiceLoader<FileSystemProvider> sl =
+          ServiceLoader.load(
+              FileSystemProvider.class, Thread.currentThread().getContextClassLoader());
+      for (FileSystemProvider provider : sl) {
+        if (uri.getScheme().equalsIgnoreCase(provider.getScheme())) {
+          try {
+            fs = provider.newFileSystem(uri, Collections.emptyMap());
+          } catch (FileSystemAlreadyExistsException e) {
+            fs = provider.getFileSystem(uri);
+          }
+          break;
+        }
+      }
+      if (fs == null) {
+        throw new ProviderNotFoundException("Provider \"" + uri.getScheme() + "\" not found");
+      }
+    }
+    ((SunshowerKernel) kernel).setFileSystem(fs);
+    return fs;
   }
 
   @Bean
@@ -102,7 +128,8 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
 
   @Bean
   public ModuleDescriptor moduleDescriptor(ClassLoader classLoader) {
-    URL source = getClass().getProtectionDomain().getCodeSource().getLocation();
+
+    val source = getClass().getProtectionDomain().getCodeSource().getLocation();
     File file = new File(source.getFile());
     for (ModuleScanner scanner : ServiceLoader.load(ModuleScanner.class, classLoader)) {
 
@@ -111,7 +138,16 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
         return scan.get();
       }
     }
-    throw new IllegalStateException("No module descriptor somehow");
+
+    val coordinate = ModuleCoordinate.create("io.zephyr.aire", "zephyr-aire", "1.0.0");
+    return new ModuleDescriptor(
+        Module.Type.Plugin,
+        source,
+        1,
+        new File(source.getFile()),
+        coordinate,
+        Collections.emptyList(),
+        "Aire Plugin");
   }
 
   @Bean
@@ -153,6 +189,7 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
       ApplicationContext context = contextRefreshedEvent.getApplicationContext();
       Module module = context.getBean(Module.class);
       Kernel kernel = context.getBean(Kernel.class);
+      log.warn("Kernel File System: " + kernel.getFileSystem());
 
       DeploymentScanner scanner = context.getBean(DeploymentScanner.class);
       ModuleThread moduleThread = context.getBean(ModuleThread.class);
@@ -177,7 +214,11 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
     module.getLifecycle().setState(Lifecycle.State.Active);
     kernel.getVolatileStorage().set(ApplicationContext.class, context);
     kernel.createContext(module, moduleThread).register(ViewManager.class, viewManager);
-    scanner.start();
+    try {
+      scanner.start();
+    } catch (Exception ex) {
+      log.info("Failed to start deployment scanner");
+    }
   }
 
   private boolean isFromThis(ContextRefreshedEvent contextRefreshedEvent) {

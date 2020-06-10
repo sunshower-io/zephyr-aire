@@ -9,6 +9,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import io.zephyr.aire.MainView;
 import io.zephyr.aire.api.Decorate;
 import io.zephyr.aire.api.Undecorate;
 import io.zephyr.aire.components.AireAsideDrawerMenu;
@@ -47,7 +48,7 @@ public class PluginListPage extends HorizontalLayout {
   }
 
   @Decorate
-  public void decorate(AireApplicationViewport viewport) {
+  public void decorate(MainView viewport) {
     instance = new AireAsideDrawerMenu();
 
     infoButton = new Button();
@@ -57,7 +58,7 @@ public class PluginListPage extends HorizontalLayout {
   }
 
   @Undecorate
-  public void undecorate(AireApplicationViewport viewport) {
+  public void undecorate(MainView viewport) {
     viewport.setSecondaryNavigation(null);
   }
 

@@ -59,13 +59,17 @@
     </panels>
 
     <packs>
-        <pack name="ColoradoPics" preselected="yes" required="no">
-            <description>Some nice pictures of the Maroon Bells in Aspen Colorado.</description>
-            <file src="pack1_content/pack1_content.zip" targetdir="$INSTALL_PATH/docs" unpack="true"/>
+        <pack name="Java Runtime Environment" preselected="yes" required="yes">
+            <file src="${project.build.directory}/windows-x64/jre" targetdir="$INSTALL_PATH/jre"></file>
+            <description>Required Java Runtime Environment</description>
         </pack>
-        <pack name="DirtBikes" required="yes">
-            <description>Some pictures of dirt bikes because I wanted another pack in the example.</description>
-            <file src="pack2_content/adave_willet_jim_davies.jpg" targetdir="$INSTALL_PATH"/>
-        </pack>
+        <!--        <pack name="ColoradoPics" preselected="yes" required="no">-->
+        <!--            <description>Some nice pictures of the Maroon Bells in Aspen Colorado.</description>-->
+        <!--            <file src="pack1_content/pack1_content.zip" targetdir="$INSTALL_PATH/docs" unpack="true"/>-->
+        <!--        </pack>-->
+        <!--        <pack name="DirtBikes" required="yes">-->
+        <!--            <description>Some pictures of dirt bikes because I wanted another pack in the example.</description>-->
+        <!--            <file src="pack2_content/adave_willet_jim_davies.jpg" targetdir="$INSTALL_PATH"/>-->
+        <!--        </pack>-->
     </packs>
 </installation>

@@ -12,7 +12,7 @@
     <parent>
         <groupId>io.zephyr.aire</groupId>
         <artifactId>aire-parent</artifactId>
-        <version>2.0-SNAPSHOT</version>
+        <version>2.0.0-SNAPSHOT</version>
         <relativePath>../aire-parent</relativePath>
     </parent>
 

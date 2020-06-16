@@ -7,6 +7,7 @@ import io.zephyr.aire.core.deployments.DeploymentScanner;
 import io.zephyr.aire.core.ui.ModuleViewRegistrationPostProcessor;
 import io.zephyr.aire.core.ui.VaadinViewManager;
 import io.zephyr.aire.servlet.ModuleResourceServlet;
+import io.zephyr.aire.util.YamlPropertySourceFactory;
 import io.zephyr.api.ModuleActivator;
 import io.zephyr.kernel.Lifecycle;
 import io.zephyr.kernel.Module;
@@ -22,6 +23,9 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.context.properties.bind.PropertySourcesPlaceholdersResolver;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
@@ -29,6 +33,8 @@ import org.springframework.context.annotation.*;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.ContextStoppedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.env.Environment;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,12 +49,23 @@ import java.util.*;
 @Slf4j
 @EnableVaadin
 @Configuration
+@EnableConfigurationProperties
 @Import(EmbeddedSpringConfiguration.class)
 public class AireConfiguration implements ApplicationListener<ContextRefreshedEvent> {
 
   @Bean
-  public DeploymentScanner deploymentScanner(
-      Kernel kernel, @Value("${deployment.locations}") List<String> locations) throws IOException {
+  public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+    return new PropertySourcesPlaceholderConfigurer();
+  }
+
+  @Bean
+  public static PropertySourcesPlaceholdersResolver propertySourcesPlaceholdersResolver(Environment environment) {
+      return new PropertySourcesPlaceholdersResolver(environment);
+  }
+
+  @Bean
+  public DeploymentScanner deploymentScanner(Kernel kernel, @Value("${deployment.locations}") List<String> locations)
+      throws IOException {
     return new DeploymentScanner(kernel, locations);
   }
 

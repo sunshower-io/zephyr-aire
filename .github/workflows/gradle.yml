@@ -20,8 +20,8 @@ jobs:
         java-version: 11
     - name: Install Maven Dependencies
       run: >-
-      mvn install deploy
-      --settings settings/settings.xml
-      -Dsunshower-repo.username=${{secrets.MAVEN_REPOSITORY_USERNAME}}
-      -Dsunshower-repo.password=${{secrets.MAVEN_REPOSITORY_PASSWORD}}
+        mvn install deploy
+        --settings settings/settings.xml
+        -Dsunshower-repo.username=${{secrets.MAVEN_REPOSITORY_USERNAME}}
+        -Dsunshower-repo.password=${{secrets.MAVEN_REPOSITORY_PASSWORD}}
 

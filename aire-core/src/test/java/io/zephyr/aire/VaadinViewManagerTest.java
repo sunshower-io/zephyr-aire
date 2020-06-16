@@ -7,6 +7,7 @@ import io.zephyr.aire.api.*;
 import io.zephyr.aire.elements.AireHeader;
 import io.zephyr.aire.test.*;
 import lombok.val;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
 

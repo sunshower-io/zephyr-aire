@@ -3,17 +3,17 @@ package io.zephyr.aire;
 import io.zephyr.aire.test.AireTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @AireTest
-@EnableConfigurationProperties
 public class AireConfigurationTest {
 
-  @Value("${deployment.locations}")
+  @Value("${deployment.location}")
   String value;
 
   @Test
-  void ensurePortIsCorrect() {
-    System.out.println("VAL" + value);
+  void ensureDeploymentLocationIsCorrect() {
+    assertEquals(value, "data/plugins");
   }
 }

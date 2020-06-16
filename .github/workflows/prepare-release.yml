@@ -1,0 +1,156 @@
+name: Prepare Zephyr Release
+on:
+  push:
+    tags:
+      - 't*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+
+    #################   Set up Environment  #################
+    #
+    #   This is where we set the new MAJOR and MINOR versions
+    #   for a series of releases.  This must be updated both
+    #   here and in release.yml
+    #
+    #################   Set up Environment  #################
+
+    env:
+      CURRENT_MAJOR_VERSION: 2
+      CURRENT_MINOR_VERSION: 0
+
+    #################   Overview of Build Process   #################
+    #
+    #
+    #################   Overview of Build Process   #################
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Generate Build Number
+        id: buildnumber
+        uses: einaregilsson/build-number@v2
+        with:
+          token: ${{ secrets.github_token }}
+          prefix: aire
+
+
+
+      # Accessible via ${{ steps.finalVersion.outputs.result }}
+      - name: Set Final Version Number
+        id: finalVersion
+        run: |
+          echo '::set-output name=result::$CURRENT_MAJOR_VERSION.$CURRENT_MINOR_VERSION.$BUILD_NUMBER.Final'
+
+
+      - name: Generate Next Number
+        id: nextbuildnumber
+        uses: einaregilsson/build-number@v2
+        with:
+          token: ${{ secrets.github_token }}
+          prefix: aire
+
+      # Accessible via ${{ steps.snapshotVersion.outputs.result }}
+      - name: Set Next Snapshot Version Number
+        id: snapshotVersion
+        run: |
+          echo '::set-output name=result::$CURRENT_MAJOR_VERSION.$CURRENT_MINOR_VERSION.$BUILD_NUMBER-SNAPSHOT'
+
+      - name: Increment Aire Version
+        run: >-
+          mvn versions:set -DnewVersion=${{ steps.finalVersion.outputs.result }}
+          && mvn clean install
+
+
+      - name: Deploy Bills-Of-Materials
+        run: >-
+          mvn install deploy
+          --settings settings/settings.xml
+          -Dsunshower-repo.username=${{secrets.MAVEN_REPOSITORY_USERNAME}}
+          -Dsunshower-repo.password=${{secrets.MAVEN_REPOSITORY_PASSWORD}} -e
+
+
+
+      - name: Commit Version Changes
+        run: |
+          git config --local user.email "build@sunshower.io"
+          git config --local user.name "build"
+          git commit -am "Final Release [tag: final, version: ${{steps.finalVersion.outputs.result}}]"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git tag -a v${{ steps.finalVersion.outputs.result }} -m "Releasing ${{ steps.finalVersion.outputs.result }}"
+          git push origin v${{ steps.finalVersion.outputs.result }}
+
+      - name: get commit message
+        run: echo ::set-env name=commitmsg::$(git log --format=%B -n 1 ${{ github.event.after }})
+
+      - name: Perform Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release:
+            ${{ env.commitmsg }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Windows Installer Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: aire-installers/aire-windows-installer/target/sunshower-installer-windows-x64.exe
+          asset_name: aire-installer-windows-x64.exe
+          asset_content_type: application/vnd.microsoft.portable-executable
+
+      #################   Rev Snapshots     #################
+
+
+
+      - name: Increment Version to Snapshot
+        run: >-
+          mvn versions:set
+          -DnewVersion=${{ steps.snapshotVersion.outputs.result }}
+          && mvn clean install
+
+
+      - name: Deploy Project
+        run: >-
+          mvn install deploy
+          --settings settings/settings.xml
+          -Dsunshower-repo.username=${{secrets.MAVEN_REPOSITORY_USERNAME}}
+          -Dsunshower-repo.password=${{secrets.MAVEN_REPOSITORY_PASSWORD}} -e
+
+
+      - name: Commit Version Changes and Release
+        run: |
+          git config --local user.email "build@sunshower.io"
+          git config --local user.name "build"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git commit -am "Releasing new Snapshot [tag: snapshot]"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Delete release tag
+        run: |
+          git push --delete origin ${GITHUB_REF##*/}
+

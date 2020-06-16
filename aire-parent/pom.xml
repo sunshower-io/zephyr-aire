@@ -15,6 +15,17 @@
         <version>2.2.3.RELEASE</version>
         <relativePath/>
     </parent>
+    <distributionManagement>
+        <repository>
+            <id>sunshower-releases</id>
+            <url>http://artifacts.sunshower.io/repository/sunshower-releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>sunshower-snapshots</id>
+            <url>http://artifacts.sunshower.io/repository/sunshower-snapshots</url>
+        </snapshotRepository>
+
+    </distributionManagement>
 
     <properties>
         <!--

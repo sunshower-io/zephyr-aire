@@ -21,7 +21,7 @@
 
         <dependencySet>
             <unpack>false</unpack>
-            <outputDirectory>data/plugins</outputDirectory>
+            <outputDirectory>aire/data/plugins</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <useTransitiveDependencies>false</useTransitiveDependencies>
             <excludes>

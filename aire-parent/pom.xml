@@ -15,6 +15,17 @@
         <version>2.2.3.RELEASE</version>
         <relativePath/>
     </parent>
+    <distributionManagement>
+        <repository>
+            <id>sunshower-releases</id>
+            <url>http://artifacts.sunshower.io/repository/sunshower-releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>sunshower-snapshots</id>
+            <url>http://artifacts.sunshower.io/repository/sunshower-snapshots</url>
+        </snapshotRepository>
+
+    </distributionManagement>
 
     <properties>
         <!--
@@ -32,7 +43,7 @@
 
         <commons-collections.version>4.4</commons-collections.version>
         <vaadin.version>16.0.0</vaadin.version>
-        <zephyr.version>2.0.0-SNAPSHOT</zephyr.version>
+        <zephyr.version>2.0.16.Final</zephyr.version>
         <vaadin-html-components.version>3.1.1</vaadin-html-components.version>
         <vaadin-flow-server.version>3.1.1</vaadin-flow-server.version>
         <webdrivermanager.version>3.8.1</webdrivermanager.version>

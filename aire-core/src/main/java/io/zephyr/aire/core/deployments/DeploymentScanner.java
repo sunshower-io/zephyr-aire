@@ -29,13 +29,15 @@ public class DeploymentScanner extends AbstractDeploymentScanner
   //  @Value("#{'${deployment.locations}'.split('\\s*,\\s*)}}")
   //  private List<String> locations;
 
-  public DeploymentScanner(Kernel kernel, Collection<String> paths) throws IOException {
+  public DeploymentScanner(Kernel kernel, Collection<String> paths) {
     super(kernel, paths);
   }
 
   @Override
   public void run() {
-    install(getPaths());
+    val paths = getPaths();
+    log.info("Deployment scanner started watching {}", paths);
+    install(paths);
     super.run();
   }
 

@@ -78,7 +78,7 @@
         </pack>
 
         <pack name="Default Zephyr Plugins" preselected="yes" required="no">
-            <file src="${project.build.directory}/windows-x64/data" targetdir="$INSTALL_PATH"/>
+            <file src="${project.build.directory}/windows-x64/aire" targetdir="$INSTALL_PATH"/>
             <description>A set of default Zephyr plugins</description>
         </pack>
 

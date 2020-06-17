@@ -46,11 +46,11 @@
             <version>${project.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.codehaus.izpack</groupId>
-            <artifactId>izpack-native</artifactId>
-            <version>${izpack-maven-plugin.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.codehaus.izpack</groupId>-->
+<!--            <artifactId>izpack-native</artifactId>-->
+<!--            <version>${izpack-maven-plugin.version}</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>

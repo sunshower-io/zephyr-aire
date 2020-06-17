@@ -9,7 +9,9 @@ logging:
 
 
 deployment:
-  location: "data/plugins"
+  locations:
+    - "deployments/"
+    - "data/plugins"
 
 spring:
   application:

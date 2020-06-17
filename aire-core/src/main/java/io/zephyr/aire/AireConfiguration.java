@@ -7,6 +7,7 @@ import io.zephyr.aire.core.deployments.DeploymentScanner;
 import io.zephyr.aire.core.ui.ModuleViewRegistrationPostProcessor;
 import io.zephyr.aire.core.ui.VaadinViewManager;
 import io.zephyr.aire.servlet.ModuleResourceServlet;
+import io.zephyr.aire.util.YamlPropertySourceFactory;
 import io.zephyr.api.ModuleActivator;
 import io.zephyr.kernel.Lifecycle;
 import io.zephyr.kernel.Module;
@@ -20,8 +21,15 @@ import io.zephyr.spring.embedded.EmbeddedModuleLoader;
 import io.zephyr.spring.embedded.EmbeddedSpringConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.context.properties.bind.PropertySourcesPlaceholdersResolver;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
@@ -29,6 +37,9 @@ import org.springframework.context.annotation.*;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.ContextStoppedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,12 +55,12 @@ import java.util.*;
 @EnableVaadin
 @Configuration
 @Import(EmbeddedSpringConfiguration.class)
-public class AireConfiguration implements ApplicationListener<ContextRefreshedEvent> {
+public class AireConfiguration implements ApplicationListener<ApplicationReadyEvent> {
 
   @Bean
   public DeploymentScanner deploymentScanner(
-      Kernel kernel, @Value("${deployment.locations}") List<String> locations) throws IOException {
-    return new DeploymentScanner(kernel, locations);
+      Kernel kernel, @Value("${deployment.location}") String location) throws IOException {
+    return new DeploymentScanner(kernel, Collections.singleton(location));
   }
 
   @Bean
@@ -183,13 +194,13 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
   }
 
   @Override
-  public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+  public void onApplicationEvent(ApplicationReadyEvent contextRefreshedEvent) {
 
     if (isFromThis(contextRefreshedEvent)) {
       ApplicationContext context = contextRefreshedEvent.getApplicationContext();
       Module module = context.getBean(Module.class);
       Kernel kernel = context.getBean(Kernel.class);
-      log.warn("Kernel File System: " + kernel.getFileSystem());
+      log.info("Kernel File System: " + kernel.getFileSystem());
 
       DeploymentScanner scanner = context.getBean(DeploymentScanner.class);
       ModuleThread moduleThread = context.getBean(ModuleThread.class);
@@ -215,13 +226,24 @@ public class AireConfiguration implements ApplicationListener<ContextRefreshedEv
     kernel.getVolatileStorage().set(ApplicationContext.class, context);
     kernel.createContext(module, moduleThread).register(ViewManager.class, viewManager);
     try {
-      scanner.start();
+      new Thread(
+              () -> {
+                try {
+                  System.out.println("STARTING in 5");
+                  Thread.sleep(5000);
+                    System.out.println("STARTING NOW");
+                } catch (InterruptedException e) {
+                  e.printStackTrace();
+                }
+                scanner.start();
+              })
+          .start();
     } catch (Exception ex) {
       log.info("Failed to start deployment scanner");
     }
   }
 
-  private boolean isFromThis(ContextRefreshedEvent contextRefreshedEvent) {
+  private boolean isFromThis(ApplicationReadyEvent contextRefreshedEvent) {
     val ctx = contextRefreshedEvent.getApplicationContext();
     val classloader = ctx.getClassLoader();
     return classloader == AireConfiguration.class.getClassLoader();

@@ -43,7 +43,7 @@
 
         <commons-collections.version>4.4</commons-collections.version>
         <vaadin.version>16.0.0</vaadin.version>
-        <zephyr.version>2.0.16.Final</zephyr.version>
+        <zephyr.version>2.0.39.Final</zephyr.version>
         <vaadin-html-components.version>3.1.1</vaadin-html-components.version>
         <vaadin-flow-server.version>3.1.1</vaadin-flow-server.version>
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
@@ -171,6 +171,22 @@
     </dependencyManagement>
 
     <repositories>
+
+
+        <repository>
+            <id>sunshower-releases</id>
+            <url>http://artifacts.sunshower.io/repository/sunshower-releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>sunshower-snapshots</id>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <url>http://artifacts.sunshower.io/repository/sunshower-releases</url>
+        </repository>
         <repository>
             <id>central</id>
             <url>https://repo.maven.apache.org/maven2</url>
@@ -200,6 +216,22 @@
 
 
     <pluginRepositories>
+
+        <pluginRepository>
+            <id>sunshower-releases</id>
+            <url>http://artifacts.sunshower.io/repository/sunshower-releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>sunshower-snapshots</id>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <url>http://artifacts.sunshower.io/repository/sunshower-releases</url>
+        </pluginRepository>
+
         <pluginRepository>
             <id>central</id>
             <url>https://repo.maven.apache.org/maven2</url>

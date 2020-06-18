@@ -141,15 +141,16 @@ public class AireConfiguration implements ApplicationListener<ApplicationReadyEv
   public ModuleDescriptor moduleDescriptor(ClassLoader classLoader) {
 
     val source = getClass().getProtectionDomain().getCodeSource().getLocation();
-    File file = new File(source.getFile());
-    for (ModuleScanner scanner : ServiceLoader.load(ModuleScanner.class, classLoader)) {
-
-      final Optional<ModuleDescriptor> scan = scanner.scan(file, source);
-      if (scan.isPresent()) {
-        return scan.get();
-      }
-    }
-
+    //    File file = new File(source.getFile());
+    //    for (ModuleScanner scanner :
+    //        ServiceLoader.load(ModuleScanner.class,
+    // Thread.currentThread().getContextClassLoader())) {
+    //      final Optional<ModuleDescriptor> scan = scanner.scan(file, source);
+    //      if (scan.isPresent()) {
+    //        return scan.get();
+    //      }
+    //    }
+    //
     val coordinate = ModuleCoordinate.create("io.zephyr.aire", "zephyr-aire", "1.0.0");
     return new ModuleDescriptor(
         Module.Type.Plugin,
@@ -231,7 +232,7 @@ public class AireConfiguration implements ApplicationListener<ApplicationReadyEv
                 try {
                   System.out.println("STARTING in 5");
                   Thread.sleep(5000);
-                    System.out.println("STARTING NOW");
+                  System.out.println("STARTING NOW");
                 } catch (InterruptedException e) {
                   e.printStackTrace();
                 }

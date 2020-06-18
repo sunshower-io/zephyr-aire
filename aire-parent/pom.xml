@@ -49,6 +49,7 @@
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
         <sass-maven-plugin.version>3.7.2</sass-maven-plugin.version>
         <maven-war-plugin.version>3.2.3</maven-war-plugin.version>
+        <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
         <lombok.version>1.18.12</lombok.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <karibu.version>1.2.0</karibu.version>
@@ -57,6 +58,7 @@
         <maven-assembly-plugin.version>2.5.3</maven-assembly-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
     </properties>
+
 
     <dependencyManagement>
         <dependencies>
@@ -251,5 +253,52 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven-javadoc-plugin.version}</version>
+                    <configuration>
+                        <aggregate>true</aggregate>
+                        <reportSets>
+                            <reportSet>
+                                <id>aggregate</id>
+                                <inherited>false</inherited>
+                                <reports>
+                                    <report>aggregate</report>
+                                </reports>
+                            </reportSet>
+                            <reportSet>
+                                <id>default</id>
+                                <reports>
+                                    <report>javadoc</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>

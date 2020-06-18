@@ -162,7 +162,14 @@ jobs:
 
       - name: Deploy Aire Project
         run: >-
-          mvn clean install deploy
+          mvn
+          clean
+          package
+          javadoc:jar
+          javadoc:aggregate
+          javadoc:aggregate-jar
+          install
+          deploy
           --settings settings/settings.xml
           -Dsunshower-repo.username=${{secrets.MAVEN_REPOSITORY_USERNAME}}
           -Dsunshower-repo.password=${{secrets.MAVEN_REPOSITORY_PASSWORD}} -e

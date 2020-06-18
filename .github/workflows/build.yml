@@ -18,9 +18,12 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
+
+    - name: Maven Version
+      run: mvn -v
     - name: Build Aire
       run: >-
-        mvn install deploy
+        mvn clean install
         --settings settings/settings.xml
         -Dsunshower-repo.username=${{secrets.MAVEN_REPOSITORY_USERNAME}}
         -Dsunshower-repo.password=${{secrets.MAVEN_REPOSITORY_PASSWORD}}

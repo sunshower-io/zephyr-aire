@@ -1,4 +1,4 @@
-name: Prepare Zephyr Release
+name: Prepare Aire Release
 on:
   push:
     tags:
@@ -22,6 +22,20 @@ jobs:
       CURRENT_MINOR_VERSION: 0
 
     #################   Overview of Build Process   #################
+    #   Note:  this is documented fully at
+    #   https://github.com/sunshower-io/zephyr/build.md
+    #
+    #   Versions:  most/all component versions should be stored in
+    #   imported/pom.xml
+    #
+    #   Released versions:  All exported component versions should be
+    #   stored in exported/pom.xml
+    #
+    #   Odd dependency notes:
+    #   Project path: tools/zephyr-bundle/native-packages/(windows,linux,mac)
+    #   Notes:  These projects depend on warp (https://github.com/dgiagio/warp/releases)
+    #
+    #
     #
     #
     #################   Overview of Build Process   #################
@@ -43,34 +57,26 @@ jobs:
         uses: einaregilsson/build-number@v2
         with:
           token: ${{ secrets.github_token }}
-          prefix: aire
-
 
 
       # Accessible via ${{ steps.finalVersion.outputs.result }}
       - name: Set Final Version Number
         id: finalVersion
         run: |
-          echo '::set-output name=result::$CURRENT_MAJOR_VERSION.$CURRENT_MINOR_VERSION.$BUILD_NUMBER.Final'
+          echo ::set-env name=final_version::$CURRENT_MAJOR_VERSION.$CURRENT_MINOR_VERSION.$BUILD_NUMBER
+          echo ::set-output name=result::$CURRENT_MAJOR_VERSION.$CURRENT_MINOR_VERSION.$BUILD_NUMBER.Final
 
 
-      - name: Generate Next Number
-        id: nextbuildnumber
-        uses: einaregilsson/build-number@v2
-        with:
-          token: ${{ secrets.github_token }}
-          prefix: aire
 
-      # Accessible via ${{ steps.snapshotVersion.outputs.result }}
-      - name: Set Next Snapshot Version Number
-        id: snapshotVersion
-        run: |
-          echo '::set-output name=result::$CURRENT_MAJOR_VERSION.$CURRENT_MINOR_VERSION.$BUILD_NUMBER-SNAPSHOT'
-
-      - name: Increment Aire Version
+      - name: Increment Versions
         run: >-
-          mvn versions:set -DnewVersion=${{ steps.finalVersion.outputs.result }}
-          && mvn clean install
+          mvn versions:set
+          -DnewVersion=${{ steps.finalVersion.outputs.result }} &&
+          mvn versions:set-property
+          -Dproperty=zephyr.version -DnewVersion=${{ steps.finalVersion.outputs.result }} &&
+          mvn clean install
+
+
 
 
       - name: Deploy Bills-Of-Materials
@@ -82,17 +88,26 @@ jobs:
 
 
 
+
+
+      #################   Deploy Aire Maven Plugin #################
+      #
+      #   build and deploy the zephyr maven plugin.
+      #
+      #   Note:  This must happen after "Build Aire Projects" action
+      #
+      #################   Deploy Aire Maven Plugin #################
+
+
+      - name: get commit message
+        run: echo ::set-env name=commitmsg::$(git log --format=%B -n 1:2 ${{ github.event.after }})
+
+
       - name: Commit Version Changes
         run: |
           git config --local user.email "build@sunshower.io"
           git config --local user.name "build"
           git commit -am "Final Release [tag: final, version: ${{steps.finalVersion.outputs.result}}]"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git tag -a v${{ steps.finalVersion.outputs.result }} -m "Releasing ${{ steps.finalVersion.outputs.result }}"
-          git push origin v${{ steps.finalVersion.outputs.result }}
-
-      - name: get commit message
-        run: echo ::set-env name=commitmsg::$(git log --format=%B -n 1 ${{ github.event.after }})
 
       - name: Perform Release
         id: create_release
@@ -100,43 +115,78 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: aire-${{ env.final_version }}
+          release_name: aire-r${{ env.final_version }}
+
           body: |
-            Changes in this Release:
+            ** Changes in are-${{ env.final_version }} **
+
             ${{ env.commitmsg }}
+
+            Tag: https://github.com/sunshower-io/zephyr-aire/releases/tag/v${{ env.final_version }}.Final
           draft: false
           prerelease: false
 
-      - name: Upload Windows Installer Asset
-        id: upload-release-asset
+      - name: Upload Windows Installer
+        id: upload-release-asset-zip
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: aire-installers/aire-windows-installer/target/sunshower-installer-windows-x64.exe
-          asset_name: aire-installer-windows-x64.exe
+          asset_name: aire-installer.exe
           asset_content_type: application/vnd.microsoft.portable-executable
+
+
+      - name: Commit Version Changes
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git tag -a v${{ steps.finalVersion.outputs.result }} -m "Releasing ${{ steps.finalVersion.outputs.result }}"
+          git push origin v${{ steps.finalVersion.outputs.result }}
+
+
 
       #################   Rev Snapshots     #################
 
 
+      - name: Generate Next Number
+        id: nextbuildnumber
+        uses: einaregilsson/build-number@v2
+        with:
+          token: ${{ secrets.github_token }}
 
-      - name: Increment Version to Snapshot
+      # Accessible via ${{ steps.snapshotVersion.outputs.result }}
+      - name: Set Next Snapshot Version Number
+        id: snapshotVersion
+        run: |
+          echo '::set-output name=result::$CURRENT_MAJOR_VERSION.$CURRENT_MINOR_VERSION.$BUILD_NUMBER-SNAPSHOT'
+
+      - name: Increment Bills-of-Materials to Snapshots
         run: >-
           mvn versions:set
-          -DnewVersion=${{ steps.snapshotVersion.outputs.result }}
-          && mvn clean install
+          -DnewVersion=${{ steps.snapshotVersion.outputs.result }} &&
+          mvn versions:set-property
+          -Dproperty=zephyr.version -DnewVersion=${{ steps.snapshotVersion.outputs.result }} &&
+          mvn clean install
 
 
-      - name: Deploy Project
+      - name: Deploy Bills-Of-Materials
         run: >-
           mvn install deploy
           --settings settings/settings.xml
           -Dsunshower-repo.username=${{secrets.MAVEN_REPOSITORY_USERNAME}}
           -Dsunshower-repo.password=${{secrets.MAVEN_REPOSITORY_PASSWORD}} -e
 
+
+
+
+      - name: Deploy Aire Project
+        run: >-
+          mvn clean install deploy
+          --settings settings/settings.xml
+          -Dsunshower-repo.username=${{secrets.MAVEN_REPOSITORY_USERNAME}}
+          -Dsunshower-repo.password=${{secrets.MAVEN_REPOSITORY_PASSWORD}} -e
 
       - name: Commit Version Changes and Release
         run: |

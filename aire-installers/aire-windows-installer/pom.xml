@@ -30,6 +30,17 @@
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>sunshower-releases</id>
+            <url>http://artifacts.sunshower.io/repository/sunshower-releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>sunshower-snapshots</id>
+            <url>http://artifacts.sunshower.io/repository/sunshower-snapshots</url>
+        </snapshotRepository>
+
+    </distributionManagement>
 
     <dependencies>
         <dependency>

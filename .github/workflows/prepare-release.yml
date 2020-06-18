@@ -70,14 +70,7 @@ jobs:
 
       - name: Increment Versions
         run: >-
-          mvn versions:set
-          -DnewVersion=${{ steps.finalVersion.outputs.result }} &&
-          mvn versions:set-property
-          -Dproperty=zephyr.version -DnewVersion=${{ steps.finalVersion.outputs.result }} &&
-          mvn clean install
-
-
-
+          mvn versions:set -DnewVersion=${{ steps.finalVersion.outputs.result }}
 
       - name: Deploy Bills-Of-Materials
         run: >-
@@ -92,7 +85,6 @@ jobs:
 
       #################   Deploy Aire Maven Plugin #################
       #
-      #   build and deploy the zephyr maven plugin.
       #
       #   Note:  This must happen after "Build Aire Projects" action
       #
@@ -164,10 +156,7 @@ jobs:
 
       - name: Increment Bills-of-Materials to Snapshots
         run: >-
-          mvn versions:set
-          -DnewVersion=${{ steps.snapshotVersion.outputs.result }} &&
-          mvn versions:set-property
-          -Dproperty=zephyr.version -DnewVersion=${{ steps.snapshotVersion.outputs.result }} &&
+          mvn versions:set -DnewVersion=${{ steps.snapshotVersion.outputs.result }} &&
           mvn clean install
 
 

@@ -98,7 +98,10 @@
         <dependency>
             <groupId>io.zephyr</groupId>
             <artifactId>sunshower-yaml-reader</artifactId>
+            <type>jar</type>
         </dependency>
+
+
         <dependency>
             <groupId>io.zephyr</groupId>
             <artifactId>kernel-api</artifactId>

@@ -98,7 +98,6 @@
         <dependency>
             <groupId>io.zephyr</groupId>
             <artifactId>sunshower-yaml-reader</artifactId>
-            <type>jar</type>
         </dependency>
 
 
@@ -106,6 +105,7 @@
             <groupId>io.zephyr</groupId>
             <artifactId>kernel-api</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.github.zafarkhaja</groupId>
             <artifactId>java-semver</artifactId>

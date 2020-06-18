@@ -11,6 +11,9 @@ jobs:
 
     runs-on: ${{ matrix.platform }}
 
+    env:
+      JAVA_TOOL_OPTIONS: -Duser.language=en -Duser.country=US
+
     steps:
     - name: Checkout
       uses: actions/checkout@v1

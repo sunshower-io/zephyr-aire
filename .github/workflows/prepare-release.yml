@@ -20,6 +20,8 @@ jobs:
     env:
       CURRENT_MAJOR_VERSION: 2
       CURRENT_MINOR_VERSION: 0
+      JAVA_TOOL_OPTIONS: -Duser.language=en -Duser.country=US
+
 
     #################   Overview of Build Process   #################
     #   Note:  this is documented fully at
@@ -72,23 +74,14 @@ jobs:
         run: >-
           mvn versions:set -DnewVersion=${{ steps.finalVersion.outputs.result }}
 
-      - name: Deploy Bills-Of-Materials
+      - name: Deploy Zephyr-Aire
         run: >-
-          mvn install deploy
+          mvn install deploy -Pproduction
           --settings settings/settings.xml
           -Dsunshower-repo.username=${{secrets.MAVEN_REPOSITORY_USERNAME}}
           -Dsunshower-repo.password=${{secrets.MAVEN_REPOSITORY_PASSWORD}} -e
 
 
-
-
-
-      #################   Deploy Aire Maven Plugin #################
-      #
-      #
-      #   Note:  This must happen after "Build Aire Projects" action
-      #
-      #################   Deploy Aire Maven Plugin #################
 
 
       - name: get commit message
@@ -158,15 +151,6 @@ jobs:
         run: >-
           mvn versions:set -DnewVersion=${{ steps.snapshotVersion.outputs.result }} &&
           mvn clean install
-
-
-      - name: Deploy Bills-Of-Materials
-        run: >-
-          mvn install deploy
-          --settings settings/settings.xml
-          -Dsunshower-repo.username=${{secrets.MAVEN_REPOSITORY_USERNAME}}
-          -Dsunshower-repo.password=${{secrets.MAVEN_REPOSITORY_PASSWORD}} -e
-
 
 
 

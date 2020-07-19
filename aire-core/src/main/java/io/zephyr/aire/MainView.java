@@ -17,6 +17,7 @@ import lombok.val;
 import javax.inject.Inject;
 
 @Route
+@PageTitle("Zephyr - Home")
 @Location("home")
 @Container(":main")
 @CssImport("./styles/aire/layout/aire-structure.css")

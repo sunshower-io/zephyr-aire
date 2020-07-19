@@ -52,7 +52,7 @@ public class PluginListPage extends HorizontalLayout {
     instance = new AireAsideDrawerMenu();
 
     infoButton = new Button();
-    infoButton.setIcon(AireIcon.icon("info-square"));
+    infoButton.setIcon(AireIcon.icon("info-circle"));
     instance.add(infoButton, new Div());
     viewport.setSecondaryNavigation(instance);
   }

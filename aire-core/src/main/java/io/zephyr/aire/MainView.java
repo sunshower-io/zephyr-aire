@@ -7,6 +7,7 @@ import com.vaadin.flow.router.*;
 import io.zephyr.aire.api.Container;
 import io.zephyr.aire.api.Location;
 import io.zephyr.aire.components.*;
+import io.zephyr.aire.designer.AireDesigner;
 import io.zephyr.aire.elements.*;
 import io.zephyr.aire.layout.AireApplicationViewport;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -58,8 +59,9 @@ public class MainView extends AireApplicationViewport {
   }
 
   private void checkDefaults() {
-    if (kernel.getModuleManager().getModules().size() == 1) { // aire's the only one installed
-      addContent(new UploadPluginCallToAction(kernel));
-    }
+    addContent(new AireDesigner());
+    //    if (kernel.getModuleManager().getModules().size() == 1) { // aire's the only one installed
+    //      addContent(new UploadPluginCallToAction(kernel));
+    //    }
   }
 }

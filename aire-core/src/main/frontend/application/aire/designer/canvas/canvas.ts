@@ -15,15 +15,15 @@ import {
   mxGraphView
 } from "mxgraph/javascript/mxClient";
 
-import {CanvasModel}                   from "@aire/designer/model";
-import {Chord, KeyHandler}             from "./key-handler";
+import {CanvasModel}       from "../model/model";
+import {Chord, KeyHandler} from "./key-handler";
 import {Action}                        from "./action";
-import {Drawable, RenderableElement}   from "@aire/designer/model/elements";
+import {Drawable, RenderableElement}   from "../model/elements";
 import {ElementFactory, ElementLoader} from "./palette";
 import {GraphHandler}                  from "./graph-handler";
 import {DefaultConnectionHandler}      from "./connection-handler";
-import {DefaultHoverListener}          from "./graph-listeners";
-import {Grid}                          from "@aire/designer/core/grid";
+import {DefaultHoverListener} from "./graph-listeners";
+import {Grid}                 from "../core/grid";
 
 export interface CanvasEvent<T> {
   data : T;

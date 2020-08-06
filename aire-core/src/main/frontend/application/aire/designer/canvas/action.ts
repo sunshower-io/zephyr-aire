@@ -1,4 +1,4 @@
-import {Canvas} from "@aire/designer/canvas";
+import {Canvas} from "./canvas";
 
 export interface Action {
   name : string;

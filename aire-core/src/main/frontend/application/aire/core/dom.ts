@@ -1,5 +1,5 @@
-import {UUID}      from "@aire/core/uuid";
-import {Predicate} from "@aire/core/predicates";
+import {UUID}      from "./uuid";
+import {Predicate} from "./predicates";
 
 
 export class dom {

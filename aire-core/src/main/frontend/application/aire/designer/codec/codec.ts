@@ -1,11 +1,11 @@
-import {Encoder}   from "./json-codec";
-import {Canvas}    from "@aire/designer/canvas/canvas";
+import {Encoder} from "./json-codec";
+import {Canvas}    from "../canvas/canvas";
 import {
   ElementFactoryProvider,
   ElementLoader
-}                  from "@aire/designer/canvas/palette";
-import {TaskGraph} from "@aire/designer/model/graph/graph-element";
-import {Class}     from "@aire/core/lang";
+}                  from "../canvas/palette";
+import {TaskGraph} from "../model/graph/graph-element";
+import {Class}     from "../../core/lang";
 
 export interface Codec {
   register<T>(type : Class<T>, encoder : Encoder);

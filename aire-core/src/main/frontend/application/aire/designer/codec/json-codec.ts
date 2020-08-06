@@ -1,20 +1,20 @@
 import * as _ from "lodash";
 
-import {Graph, Node, Vertex} from "@aire/common/algorithms/graph/graph";
+import {Graph, Node, Vertex} from "../../common/algorithms/graph/graph";
 
 import {Layer, mxGraph, mxGraphModel} from "mxgraph";
 
-import {Class, getClass} from "@aire/core/lang";
+import {Class, getClass} from "../../core/lang";
 
-import {TaskGraph, Vertex as V} from "@aire/designer/model/graph";
+import {TaskGraph, Vertex as V} from "../../designer/model/graph";
 
-import {Canvas}   from "@aire/designer/canvas/canvas";
-import {Edge}     from "@aire/designer/model/graph/edge";
+import {Canvas} from "../canvas/canvas";
+import {Edge}  from "../../designer/model/graph";
 import {
   ElementFactoryProvider,
   ElementLoader
-}                 from "@aire/designer/canvas/palette";
-import {Codec}    from "./codec";
+}              from "../canvas/palette";
+import {Codec} from "./codec";
 import {Drawable} from "../model/elements";
 
 export interface Encoder {

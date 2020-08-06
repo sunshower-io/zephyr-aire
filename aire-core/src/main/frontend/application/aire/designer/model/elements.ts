@@ -9,10 +9,10 @@ import {
   Port
 } from 'mxgraph/javascript/mxClient';
 
-import {Canvas}            from "@aire/designer/canvas";
-import {Identifier}        from "@aire/core/identifiers";
-import {Class}             from "@aire/core/lang";
-import {Dependency}        from '@aire/designer/base/model';
+import {Canvas}            from "../canvas/canvas";
+import {Identifier}        from "../../core/identifiers";
+import {Class}             from "../../core/lang";
+import {Dependency}        from '../base/model';
 import {ConstraintManager} from '../base/dependencies';
 
 export class Overlay extends mxCellOverlay {
@@ -52,7 +52,7 @@ export function decorateShape(shape : Class<mxRectangleShape>, ports : Port[]) {
 
 decorateShape(mxRectangleShape, defaultPorts);
 
-export abstract class RenderableElement extends mxCell implements Drawable, Layer {
+export abstract class RenderableElement extends mxCell implements Drawable {
   id : string;
   taskId : string;
   drawable : boolean;

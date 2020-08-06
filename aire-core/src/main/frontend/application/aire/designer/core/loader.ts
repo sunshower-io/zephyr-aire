@@ -1,4 +1,4 @@
-import {UUID} from "@aire/core/uuid";
+import {UUID} from "../../core/uuid";
 
 export class DesignerLoader {
   private childElementId : string = UUID.random();

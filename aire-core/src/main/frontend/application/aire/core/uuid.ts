@@ -1,4 +1,4 @@
-import {range} from "@aire/core/lang";
+import {range} from "./lang";
 
 export class UUID {
   public readonly value : string;

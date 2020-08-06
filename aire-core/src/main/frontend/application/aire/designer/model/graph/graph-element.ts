@@ -1,6 +1,6 @@
 import {Edge}     from "./edge";
 import {Vertex}   from "./vertex";
-import {Property} from "@aire/condensation/condensation";
+import {Property} from "../../../condensation/condensation";
 
 export class CanvasLayout {
   x : number;

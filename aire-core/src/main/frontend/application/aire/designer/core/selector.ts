@@ -1,10 +1,12 @@
-import { mxGraph, mxRubberband } from 'mxgraph';
+import {mxGraph, mxRubberband} from 'mxgraph/javascript/mxClient';
+
 export class CanvasSelector extends mxRubberband {
-  private minx: number;
-  private miny: number;
-  private maxWidth: number;
-  private maxHeight: number;
-  constructor(mxGraph: mxGraph, private readonly container: HTMLElement) {
+  private minx : number;
+  private miny : number;
+  private maxWidth : number;
+  private maxHeight : number;
+
+  constructor(mxGraph : mxGraph, private readonly container : HTMLElement) {
     super(mxGraph);
     this.updateBounds();
   }
@@ -27,7 +29,7 @@ export class CanvasSelector extends mxRubberband {
     this.maxHeight = height;
   }
 
-  update(x: number, y: number) {
+  update(x : number, y : number) {
     let left = this.minx,
       top = this.miny,
       width = this.maxWidth,
@@ -48,7 +50,7 @@ export class CanvasSelector extends mxRubberband {
     super.update(x, y);
   }
 
-  public toString(): string {
+  public toString() : string {
     return `Selector {
             x: ${this.minx},
             y:${this.miny},

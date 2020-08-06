@@ -7,16 +7,17 @@ import {
   mxMouseEvent,
   mxUtils,
   Style
-} from 'mxgraph';
-import { Canvas } from './canvas';
+}               from 'mxgraph/javascript/mxClient';
+import {Canvas} from './canvas';
 
 export class DefaultHoverListener implements MouseListener {
-  private previousStyle: Style;
-  private currentState: mxCellState;
+  private previousStyle : Style;
+  private currentState : mxCellState;
 
-  constructor(private graph: Canvas) {}
+  constructor(private graph : Canvas) {
+  }
 
-  dragEnter(event: mxEvent, state: mxCellState): void {
+  dragEnter(event : mxEvent, state : mxCellState) : void {
     if (state && state.shape) {
       this.previousStyle = state.style;
       state.style = mxUtils.clone(state.style);
@@ -31,7 +32,7 @@ export class DefaultHoverListener implements MouseListener {
     }
   }
 
-  dragLeave(event: mxEvent, state: mxCellState): void {
+  dragLeave(event : mxEvent, state : mxCellState) : void {
     if (state && state.shape) {
       state.style = this.previousStyle;
       this.updateStyle(state, false);
@@ -45,16 +46,17 @@ export class DefaultHoverListener implements MouseListener {
     }
   }
 
-  mouseDown(sender: mxGraph, event: mxMouseEvent): void {
+  mouseDown(sender : mxGraph, event : mxMouseEvent) : void {
     if (this.currentState) {
       this.dragLeave(event.getEvent(), this.currentState);
       this.currentState = null;
     }
   }
 
-  mouseUp(sender, a): void {}
+  mouseUp(sender, a) : void {
+  }
 
-  mouseMove(sender: mxGraph, me: mxMouseEvent): void {
+  mouseMove(sender : mxGraph, me : mxMouseEvent) : void {
     if (this.currentState && me.getState() == this.currentState) {
       return;
     }
@@ -75,7 +77,7 @@ export class DefaultHoverListener implements MouseListener {
     }
   }
 
-  updateStyle(state: mxCellState, hover: boolean) {
+  updateStyle(state : mxCellState, hover : boolean) {
     if (hover) {
       state.style[mxConstants.STYLE_STROKECOLOR] = '#254033';
     }

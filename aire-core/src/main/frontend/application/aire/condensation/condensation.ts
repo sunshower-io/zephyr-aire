@@ -1,4 +1,4 @@
-import {Class, getClass} from "@aire/core/lang";
+import {Class, getClass} from "../core/lang";
 
 export type Decorator = (
   target,

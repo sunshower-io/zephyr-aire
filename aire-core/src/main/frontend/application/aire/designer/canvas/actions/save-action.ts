@@ -1,5 +1,5 @@
-import {Canvas}    from "@aire/designer/canvas";
-import {JsonCodec} from "@aire/designer/codec/json-codec";
+import {Canvas}    from "../canvas";
+import {JsonCodec} from "../../codec/json-codec";
 
 export class SaveAction {
   name : string = "save";

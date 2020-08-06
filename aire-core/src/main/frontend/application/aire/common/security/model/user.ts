@@ -1,6 +1,6 @@
 import {Token}    from "./token";
-import {Property} from "@aire/condensation/condensation";
-import {Image}    from "@aire/designer/core";
+import {Property} from "../../../condensation/condensation";
+import {Image}    from "../../../designer/core";
 
 export class Principal {
   id : string;

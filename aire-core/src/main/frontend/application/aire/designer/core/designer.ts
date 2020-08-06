@@ -1,16 +1,14 @@
-import {Point2D}                  from '@aire/common/math';
-import {Canvas}                   from '@aire/designer/canvas';
-import {CanvasModel}              from '@aire/designer/model';
-import {UndoAction}               from '@aire/designer/canvas/actions/undo-action';
-import {RedoAction}               from '@aire/designer/canvas/actions/redo-action';
-import {SaveAction}               from '@aire/designer/canvas/actions/save-action';
-import {TaskGraph}                from '@aire/designer/model/graph/graph-element';
-import {DesignerLoader}           from './loader';
-import {Codec}                    from '@aire/designer/codec';
-import {DeleteSelectionAction}    from '@aire/designer/canvas/actions/delete-action';
-import {CanvasSelector}           from './selector';
+import {Point2D}     from '../../common/math';
+import {Canvas}      from '../canvas/canvas';
+import {CanvasModel} from '../model/model';
+import {UndoAction} from '../canvas/actions/undo-action';
+import {RedoAction}     from '../canvas/actions/redo-action';
+import {TaskGraph}      from '../model/graph/graph-element';
+import {DesignerLoader}        from './loader';
+import {Codec}                 from '../codec/codec';
+import {DeleteSelectionAction} from '../canvas/actions/delete-action';
+import {CanvasSelector}        from './selector';
 import {BringToFront, SendToBack} from '../canvas/actions/btf-action';
-import {Action}                   from '@aire/designer/canvas/action';
 
 export class Designer {
   private codec : Codec;

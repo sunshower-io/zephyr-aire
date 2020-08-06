@@ -1,4 +1,4 @@
-import {mxGraph, mxPoint, mxGraphView, mxEvent} from 'mxgraph';
+import {mxGraph, mxPoint, mxGraphView, mxEvent} from 'mxgraph/javascript/mxClient';
 
 export interface GridOptions {
   strokeStyle? : string;

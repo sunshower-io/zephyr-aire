@@ -1,6 +1,6 @@
-import { Enum }                       from '@aire/core/lang';
+import { Enum }                       from '../../core/lang';
 import { mxCellOverlay, mxConstants } from 'mxgraph/javascript/mxClient';
-import {Image, Point}                 from "@aire/designer/core";
+import {Image, Point}                 from "../core";
 
 // import { Point, Image } from 'lib/designer/core';
 

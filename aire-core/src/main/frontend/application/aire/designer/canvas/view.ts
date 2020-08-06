@@ -1,11 +1,11 @@
-import { mxGraph, mxGraphView, mxRectangle, mxUtils } from 'mxgraph';
+import {mxGraph, mxGraphView, mxRectangle, mxUtils} from 'mxgraph/javascript/mxClient';
 
 export class View extends mxGraphView {
-  constructor(private graph: mxGraph) {
+  constructor(private graph : mxGraph) {
     super(graph);
   }
 
-  getBackgroundPageBounds(): mxRectangle {
+  getBackgroundPageBounds() : mxRectangle {
     let layout = this.graph.getPageLayout(),
       page = this.graph.getPageSize();
 
@@ -17,7 +17,7 @@ export class View extends mxGraphView {
     );
   }
 
-  validate(): void {
+  validate() : void {
     if (
       this.graph.container != null &&
       mxUtils.hasScrollbars(this.graph.container)

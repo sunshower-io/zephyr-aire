@@ -19,12 +19,12 @@ export class Overlay extends mxCellOverlay {
 }
 
 export interface Drawable extends Layer {
-  taskId? : string;
+  taskId : string;
 
-  drawable? : boolean;
-  labelVisible? : boolean;
-  labelClass? : string;
-  dropTarget? : boolean;
+  drawable : boolean;
+  labelVisible : boolean;
+  labelClass : string;
+  dropTarget : boolean;
 
   getLabel() : string;
 
@@ -52,17 +52,19 @@ export function decorateShape(shape : Class<mxRectangleShape>, ports : Port[]) {
 
 decorateShape(mxRectangleShape, defaultPorts);
 
-export abstract class RenderableElement extends mxCell implements Drawable {
-  taskId ? : string;
+export abstract class RenderableElement extends mxCell implements Drawable, Layer {
+  id : string;
+  taskId : string;
   drawable : boolean;
   dropTarget : boolean;
 
   labelVisible : boolean = true;
   labelClass : string = 'default-label';
-  cellOverlays ? : Overlay[];
+  cellOverlays : Overlay[];
 
-  shape ? : mxShape;
-  parent ? : Drawable;
+  shape : mxShape;
+  parent : Drawable;
+  children : Layer[];
   dependencies ? : Dependency[];
   manager ? : ConstraintManager;
 
@@ -149,6 +151,8 @@ export abstract class RenderableElement extends mxCell implements Drawable {
 }
 
 export abstract class Edge extends mxCell {
+  id : string;
+
   constructor(
     public source : RenderableVertex,
     public target : RenderableVertex

@@ -173,6 +173,7 @@ export abstract class DefaultElementFactory
 
 export class Palette {
   public canvas : Canvas;
+  public name: string;
 
 
   constructor(public factoryProvider : ElementFactoryProvider) {

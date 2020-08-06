@@ -13,21 +13,17 @@ import {
   mxCell,
   mxRectangle,
   mxGraphView
-}                                      from "mxgraph/javascript/mxClient";
+} from "mxgraph/javascript/mxClient";
 
-import {Grid}                          from "";
-import {CanvasModel}                   from 'lib/designer/model';
-import {KeyHandler}                    from './key-handler';
-import {Chord}                         from 'aire/components/aire-action';
-import {Action}                        from './action';
-import {Drawable, RenderableElement}   from 'lib/designer/model/elements';
-import {ElementFactory, ElementLoader} from './palette';
-import {filter}                        from 'rxjs/operators';
-import {Subject, Observable}           from 'rxjs';
-import {GraphHandler}                  from './graph-handler';
-import {DefaultConnectionHandler}      from './connection-handler';
-import {DefaultHoverListener}          from './graph-listeners';
-import {EventAggregator}               from 'aurelia-event-aggregator';
+import {CanvasModel}                   from "@aire/designer/model";
+import {Chord, KeyHandler}             from "./key-handler";
+import {Action}                        from "./action";
+import {Drawable, RenderableElement}   from "@aire/designer/model/elements";
+import {ElementFactory, ElementLoader} from "./palette";
+import {GraphHandler}                  from "./graph-handler";
+import {DefaultConnectionHandler}      from "./connection-handler";
+import {DefaultHoverListener}          from "./graph-listeners";
+import {Grid}                          from "@aire/designer/core/grid";
 
 export interface CanvasEvent<T> {
   data : T;
@@ -53,31 +49,31 @@ mxUtils.getPortConstraints = function (terminal, edge, source, defaultValue) {
   return mxUtilsGetPortConstraints.apply(this, arguments);
 };
 
-// mxConstants.GUIDE_COLOR = '#660066';
-// mxConstants.HANDLE_FILLCOLOR = '#FF9900';
-// mxConstants.HANDLE_STROKECOLOR = '#FF9900';
-// mxConstants.VERTEX_SELECTION_COLOR = '#FF9900';
-// mxConstants.DROP_TARGET_COLOR = '#4D5E7C';
-// mxConstants.DEFAULT_VALID_COLOR = '#77CCA4';
-// mxConstants.VALID_COLOR = '#77CCA4';
-// mxConstants.OUTLINE_HIGHLIGHT_COLOR = '#2385AF';
-// mxConstants.HIGHLIGHT_COLOR = '#2385AF';
+// mxConstants.GUIDE_COLOR = "#660066";
+// mxConstants.HANDLE_FILLCOLOR = "#FF9900";
+// mxConstants.HANDLE_STROKECOLOR = "#FF9900";
+// mxConstants.VERTEX_SELECTION_COLOR = "#FF9900";
+// mxConstants.DROP_TARGET_COLOR = "#4D5E7C";
+// mxConstants.DEFAULT_VALID_COLOR = "#77CCA4";
+// mxConstants.VALID_COLOR = "#77CCA4";
+// mxConstants.OUTLINE_HIGHLIGHT_COLOR = "#2385AF";
+// mxConstants.HIGHLIGHT_COLOR = "#2385AF";
 
 mxConstants.HANDLE_SIZE = 3;
-mxConstants.HANDLE_FILLCOLOR = '#6a6b8a';
-mxConstants.HANDLE_STROKECOLOR = '#686b8a';
-mxConstants.VERTEX_SELECTION_COLOR = '#E74694';
-mxConstants.DEFAULT_VALID_COLOR = '#E74694';
+mxConstants.HANDLE_FILLCOLOR = "#6a6b8a";
+mxConstants.HANDLE_STROKECOLOR = "#686b8a";
+mxConstants.VERTEX_SELECTION_COLOR = "#E74694";
+mxConstants.DEFAULT_VALID_COLOR = "#E74694";
 mxConstants.OUTLINE_HIGHLIGHT_STROKEWIDTH = 1;
-mxConstants.HIGHLIGHT_COLOR = '#E74694';
-mxConstants.OUTLINE_HIGHLIGHT_COLOR = '#E74694';
-mxConstants.VALID_COLOR = '#E74694';
-mxConstants.EDGE_SELECTION_COLOR = '#E74694';
+mxConstants.HIGHLIGHT_COLOR = "#E74694";
+mxConstants.OUTLINE_HIGHLIGHT_COLOR = "#E74694";
+mxConstants.VALID_COLOR = "#E74694";
+mxConstants.EDGE_SELECTION_COLOR = "#E74694";
 
 export namespace ElementEvent {
   export namespace Vertices {
-    export let DoubleClicked : string = 'vertex:double-clicked';
-    export let SingleClicked : string = 'vertex:single-clicked';
+    export let DoubleClicked : string = "vertex:double-clicked";
+    export let SingleClicked : string = "vertex:single-clicked";
   }
 }
 
@@ -92,13 +88,11 @@ export class Canvas extends mxGraph {
   private undoListener : any;
 
   private providers : ElementFactory[];
-  private subject : Subject<CanvasEvent<any>>;
 
   public readonly keyHandler : KeyHandler;
   readonly historyManager : mxUndoManager;
 
   constructor(
-    private readonly eventBus : EventAggregator,
     public readonly container : HTMLElement,
     model : CanvasModel
   ) {
@@ -106,14 +100,14 @@ export class Canvas extends mxGraph {
 
     if (!mxClient.isBrowserSupported()) {
       window.alert(
-        'Browser is not supported.  Please upgrade to a supported browser (Chrome, Firefox, Edge)'
+        "Browser is not supported.  Please upgrade to a supported browser (Chrome, Firefox, Edge)"
       );
       throw new Error(
-        'Browser is not supported.  ' + 'Please upgrade to a modern browser'
+        "Browser is not supported.  " + "Please upgrade to a modern browser"
       );
     }
     this.foldingEnabled = false;
-    this.subject = new Subject();
+    // this.subject = new Subject();
     this.setConnectable(true);
     this.setAllowDanglingEdges(false);
     this.setDisconnectOnMove(false);
@@ -144,47 +138,47 @@ export class Canvas extends mxGraph {
   }
 
   public publishEvent(event : ElementEvent) {
-    this.eventBus.publish(event.topic, event);
+    // this.eventBus.publish(event.topic, event);
   }
 
   protected clickListener = (sender : any, e : any) => {
-    let cell = e.getProperty('cell');
+    let cell = e.getProperty("cell");
     if (cell && cell.onClick) {
       let vert = cell as Drawable;
       (vert as any).onClick(sender, e, this);
     }
 
-    this.dispatch({
-      data : cell,
-      type : 'cell-selected'
-    });
+    // this.dispatch({
+    //   data : cell,
+    //   type : "cell-selected"
+    // });
   };
 
   protected doubleClickListener = (sender : any, e : any) => {
-    let cell = e.getProperty('cell');
+    let cell = e.getProperty("cell");
     if (cell && cell.onDoubleClick) {
       let vert = cell as Drawable;
       (vert as any).onDoubleClick(sender, e, this);
     }
 
-    this.dispatch({
-      data : cell,
-      type : 'cell-double-clicked'
-    });
+    // this.dispatch({
+    //   data : cell,
+    //   type : "cell-double-clicked"
+    // });
   };
 
   private graphChanged = (sender : any, e : any) => {
-    this.dispatch({
-      type : 'graph-changed',
-      data : this.getChildVertices(this.getDefaultParent())
-    });
+    // this.dispatch({
+    //   type : "graph-changed",
+    //   data : this.getChildVertices(this.getDefaultParent())
+    // });
   };
 
   private cellSelected = (sender : any, e : any) => {
-    this.dispatch({
-      type : 'selection-changed',
-      data : this.getSelectionModel()
-    });
+    // this.dispatch({
+    //   type : "selection-changed",
+    //   data : this.getSelectionModel()
+    // });
   };
 
   public getAllConnectionConstraints(terminal : mxCellState, source : boolean) {
@@ -213,11 +207,12 @@ export class Canvas extends mxGraph {
   }
 
   getConnectionPoint(
-    vertex : mxCell,
+    v : mxCell,
     constraint : mxConnectionConstraint
   ) : mxPoint {
+    let vertex : Layer = v;
     if (constraint.id && vertex && vertex.shape) {
-      var port = vertex.shape.getPorts()[constraint.id];
+      const port = vertex.shape.getPorts()[constraint.id];
 
       if (port) {
         constraint = new mxConnectionConstraint(
@@ -261,16 +256,16 @@ export class Canvas extends mxGraph {
     super.cellsMoved(cells, dx, dy, false, false, true);
   }
 
-  public listen<T>(key : string) : Observable<CanvasEvent<T>> {
-    return this.subject.pipe(filter(
-      (v : CanvasEvent<any>, i : number) => v.type === key
-    ));
-  }
+  // public listen<T>(key : string) : Observable<CanvasEvent<T>> {
+  //   // return this.subject.pipe(filter(
+  //   //   (v : CanvasEvent<any>, i : number) => v.type === key
+  //   // ));
+  // }
 
-  public dispatch<T>(e : CanvasEvent<T>) : void {
-    this.eventBus.publish(ElementEvent.Vertices.SingleClicked, e);
-    this.subject.next(e);
-  }
+  // public dispatch<T>(e : CanvasEvent<T>) : void {
+  //   this.eventBus.publish(ElementEvent.Vertices.SingleClicked, e);
+  //   this.subject.next(e);
+  // }
 
   public register(chord : Chord, action : Action) : void {
     this.keyHandler.bind(chord, action);
@@ -322,7 +317,7 @@ export class Canvas extends mxGraph {
   }
 
   getLabel(cell : Layer) : HTMLElement | string {
-    let label = this.labelsVisible ? this.convertValueToString(cell) : '',
+    let label = this.labelsVisible ? this.convertValueToString(cell) : "",
       geometry = this.model.getGeometry(cell);
 
     if (
@@ -339,14 +334,14 @@ export class Canvas extends mxGraph {
         max = geometry.width / (fontSize * 0.625);
 
       if (max < label.length) {
-        return label.substring(0, max) + '...';
+        return label.substring(0, max) + "...";
       }
     }
 
     if (cell instanceof RenderableElement) {
       let re = <RenderableElement>cell;
       if (re.labelVisible) {
-        let el = document.createElement('div') as any;
+        let el = document.createElement("div") as any;
         el.style.offsetTop -= 0.6 * geometry.height;
         el.classList.add(re.labelClass);
         el.innerHTML = label as string;
@@ -386,7 +381,7 @@ export class Canvas extends mxGraph {
   protected createUndoManager() {
     let undoMgr = new mxUndoManager();
     this.undoListener = function (sender, evt) {
-      undoMgr.undoableEditHappened(evt.getProperty('edit'));
+      undoMgr.undoableEditHappened(evt.getProperty("edit"));
     };
 
     let listener = mxUtils.bind(this, function (sender, evt) {
@@ -398,11 +393,11 @@ export class Canvas extends mxGraph {
 
     let undoHandler = (sender, evt) => {
       let cand = this.getSelectionCellsForChanges(
-        evt.getProperty('edit').changes
+        evt.getProperty("edit").changes
         ),
         model = this.getModel(),
         cells = [];
-      for (var i = 0; i < cand.length; i++) {
+      for (let i = 0; i < cand.length; i++) {
         if (
           (model.isVertex(cand[i]) || model.isEdge(cand[i])) &&
           this.view.getState(cand[i]) != null

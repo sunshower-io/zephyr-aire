@@ -1,29 +1,30 @@
-import { Layout } from './layout';
-import { Entity, Property } from 'lib/designer/model/entity';
-import { UUID } from 'aire/core/uuid';
-import { Identifier } from 'aire/core/identifiers';
+import {Layout}           from "./layout";
+import {Entity, Property} from "@aire/designer/model/entity";
+import {UUID}             from "@aire/core/uuid";
+import {Identifier}       from "@aire/core/identifiers";
 
-type ContentType = 'file' | 'reference';
+type ContentType = "file" | "reference";
 
 export class PropertyAwareObject {
-  type: string;
-  properties?: Property[];
+  type : string;
+  properties? : Property[];
 
-  constructor() {}
+  constructor() {
+  }
 }
 
 export class Content extends PropertyAwareObject {
-  id?: string;
+  id? : string;
 
-  reference?: string;
-  value?: string;
-  mediaType?: string;
-  contentType?: ContentType;
-  name?: string;
+  reference? : string;
+  value? : string;
+  mediaType? : string;
+  contentType? : ContentType;
+  name? : string;
 
-  static type: string = 'io.sunshower.gyre.api.model.ContentElement';
+  static type : string = "io.sunshower.gyre.api.model.ContentElement";
 
-  constructor(data?: any) {
+  constructor(data? : any) {
     super();
     if (data) {
       Object.assign(this, data);
@@ -34,18 +35,18 @@ export class Content extends PropertyAwareObject {
 }
 
 export class Vertex {
-  id: string;
-  type: string;
-  layout: Layout;
+  id : string;
+  type : string;
+  layout : Layout;
 
-  name: string;
+  name : string;
 
-  entities: Entity[];
+  entities : Entity[];
 
-  properties: Property[];
-  reference: any;
+  properties : Property[];
+  reference : any;
 
-  constructor(data?: any) {
+  constructor(data? : any) {
     Object.assign(this, data);
     this.properties = [];
     this.entities = [];

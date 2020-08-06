@@ -1,21 +1,21 @@
-import { range } from 'aire/core/lang';
+import {range} from "@aire/core/lang";
 
 export class UUID {
-  public readonly value: string;
+  public readonly value : string;
 
-  constructor(value: string) {
+  constructor(value : string) {
     this.value = value;
   }
 
-  static fromString(str: string): UUID {
+  static fromString(str : string) : UUID {
     return new UUID(str);
   }
 
-  static random(): string {
+  static random() : string {
     return UUID.randomUUID().value;
   }
 
-  static randomBytes(): number[] {
+  static randomBytes() : number[] {
     let d = new Date().getTime();
     if (window.performance && typeof window.performance.now === 'function') {
       d += performance.now();
@@ -31,12 +31,12 @@ export class UUID {
     });
   }
 
-  static randomUUID(): UUID {
+  static randomUUID() : UUID {
     let d = new Date().getTime();
     if (window.performance && typeof window.performance.now === 'function') {
       d += performance.now();
     }
-    let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(
+    let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (
       c
     ) {
       var r = (d + Math.random() * 16) % 16 | 0;
@@ -46,14 +46,14 @@ export class UUID {
     return new UUID(uuid);
   }
 
-  static randomId(len: number): string {
+  static randomId(len : number) : string {
     let id = 'x'.repeat(len).replace(/x/g, c => {
       return ((Math.random() * 16) % 16 | 0).toString(16);
     });
     return id;
   }
 
-  toString(): string {
+  toString() : string {
     return this.value;
   }
 }

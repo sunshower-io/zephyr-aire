@@ -1,6 +1,6 @@
-import { Canvas, ElementEvent } from 'lib/designer/canvas/canvas';
+import { Canvas, ElementEvent } from '@aire/designer/canvas/canvas';
 
-import { RenderableVertex as Vertex } from 'lib/designer/model';
+import { RenderableVertex as Vertex } from '@aire/designer/model';
 import { Layer } from 'mxgraph';
 
 export class ComplexGyre extends Vertex {

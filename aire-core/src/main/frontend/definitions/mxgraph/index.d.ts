@@ -1,284 +1,288 @@
-
 /// <reference path="./geometry.d.ts" />
 /// <reference path="./graph.d.ts" />
+/// <reference path="./cell.d.ts" />
 /// <reference path="./utils.d.ts" />
 /// <reference path="./constants.d.ts" />
 declare module "mxgraph/javascript/mxClient" {
 
 
-    export class mxXmlCanvas2D {
+  export class mxXmlCanvas2D {
 
-        scale(scale: number): void;
+    scale(scale : number) : void;
 
-        translate(x: number, y: number): void;
+    translate(x : number, y : number) : void;
 
 
-    }
+  }
 
 
-    export interface Cloneable<T> {
-        clone(): T;
-    }
-    export class mxClient {
-        static isBrowserSupported(): boolean;
+  export interface Cloneable<T> {
+    clone() : T;
+  }
 
-        static basePath: string;
-        static imageBasePath: string;
-    }
+  export class mxClient {
+    static isBrowserSupported() : boolean;
 
-    export class XmlDocument {
+    static basePath : string;
+    static imageBasePath : string;
+  }
 
-        /**
-         *
-         * @param key
-         * @param value
-         */
-        setAttribute(key: string, value: string): void;
+  export class XmlDocument {
 
-        /**
-         *
-         * @param cell
-         */
-        appendChild(cell: XmlDocument): void;
+    /**
+     *
+     * @param key
+     * @param value
+     */
+    setAttribute(key : string, value : string) : void;
 
-        /**
-         *
-         * @param name
-         */
-        createElement(name: string): XmlDocument;
+    /**
+     *
+     * @param cell
+     */
+    appendChild(cell : XmlDocument) : void;
 
-        /**
-         *
-         * @param namespace
-         * @param name
-         */
+    /**
+     *
+     * @param name
+     */
+    createElement(name : string) : XmlDocument;
 
-        createElementNS(namespace: string, name: string): XmlDocument;
+    /**
+     *
+     * @param namespace
+     * @param name
+     */
 
+    createElementNS(namespace : string, name : string) : XmlDocument;
 
-        /**
-         *
-         * @param namespace
-         * @param name
-         * @param xlink
-         */
-        setAttributeNS(namespace: string, name: string, xlink?: string): void;
 
-    }
+    /**
+     *
+     * @param namespace
+     * @param name
+     * @param xlink
+     */
+    setAttributeNS(namespace : string, name : string, xlink? : string) : void;
 
+  }
 
-    export interface Connectable {
-        isConnectable(): boolean;
-        setConnectable(connectable: boolean): void;
-    }
 
+  export interface Connectable {
+    isConnectable() : boolean;
 
-    //not technically part of mxGraph's api, but w/e.
-    export interface Component<T extends Layer> {
-        graph: mxGraph;
-        constituent: boolean;
-        cast(): T;
-    }
+    setConnectable(connectable : boolean) : void;
+  }
 
 
-    export class mxVertex extends mxCell implements Layer {
-      children : Layer[];
-      edges : Layer[];
-      geometry : mxGeometry;
-      id : string;
-      parent : Layer;
-      shape : mxShape;
-      source : Layer;
-      style : string;
-      target : Layer;
-      value : any;
+  //not technically part of mxGraph's api, but w/e.
+  export interface Component<T extends Layer> {
+    graph : mxGraph;
+    constituent : boolean;
 
-      clone() : Layer;
+    cast() : T;
+  }
 
-      getAttribute(key : string) : string;
 
-      getChildAt(index : number) : Layer;
+  export class mxVertex extends mxCell implements Layer {
+    children : Layer[];
+    edges : Layer[];
+    geometry : mxGeometry;
+    id : string;
+    parent : Layer;
+    shape : mxShape;
+    source : Layer;
+    style : string;
+    target : Layer;
+    value : any;
 
-      getChildCount() : number;
+    clone() : Layer;
 
-      getParent() : Layer;
+    getAttribute(key : string) : string;
 
-      getProperty(key : string) : string;
+    getChildAt(index : number) : Layer;
 
-      insert(child : Layer, index? : number) : void;
+    getChildCount() : number;
 
-      isConnectable() : boolean;
+    getParent() : Layer;
 
-      isEdge() : boolean;
+    getProperty(key : string) : string;
 
-      isVertex() : boolean;
+    insert(child : Layer, index? : number) : void;
 
-      setAttribute(key : string, value : string) : void;
+    isConnectable() : boolean;
 
-      setConnectable(connectable : boolean) : void;
+    isEdge() : boolean;
 
-      setEdge(edge : boolean) : void;
+    isVertex() : boolean;
 
-      setGeometry(geo : mxGeometry) : void;
+    setAttribute(key : string, value : string) : void;
 
-      setParent(layer : Layer) : void;
+    setConnectable(connectable : boolean) : void;
 
-      setProperty(key : string, value : string) : void;
+    setEdge(edge : boolean) : void;
 
-      setStyle(style : string) : void;
+    setGeometry(geo : mxGeometry) : void;
 
-      setValue(label : string) : void;
+    setParent(layer : Layer) : void;
 
-      setVertex(vertex : boolean) : void;
+    setProperty(key : string, value : string) : void;
 
-      setVisible(b : boolean) : void;
+    setStyle(style : string) : void;
 
+    setValue(label : string) : void;
 
-    }
+    setVertex(vertex : boolean) : void;
 
-    type Bounds = mxGraphBounds;
+    setVisible(b : boolean) : void;
 
 
-    export class mxGraphModel {
+  }
 
-        root: Layer;
+  type Bounds = mxGraphBounds;
 
 
-        createId(): string;
+  export class mxGraphModel {
 
+    root : Layer;
 
-        constructor(root?: Layer);
-        setValue(layer: Layer, value: any) : void;
 
-        isCollapsed(layer: Layer) : boolean;
+    createId() : string;
 
-        addListener(k:string, v:any) : void;
 
-        remove(cell:Layer) : Layer;
+    constructor(root? : Layer);
 
-        clear() : void;
+    setValue(layer : Layer, value : any) : void;
 
+    isCollapsed(layer : Layer) : boolean;
 
-        /**
-         *
-         * @param layer
-         */
-        isEdge(layer: Layer): boolean;
+    addListener(k : string, v : any) : void;
 
-        /**
-         *
-         * @param layer
-         */
-        isVertex(layer: Layer): boolean;
+    remove(cell : Layer) : Layer;
 
-        /**
-         *
-         * @param cell
-         * @param geometry
-         */
-        setGeometry(cell: Layer, geometry: mxGeometry) : void;
+    clear() : void;
 
-        /**
-         *
-         * @param parent
-         * @param vertices
-         * @param edges
-         */
 
-        getChildCells(parent: Layer,
-                      vertices: boolean,
-                      edges: boolean): Layer[];
+    /**
+     *
+     * @param layer
+     */
+    isEdge(layer : Layer) : boolean;
 
+    /**
+     *
+     * @param layer
+     */
+    isVertex(layer : Layer) : boolean;
 
-        getCellState(cell: Layer): mxCellState;
+    /**
+     *
+     * @param cell
+     * @param geometry
+     */
+    setGeometry(cell : Layer, geometry : mxGeometry) : void;
 
-        /**
-         *
-         * @param parent
-         * @param index
-         */
-        getChildAt(parent: Layer, index: number): Layer;
+    /**
+     *
+     * @param parent
+     * @param vertices
+     * @param edges
+     */
 
-        /**
-         *
-         * @param cell
-         */
-        getGeometry(cell: Layer): mxGeometry;
+    getChildCells(
+      parent : Layer,
+      vertices : boolean,
+      edges : boolean
+    ) : Layer[];
 
-        /**
-         *
-         */
-        endUpdate(): void;
 
-        /**
-         *
-         */
-        beginUpdate(): void;
+    getCellState(cell : Layer) : mxCellState;
 
-        getChildCount(cell: Layer): number;
+    /**
+     *
+     * @param parent
+     * @param index
+     */
+    getChildAt(parent : Layer, index : number) : Layer;
 
-        /**
-         *
-         * @param id
-         */
-        getCell(id: string): Layer;
+    /**
+     *
+     * @param cell
+     */
+    getGeometry(cell : Layer) : mxGeometry;
 
-        /**
-         *
-         * @param cell
-         */
-        getParent(cell: Layer): Layer;
+    /**
+     *
+     */
+    endUpdate() : void;
 
-        /**
-         *
-         * @param cell
-         */
-        isVertex(cell: Layer): boolean;
-    }
+    /**
+     *
+     */
+    beginUpdate() : void;
 
+    getChildCount(cell : Layer) : number;
 
+    /**
+     *
+     * @param id
+     */
+    getCell(id : string) : Layer;
 
+    /**
+     *
+     * @param cell
+     */
+    getParent(cell : Layer) : Layer;
 
-    export class mxRubberband {
-        constructor(g: mxGraph);
+    /**
+     *
+     * @param cell
+     */
+    isVertex(cell : Layer) : boolean;
+  }
 
-        static enabled: boolean;
-        static defaultOpacity: number;
 
-        currentX: number;
-        currentY: number;
+  export class mxRubberband {
+    constructor(g : mxGraph);
 
+    static enabled : boolean;
+    static defaultOpacity : number;
 
-        mouseDown(a: any, b: any): any;
+    currentX : number;
+    currentY : number;
 
-        /**
-         * @param a
-         * @param b
-         */
 
-        mouseUp(a: any, b: any): any;
+    mouseDown(a : any, b : any) : any;
 
-        /**
-         *
-         * @param x
-         * @param y
-         */
+    /**
+     * @param a
+     * @param b
+     */
 
-        update(x: number, y: number): void;
+    mouseUp(a : any, b : any) : any;
 
-        /**
-         *
-         * @param a
-         * @param b
-         */
+    /**
+     *
+     * @param x
+     * @param y
+     */
 
-        mouseMove(a: any, b: any): any;
+    update(x : number, y : number) : void;
 
-        /**
-         * @param x
-         * @param y
-         */
-        start(x: number, y: number): void;
-    }
+    /**
+     *
+     * @param a
+     * @param b
+     */
+
+    mouseMove(a : any, b : any) : any;
+
+    /**
+     * @param x
+     * @param y
+     */
+    start(x : number, y : number) : void;
+  }
 
 }

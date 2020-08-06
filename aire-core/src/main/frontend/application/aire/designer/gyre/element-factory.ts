@@ -1,46 +1,39 @@
 import {
   DefaultElementFactory,
   ElementLoader
-} from 'lib/designer/canvas/palette';
-import { Canvas } from 'lib/designer/canvas/canvas';
+}               from "@aire/designer/canvas/palette";
+import {Canvas} from "@aire/designer/canvas/canvas";
 
-import { Drawable, RenderableVertex as Vertex } from 'lib/designer/model';
+import {Drawable} from "@aire/designer/model";
 
-import { Role } from 'lib/common/security/model/user';
+import {Role} from "@aire/common/security/model/user";
 
-import { Vertex as TaskVertex } from 'lib/designer/model/graph';
-import { Dependency, Item, Reference } from 'lib/designer/base/model';
-import { Images } from 'lib/utils/image';
+import {Vertex as TaskVertex} from "@aire/designer/model/graph";
+import {Images}               from "@aire/utils/image";
 import imgData = Images.imgData;
 
-import { ConstraintManager } from 'lib/designer/base/dependencies';
-import { Identifier } from 'aire/core/identifiers';
-import { ConstructorFactory } from 'lib/designer/base/factory';
-import { LoaderRegistry } from 'lib/designer/base/loader-registry';
-import { createGyreLoaderRegistry } from './gyre-registry';
-import { DesignerManager } from 'lib/designer/core/designer-manager';
+import {ConstraintManager}  from "@aire/designer/base/dependencies";
+import {Identifier}         from "@aire/core/identifiers";
+import {ConstructorFactory} from "@aire/designer/base/factory";
+import {Item}               from "@aire/designer/base/model";
 
 export class GyreFactory extends DefaultElementFactory
   implements ElementLoader {
-  taskName: string;
-  rolesAllowed: Role[] = [new Role('admin')];
-  elementName: string = 'Composite Node';
+  taskName : string;
+  rolesAllowed : Role[] = [new Role("admin")];
+  elementName : string = "Composite Node";
 
-  displayIcon: string = 'assets/logos/blocks.svg';
-  paletteIcon: string = 'assets/logos/blocks.svg';
-  taskId: string;
-  reference: Reference;
+  displayIcon : string = "assets/logos/blocks.svg";
+  paletteIcon : string = "assets/logos/blocks.svg";
+  taskId : string;
 
-  private readonly dependencies: Dependency[];
 
-  private readonly constructorFactory: ConstructorFactory;
+  private readonly constructorFactory : ConstructorFactory;
 
-  static types: LoaderRegistry;
 
   constructor(
-    private readonly model: Item,
-    public readonly constraintManager: ConstraintManager,
-    private readonly designerManager: DesignerManager
+    private readonly model : Item,
+    public readonly constraintManager : ConstraintManager,
   ) {
     super();
     this.taskName = model.name;
@@ -48,47 +41,45 @@ export class GyreFactory extends DefaultElementFactory
     let data = imgData(model.image);
     this.displayIcon = data;
     this.paletteIcon = data;
-    this.reference = model.reference;
-    this.dependencies = model.dependencies;
     constraintManager.register(model.id, this);
-    if (!GyreFactory.types) {
-      GyreFactory.types = createGyreLoaderRegistry(designerManager);
-    }
-    this.constructorFactory = GyreFactory.types.resolve(model);
+    // if (!GyreFactory.types) {
+    //   GyreFactory.types = createGyreLoaderRegistry();
+    // }
+    // this.constructorFactory = GyreFactory.types.resolve(model);
   }
 
   newElement(
-    x: number,
-    y: number,
-    event: Event,
-    canvas: Canvas,
-    target: any
-  ): Drawable {
+    x : number,
+    y : number,
+    event : Event,
+    canvas : Canvas,
+    target : any
+  ) : Drawable {
     // let l = v.layout;
     return this.constructorFactory.construct({
-      loader: this,
-      x: x,
-      y: y,
-      id: this.taskId,
-      taskId: Identifier.newId(),
-      isCreate: true
+      loader   : this,
+      x        : x,
+      y        : y,
+      id       : this.taskId,
+      taskId   : Identifier.newId(),
+      isCreate : true
     });
   }
 
-  load(model: Canvas, v: TaskVertex): Drawable {
+  load(model : Canvas, v : TaskVertex) : Drawable {
     let l = v.layout;
     return this.constructorFactory.construct({
-      loader: this,
-      x: l.x,
-      y: l.y,
-      width: l.width,
-      height: l.height,
-      id: v.id,
-      taskId: v.id
+      loader : this,
+      x      : l.x,
+      y      : l.y,
+      width  : l.width,
+      height : l.height,
+      id     : v.id,
+      taskId : v.id
     });
   }
 
-  isHostableBy(e: Drawable): boolean {
+  isHostableBy(e : Drawable) : boolean {
     return true;
     // if (this.dependencies) {
     //   for (let dep of this.dependencies) {
@@ -100,13 +91,14 @@ export class GyreFactory extends DefaultElementFactory
     // return false;
   }
 
-  resolveElementLoader(key: string): ElementLoader {
+  resolveElementLoader(key : string) : ElementLoader {
     return this;
   }
 
-  handles(key: string): boolean {
-    return (
-      this.taskId === key || (this.reference && this.reference.targetId === key)
-    );
+  handles(key : string) : boolean {
+    return false;
+    // return (
+    //   this.taskId === key || (this.reference && this.reference.targetId === key)
+    // );
   }
 }

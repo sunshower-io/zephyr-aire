@@ -1,39 +1,40 @@
-import { Canvas, ElementEvent } from 'lib/designer/canvas/canvas';
+import {Canvas, ElementEvent} from "@aire/designer/canvas/canvas";
 
-import { RenderableVertex as Vertex } from 'lib/designer/model';
+import {RenderableVertex as Vertex} from "@aire/designer/model";
 
-import { Reference } from 'lib/designer/base/model';
-import { ConstraintManager } from 'lib/designer/base//dependencies';
-import { ReferenceVertex } from 'lib/designer//base/factory';
+import {Reference}         from "@aire/designer/base/model";
+import {ConstraintManager} from "@aire/designer/base//dependencies";
+import {ReferenceVertex}   from "@aire/designer//base/factory";
 
 export class GyreContainerNode extends Vertex implements ReferenceVertex {
-  reference: Reference;
+  reference : Reference;
 
-  image: string;
-  manager: ConstraintManager;
-  style = 'container-style';
+  image : string;
+  manager : ConstraintManager;
+  style = "container-style";
 
   constructor(
-    private name: string,
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-    id?: string,
-    cid?: string
+    private name : string,
+    x : number,
+    y : number,
+    width : number,
+    height : number,
+    id? : string,
+    cid? : string
   ) {
     super(name, x, y, width, height, id);
     this.id = cid;
     this.taskId = id;
   }
 
-  onDoubleClick(sender: Canvas, event: any): void {
+  onDoubleClick(sender : Canvas, event : any) : void {
     sender.publishEvent({
-      source: this,
-      event: event,
-      topic: ElementEvent.Vertices.DoubleClicked
+      source : this,
+      event  : event,
+      topic  : ElementEvent.Vertices.DoubleClicked
     });
   }
 
-  onClick(sender: any, event: any): void {}
+  onClick(sender : any, event : any) : void {
+  }
 }

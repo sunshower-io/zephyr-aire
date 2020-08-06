@@ -1,4 +1,4 @@
-
+/// <reference path="./drag-source.d.ts" />
 declare module "mxgraph/javascript/mxClient" {
 
 

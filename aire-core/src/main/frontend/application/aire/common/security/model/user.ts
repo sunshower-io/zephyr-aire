@@ -1,34 +1,33 @@
-import { Token } from './token';
-import { Property } from 'condensation/condensation';
-import { ValidationRules } from 'aurelia-validation';
-import { Image } from 'lib/tasks/task-model';
+import {Token}    from "./token";
+import {Property} from "@aire/condensation/condensation";
+import {Image}    from "@aire/designer/core";
 
 export class Principal {
-  id: string;
-  active: boolean;
-  lastName: string;
-  firstName: string;
-  username: string;
-  emailAddress: string;
-  phoneNumber: string;
-  roles: Role[];
+  id : string;
+  active : boolean;
+  lastName : string;
+  firstName : string;
+  username : string;
+  emailAddress : string;
+  phoneNumber : string;
+  roles : Role[];
 
-  constructor(value?: any) {
+  constructor(value? : any) {
     Object.assign(this, value);
     if (value) {
-      this.emailAddress = value['email-address'];
-      this.phoneNumber = value['phone-number'];
-      this.firstName = value['first-name'];
-      this.lastName = value['last-name'];
+      this.emailAddress = value["email-address"];
+      this.phoneNumber = value["phone-number"];
+      this.firstName = value["first-name"];
+      this.lastName = value["last-name"];
     }
   }
 }
 
 export class Authentication {
-  token: Token;
-  user: Principal;
+  token : Token;
+  user : Principal;
 
-  constructor(value?: any) {
+  constructor(value? : any) {
     if (value) {
       this.token = new Token(value.token);
       this.user = new Principal(value.principal);
@@ -37,84 +36,73 @@ export class Authentication {
 }
 
 export class Role {
-  constructor(public readonly authority?: string) {}
+  constructor(public readonly authority? : string) {
+  }
 }
 
 export interface ProtectedObject {
-  rolesAllowed: Role[];
-  rolesDenied: Role[];
+  rolesAllowed : Role[];
+  rolesDenied : Role[];
 }
 
 export class RegistrationConfirmation {
-  expires: string;
+  expires : string;
 
-  @Property('requested-on')
-  requestedOn: string;
+  @Property("requested-on")
+  requestedOn : string;
 
-  @Property('registration-id')
-  registrationId: string;
+  @Property("registration-id")
+  registrationId : string;
 
   @Property({
-    alias: 'principal',
-    type: Principal
+    alias : "principal",
+    type  : Principal
   })
-  principal: Principal;
+  principal : Principal;
 }
 
 export class RegistrationRequest {
-  type: string =
-    'io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement';
+  type : string =
+    "io.sunshower.sdk.v1.model.core.security.RegistrationRequestElement";
 
-  @Property('registration-id')
-  id: string;
+  @Property("registration-id")
+  id : string;
 
-  username: string;
+  username : string;
 
-  password: string;
+  password : string;
 
-  @Property('phone-number')
-  phoneNumber: string;
+  @Property("phone-number")
+  phoneNumber : string;
 
-  @Property('email-address')
-  emailAddress: string;
+  @Property("email-address")
+  emailAddress : string;
 
-  @Property('last-name')
-  lastName: string;
+  @Property("last-name")
+  lastName : string;
 
-  @Property('first-name')
-  firstName: string;
+  @Property("first-name")
+  firstName : string;
 
   @Property({
-    alias: 'image',
-    type: Image
+    alias : "image",
+    type  : Image
   })
-  image: Image;
+  image : Image;
 
-  constructor(value?: any) {
+  constructor(value? : any) {
     if (value) {
       Object.assign(this, value);
     }
 
-    ValidationRules.ensure((m: RegistrationRequest) => m.emailAddress)
-      .required()
-      .email()
-      .ensure((m: RegistrationRequest) => m.username)
-      .required()
-      .minLength(5)
-      .maxLength(50)
-      .ensure((m: RegistrationRequest) => m.password)
-      .required()
-      .minLength(5)
-      .maxLength(50)
-      .on(this);
   }
 }
 
 export class AuthenticationRequest {
-  public username: string;
-  public password: string;
+  public username : string;
+  public password : string;
 
-  constructor(value?: any) {
+  constructor(value? : any) {
     Object.assign(this, value);
   }
 }

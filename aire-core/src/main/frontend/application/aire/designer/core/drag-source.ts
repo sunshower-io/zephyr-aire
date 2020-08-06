@@ -1,32 +1,32 @@
-import { Canvas, Layer, mxDragSource, mxEvent, mxGraph } from 'mxgraph';
-import { ElementFactory } from 'lib/designer/canvas/palette';
-import { CanvasUtilities } from 'lib/designer/canvas/utils/canvas-utilities';
-import { Drawable } from 'lib/designer/model/elements';
+import {Canvas, Layer, mxDragSource, mxEvent, mxGraph} from "mxgraph/javascript/mxClient";
+import {ElementFactory}                                from "@aire/designer/canvas/palette";
+import {CanvasUtilities}                               from "@aire/designer/canvas/utils/canvas-utilities";
+import {Drawable}                                      from "@aire/designer/model/elements";
 
 export class DragSource extends mxDragSource {
   constructor(
-    private canvas: Canvas,
-    e: HTMLElement,
-    private factory: ElementFactory
+    private canvas : Canvas,
+    e : HTMLElement,
+    private factory : ElementFactory
   ) {
     super(e, factory.importFunction);
     this.highlightDropTargets = true;
   }
 
-  dragEnter(c: Canvas, e: mxEvent) {
+  dragEnter(c : Canvas, e : mxEvent) {
     let m = super.dragEnter(c, e);
     return m;
   }
 
-  mouseMove(e: mxEvent): void {
+  mouseMove(e : mxEvent) : void {
     super.mouseMove(e);
   }
 
-  drop(graph: mxGraph, e: mxEvent, t: Layer, x: number, y: number): Layer {
+  drop(graph : mxGraph, e : mxEvent, t : Layer, x : number, y : number) : Layer {
     return super.drop(graph, e, t, x, y);
   }
 
-  getDropTarget(c: mxGraph, x: number, y: number, e: mxEvent): Layer {
+  getDropTarget(c : mxGraph, x : number, y : number, e : mxEvent) : Layer {
     let p = c.getDefaultParent(),
       pgeom = p.geometry,
       px = (pgeom && pgeom.x) || 0,
@@ -42,13 +42,13 @@ export class DragSource extends mxDragSource {
 
   //if this gets slow we can implement KD or BS partitioning.
   private findDropTarget(
-    p: Layer,
-    x: number,
-    y: number,
-    m: number,
-    pox: number,
-    poy: number
-  ): [number, Layer] {
+    p : Layer,
+    x : number,
+    y : number,
+    m : number,
+    pox : number,
+    poy : number
+  ) : [number, Layer] {
     let min = null,
       rn = m;
     if (p && p.children && p.children.length) {

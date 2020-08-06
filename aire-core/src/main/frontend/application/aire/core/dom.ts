@@ -1,6 +1,5 @@
-import { UUID }    from 'aire/core/uuid';
-import {Predicate} from "aire/core/predicates";
-
+import {UUID}      from "@aire/core/uuid";
+import {Predicate} from "@aire/core/predicates";
 
 
 export class dom {
@@ -11,31 +10,32 @@ export class dom {
 
 export namespace dom {
 
-  export const $$: dom = new dom();
+  export const $$ : dom = new dom();
 
-  export function $(s: string): Element {
+  export function $(s : string) : Element {
     return document.querySelector(s);
   }
 
-  export function isAncestor(test: Element, target: Element) {
+  export function isAncestor(test : Element, target : Element) {
     if (test === target) {
       return true;
     }
     let c = test;
-    while ((c = c.parentElement) && c !== target) {}
+    while ((c = c.parentElement) && c !== target) {
+    }
     return !!c;
   }
 
 
-  export function applyIf(el: Element) : Predicate {
+  export function applyIf(el : Element) : Predicate {
     return new Predicate(el);
   }
 
   export function decorateTo(
-    sourceEl: Element,
-    el: Element,
-    decoration: string,
-    className?: string
+    sourceEl : Element,
+    el : Element,
+    decoration : string,
+    className? : string
   ) {
     if (sourceEl.hasAttribute(decoration)) {
       if (className) {
@@ -47,10 +47,10 @@ export namespace dom {
   }
 
   export function decorate(
-    el: Element,
-    decoration: string,
-    className?: string
-  ): boolean {
+    el : Element,
+    decoration : string,
+    className? : string
+  ) : boolean {
     if (el.hasAttribute(decoration)) {
       if (className) {
         el.classList.add(className);
@@ -65,49 +65,50 @@ export namespace dom {
 
 export declare type Class = Function;
 
-export function generated(instance: any, key: string) {
+export function generated(instance : any, key : string) {
   let value = instance[key] || UUID.random(),
-    getter = function(): string {
+    getter = function () : string {
       return value;
     },
-    setter = function(v: string): void {
+    setter = function (v : string) : void {
       value = v;
     };
   if (delete instance[key]) {
     Object.defineProperty(instance, key, {
-      get: getter,
-      set: setter,
-      enumerable: true,
-      configurable: true
+      get          : getter,
+      set          : setter,
+      enumerable   : true,
+      configurable : true
     });
   }
 }
 
-export function findParentByClass(el: Element, selectorClass: string): Element {
+export function findParentByClass(el : Element, selectorClass : string) : Element {
   if (Element.prototype.closest) {
     return el.closest(selectorClass);
   }
   while (
     (el = el.parentElement) &&
     !(el.matches || (el as any).matchesSelector).call(el, selectorClass)
-  ) {}
+    ) {
+  }
   return el;
 }
 
-export function createEvent(name: string, value: any): Event {
+export function createEvent(name : string, value : any) : Event {
   let w = window as any;
   if (w.CustomEvent) {
     return new CustomEvent(name, {
-      detail: {
-        value: value
+      detail  : {
+        value : value
       },
-      bubbles: true
+      bubbles : true
     });
   } else {
-    let e = document.createEvent('CustomEvent');
+    let e = document.createEvent("CustomEvent");
     e.initCustomEvent(name, true, true, {
-      detail: {
-        value: value
+      detail : {
+        value : value
       }
     });
   }

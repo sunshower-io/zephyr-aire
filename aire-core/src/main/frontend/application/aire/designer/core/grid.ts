@@ -1,19 +1,19 @@
-import { mxGraph, mxPoint, mxGraphView, mxEvent } from 'mxgraph';
+import {mxGraph, mxPoint, mxGraphView, mxEvent} from 'mxgraph';
 
 export interface GridOptions {
-  strokeStyle?: string;
+  strokeStyle? : string;
 
-  dash?: number[];
+  dash? : number[];
 
-  gridSize?: number;
+  gridSize? : number;
 }
 
 export class Grid {
-  private canvas: HTMLCanvasElement;
+  private canvas : HTMLCanvasElement;
 
   constructor(
-    private readonly graph: mxGraph,
-    private readonly options: GridOptions
+    private readonly graph : mxGraph,
+    private readonly options : GridOptions
   ) {
     this.canvas = document.createElement('canvas');
     this.canvas.style.position = 'absolute';
@@ -24,19 +24,19 @@ export class Grid {
     graph.container.appendChild(this.canvas);
   }
 
-  public draw(): void {
+  public draw() : void {
     let scale = 0,
       gridSize = this.options.gridSize,
       width = 0,
       height = 0,
-      translate = { x: null, y: null },
+      translate = {x : null, y : null},
       context = this.canvas.getContext('2d'),
       canvas = this.canvas,
       isContainerEvent = mxGraphView.prototype.isContainerEvent;
 
     context.fillStyle = 'rgba(255, 255, 255, 0.5)';
 
-    mxGraphView.prototype.isContainerEvent = function(e: Event) {
+    mxGraphView.prototype.isContainerEvent = function (e : Event) {
       return (
         isContainerEvent.apply(this, arguments) ||
         mxEvent.getSource(e) == canvas
@@ -46,13 +46,13 @@ export class Grid {
   }
 
   private paintGrid(
-    translate: mxPoint,
-    scale: number,
-    currentWidth: number,
-    currentHeight: number,
-    gridSize: number,
-    context: CanvasRenderingContext2D
-  ): void {
+    translate : mxPoint,
+    scale : number,
+    currentWidth : number,
+    currentHeight : number,
+    gridSize : number,
+    context : CanvasRenderingContext2D
+  ) : void {
     let graph = this.graph,
       options = this.options,
       bounds = graph.getGraphBounds(),

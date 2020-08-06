@@ -1,42 +1,43 @@
-import { Drawable } from 'lib/designer/model';
+import {Drawable} from "@aire/designer/model";
 
-import { Reference } from './model';
-import { ElementFactory, ElementLoader } from 'lib/designer/canvas/palette';
-import { Subscription } from 'aurelia-event-aggregator';
-import { Designer } from 'lib/designer/core/designer';
+import {Reference}                     from "./model";
+import {ElementFactory, ElementLoader} from "@aire/designer/canvas/palette";
+import {Designer}                      from "@aire/designer/core/designer";
 
 export interface ReferenceVertex {
-  reference: Reference;
-  image: string;
+  reference : Reference;
+  image : string;
 }
 
 export interface Descriptor {
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
-  loader?: ElementFactory;
-  id?: string;
-  taskId?: string;
-  isCreate?: boolean;
+  x? : number;
+  y? : number;
+  width? : number;
+  height? : number;
+  loader? : ElementFactory;
+  id? : string;
+  taskId? : string;
+  isCreate? : boolean;
 }
 
 export interface ConstructorFactory {
-  initialize(designer: Designer): void;
-  dispose(designer: Designer): void;
-  construct(d: Descriptor): Drawable;
+  initialize(designer : Designer) : void;
+
+  dispose(designer : Designer) : void;
+
+  construct(d : Descriptor) : Drawable;
 }
 
 export abstract class AbstractConstructorFactory implements ConstructorFactory {
-  private subscription: Subscription;
 
-  dispose(manager: Designer): void {}
+  dispose(manager : Designer) : void {
+  }
 
-  abstract construct(d: Descriptor): Drawable;
+  abstract construct(d : Descriptor) : Drawable;
 
-  initialize(manager: Designer): void {
+  initialize(manager : Designer) : void {
     this.doRegister(manager);
   }
 
-  protected abstract doRegister(designer: Designer): void;
+  protected abstract doRegister(designer : Designer) : void;
 }

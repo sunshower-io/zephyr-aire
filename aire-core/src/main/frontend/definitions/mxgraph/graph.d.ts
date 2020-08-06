@@ -7,7 +7,6 @@
 declare module "mxgraph/javascript/mxClient" {
 
 
-
   import {mxEvent} from "mxgraph/javascript/mxClient";
 
   export class mxConnectionHandler {
@@ -25,7 +24,7 @@ declare module "mxgraph/javascript/mxClient" {
       source : Layer,
       target : Layer,
       style : mxStylesheet
-    ): void;
+    ) : void;
 
     connect(
       source : Layer,
@@ -55,9 +54,10 @@ declare module "mxgraph/javascript/mxClient" {
      * @param cell
      */
 
-    isSelected(cell:Layer) : boolean;
+    isSelected(cell : Layer) : boolean;
 
-    removeCell(n:Layer) : void;
+    removeCell(n : Layer) : void;
+
     addListener(t : string, fireElement : (a : mxGraphSelectionModel, b : mxEventObject) => void) : void;
 
     addCell(n : mxCell) : void;
@@ -77,9 +77,11 @@ declare module "mxgraph/javascript/mxClient" {
 
     constructor(g : mxGraph);
 
-    x0: number;
-    y0:number;
-    setTranslate(x:number, y:number) : void;
+    x0 : number;
+    y0 : number;
+
+    setTranslate(x : number, y : number) : void;
+
     scale : number;
     currentRoot : Layer;
     translate : mxGraphBounds;
@@ -186,9 +188,9 @@ declare module "mxgraph/javascript/mxClient" {
   }
 
   export class mxEventSource {
-    addListener(e: string, f:(e:any) => void) : void;
+    addListener(e : string, f : (e : any) => void) : void;
 
-    removeListener(f:(e:any) => void) : void;
+    removeListener(f : (e : any) => void) : void;
   }
 
   export class mxGraph implements Connectable {
@@ -219,9 +221,9 @@ declare module "mxgraph/javascript/mxClient" {
     allowLoops : boolean;
     autoExtend : boolean;
 
-    autoTranslate: boolean;
+    autoTranslate : boolean;
 
-    minimumGraphSize: mxRectangle;
+    minimumGraphSize : mxRectangle;
     container : Element;
     view : mxGraphView;
     model : mxGraphModel;
@@ -238,7 +240,7 @@ declare module "mxgraph/javascript/mxClient" {
 
     setAutoSizeCells(b : boolean) : void;
 
-    getChildCells(cell:Layer, bounds: boolean, recurse: boolean) : Layer[];
+    getChildCells(cell : Layer, bounds : boolean, recurse : boolean) : Layer[];
 
     getCellStyle(cell : Layer) : mxStylesheet;
 
@@ -250,16 +252,19 @@ declare module "mxgraph/javascript/mxClient" {
     getPageSize() : mxRectangle;
 
     getPageView() : mxRectangle;
+
     getPageLayout() : mxRectangle;
 
     getPagePadding() : mxPoint;
 
     sizeDidChange() : void;
-    scrollCellToVisible(cell:Layer, center?: boolean) : void;
 
-    getCellOverlays(cell:Layer) : mxCellOverlay[];
+    scrollCellToVisible(cell : Layer, center? : boolean) : void;
 
-    toggleCells(show:boolean, cells:Layer[], includeEdges?:boolean) : void;
+    getCellOverlays(cell : Layer) : mxCellOverlay[];
+
+    toggleCells(show : boolean, cells : Layer[], includeEdges? : boolean) : void;
+
     /**
      *
      * @param b
@@ -344,7 +349,7 @@ declare module "mxgraph/javascript/mxClient" {
      * @param changes
      */
 
-    getSelectionCellsForChanges(changes : any) : void;
+    getSelectionCellsForChanges(changes : any) : Layer[];
 
     /**
      *
@@ -652,7 +657,7 @@ declare module "mxgraph/javascript/mxClient" {
      *
      * @param cell
      */
-    selectCellForEvent(cell : Layer): void;
+    selectCellForEvent(cell : Layer) : void;
 
     /**
      *

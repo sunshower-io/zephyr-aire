@@ -1,24 +1,24 @@
-import { Edge } from './edge';
-import { Vertex } from './vertex';
-import { Property } from 'condensation/condensation';
+import {Edge}     from "./edge";
+import {Vertex}   from "./vertex";
+import {Property} from "@aire/condensation/condensation";
 
 export class CanvasLayout {
-  x: number;
-  y: number;
-  translateX: number;
-  translateY: number;
+  x : number;
+  y : number;
+  translateX : number;
+  translateY : number;
 }
 
 export class TaskGraph {
-  @Property({ alias: 'edges', type: Edge })
-  edges: Edge[];
+  @Property({alias : "edges", type : Edge})
+  edges : Edge[];
 
-  @Property({ alias: 'vertices', type: Vertex })
-  vertices: Vertex[];
+  @Property({alias : "vertices", type : Vertex})
+  vertices : Vertex[];
 
-  layout: CanvasLayout;
+  layout : CanvasLayout;
 
-  constructor(o?: any) {
+  constructor(o? : any) {
     // if (o.vertices) {
     //     for (let i = 0; i < o.vertices.length; i++) {
     //         this.vertices.push(new Vertex(o.vertices[i]))
@@ -26,14 +26,14 @@ export class TaskGraph {
     // }
   }
 
-  addEdge(e: Edge): void {
+  addEdge(e : Edge) : void {
     if (!this.edges) {
       this.edges = [];
     }
     this.edges.push(e);
   }
 
-  addVertex(v: Vertex): void {
+  addVertex(v : Vertex) : void {
     if (!this.vertices) {
       this.vertices = [];
     }

@@ -1,6 +1,5 @@
 import { UUID } from './uuid';
 import { Base58 } from './base58';
-import { HttpClient } from 'aurelia-fetch-client';
 
 export class Identifier {
   constructor(public readonly id: string) {}
@@ -16,11 +15,6 @@ export namespace Identifier {
 }
 
 export class Identifiers {
-  private static client: HttpClient;
-
-  public static initialize(client: HttpClient): void {
-    Identifiers.client = client;
-  }
 
   public static create(): Promise<any> {
     return Promise.resolve(Identifier.newId());

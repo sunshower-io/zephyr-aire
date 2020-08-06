@@ -1,18 +1,17 @@
 import {
   AbstractConstructorFactory,
-  ConstructorFactory,
   Descriptor
-} from 'lib/designer/base/factory';
-import { Drawable } from 'lib/designer/model/elements';
-import { GyreFactory } from 'lib/designer/gyre/element-factory';
-import { GyreContainerNode } from 'lib/designer/gyre/container-node';
-import { Designer } from 'lib/designer/core/designer';
-import { mxCellOverlay, mxConstants, mxImage, mxPoint } from 'mxgraph';
+}                                                     from '@aire/designer/base/factory';
+import {Drawable}                                     from '@aire/designer/model/elements';
+import {GyreFactory}                                  from '@aire/designer/gyre/element-factory';
+import {GyreContainerNode}                            from '@aire/designer/gyre/container-node';
+import {Designer}                                     from '@aire/designer/core/designer';
+import {mxCellOverlay, mxConstants, mxImage, mxPoint} from 'mxgraph';
 
 export class ContainerConstructorFactory extends AbstractConstructorFactory {
   static readonly style = 'container-style';
 
-  protected doRegister(designer: Designer): void {
+  protected doRegister(designer : Designer) : void {
     let style = {};
     style[mxConstants.STYLE_FILL_OPACITY] = 40;
     style[mxConstants.STYLE_FILLCOLOR] = '#FFFFFF';
@@ -24,7 +23,7 @@ export class ContainerConstructorFactory extends AbstractConstructorFactory {
       .putCellStyle(ContainerConstructorFactory.style, style);
   }
 
-  construct(d: Descriptor): Drawable {
+  construct(d : Descriptor) : Drawable {
     let e = d.loader as GyreFactory,
       n = new GyreContainerNode(
         e.taskName,
@@ -45,7 +44,7 @@ export class ContainerConstructorFactory extends AbstractConstructorFactory {
         new mxPoint(32, 0)
       )
     );
-    n.reference = e.reference;
+    // n.reference = e.reference;
     n.style = ContainerConstructorFactory.style;
     return n;
   }

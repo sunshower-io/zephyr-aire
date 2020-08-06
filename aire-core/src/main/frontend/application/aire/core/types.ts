@@ -1,4 +1,4 @@
-import { parseBoolean } from 'aire/core/lang';
+import { parseBoolean } from "@aire/core/lang";
 
 export class Value<T> {
   public value: T;

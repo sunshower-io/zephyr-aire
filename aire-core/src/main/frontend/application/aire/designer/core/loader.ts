@@ -1,11 +1,12 @@
-import { UUID } from 'aire/core/uuid';
+import {UUID} from "@aire/core/uuid";
 
 export class DesignerLoader {
-  private childElementId: string = UUID.random();
+  private childElementId : string = UUID.random();
 
-  constructor(private parentElement: HTMLElement) {}
+  constructor(private parentElement : HTMLElement) {
+  }
 
-  setLoading(): void {
+  setLoading() : void {
     let loaderHTML =
       "<div class='fullscreen loader' id='" +
       this.childElementId +
@@ -13,7 +14,7 @@ export class DesignerLoader {
     // $(this.parentElement).append(loaderHTML);
   }
 
-  removeLoading(): void {
+  removeLoading() : void {
     // $("#" + this.childElementId).remove();
   }
 }

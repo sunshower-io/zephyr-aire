@@ -1,182 +1,196 @@
-
-
 declare module "mxgraph/javascript/mxClient" {
 
-    export class mxImage {
-        public src : string;
-        public width : number;
-        public height : number;
+  export class mxImage {
+    public src : string;
+    public width : number;
+    public height : number;
 
-        constructor(src? : string,
-                    width? : number,
-                    height? : number);
-    }
-
-
-    export class mxSelectionCellsHandler {
-        mouseDown() : void;
-    }
-
-    export class mxRectangleShape {
-        constructor(bounds : mxRectangle, fill : string,
-                    stroke : string, strokewidth : number);
-    }
+    constructor(
+      src? : string,
+      width? : number,
+      height? : number
+    );
+  }
 
 
-    export class mxCellOverlay {
+  export class mxSelectionCellsHandler {
+    mouseDown() : void;
+  }
 
-        cursor : string;
-
-
-        public image: mxImage;
-        constructor(image? : mxImage,
-                    tooltip? : string,
-                    align? : string,
-                    valign? : string,
-                    offset? : mxPoint,
-                    cursor? : string);
+  export class mxRectangleShape {
+    constructor(bounds : mxRectangle, fill : string,
+                stroke : string, strokewidth : number
+    );
+  }
 
 
-        addListener(event : string, listener : (sender : any, event : mxEvent) => void) : void;
-    }
+  export class mxCellOverlay {
 
-    export interface Renderable {
-
-    }
-
-    export interface Node extends Renderable {
-
-    }
-
-    export interface SceneGraphElement extends Node {
-
-    }
-
-    export class mxCell implements Connectable, SceneGraphElement, Layer {
+    cursor : string;
 
 
-        constructor(label? : string, geometry? : mxGeometry);
+    public image : mxImage;
+
+    constructor(
+      image? : mxImage,
+      tooltip? : string,
+      align? : string,
+      valign? : string,
+      offset? : mxPoint,
+      cursor? : string
+    );
 
 
-        setValue(label : string) : void;
+    addListener(event : string, listener : (sender : any, event : mxEvent) => void) : void;
+  }
 
-        /**
-         *
-         * @param geo
-         */
+  export interface Renderable {
 
-        setGeometry(geo : mxGeometry) : void;
+  }
 
-        /**
-         *
-         * @param child
-         * @param index
-         */
+  export interface Node extends Renderable {
 
-        insert(child : Layer, index? : number) : void;
+  }
 
-        /**
-         *
-         */
-        isConnectable() : boolean
+  export interface SceneGraphElement extends Node {
 
-        /**
-         *
-         */
-        getParent() : Layer;
+  }
 
-        /**
-         *
-         * @param layer
-         */
-        setParent(layer : Layer) : void;
+  export class mxCell implements Connectable, SceneGraphElement, Layer {
 
-        /**
-         *
-         * @param edge
-         */
-        setEdge(edge : boolean) : void;
+    source : Layer;
+    target : Layer;
+    parent : Layer;
+    id : string;
+    value : any;
+    geometry : mxGeometry;
+    style : string;
+    shape : mxShape;
+    edges : Layer[];
+    children : Layer[];
 
-        /**
-         *
-         * @param vertex
-         */
-        setVertex(vertex : boolean) : void;
-
-        /**
-         *
-         * @param key
-         */
-        getProperty(key : string) : string;
-
-        /**
-         *
-         * @param key
-         * @param value
-         */
-        setProperty(key : string, value : string) : void;
-
-        /**
-         *
-         * @param style
-         */
-
-        setStyle(style : string) : void;
+    constructor(label? : string, geometry? : mxGeometry);
 
 
-        /**
-         *
-         * @param key
-         */
-        getAttribute(key : string) : string;
+    setValue(label : string) : void;
 
-        /**
-         *
-         * @param key
-         * @param value
-         */
-        setAttribute(key : string, value : string) : void;
+    /**
+     *
+     * @param geo
+     */
 
-        /**
-         *
-         * @param connectable
-         */
-        setConnectable(connectable : boolean) : void
+    setGeometry(geo : mxGeometry) : void;
 
-        /**
-         *
-         * @param b
-         */
-        setVisible(b : boolean) : void;
+    /**
+     *
+     * @param child
+     * @param index
+     */
+
+    insert(child : Layer, index? : number) : void;
+
+    /**
+     *
+     */
+    isConnectable() : boolean
+
+    /**
+     *
+     */
+    getParent() : Layer;
+
+    /**
+     *
+     * @param layer
+     */
+    setParent(layer : Layer) : void;
+
+    /**
+     *
+     * @param edge
+     */
+    setEdge(edge : boolean) : void;
+
+    /**
+     *
+     * @param vertex
+     */
+    setVertex(vertex : boolean) : void;
+
+    /**
+     *
+     * @param key
+     */
+    getProperty(key : string) : string;
+
+    /**
+     *
+     * @param key
+     * @param value
+     */
+    setProperty(key : string, value : string) : void;
+
+    /**
+     *
+     * @param style
+     */
+
+    setStyle(style : string) : void;
 
 
-        /**
-         *
-         */
-        isVertex() : boolean;
+    /**
+     *
+     * @param key
+     */
+    getAttribute(key : string) : string;
 
-        /**
-         *
-         */
-        isEdge() : boolean;
+    /**
+     *
+     * @param key
+     * @param value
+     */
+    setAttribute(key : string, value : string) : void;
+
+    /**
+     *
+     * @param connectable
+     */
+    setConnectable(connectable : boolean) : void
+
+    /**
+     *
+     * @param b
+     */
+    setVisible(b : boolean) : void;
 
 
-        /**
-         *
-         */
-        getChildCount() : number;
+    /**
+     *
+     */
+    isVertex() : boolean;
 
-        /**
-         *
-         * @param index
-         */
-        getChildAt(index : number) : Layer;
+    /**
+     *
+     */
+    isEdge() : boolean;
 
-        clone() : Layer;
-    }
 
-    export class mxEdge extends mxCell {
+    /**
+     *
+     */
+    getChildCount() : number;
 
-    }
+    /**
+     *
+     * @param index
+     */
+    getChildAt(index : number) : Layer;
+
+    clone() : Layer;
+  }
+
+  export class mxEdge extends mxCell {
+
+  }
 
 }

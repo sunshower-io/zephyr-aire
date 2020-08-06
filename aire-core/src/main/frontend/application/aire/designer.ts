@@ -1,13 +1,8 @@
-import {
-  mxCell,
-  mxGraph,
-  mxRubberband
-}                        from "mxgraph/javascript/mxClient";
-import {PolymerElement}  from "@polymer/polymer/polymer-element";
-import {StampedTemplate} from "@polymer/polymer/interfaces";
-import {Designer}        from "./designer/core/designer";
-import {CanvasModel}     from "./designer/model/model";
-import {Grid}            from "@aire/designer/core/grid";
+import {PolymerElement}   from "@polymer/polymer/polymer-element";
+import {StampedTemplate}  from "@polymer/polymer/interfaces";
+import {Designer}         from "./designer/core/designer";
+import {CanvasModel}      from "./designer/model/model";
+import {RenderableVertex} from "./designer/model/elements";
 
 
 class AireDesigner extends PolymerElement {
@@ -25,9 +20,9 @@ class AireDesigner extends PolymerElement {
   ready() : void {
     super.ready();
     let designer = new Designer(this, new CanvasModel());
-    let cell = new mxCell("hello");
+    let cell = new RenderableVertex("hello", 20, 30, 200, 200, "sup");
+    cell.addTo(designer.getCanvas());
 
-    designer.getCanvas().addCell(cell, null);
 
     // let graph = new mxGraph(this) as any;
     // new mxRubberband(graph);

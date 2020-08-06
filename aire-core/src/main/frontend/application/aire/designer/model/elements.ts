@@ -162,7 +162,7 @@ export abstract class Edge extends mxCell {
   }
 }
 
-export abstract class RenderableVertex extends RenderableElement {
+export class RenderableVertex extends RenderableElement {
   container : boolean;
 
   constructor(
@@ -178,3 +178,5 @@ export abstract class RenderableVertex extends RenderableElement {
     this.id = id;
   }
 }
+
+

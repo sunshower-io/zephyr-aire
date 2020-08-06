@@ -1,14 +1,15 @@
-import {Point2D}     from '../../common/math';
-import {Canvas}      from '../canvas/canvas';
-import {CanvasModel} from '../model/model';
-import {UndoAction} from '../canvas/actions/undo-action';
-import {RedoAction}     from '../canvas/actions/redo-action';
-import {TaskGraph}      from '../model/graph/graph-element';
-import {DesignerLoader}        from './loader';
-import {Codec}                 from '../codec/codec';
-import {DeleteSelectionAction} from '../canvas/actions/delete-action';
-import {CanvasSelector}        from './selector';
+import {Point2D}                  from '../../common/math';
+import {Canvas}                   from '../canvas/canvas';
+import {CanvasModel}              from '../model/model';
+import {UndoAction}               from '../canvas/actions/undo-action';
+import {RedoAction}               from '../canvas/actions/redo-action';
+import {TaskGraph}                from '../model/graph/graph-element';
+import {DesignerLoader}           from './loader';
+import {Codec}                    from '../codec/codec';
+import {DeleteSelectionAction}    from '../canvas/actions/delete-action';
+import {CanvasSelector}           from './selector';
 import {BringToFront, SendToBack} from '../canvas/actions/btf-action';
+import {mxRubberband}             from "mxgraph/javascript/mxClient";
 
 export class Designer {
   private codec : Codec;
@@ -22,8 +23,9 @@ export class Designer {
     private readonly model : CanvasModel = new CanvasModel(),
     options? : DesignerOptions
   ) {
-    let canvas = new Canvas(container, model),
-      selector = new CanvasSelector(canvas, container);
+    let canvas = new Canvas(container, model);
+    new mxRubberband(canvas);
+      // selector = new CanvasSelector(canvas, container);
     this.canvas = canvas;
 
     // this.canvas.register(

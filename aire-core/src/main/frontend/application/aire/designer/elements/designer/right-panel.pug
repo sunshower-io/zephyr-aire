@@ -1,0 +1,8 @@
+template
+    div(slot="right-panel")
+        .panel.side.right(class.bind="panelClosed ? 'closed' : ''")
+            slot(name="top")
+            slot(name="bottom")
+            slot(name="full")
+        .panel-toggle(click.delegate="togglePanel()")
+            i.material-icons.mdi(class.bind="panelClosed ? 'mdi-chevron-left' : 'mdi-chevron-right'")

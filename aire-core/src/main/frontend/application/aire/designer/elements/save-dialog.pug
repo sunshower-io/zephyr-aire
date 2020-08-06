@@ -1,0 +1,26 @@
+template
+    ui-page
+        ui-section(column-layout)
+            ui-form(padded)
+                ui-input-group
+                    ui-input-label Name
+                    ui-input(value.bind="createJobRequest.name")
+
+                ui-input-group
+                    ui-input-label Description
+                    ui-input(value.bind="createJobRequest.description")
+                ui-input-group
+                    ui-input-label Icon
+                    ui-input(file placeholder="icon" value.bind="iconFile" view-model.ref="fileInput")
+
+                aire-icon-button(
+                    ref="selectCloudButton"
+                    clicked.delegate="selectCloud()"
+                    inline-icon.bind="inlineIcon"
+                )
+
+            ui-content(scroll padded)
+            ui-toolbar
+                ui-button Cancel
+                ui-button(primary click.trigger="close()") Add
+

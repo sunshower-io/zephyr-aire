@@ -1,0 +1,5 @@
+template
+    .fixed-action-btn.designer-button(slot="action-button")
+        .btn-floating(class="${active ? 'active' : ''}" click.delegate="deploy()")
+            span Deploy
+                i.material-icons.mdi.mdi-chevron-right.large

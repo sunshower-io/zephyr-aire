@@ -1,0 +1,15 @@
+template
+    require(from='./palette-icon')
+    .designer-panel-body(if.bind="factories.length > 0")
+        .center(if.bind="loading")
+            img(src="themes/aire/assets/img/loader/loader.svg" alt="loading ..." class="loader")
+        .panel-header ${title}
+        .designer-cards(if.bind="!loading")
+            palette-icon(
+                repeat.for="factory of factories"
+                factory.bind="factory"
+                canvas.bind="canvas"
+            )
+    .designer-panel-body(show.bind="!factories.length")
+        .panel-header ${title}
+        slot(name="default-view")

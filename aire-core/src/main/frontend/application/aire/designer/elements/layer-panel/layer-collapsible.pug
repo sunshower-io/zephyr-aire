@@ -1,0 +1,9 @@
+template
+    li
+        span(click.delegate="toggleAndCenter()" class="${selected ? 'selected' : ''}")
+            ui-glyph(glyph.bind="expandedGlyph" if.bind="layer.children && layer.children.length > 0" click.trigger="toggle($event)")
+            img(src.bind="layer.icon")
+            span ${layer.title}
+            ui-glyph(glyph.bind="visGlyph" click.trigger="toggleVisibility($event)")
+        ul(if.bind="layer.children && layer.children.length != 0" show.bind="expanded")
+            layer-collapsible(repeat.for="child of layer.children" layer.bind="child")

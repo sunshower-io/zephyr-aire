@@ -1,0 +1,9 @@
+template
+    div.__panel-body(id="${id}")
+        compose(
+            if.bind="active"
+            model.bind="model"
+            view-model.bind="viewModel"
+            view-model.ref="contents"
+        )
+

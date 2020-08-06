@@ -1,0 +1,7 @@
+template
+    .designer-container(style="width:100%; height:100%")
+        .loader(show.bind="designerManager.loading")
+            aire-progress-bar(loading-text="loading")
+        .canvas(ref="element" style="position:absolute; top:0px; bottom:32px; left:0px; right:32px;")
+
+

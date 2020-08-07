@@ -1,21 +1,21 @@
 import {
   DefaultElementFactory,
   ElementLoader
-}               from "../canvas/palette";
-import {Canvas} from "../canvas/canvas";
+}               from "@aire/designer/canvas/palette";
+import {Canvas} from "@aire/designer/canvas/canvas";
 
-import {Drawable} from "../model/elements";
+import {Drawable} from "@aire/designer/model/elements";
 
-import {Role} from "../../common/security/model/user";
+import {Role} from "@aire/common/security/model/user";
 
-import {Vertex as TaskVertex} from "../model/graph/vertex";
-import {Images}               from "../../utils/image";
+import {Vertex as TaskVertex} from "@aire/designer/model/graph/vertex";
+import {Images}               from "@aire/utils/image";
 import imgData = Images.imgData;
 
-import {ConstraintManager}  from "../base/dependencies";
-import {Identifier}         from "../../core/identifiers";
-import {ConstructorFactory} from "../base/factory";
-import {Item}               from "../base/model";
+import {ConstraintManager}  from "@aire/designer/base/dependencies";
+import {Identifier}         from "@aire/core/identifiers";
+import {ConstructorFactory} from "@aire/designer/base/factory";
+import {Item}               from "@aire/designer/base/model";
 
 export class GyreFactory extends DefaultElementFactory
   implements ElementLoader {

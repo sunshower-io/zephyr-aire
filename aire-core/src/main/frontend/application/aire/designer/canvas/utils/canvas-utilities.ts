@@ -1,8 +1,8 @@
-import {Canvas}                                        from "../canvas";
+import {Canvas}                                        from "@aire/designer/canvas/canvas";
 import {Layer, mxConstants, mxEvent, mxGraph, mxPoint} from "mxgraph";
-import {DragSource}                                    from "../../core/drag-source";
-import {Drawable}                                      from "../../model/elements";
-import {ElementFactory}                                from "../palette";
+import {DragSource}                                    from "@aire/designer/core/drag-source";
+import {Drawable}                                      from "@aire/designer/model/elements";
+import {ElementFactory}                                from "@aire/designer/canvas/palette";
 
 type CanvasF = (mxEvent) => Canvas;
 type DropTarget = Canvas | CanvasF;

@@ -1,13 +1,13 @@
-import {Canvas}         from "./canvas";
+import {Canvas}         from "@aire/designer/canvas/canvas";
 import {ImportFunction} from "mxgraph/javascript/mxClient";
 
-import {Drawable} from "../model/elements";
+import {Drawable} from "@aire/designer/model/elements";
 
 import "velocity";
-import {Vertex}                from "../model/graph/vertex";
-import {ProtectedObject, Role} from "../../common/security/model/user";
-import {CanvasUtilities}   from "./utils/canvas-utilities";
-import {ConstraintManager} from "../base/dependencies";
+import {Vertex}                from "@aire/designer/model/graph/vertex";
+import {ProtectedObject, Role} from "@aire/common/security/model/user";
+import {CanvasUtilities}   from "@aire/designer/canvas/utils/canvas-utilities";
+import {ConstraintManager} from "@aire/designer/base/dependencies";
 
 declare let Velocity : any;
 

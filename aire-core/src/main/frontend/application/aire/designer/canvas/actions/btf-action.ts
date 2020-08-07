@@ -1,5 +1,5 @@
-import { Action } from '../action';
-import { Canvas } from '../canvas';
+import { Action } from '@aire/designer/canvas/action';
+import { Canvas } from '@aire/designer/canvas/canvas';
 
 export class BringToFront implements Action {
   name: string;

@@ -1,7 +1,7 @@
-import {Layout}           from "./layout";
-import {Entity, Property} from "../entity";
-import {UUID}             from "../../../core/uuid";
-import {Identifier}       from "../../../core/identifiers";
+import {Layout}           from "@aire/designer/model/graph/layout";
+import {Entity, Property} from "@aire/designer/model/entity";
+import {UUID}       from "@aire/core/uuid";
+import {Identifier} from "@aire/core/identifiers";
 
 type ContentType = "file" | "reference";
 

@@ -1,14 +1,13 @@
-import {Point2D}                  from '../../common/math';
-import {Canvas}                   from '../canvas/canvas';
-import {CanvasModel}              from '../model/model';
-import {UndoAction}               from '../canvas/actions/undo-action';
-import {RedoAction}               from '../canvas/actions/redo-action';
-import {TaskGraph}                from '../model/graph/graph-element';
-import {DesignerLoader}           from './loader';
-import {Codec}                    from '../codec/codec';
-import {DeleteSelectionAction}    from '../canvas/actions/delete-action';
-import {CanvasSelector}           from './selector';
-import {BringToFront, SendToBack} from '../canvas/actions/btf-action';
+import {Point2D}     from '@aire/common/math';
+import {Canvas}      from '@aire/designer/canvas/canvas';
+import {CanvasModel} from '@aire/designer/model/model';
+import {UndoAction} from '@aire/designer/canvas/actions/undo-action';
+import {RedoAction}     from '@aire/designer/canvas/actions/redo-action';
+import {TaskGraph}      from '@aire/designer/model/graph/graph-element';
+import {DesignerLoader}        from '@aire/designer/core/loader';
+import {Codec}                 from '@aire/designer/codec/codec';
+import {DeleteSelectionAction}    from '@aire/designer/canvas/actions/delete-action';
+import {BringToFront, SendToBack} from '@aire/designer/canvas/actions/btf-action';
 import {mxRubberband}             from "mxgraph/javascript/mxClient";
 
 export class Designer {

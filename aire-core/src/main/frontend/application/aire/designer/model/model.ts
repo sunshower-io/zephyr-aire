@@ -1,6 +1,6 @@
 import {mxGraphModel} from "mxgraph/javascript/mxClient";
 
-import {Identifier} from "../../core/identifiers";
+import {Identifier} from "@aire/core/identifiers";
 
 export class CanvasModel extends mxGraphModel {
   public createId() : string {

@@ -1,6 +1,6 @@
-import {Canvas} from './canvas';
+import {Canvas} from '@aire/designer/canvas/canvas';
 
-import {Action} from './action';
+import {Action} from '@aire/designer/canvas/action';
 
 export interface Chord {
   group : string;

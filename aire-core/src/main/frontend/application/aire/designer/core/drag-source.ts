@@ -1,7 +1,7 @@
 import {Canvas, Layer, mxDragSource, mxEvent, mxGraph} from "mxgraph/javascript/mxClient";
-import {ElementFactory}  from "../canvas/palette";
-import {CanvasUtilities} from "../canvas/utils/canvas-utilities";
-import {Drawable}        from "../model/elements";
+import {ElementFactory}                                from "@aire/designer/canvas/palette";
+import {CanvasUtilities}                               from "@aire/designer/canvas/utils/canvas-utilities";
+import {Drawable}                                      from "@aire/designer/model/elements";
 
 export class DragSource extends mxDragSource {
   constructor(

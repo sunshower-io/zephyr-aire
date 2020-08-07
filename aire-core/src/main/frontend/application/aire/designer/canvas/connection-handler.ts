@@ -2,7 +2,7 @@ import {
   mxCellState,
   mxConnectionHandler,
 }               from 'mxgraph/javascript/mxClient';
-import {Canvas} from './canvas';
+import {Canvas} from '@aire/designer/canvas/canvas';
 
 export class DefaultConnectionHandler extends mxConnectionHandler {
   constructor(private canvas : Canvas) {

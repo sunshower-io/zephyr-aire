@@ -1,10 +1,10 @@
-import {Canvas, ElementEvent} from "../canvas/canvas";
+import {Canvas, ElementEvent} from "@aire/designer/canvas/canvas";
 
-import {RenderableVertex as Vertex} from "../model/elements";
+import {RenderableVertex as Vertex} from "@aire/designer/model/elements";
 
-import {Reference}         from "../base/model";
-import {ConstraintManager} from "../base/dependencies";
-import {ReferenceVertex}   from "../base/factory";
+import {Reference}         from "@aire/designer/base/model";
+import {ConstraintManager} from "@aire/designer/base/dependencies";
+import {ReferenceVertex}   from "@aire/designer/base/factory";
 
 export class GyreContainerNode extends Vertex implements ReferenceVertex {
   reference : Reference;

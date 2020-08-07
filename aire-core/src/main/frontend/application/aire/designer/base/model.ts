@@ -1,9 +1,9 @@
-import {CollectionType, Property}               from '../../condensation/condensation';
-import {ElementFactory, ElementFactoryProvider} from '../canvas/palette';
+import {CollectionType, Property}               from '@aire/condensation/condensation';
+import {ElementFactory, ElementFactoryProvider} from '@aire/designer/canvas/palette';
 // import {GyreProviderFactory}                    from '<aire>/designer/gyre/provider-factory';
 
-import {ConstraintManager, Relationship} from './dependencies';
-import {Image}                           from "../core";
+import {ConstraintManager, Relationship} from '@aire/designer/base/dependencies';
+import {Image}                           from "@aire/designer/core";
 
 export interface PaletteCoordinate {
   key? : string;

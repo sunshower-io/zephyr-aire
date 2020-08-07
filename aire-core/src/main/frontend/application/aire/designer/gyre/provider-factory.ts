@@ -2,13 +2,13 @@ import {
   doLoad,
   ElementFactory,
   ElementFactoryProvider, Palette
-}               from '../canvas/palette';
-import {Canvas} from '../canvas/canvas';
+}               from '@aire/designer/canvas/palette';
+import {Canvas} from '@aire/designer/canvas/canvas';
 
 
 import * as _              from 'lodash';
-import {ConstraintManager} from '../base/dependencies';
-import {GyreFactory}       from './element-factory';
+import {ConstraintManager} from '@aire/designer/base/dependencies';
+import {GyreFactory}       from '@aire/designer/gyre/element-factory';
 
 export class GyreProviderFactory implements ElementFactoryProvider {
   icon : string;

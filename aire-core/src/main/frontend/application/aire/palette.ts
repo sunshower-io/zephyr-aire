@@ -12,8 +12,14 @@ class AirePalette extends LitElement {
     super.updated(vals);
   }
 
+
+  dispatchAddElementEvent() : void {
+    console.log("SUP");
+
+  }
+
   render() : TemplateResult {
-    return html`<h1><slot></slot></h1>`;
+    return html`<h1 @click="${this.dispatchAddElementEvent}">Click me!</h1>`;
   }
 
 

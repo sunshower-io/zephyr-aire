@@ -9,11 +9,11 @@ import {
   Port
 } from 'mxgraph/javascript/mxClient';
 
-import {Canvas}            from "../canvas/canvas";
-import {Identifier}        from "../../core/identifiers";
-import {Class}             from "../../core/lang";
-import {Dependency}        from '../base/model';
-import {ConstraintManager} from '../base/dependencies';
+import {Canvas}     from "@aire/designer/canvas/canvas";
+import {Identifier} from "@aire/core/identifiers";
+import {Class}             from "@aire/core/lang";
+import {Dependency}        from '@aire/designer/base/model';
+import {ConstraintManager} from '@aire/designer/base/dependencies';
 
 export class Overlay extends mxCellOverlay {
 }

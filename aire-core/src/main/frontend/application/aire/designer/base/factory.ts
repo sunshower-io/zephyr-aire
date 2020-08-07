@@ -1,8 +1,8 @@
-import {Drawable} from "../model/elements";
+import {Drawable} from "@aire/designer/model/elements";
 
-import {Reference}                     from "./model";
-import {ElementFactory, ElementLoader} from "../canvas/palette";
-import {Designer}                      from "../core/designer";
+import {Reference}                     from "@aire/designer/base/model";
+import {ElementFactory, ElementLoader} from "@aire/designer/canvas/palette";
+import {Designer}                      from "@aire/designer/core/designer";
 
 export interface ReferenceVertex {
   reference : Reference;

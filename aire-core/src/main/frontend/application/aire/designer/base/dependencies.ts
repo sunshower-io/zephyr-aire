@@ -1,9 +1,9 @@
-import {Dependency, Item} from "./model";
+import {Dependency, Item} from "@aire/designer/base/model";
 import {
   RenderableElement,
-}                       from "../model/elements";
-import {Canvas}         from "../canvas/canvas";
-import {ElementFactory} from "../canvas/palette";
+}                       from "@aire/designer/model/elements";
+import {Canvas}         from "@aire/designer/canvas/canvas";
+import {ElementFactory} from "@aire/designer/canvas/palette";
 
 export type Relationship =
   | "parent"

@@ -1,18 +1,18 @@
 import {
   AbstractConstructorFactory,
   Descriptor
-}                    from "../../base/factory";
-import {Drawable}    from "../../model/elements";
-import {GyreFactory} from "../element-factory";
-import {Designer}    from "../../core/designer";
+}                    from "@aire/designer/base/factory";
+import {Drawable}    from "@aire/designer/model/elements";
+import {GyreFactory} from "@aire/designer/gyre/element-factory";
+import {Designer}    from "@aire/designer/core/designer";
 import {
   mxCellOverlay,
   mxConstants,
   mxImage,
   mxPerimeter,
   mxPoint
-}                    from "mxgraph/javascript/mxClient";
-import {Gyre}        from "../gyre-element";
+}             from "mxgraph/javascript/mxClient";
+import {Gyre} from "@aire/designer/gyre/gyre-element";
 
 export class DefaultConstructorFactory extends AbstractConstructorFactory {
   static readonly style = "default-style";

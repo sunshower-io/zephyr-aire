@@ -1,6 +1,6 @@
-import {Edge}     from "./edge";
-import {Vertex}   from "./vertex";
-import {Property} from "../../../condensation/condensation";
+import {Edge}   from "@aire/designer/model/graph/edge";
+import {Vertex} from "@aire/designer/model/graph/vertex";
+import {Property} from "@aire/condensation/condensation";
 
 export class CanvasLayout {
   x : number;

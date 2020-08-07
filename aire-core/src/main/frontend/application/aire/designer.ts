@@ -1,8 +1,8 @@
 import {PolymerElement}   from "@polymer/polymer/polymer-element";
 import {StampedTemplate}  from "@polymer/polymer/interfaces";
-import {Designer}         from "./designer/core/designer";
-import {CanvasModel}      from "./designer/model/model";
-import {RenderableVertex} from "./designer/model/elements";
+import {Designer}         from "@aire/designer/core/designer";
+import {CanvasModel}      from "@aire/designer/model/model";
+import {RenderableVertex} from "@aire/designer/model/elements";
 
 
 class AireDesigner extends PolymerElement {

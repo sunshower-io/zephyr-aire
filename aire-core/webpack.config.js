@@ -1,8 +1,15 @@
 const merge = require('webpack-merge');
 const flowDefaults = require('./webpack.generated.js');
+const path = require('path');
 
 module.exports = merge(flowDefaults, {
 
+    resolve: {
+        alias: {
+            "@aire": path.resolve(__dirname, "src/main/frontend/application/aire")
+        },
+        extensions: ['.js', '.ts', '.css']
+    },
     module: {
         rules: [
 

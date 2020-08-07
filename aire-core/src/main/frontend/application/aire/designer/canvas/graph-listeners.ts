@@ -8,7 +8,7 @@ import {
   mxUtils,
   Style
 }               from 'mxgraph/javascript/mxClient';
-import {Canvas} from './canvas';
+import {Canvas} from '@aire/designer/canvas/canvas';
 
 export class DefaultHoverListener implements MouseListener {
   private previousStyle : Style;

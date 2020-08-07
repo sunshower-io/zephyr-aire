@@ -1,9 +1,9 @@
-import {RenderableVertex as Vertex} from '../model/elements';
+import {RenderableVertex as Vertex} from '@aire/designer/model/elements';
 
-import {Reference} from '../base/model';
+import {Reference} from '@aire/designer/base/model';
 
-import {ConstraintManager} from '../base/dependencies';
-import {ReferenceVertex}   from '../base/factory';
+import {ConstraintManager} from '@aire/designer/base/dependencies';
+import {ReferenceVertex}   from '@aire/designer/base/factory';
 
 export class CompositeGyre extends Vertex implements ReferenceVertex {
   style : string = 'composite-style';

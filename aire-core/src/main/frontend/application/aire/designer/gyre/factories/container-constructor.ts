@@ -1,12 +1,12 @@
 import {
   AbstractConstructorFactory,
   Descriptor
-}                                                     from '../../base/factory';
-import {Drawable}                                     from '../../model/elements';
-import {GyreFactory}                                  from '../element-factory';
-import {GyreContainerNode}                            from '../container-node';
-import {Designer}                                     from '../../core/designer';
-import {mxCellOverlay, mxConstants, mxImage, mxPoint} from 'mxgraph';
+}                                                     from '@aire/designer/base/factory';
+import {Drawable}                                     from '@aire/designer/model/elements';
+import {GyreFactory}                                  from '@aire/designer/gyre/element-factory';
+import {GyreContainerNode}                            from '@aire/designer/gyre/container-node';
+import {Designer}                                     from '@aire/designer/core/designer';
+import {mxCellOverlay, mxConstants, mxImage, mxPoint} from 'mxgraph/javascript/mxClient';
 
 export class ContainerConstructorFactory extends AbstractConstructorFactory {
   static readonly style = 'container-style';

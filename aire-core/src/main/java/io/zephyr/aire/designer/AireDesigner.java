@@ -13,7 +13,6 @@ public class AireDesigner extends Div  {
 
     public AireDesigner() {
         addClassName("expand");
-
     }
 
 }

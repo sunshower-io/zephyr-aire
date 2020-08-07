@@ -7,10 +7,17 @@ import {RenderableVertex} from "@aire/designer/model/elements";
 
 class AireDesigner extends PolymerElement {
 
+  private designer : Designer;
+
   constructor() {
     super();
   }
 
+
+  addElement(el : any) {
+    let cell = new RenderableVertex(el, 20, 30, 200, 200, "sup");
+    cell.addTo(this.designer.getCanvas());
+  }
 
   _attachDom(dom : StampedTemplate | null) : ShadowRoot | null {
     document.body.append(dom as any);
@@ -19,9 +26,7 @@ class AireDesigner extends PolymerElement {
 
   ready() : void {
     super.ready();
-    let designer = new Designer(this, new CanvasModel());
-    let cell = new RenderableVertex("hello", 20, 30, 200, 200, "sup");
-    cell.addTo(designer.getCanvas());
+    this.designer = new Designer(this, new CanvasModel());
 
 
     // let graph = new mxGraph(this) as any;

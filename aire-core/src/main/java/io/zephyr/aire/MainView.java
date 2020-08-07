@@ -1,5 +1,6 @@
 package io.zephyr.aire;
 
+import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.Uses;
 import com.vaadin.flow.component.html.Anchor;
@@ -9,6 +10,7 @@ import com.vaadin.flow.router.*;
 import io.zephyr.aire.api.Container;
 import io.zephyr.aire.api.Location;
 import io.zephyr.aire.components.*;
+import io.zephyr.aire.designer.AddElementEvent;
 import io.zephyr.aire.designer.AireDesigner;
 import io.zephyr.aire.designer.AirePalette;
 import io.zephyr.aire.elements.*;
@@ -78,6 +80,13 @@ public class MainView extends AireApplicationViewport {
 
     val designer = new AireDesigner();
     addContent(designer);
+    palette.addAddElementListener(
+        new ComponentEventListener<AddElementEvent>() {
+          @Override
+          public void onComponentEvent(AddElementEvent addElementEvent) {
+            designer.addElement();
+          }
+        });
     //      val palette = new AireDesignerPalette();
     //
     //      palette.addEventListener()

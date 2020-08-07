@@ -48,7 +48,9 @@
     "simple-button": "github:SimpleElements/simple-button",
     "@vaadin/vaadin-date-time-picker": "1.1.0",
     "@vaadin/router": "1.7.2",
-    "lit-element": "^2.3.1"
+    "lit-element": "^2.3.1",
+    "tsyringe": "4.3.0",
+    "reflect-metadata": "0.1.13"
   },
   "devDependencies": {
     "awesome-typescript-loader": "5.2.1",
@@ -120,7 +122,9 @@
       "mxgraph": "^4.1.0",
       "@polymer/polymer-element": "^3.0.1",
       "lit-element": "^2.3.1",
-      "@vaadin/vaadin-date-time-picker": "1.1.0"
+      "@vaadin/vaadin-date-time-picker": "1.1.0",
+      "tsyringe": "4.3.0",
+      "reflect-metadata": "0.1.13"
     },
     "devDependencies": {
       "webpack-babel-multi-target-plugin": "2.3.3",
@@ -139,6 +143,6 @@
       "progress-webpack-plugin": "0.0.24",
       "chokidar": "^3.4.0"
     },
-    "hash": "38124b7bc287e6cad2b53f196691af201c4b6da0fc4329b03bfd6c9eecd5ef3e"
+    "hash": "c58315c66fbd5d90b6cf9e3443c3601096a17237c67f0c1715f64def7da23401"
   }
 }

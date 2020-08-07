@@ -76,7 +76,6 @@ public class MainView extends AireApplicationViewport {
     val palette = new AirePalette();
     paletteContainer.add(new Button("schnorp"));
     paletteContainer.add(palette);
-    paletteContainer.add(new AirePalette());
 
     val designer = new AireDesigner();
     addContent(designer);

@@ -3,14 +3,27 @@ import {StampedTemplate}  from "@polymer/polymer/interfaces";
 import {Designer}         from "@aire/designer/core/designer";
 import {CanvasModel}      from "@aire/designer/model/model";
 import {RenderableVertex} from "@aire/designer/model/elements";
+import Inject             from "@aire/inject/inject";
+import {DesignerManager}  from "@aire/designer/elements/designer-manager";
 
 
 class AireDesigner extends PolymerElement {
 
+
   private designer : Designer;
+
+  @Inject
+  private designerManager : DesignerManager;
+
 
   constructor() {
     super();
+  }
+
+  static get properties() {
+    return {
+      id : String
+    };
   }
 
 
@@ -24,31 +37,22 @@ class AireDesigner extends PolymerElement {
     return null;
   }
 
+  focus(options? : FocusOptions) : void {
+    super.focus(options);
+  }
+
   ready() : void {
     super.ready();
     this.designer = new Designer(this, new CanvasModel());
+    this.designerManager.register(this.id, this.designer);
+  }
 
-
-    // let graph = new mxGraph(this) as any;
-    // new mxRubberband(graph);
-    // var parent = graph.getDefaultParent();
-    //
-    // let cell = new mxCell();
-
-    // graph.getModel().beginUpdate();
-    // try {
-    //   var v1 = graph.insertVertex(parent, null, 'Hello,', 20, 20, 80, 30);
-    //   var v2 = graph.insertVertex(parent, null, 'World!', 200, 150, 80, 30);
-    //   graph.insertEdge(parent, null, '', v1, v2);
-    // } finally {
-    //   // Updates the display
-    //   graph.getModel().endUpdate();
-    // }
-
-
+  unregister() {
+    this.designerManager.unregister(this.id);
   }
 
 }
+
 
 window.customElements.define('aire-designer', AireDesigner);
 

@@ -2,6 +2,8 @@ package io.zephyr.aire.layout;
 
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.dependency.JsModule;
+import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.router.RouterLayout;
 import io.aire.core.AireContainer;
@@ -9,6 +11,7 @@ import io.aire.core.AireLayout;
 import io.zephyr.aire.api.Container;
 import io.zephyr.aire.api.Slot;
 import io.zephyr.aire.elements.*;
+import io.zephyr.aire.versions.NodeVersions;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.val;
@@ -16,6 +19,9 @@ import lombok.val;
 @Container(":main")
 @CssImport("./styles/aire/layout/aire-nav.css")
 @CssImport("./styles/aire/layout/aire-viewport.css")
+@JsModule("application/aire/application-viewport.ts")
+@NpmPackage(value = "tsyringe", version = NodeVersions.TSYRINGE)
+@NpmPackage(value = "reflect-metadata", version = NodeVersions.REFLECT_METADATA)
 public class AireApplicationViewport extends AbstractAireContainer<Main>
     implements AireLayout, RouterLayout, HasOrderedComponents {
 
@@ -50,8 +56,8 @@ public class AireApplicationViewport extends AbstractAireContainer<Main>
     main.add(primaryNavigation = new AirePrimaryNavigation());
     main.add(content);
 
-//    main.add(secondaryNavigation = new AireSecondaryNavigation());
-//    add(footer = new AireFooter());
+    //    main.add(secondaryNavigation = new AireSecondaryNavigation());
+    //    add(footer = new AireFooter());
   }
 
   public void setSecondaryNavigation(Component component) {

@@ -1,14 +1,19 @@
-import {PolymerElement}   from "@polymer/polymer/polymer-element";
+import {html, LitElement, PropertyValues, TemplateResult, customElement} from "lit-element";
 
 
-class AirePalette extends PolymerElement {
+@customElement('aire-palette')
+class AirePalette extends LitElement {
   constructor() {
     super();
   }
 
 
-  ready() {
-    super.ready();
+  updated(vals : PropertyValues) {
+    super.updated(vals);
+  }
+
+  render() : TemplateResult {
+    return html`<h1><slot></slot></h1>`;
   }
 
 

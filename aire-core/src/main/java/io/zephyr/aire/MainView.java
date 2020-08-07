@@ -9,6 +9,7 @@ import com.vaadin.flow.router.*;
 import io.zephyr.aire.api.Container;
 import io.zephyr.aire.api.Location;
 import io.zephyr.aire.components.*;
+import io.zephyr.aire.designer.AireDesigner;
 import io.zephyr.aire.designer.AirePalette;
 import io.zephyr.aire.elements.*;
 import io.zephyr.aire.layout.AireApplicationViewport;
@@ -71,10 +72,12 @@ public class MainView extends AireApplicationViewport {
     setSecondaryNavigation(aside);
 
     val palette = new AirePalette();
-    paletteContainer.add(new Button("nporp"));
+    paletteContainer.add(new Button("schnorp"));
     paletteContainer.add(palette);
+    paletteContainer.add(new AirePalette());
 
-    //      val designer = new AireDesigner();
+    val designer = new AireDesigner();
+    addContent(designer);
     //      val palette = new AireDesignerPalette();
     //
     //      palette.addEventListener()

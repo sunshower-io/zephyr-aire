@@ -2,6 +2,7 @@
 declare module "mxgraph/javascript/mxClient" {
 
 
+    export type GraphResolver = (event: mxEvent) => mxGraph;
 
 
     type ImportFunction = (
@@ -100,7 +101,7 @@ declare module "mxgraph/javascript/mxClient" {
          * @param getDropTarget
          */
         function makeDraggable(element: HTMLElement,
-                               graph: mxGraph,
+                               graph: mxGraph | GraphResolver,
                                func : ImportFunction,
                                dragElement?: HTMLElement,
                                dx ?: number,

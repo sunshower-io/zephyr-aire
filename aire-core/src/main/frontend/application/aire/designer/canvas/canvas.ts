@@ -72,8 +72,8 @@ mxConstants.EDGE_SELECTION_COLOR = "#E74694";
 
 export namespace ElementEvent {
   export namespace Vertices {
-    export let DoubleClicked : string = "vertex:double-clicked";
-    export let SingleClicked : string = "vertex:single-clicked";
+    export const DoubleClicked : string = "vertex:double-clicked";
+    export const SingleClicked : string = "vertex:single-clicked";
   }
 }
 

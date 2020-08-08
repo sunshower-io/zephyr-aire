@@ -7,3 +7,8 @@ export class CanvasModel extends mxGraphModel {
     return Identifier.newId();
   }
 }
+
+
+export class ModelElement {
+  paletteIcon: string;
+}

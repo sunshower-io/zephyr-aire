@@ -6,6 +6,8 @@ import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.shared.Registration;
+import io.zephyr.aire.designer.model.CellModelElement;
+import lombok.val;
 
 @Tag("aire-palette")
 @JsModule("application/aire/designer/elements/palette.ts")
@@ -13,12 +15,8 @@ import com.vaadin.flow.shared.Registration;
 public class AirePalette extends Div {
 
   public AirePalette() {
-    for (int i = 0; i < 2; i++) {
-      add(new AirePaletteElement());
-    }
-  }
-
-  public Registration addAddElementListener(ComponentEventListener<AddElementEvent> listener) {
-    return addListener(AddElementEvent.class, listener);
+    val el = new CellModelElement<>();
+    el.setPaletteIcon("icons/icon-dark.svg");
+    add(new AirePaletteElement(el));
   }
 }

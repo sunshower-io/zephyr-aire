@@ -13,7 +13,6 @@ export class DesignerManager {
 
 
   public unregister(id : string) : Designer {
-    console.log(`unregistering ${id}`);
     let designer = this.registeredDesigners.get(id);
     this.registeredDesigners.delete(id);
     return designer;
@@ -21,7 +20,6 @@ export class DesignerManager {
 
 
   public register(id : string, designer : Designer) {
-    console.log(`registering ${id}`);
     this.registeredDesigners.set(id, designer);
   }
 
@@ -31,7 +29,6 @@ export class DesignerManager {
 
   resolveFirst() : Designer {
     for (let [_, v] of this.registeredDesigners) {
-      console.log("Resolved " + v);
       return v;
     }
   }

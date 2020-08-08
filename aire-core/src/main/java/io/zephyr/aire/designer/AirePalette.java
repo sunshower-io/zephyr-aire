@@ -17,6 +17,11 @@ public class AirePalette extends Div {
   public AirePalette() {
     val el = new CellModelElement<>();
     el.setPaletteIcon("icons/icon-dark.svg");
+
     add(new AirePaletteElement(el));
+
+    val el2 = new CellModelElement<>();
+    el2.setPaletteIcon("icons/angellist.svg");
+    add(new AirePaletteElement(el2));
   }
 }

@@ -25,9 +25,10 @@
         <jre.windows.x64.signature>22d873b52f7915afc132c568e61afa00fcec155184361f1dc0a6766ff1ecbcc7
         </jre.windows.x64.signature>
         <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
-        <zephyr-maven-plugin.version>2.0.39.Final</zephyr-maven-plugin.version>
+        <zephyr-maven-plugin.version>2.0.53-SNAPSHOT</zephyr-maven-plugin.version>
         <izpack-maven-plugin.version>5.1.3</izpack-maven-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+        <maven-antrun-plugin.version>3.0.0</maven-antrun-plugin.version>
     </properties>
 
     <distributionManagement>
@@ -68,10 +69,20 @@
     <build>
         <plugins>
 
+
+            <!--
+
+            Step 1:
+
+            Filter Installer resources into build
+            This allows us to get build information into the installer
+            -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>${maven-resources-plugin.version}</version>
+
                 <configuration>
 
                     <resources>
@@ -109,6 +120,58 @@
 
             </plugin>
 
+            <!--
+
+            Step 2:  File-placement
+
+            This copies all the dependencies we need to include into a location that is
+            archived with the installer.  For instance, any plugins that need to be bundled
+            are included here
+            -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${maven-assembly-plugin.version}</version>
+                <executions>
+
+                    <execution>
+                        <id>assemble-zips</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>assembly</finalName>
+                            <appendAssemblyId>true</appendAssemblyId>
+                            <descriptors>
+                                <descriptor>assembly/assembly-windows-x64.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+
+
+                    <execution>
+                        <id>assemble-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>assembly</finalName>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptors>
+                                <descriptor>assembly/assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <!--
+                Build the actual installer.  This includes the bundled JRE which is used to host
+                the installer as well as the application
+            -->
+
             <plugin>
                 <groupId>org.codehaus.izpack</groupId>
                 <artifactId>izpack-maven-plugin</artifactId>
@@ -118,7 +181,7 @@
                 <executions>
 
                     <execution>
-                        <phase>install</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>izpack</goal>
                         </goals>
@@ -137,6 +200,12 @@
                 </executions>
             </plugin>
 
+
+            <!--
+
+            Once the installer has been packaged, we need to bundle it into a self-hosting archive
+            -->
+
             <plugin>
                 <groupId>io.zephyr.maven</groupId>
                 <artifactId>zephyr-maven-plugin</artifactId>
@@ -145,7 +214,7 @@
 
                     <execution>
                         <id>generate-windows</id>
-                        <phase>install</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>generate-sfx</goal>
                         </goals>
@@ -154,12 +223,65 @@
                             <archive-directory>${project.build.directory}/windows-x64</archive-directory>
                             <archive-base>${project.build.directory}/sunshower-installer-windows-x64</archive-base>
                             <executable-file>launch.cmd</executable-file>
+                            <executable-configuration>
+                                <version-string>1.0.1</version-string>
+                                <file-version>1.0.2</file-version>
+                                <product-version>1.0.6</product-version>
+                                <manifest-file>${project.basedir}/archive/manifest.xml</manifest-file>
+                                <resource-strings>
+                                    <test-resource>whatever1</test-resource>
+                                    <test-resource2>whatever2</test-resource2>
+                                </resource-strings>
+
+                                <icon-definition>
+                                    <format>ICO</format>
+                                    <source>${project.basedir}/src/main/resources/assets/installer.svg</source>
+                                    <icons>
+
+                                        <icon>
+                                            <size>16px</size>
+                                            <channel>rgba</channel>
+                                        </icon>
+
+
+                                        <icon>
+                                            <size>32px</size>
+                                            <channel>rgba</channel>
+                                        </icon>
+
+                                        <icon>
+                                            <size>48px</size>
+                                            <channel>rgba</channel>
+                                        </icon>
+
+                                        <icon>
+                                            <size>32px</size>
+                                            <channel>8bit</channel>
+                                        </icon>
+
+                                        <icon>
+                                            <size>24px</size>
+                                            <channel>8bit</channel>
+                                        </icon>
+
+                                        <icon>
+                                            <size>16px</size>
+                                            <channel>8bit</channel>
+                                        </icon>
+                                    </icons>
+                                </icon-definition>
+                            </executable-configuration>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
 
+            <!--
+            Download the JRE from adoptopenjdk and place it under windows-x64/jre
+            We basically need the entire JRE as we can't know which portions of the JRE are
+            required by plugins.
+            -->
             <plugin>
                 <groupId>com.googlecode.maven-download-plugin</groupId>
                 <artifactId>download-maven-plugin</artifactId>
@@ -168,7 +290,7 @@
                 <executions>
                     <execution>
                         <id>windows-x64-jre-download</id>
-                        <phase>prepare-package</phase>
+                        <phase>generate-resources</phase>
                         <goals>
                             <goal>wget</goal>
                         </goals>
@@ -183,9 +305,14 @@
                 </executions>
             </plugin>
 
+            <!--
+            This isn't great, but the JRE extracts to an inconvenient location so we need to strip
+            its containing directory off.  Also, we copy the ready-to-package assembly over to its final destination
+            -->
+
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>${maven-antrun-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>generate-sources</id>
@@ -218,11 +345,17 @@
                     </execution>
                 </executions>
             </plugin>
+
+
+            <!--
+            This bundles the aire-core.jar file into an application with an initial splash screen
+            -->
             <plugin>
                 <groupId>com.akathist.maven.plugins.launch4j</groupId>
                 <artifactId>launch4j-maven-plugin</artifactId>
                 <version>${launch4j-plugin.version}</version>
                 <executions>
+
                     <execution>
                         <id>l4j-windows-x64</id>
                         <phase>package</phase>
@@ -240,7 +373,7 @@
                             </jre>
 
                             <!--                            <splash>-->
-                            <!--                                <file>${project.basedir}/src/main/resources/assets/splash.png</file>-->
+                            <!--                                <file>assets/splash.png</file>-->
                             <!--                                <waitForWindow>true</waitForWindow>-->
                             <!--                                <timeout>60</timeout>-->
                             <!--                                <timeoutErr>true</timeoutErr>-->
@@ -259,49 +392,57 @@
                             </versionInfo>
                         </configuration>
                     </execution>
-                </executions>
-            </plugin>
 
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>${maven-assembly-plugin.version}</version>
-                <executions>
 
                     <execution>
-                        <id>assemble-zips</id>
+                        <id>bundle-installer</id>
                         <phase>install</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>launch4j</goal>
                         </goals>
-                        <configuration>
-                            <finalName>assembly</finalName>
-                            <appendAssemblyId>true</appendAssemblyId>
-                            <descriptors>
-                                <descriptor>assembly/assembly-windows-x64.xml</descriptor>
-                            </descriptors>
-                        </configuration>
-                    </execution>
 
-
-                    <execution>
-                        <id>assemble-dependencies</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
                         <configuration>
-                            <finalName>assembly</finalName>
-                            <appendAssemblyId>false</appendAssemblyId>
-                            <descriptors>
-                                <descriptor>assembly/assembly.xml</descriptor>
-                            </descriptors>
+                            <headerType>gui</headerType>
+                            <outfile>target/windows-x64/sunshower-windows-installer.exe</outfile>
+                            <dontWrapJar>true</dontWrapJar>
+                            <headerObjects>
+                                <file>${project.build.directory}/sunshower-installer-windows-x64.exe</file>
+                            </headerObjects>
+                            <jar>sunshower-installer-windows-x64.exe</jar>
+                            <errTitle>Sunshower</errTitle>
+                            <jre>
+                                <path>jre</path>
+                            </jre>
+
+                            <splash>
+                                <file>${project.basedir}/src/main/resources/assets/installer256px.ico</file>
+                                <waitForWindow>true</waitForWindow>
+                                <timeout>60</timeout>
+                                <timeoutErr>true</timeoutErr>
+                            </splash>
+                            <icon>${project.basedir}/src/main/resources/assets/installer256px.ico</icon>
+                            <versionInfo>
+                                <fileVersion>1.2.3.4</fileVersion>
+                                <txtFileVersion>txt file version?</txtFileVersion>
+                                <fileDescription>a description</fileDescription>
+                                <copyright>my copyright</copyright>
+                                <productVersion>4.3.2.1</productVersion>
+                                <txtProductVersion>txt product version</txtProductVersion>
+                                <productName>E-N-C-C</productName>
+                                <internalName>ccne</internalName>
+                                <originalFilename>Sunshower.exe</originalFilename>
+                            </versionInfo>
                         </configuration>
+
                     </execution>
                 </executions>
             </plugin>
+
 
         </plugins>
     </build>
+
+
     <pluginRepositories>
 
         <pluginRepository>

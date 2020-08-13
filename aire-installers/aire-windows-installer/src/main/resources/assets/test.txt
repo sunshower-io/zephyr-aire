@@ -1,0 +1,1096 @@
+[   ] RCEDIT-X86.EXE
+     [ E6] KERNEL32.DLL
+          [ ? ] API-MS-WIN-CORE-RTLSUPPORT-L1-1-0.DLL
+          [ E6] NTDLL.DLL
+          [ E6] KERNELBASE.DLL
+               [ E6] NTDLL.DLL
+               [ ? ] API-MS-WIN-EVENTING-PROVIDER-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-APIQUERY-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-APIQUERY-L1-1-1.DLL
+               [D? ] EXT-MS-WIN-ADVAPI32-REGISTRY-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-ADVAPI32-REGISTRY-L1-1-1.DLL
+               [D? ] EXT-MS-WIN-KERNEL32-APPCOMPAT-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-NTUSER-STRING-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-KERNEL32-FILE-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-KERNEL32-DATETIME-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-KERNEL32-QUIRKS-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-KERNEL32-QUIRKS-L1-1-1.DLL
+               [D? ] EXT-MS-WIN-KERNEL32-SIDEBYSIDE-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-MRMCORER-RESMANAGER-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-GPAPI-GROUPPOLICY-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-NTDSAPI-ACTIVEDIRECTORYCLIENT-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-NTDSAPI-ACTIVEDIRECTORYCLIENT-L1-1-1.DLL
+               [D? ] EXT-MS-WIN-SHELL32-SHELLCOM-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-ADVAPI32-NTMARTA-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-SECURITY-CAPAUTHZ-L1-1-1.DLL
+               [D? ] EXT-MS-WIN-FECLIENT-ENCRYPTEDFILE-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-SECURITY-EFSWRT-L1-1-0.DLL
+               [D? ] API-MS-WIN-SECURITY-SDDL-L1-1-0.DLL
+               [D? ] EXT-MS-ONECORE-APPMODEL-STATEREPOSITORY-CACHE-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-APPMODEL-DAXCORE-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-KERNEL32-ERRORHANDLING-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-KERNEL32-REGISTRY-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-KERNELBASE-PROCESSTHREAD-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-ADVAPI32-NPUSERNAME-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-APPXDEPLOYMENTCLIENT-APPXDEPLOY-L1-1-0.DLL
+               [D? ] EXT-MS-ONECORE-APPMODEL-STATEREPOSITORY-INTERNAL-L1-1-1.DLL
+               [D? ] EXT-MS-WIN-APPXDEPLOYMENTCLIENT-APPXDEPLOYONECORE-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-WINRT-DEVICE-ACCESS-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-APPMODEL-APPEXECUTIONALIAS-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-APPMODEL-APPEXECUTIONALIAS-L1-1-1.DLL
+               [D? ] API-MS-WIN-SECURITY-ISOLATIONPOLICY-L1-2-0.DLL
+          [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-3.DLL
+          [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-2.DLL
+          [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-1.DLL
+          [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-HEAP-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-HEAP-L2-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-MEMORY-L1-1-1.DLL
+          [ ? ] API-MS-WIN-CORE-MEMORY-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-MEMORY-L1-1-2.DLL
+          [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-SYNCH-L1-2-1.DLL
+          [ ? ] API-MS-WIN-CORE-SYNCH-L1-2-0.DLL
+          [ ? ] API-MS-WIN-CORE-FILE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-FILE-L1-2-0.DLL
+          [ ? ] API-MS-WIN-CORE-FILE-L1-2-2.DLL
+          [ ? ] API-MS-WIN-CORE-FILE-L1-2-1.DLL
+          [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-IO-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-IO-L1-1-1.DLL
+          [ ? ] API-MS-WIN-CORE-JOB-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-THREADPOOL-LEGACY-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-THREADPOOL-PRIVATE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-LARGEINTEGER-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-2.DLL
+          [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+          [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-1.DLL
+          [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L2-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-NAMEDPIPE-L1-2-2.DLL
+          [ ? ] API-MS-WIN-CORE-NAMEDPIPE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-NAMEDPIPE-L1-2-1.DLL
+          [ ? ] API-MS-WIN-CORE-DATETIME-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-DATETIME-L1-1-1.DLL
+          [ ? ] API-MS-WIN-CORE-DATETIME-L1-1-2.DLL
+          [ ? ] API-MS-WIN-CORE-SYSINFO-L1-2-0.DLL
+          [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-SYSINFO-L1-2-3.DLL
+          [ ? ] API-MS-WIN-CORE-SYSINFO-L1-2-1.DLL
+          [ ? ] API-MS-WIN-CORE-TIMEZONE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-LOCALIZATION-L1-2-0.DLL
+          [ ? ] API-MS-WIN-CORE-PROCESSSNAPSHOT-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-PROCESSENVIRONMENT-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-PROCESSENVIRONMENT-L1-2-0.DLL
+          [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-DEBUG-L1-1-1.DLL
+          [ ? ] API-MS-WIN-CORE-DEBUG-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-3.DLL
+          [ ? ] API-MS-WIN-CORE-FIBERS-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-UTIL-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-SECURITY-BASE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-SECURITY-BASE-L1-2-0.DLL
+          [ ? ] API-MS-WIN-SECURITY-APPCONTAINER-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-COMM-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-REALTIME-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-WOW64-L1-1-1.DLL
+          [ ? ] API-MS-WIN-CORE-WOW64-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-SYSTEMTOPOLOGY-L1-1-1.DLL
+          [ ? ] API-MS-WIN-CORE-SYSTEMTOPOLOGY-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-PROCESSTOPOLOGY-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-NAMESPACE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-FILE-L2-1-2.DLL
+          [ ? ] API-MS-WIN-CORE-FILE-L2-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-FILE-L2-1-3.DLL
+          [ ? ] API-MS-WIN-CORE-FILE-L2-1-1.DLL
+          [ ? ] API-MS-WIN-CORE-XSTATE-L2-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-XSTATE-L2-1-1.DLL
+          [ ? ] API-MS-WIN-CORE-LOCALIZATION-L2-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-NORMALIZATION-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-FIBERS-L2-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-FIBERS-L2-1-1.DLL
+          [ ? ] API-MS-WIN-CORE-LOCALIZATION-PRIVATE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-SIDEBYSIDE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-APPCOMPAT-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-WINDOWSERRORREPORTING-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-WINDOWSERRORREPORTING-L1-1-1.DLL
+          [ ? ] API-MS-WIN-CORE-WINDOWSERRORREPORTING-L1-1-2.DLL
+          [ ? ] API-MS-WIN-CORE-CONSOLE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-CONSOLE-L1-2-0.DLL
+          [ ? ] API-MS-WIN-CORE-CONSOLE-L1-2-1.DLL
+          [ ? ] API-MS-WIN-CORE-CONSOLE-L2-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-CONSOLE-L2-2-0.DLL
+          [ ? ] API-MS-WIN-CORE-CONSOLE-L3-2-0.DLL
+          [ ? ] API-MS-WIN-CORE-PSAPI-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-PSAPI-ANSI-L1-1-0.DLL
+          [ ? ] API-MS-WIN-EVENTING-PROVIDER-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-APPCOMPAT-L1-1-1.DLL
+          [FE6] NTDLL.DLL
+     [ E6] USER32.DLL
+          [ E6] WIN32U.DLL
+          [ E6] NTDLL.DLL
+          [ ? ] API-MS-WIN-CORE-LOCALIZATION-L1-2-0.DLL
+          [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-HEAP-L2-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+          [ ? ] API-MS-WIN-EVENTING-PROVIDER-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+          [ ? ] API-MS-WIN-SECURITY-BASE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-STRING-L2-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-SYNCH-L1-2-0.DLL
+          [ ? ] API-MS-WIN-CORE-PROCESSENVIRONMENT-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-FILE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-1.DLL
+          [ ? ] API-MS-WIN-CORE-MEMORY-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-HEAP-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-MEMORY-L1-1-3.DLL
+          [ ? ] API-MS-WIN-CORE-PRIVATEPROFILE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-ATOMS-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-HEAP-OBSOLETE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-STRING-OBSOLETE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-LOCALIZATION-OBSOLETE-L1-2-0.DLL
+          [ ? ] API-MS-WIN-CORE-STRINGANSI-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-SIDEBYSIDE-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-KERNEL32-PRIVATE-L1-1-0.DLL
+          [ E6] KERNELBASE.DLL
+          [ ? ] API-MS-WIN-CORE-KERNEL32-LEGACY-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-APPINIT-L1-1-0.DLL
+          [ E6] GDI32.DLL
+               [ E6] NTDLL.DLL
+               [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+               [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-1.DLL
+               [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-HEAP-L2-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+               [ E6] WIN32U.DLL
+               [ ? ] API-MS-WIN-GDI-INTERNAL-UAP-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+               [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-APIQUERY-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-GDI-DC-L1-2-1.DLL
+               [D? ] EXT-MS-WIN-GDI-DC-L1-2-0.DLL
+               [D? ] EXT-MS-WIN-GDI-DC-CREATE-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-GDI-DRAW-L1-1-3.DLL
+               [D? ] EXT-MS-WIN-GDI-DRAW-L1-1-2.DLL
+               [D? ] EXT-MS-WIN-GDI-DRAW-L1-1-1.DLL
+               [D? ] EXT-MS-WIN-GDI-DRAW-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-GDI-FONT-L1-1-2.DLL
+               [D? ] EXT-MS-WIN-GDI-FONT-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-GDI-FONT-L1-1-1.DLL
+               [D? ] EXT-MS-WIN-GDI-FONT-L1-1-3.DLL
+               [D? ] EXT-MS-WIN-GDI-METAFILE-L1-1-2.DLL
+               [D? ] EXT-MS-WIN-GDI-METAFILE-L1-1-1.DLL
+               [D? ] EXT-MS-WIN-GDI-METAFILE-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-GDI-PATH-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-GDI-PRINT-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-GDI-PRIVATE-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-GDI-WCS-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-GDI-CLIPPING-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-GDI-INTERNAL-DESKTOP-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-GDI-INTERNAL-DESKTOP-L1-1-1.DLL
+               [D? ] EXT-MS-WIN-GDI-INTERNAL-DESKTOP-L1-1-3.DLL
+               [D? ] EXT-MS-WIN-GDI-INTERNAL-DESKTOP-L1-1-2.DLL
+          [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+          [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+          [ ? ] API-MS-WIN-CORE-APIQUERY-L1-1-0.DLL
+          [D? ] API-MS-WIN-POWER-SETTING-L1-1-0.DLL
+          [D? ] API-MS-WIN-POWER-BASE-L1-1-0.DLL
+          [D? ] API-MS-WIN-SERVICE-PRIVATE-L1-1-0.DLL
+          [DE6] MSIMG32.DLL
+               [ E6] NTDLL.DLL
+               [ E6] GDI32.DLL
+               [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+               [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+          [DE6] WINSTA.DLL
+               [ E6] MSVCRT.DLL
+                    [ E6] NTDLL.DLL
+                    [ ? ] API-MS-WIN-CORE-CONSOLE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-CONSOLE-L1-2-0.DLL
+                    [ ? ] API-MS-WIN-CORE-DATETIME-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-DEBUG-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-FIBERS-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-FILE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-HEAP-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-LOCALIZATION-L1-2-0.DLL
+                    [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                    [ ? ] API-MS-WIN-CORE-MEMORY-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-NAMEDPIPE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-PROCESSENVIRONMENT-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-SYNCH-L1-2-0.DLL
+                    [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-UTIL-L1-1-0.DLL
+                    [ E6] KERNELBASE.DLL
+               [ E6] NTDLL.DLL
+               [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+               [ ? ] API-MS-WIN-CORE-SYNCH-L1-2-0.DLL
+               [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-HEAP-L2-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-PROCESSENVIRONMENT-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-KERNEL32-LEGACY-L1-1-0.DLL
+               [ E6] KERNELBASE.DLL
+               [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-DEBUG-L1-1-0.DLL
+               [ ? ] API-MS-WIN-EVENTING-PROVIDER-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-1.DLL
+               [ ? ] API-MS-WIN-CORE-HEAP-L1-1-0.DLL
+               [ ? ] API-MS-WIN-EVENTING-CLASSICPROVIDER-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+               [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+               [ ? ] API-MS-WIN-CORE-THREADPOOL-LEGACY-L1-1-0.DLL
+               [DE6] RPCRT4.DLL
+                    [ E6] NTDLL.DLL
+                    [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-2.DLL
+                    [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-HEAP-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-INTERLOCKED-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-IO-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                    [ ? ] API-MS-WIN-CORE-LOCALIZATION-L1-2-0.DLL
+                    [ ? ] API-MS-WIN-CORE-MEMORY-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-HEAP-L2-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-MISC-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-NAMEDPIPE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-PROCESSENVIRONMENT-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-TIMEZONE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-THREADPOOL-LEGACY-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-SECURITY-BASE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-APIQUERY-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-THREADPOOL-L1-2-0.DLL
+                    [ E6] KERNELBASE.DLL
+                    [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+                    [D? ] EXT-MS-WIN-CORE-WINRT-REMOTE-L1-1-0.DLL
+                    [D? ] EXT-MS-WIN-RPC-SSL-L1-1-0.DLL
+                    [D? ] API-MS-WIN-SECURITY-LSALOOKUP-L1-1-0.DLL
+                    [DE6] SSPICLI.DLL
+                         [ ? ] API-MS-WIN-CORE-CRT-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-CRT-L2-1-0.DLL
+                         [ E6] NTDLL.DLL
+                         [ E6] RPCRT4.DLL
+                         [ ? ] API-MS-WIN-SECURITY-LSAPOLICY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-FILE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYNCH-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-L2-1-0.DLL
+                         [ ? ] API-MS-WIN-EVENTING-PROVIDER-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-UTIL-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+                         [DE6] CRYPTBASE.DLL
+                              [ E6] NTDLL.DLL
+                              [ E6] BCRYPTPRIMITIVES.DLL
+                              [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+                              [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+                              [DE6] RPCRT4.DLL
+                         [D? ] API-MS-WIN-SECURITY-LSALOOKUP-L1-1-0.DLL
+                    [DE6] WS2_32.DLL
+                    [DE6] IPHLPAPI.DLL
+                    [D? ] EXT-MS-WIN-AUTHZ-CONTEXT-L1-1-0.DLL
+                    [D? ] API-MS-WIN-SECURITY-SDDL-L1-1-0.DLL
+                    [DE6] BCRYPTPRIMITIVES.DLL
+                         [ E6] NTDLL.DLL
+                         [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-1.DLL
+                         [ ? ] API-MS-WIN-CORE-IO-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-MEMORY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-XSTATE-L2-1-0.DLL
+               [D? ] API-MS-WIN-SECURITY-BASE-L1-1-0.DLL
+               [D? ] API-MS-WIN-SECURITY-SDDL-L1-1-0.DLL
+               [DE6] CRYPT32.DLL
+                    [ ? ] API-MS-WIN-CRT-RUNTIME-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CRT-STRING-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CRT-PRIVATE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-PROCESSENVIRONMENT-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-HEAP-L2-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-VERSION-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-RTLSUPPORT-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-DEBUG-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-1.DLL
+                    [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-INTERLOCKED-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                    [ ? ] API-MS-WIN-CORE-FILE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-SYNCH-L1-2-0.DLL
+                    [ ? ] API-MS-WIN-EVENTING-PROVIDER-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-LOCALIZATION-L1-2-0.DLL
+                    [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-PSAPI-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-TIMEZONE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-1.DLL
+                    [ ? ] API-MS-WIN-CORE-DATETIME-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-MEMORY-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-FILE-L1-2-0.DLL
+                    [ ? ] API-MS-WIN-CORE-THREADPOOL-L1-2-0.DLL
+                    [ ? ] API-MS-WIN-CORE-THREADPOOL-PRIVATE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-SECURITY-GROUPPOLICY-L1-1-0.DLL
+                    [ E6] MSASN1.DLL
+                         [ E6] NTDLL.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-L2-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-STRING-OBSOLETE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-THREADPOOL-LEGACY-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-KERNEL32-LEGACY-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-HEAP-OBSOLETE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-LOCALIZATION-OBSOLETE-L1-2-0.DLL
+                    [ ? ] API-MS-WIN-CORE-STRING-OBSOLETE-L1-1-0.DLL
+                    [ E6] NTDLL.DLL
+                    [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+                    [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+                    [D? ] API-MS-WIN-POWER-SETTING-L1-1-0.DLL
+                    [D? ] API-MS-WIN-SECURITY-BASE-L1-1-0.DLL
+                    [DE6] RPCRT4.DLL
+                    [D? ] API-MS-WIN-SECURITY-SDDL-L1-1-0.DLL
+                    [D? ] API-MS-WIN-SECURITY-BASE-L1-2-0.DLL
+                    [DE6] NCRYPT.DLL
+                         [ E6] NTDLL.DLL
+                         [ E6] BCRYPT.DLL
+                         [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-SECURITY-BASE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-L2-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                         [ E6] NTASN1.DLL
+                              [ E6] NTDLL.DLL
+                              [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                              [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-HEAP-L2-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-RTLSUPPORT-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-MEMORY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-RTLSUPPORT-L1-1-0.DLL
+                         [DE6] CRYPTSP.DLL
+                    [DE6] BCRYPT.DLL
+                         [ E6] NTDLL.DLL
+                         [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-SECURITY-BASE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-EVENTING-PROVIDER-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PSAPI-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-THREADPOOL-PRIVATE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-THREADPOOL-LEGACY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-MEMORY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+                         [DE6] BCRYPTPRIMITIVES.DLL
+                    [DE6] SSPICLI.DLL
+                    [D? ] API-MS-WIN-SECURITY-BASE-L1-2-1.DLL
+                    [DE6] CRYPTSP.DLL
+                         [ E6] NTDLL.DLL
+                         [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSENVIRONMENT-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-L2-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-FILE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-MEMORY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+                         [DE6] BCRYPT.DLL
+                         [DE6] CRYPTBASE.DLL
+                    [D? ] API-MS-WIN-CORE-REGISTRY-PRIVATE-L1-1-0.DLL
+                    [DE6] PROFAPI.DLL
+                         [ ? ] API-MS-WIN-CRT-RUNTIME-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CRT-STRING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CRT-PRIVATE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-LOCALIZATION-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-DEBUG-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-EVENTING-PROVIDER-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYNCH-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-L2-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-THREADPOOL-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-SECURITY-BASE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSENVIRONMENT-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-FILE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-RTLSUPPORT-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-1.DLL
+                         [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-INTERLOCKED-L1-1-0.DLL
+                         [ E6] NTDLL.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-APIQUERY-L1-1-0.DLL
+                         [D? ] API-MS-WIN-SECURITY-SDDL-L1-1-0.DLL
+                         [DE6] SSPICLI.DLL
+                         [DE6] RPCRT4.DLL
+                         [D? ] API-MS-WIN-SECURITY-LSALOOKUP-L1-1-0.DLL
+                         [D? ] EXT-MS-WIN-PROFILE-EXTENDER-L1-1-0.DLL
+                         [D? ] API-MS-WIN-APPMODEL-RUNTIME-L1-1-1.DLL
+                         [D? ] API-MS-WIN-APPMODEL-RUNTIME-INTERNAL-L1-1-2.DLL
+                    [DE6] DPAPI.DLL
+                         [ E6] NTDLL.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-L2-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-SECURITY-BASE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+                         [DE6] RPCRT4.DLL
+                         [DE6] CRYPTBASE.DLL
+                         [DE6] SAMLIB.DLL
+                              [ ? ] API-MS-WIN-CRT-STRING-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CRT-RUNTIME-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CRT-PRIVATE-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-EVENTING-CLASSICPROVIDER-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                              [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-SECURITY-BASE-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-INTERLOCKED-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-RTLSUPPORT-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-DEBUG-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-1.DLL
+                              [ ? ] API-MS-WIN-EVENTING-OBSOLETE-L1-1-0.DLL
+                              [ E6] NTDLL.DLL
+                              [ ? ] API-MS-WIN-CORE-HEAP-L2-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+                              [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+                              [DE6] BCRYPT.DLL
+                              [DE6] CRYPTBASE.DLL
+                              [DE6] RPCRT4.DLL
+                              [DE6] DNSAPI.DLL
+                              [DE6] DSPARSE.DLL
+                                   [ E6] MSVCRT.DLL
+                                   [ ? ] API-MS-WIN-EVENTING-CLASSICPROVIDER-L1-1-0.DLL
+                                   [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                                   [ ? ] API-MS-WIN-CORE-SYNCH-L1-2-0.DLL
+                                   [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                                   [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                                   [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                                   [ ? ] API-MS-WIN-CORE-RTLSUPPORT-L1-1-0.DLL
+                                   [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                                   [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+                                   [ ? ] API-MS-WIN-CORE-HEAP-L2-1-0.DLL
+                                   [ E6] RPCRT4.DLL
+                                   [ E6] NTDLL.DLL
+                              [D? ] API-MS-WIN-SECURITY-LSAPOLICY-L1-1-0.DLL
+                              [DE6] CRYPTSP.DLL
+                    [DE6] CABINET.DLL
+                         [ ? ] API-MS-WIN-CRT-STRING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CRT-RUNTIME-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CRT-PRIVATE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-FILE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-RTLSUPPORT-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-DEBUG-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-1.DLL
+                         [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-INTERLOCKED-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-STRING-OBSOLETE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-KERNEL32-LEGACY-L1-1-0.DLL
+                         [ E6] NTDLL.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+                         [D? ] API-MS-WIN-CORE-COM-L1-1-0.DLL
+                    [D? ] API-MS-WIN-SERVICE-MANAGEMENT-L1-1-0.DLL
+                    [D? ] API-MS-WIN-SERVICE-MANAGEMENT-L2-1-0.DLL
+                    [D? ] API-MS-WIN-SERVICE-WINSVC-L1-1-0.DLL
+                    [D? ] API-MS-WIN-SERVICE-PRIVATE-L1-1-0.DLL
+                    [FE6] DPAPI.DLL
+               [D? ] EXT-MS-WIN-NTUSER-WINDOW-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-NTUSER-SYNCH-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-NTUSER-MESSAGE-L1-1-0.DLL
+               [D? ] EXT-MS-WIN-RTCORE-NTUSER-SYSPARAMS-L1-1-0.DLL
+               [DE6] WS2_32.DLL
+                    [ ? ] API-MS-WIN-CORE-CRT-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-CRT-L2-1-0.DLL
+                    [ E6] NTDLL.DLL
+                    [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-SYNCH-L1-2-0.DLL
+                    [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                    [ ? ] API-MS-WIN-CORE-THREADPOOL-L1-2-0.DLL
+                    [ ? ] API-MS-WIN-SECURITY-BASE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-EVENTING-PROVIDER-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-HEAP-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-PROCESSENVIRONMENT-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-HEAP-L2-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-FILE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-WOW64-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-IO-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-1.DLL
+                    [ ? ] API-MS-WIN-CORE-UTIL-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-STRING-OBSOLETE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-KERNEL32-LEGACY-L1-1-0.DLL
+                    [ E6] RPCRT4.DLL
+                    [ ? ] API-MS-WIN-CORE-DEBUG-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+                    [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-APIQUERY-L1-1-0.DLL
+                    [D? ] API-MS-WIN-SERVICE-WINSVC-L1-1-0.DLL
+                    [D? ] API-MS-WIN-SERVICE-MANAGEMENT-L1-1-0.DLL
+                    [DE6] NSI.DLL
+                         [ E6] NTDLL.DLL
+                         [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-FILE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-IO-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+                    [D? ] EXT-MS-WIN-RTCORE-NTUSER-WINDOW-EXT-L1-1-0.DLL
+               [DE6] IPHLPAPI.DLL
+                    [ ? ] API-MS-WIN-CORE-CRT-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-CRT-L2-1-0.DLL
+                    [ E6] NTDLL.DLL
+                    [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-HEAP-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                    [ ? ] API-MS-WIN-CORE-LOCALIZATION-L1-2-0.DLL
+                    [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-HEAP-OBSOLETE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-1.DLL
+                    [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-SYNCH-L1-2-0.DLL
+                    [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-UTIL-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-SECURITY-BASE-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-EVENTING-CLASSICPROVIDER-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-IO-L1-1-0.DLL
+                    [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+                    [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+                    [DE6] DHCPCSVC.DLL
+                         [ ? ] API-MS-WIN-CORE-CRT-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-CRT-L2-1-0.DLL
+                         [ E6] NTDLL.DLL
+                         [ E6] RPCRT4.DLL
+                         [ E6] WS2_32.DLL
+                         [ E6] NSI.DLL
+                         [ ? ] API-MS-WIN-DOWNLEVEL-KERNEL32-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-FILE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-IO-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-OBSOLETE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-SECURITY-BASE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-SERVICE-MANAGEMENT-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+                         [DE6] IPHLPAPI.DLL
+                    [DE6] DHCPCSVC6.DLL
+                         [ ? ] API-MS-WIN-CORE-CRT-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-CRT-L2-1-0.DLL
+                         [ E6] NTDLL.DLL
+                         [ E6] RPCRT4.DLL
+                         [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-OBSOLETE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-UTIL-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+                         [DE6] IPHLPAPI.DLL
+                         [DE6] WS2_32.DLL
+                    [DE6] DNSAPI.DLL
+                         [ ? ] API-MS-WIN-CORE-CRT-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-CRT-L2-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-FILE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-LOCALIZATION-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-OBSOLETE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSENVIRONMENT-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYNCH-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYNCH-L1-2-1.DLL
+                         [ ? ] API-MS-WIN-CORE-UTIL-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-SECURITY-BASE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-THREADPOOL-L1-2-0.DLL
+                         [ E6] WS2_32.DLL
+                         [ E6] NTDLL.DLL
+                         [ E6] NSI.DLL
+                         [ ? ] API-MS-WIN-CORE-MEMORY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-DEBUG-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-2.DLL
+                         [ ? ] API-MS-WIN-CORE-TIMEZONE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-APIQUERY-L1-1-0.DLL
+                         [DE6] IPHLPAPI.DLL
+                         [D? ] API-MS-WIN-SECURITY-LSALOOKUP-L1-1-0.DLL
+                         [D? ] API-MS-WIN-SERVICE-MANAGEMENT-L1-1-0.DLL
+                         [D? ] API-MS-WIN-SERVICE-MANAGEMENT-L2-1-0.DLL
+                         [D? ] API-MS-WIN-SERVICE-WINSVC-L1-1-0.DLL
+                         [D? ] API-MS-WIN-SERVICE-PRIVATE-L1-1-0.DLL
+                         [DE6] RPCRT4.DLL
+                         [DE6] CRYPTBASE.DLL
+                         [DE6] DHCPCSVC6.DLL
+                         [D? ] EXT-MS-WIN-NETWORKING-WCMAPI-L1-1-0.DLL
+                    [DE6] NSI.DLL
+                    [DE6] WINNSI.DLL
+                         [ ? ] API-MS-WIN-CORE-CRT-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-CRT-L2-1-0.DLL
+                         [ E6] NTDLL.DLL
+                         [ E6] RPCRT4.DLL
+                         [ E6] NSI.DLL
+                         [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-OBSOLETE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-THREADPOOL-LEGACY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-THREADPOOL-PRIVATE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-UTIL-L1-1-0.DLL
+                    [DE6] WS2_32.DLL
+                    [DE6] DEVOBJ.DLL
+                         [ ? ] API-MS-WIN-CRT-RUNTIME-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CRT-STRING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CRT-PRIVATE-L1-1-0.DLL
+                         [ E6] NTDLL.DLL
+                         [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-DEVICES-CONFIG-L1-1-1.DLL
+                         [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYNCH-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-DEBUG-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-1.DLL
+                         [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-INTERLOCKED-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-STRING-OBSOLETE-L1-1-0.DLL
+                         [ E6] CFGMGR32.DLL
+                              [ ? ] API-MS-WIN-CORE-CRT-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-CRT-L2-1-0.DLL
+                              [ E6] NTDLL.DLL
+                              [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                              [ ? ] API-MS-WIN-CORE-HEAP-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-SYNCH-L1-2-0.DLL
+                              [ ? ] API-MS-WIN-CORE-IO-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-THREADPOOL-L1-2-0.DLL
+                              [ ? ] API-MS-WIN-CORE-HEAP-L2-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-WOW64-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-SECURITY-BASE-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-LOCALIZATION-L1-2-0.DLL
+                              [ ? ] API-MS-WIN-EVENTING-PROVIDER-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-UTIL-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-STRING-OBSOLETE-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CRT-RUNTIME-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-PROCESSENVIRONMENT-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-FILE-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-MEMORY-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+                              [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+                              [DE6] RPCRT4.DLL
+                              [D? ] API-MS-WIN-SECURITY-SDDL-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-DEVICES-QUERY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-PROCESSENVIRONMENT-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-LOCALIZATION-L1-2-0.DLL
+                         [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-MEMORY-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-FILE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-TIMEZONE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-FILE-L2-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-HEAP-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-IO-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-SECURITY-BASE-L1-1-0.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL
+                         [ ? ] API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL
+                         [DE6] DEVRTL.DLL
+                              [ ? ] API-MS-WIN-CRT-RUNTIME-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CRT-STRING-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CRT-PRIVATE-L1-1-0.DLL
+                              [ E6] NTDLL.DLL
+                              [ ? ] API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-HEAP-L2-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-SYNCH-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-PROFILE-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-INTERLOCKED-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-DEBUG-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-PROCESSTHREADS-L1-1-1.DLL
+                              [ ? ] API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL
+                              [ ? ] API-MS-WIN-CORE-FILE-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-HANDLE-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-FILE-L2-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-PROCESSENVIRONMENT-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-TIMEZONE-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-LOCALIZATION-L1-2-0.DLL
+                              [ ? ] API-MS-WIN-CORE-STRING-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-IO-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-MEMORY-L1-1-0.DLL
+                              [ ? ] API-MS-WIN-CORE-HEAP-L1-1-0.DLL
+          [D? ] EXT-MS-WIN-EDPUTIL-POLICY-L1-1-0.DLL
+
+********************************| Module List |*********************************
+*                                                                              *
+* Legend: D  Delay Load Module   ?  Missing Module           6  64-bit Module  *
+*         *  Dynamic Module      !  Invalid Module                             *
+*                                E  Import/Export Mismatch or Load Failure     *
+*                                                                              *
+********************************************************************************
+
+       Module                                                        File Time Stamp    Link Time Stamp    File Size  Attr.  Link Checksum  Real Checksum  CPU  Subsystem  Symbols     Preferred Base      Actual Base  Virtual Size  Load Order  File Ver        Product Ver     Image Ver  Linker Ver  OS Ver  Subsystem Ver
+-----  ------------------------------------------------------------  -----------------  -----------------  ---------  -----  -------------  -------------  ---  ---------  ----------  ------------------  -----------  ------------  ----------  --------------  --------------  ---------  ----------  ------  -------------
+[ ? ]  API-MS-WIN-CORE-APIQUERY-L1-1-0.DLL                           Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-APIQUERY-L1-1-1.DLL                           Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-APPCOMPAT-L1-1-0.DLL                          Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-APPCOMPAT-L1-1-1.DLL                          Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-APPINIT-L1-1-0.DLL                            Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-ATOMS-L1-1-0.DLL                              Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-COMM-L1-1-0.DLL                               Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-CONSOLE-L1-1-0.DLL                            Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-CONSOLE-L1-2-0.DLL                            Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-CONSOLE-L1-2-1.DLL                            Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-CONSOLE-L2-1-0.DLL                            Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-CONSOLE-L2-2-0.DLL                            Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-CONSOLE-L3-2-0.DLL                            Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-DATETIME-L1-1-0.DLL                           Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-DATETIME-L1-1-1.DLL                           Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-DATETIME-L1-1-2.DLL                           Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-DEBUG-L1-1-0.DLL                              Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-DEBUG-L1-1-1.DLL                              Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL                          Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL                          Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL                      Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-ERRORHANDLING-L1-1-3.DLL                      Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-FIBERS-L1-1-0.DLL                             Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-FIBERS-L2-1-0.DLL                             Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-FIBERS-L2-1-1.DLL                             Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-FILE-L1-1-0.DLL                               Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-FILE-L1-2-0.DLL                               Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-FILE-L1-2-1.DLL                               Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-FILE-L1-2-2.DLL                               Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-FILE-L2-1-0.DLL                               Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-FILE-L2-1-1.DLL                               Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-FILE-L2-1-2.DLL                               Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-FILE-L2-1-3.DLL                               Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-HANDLE-L1-1-0.DLL                             Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-HEAP-L1-1-0.DLL                               Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-HEAP-L2-1-0.DLL                               Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-HEAP-OBSOLETE-L1-1-0.DLL                      Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-IO-L1-1-0.DLL                                 Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-IO-L1-1-1.DLL                                 Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-JOB-L1-1-0.DLL                                Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-KERNEL32-LEGACY-L1-1-0.DLL                    Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-KERNEL32-PRIVATE-L1-1-0.DLL                   Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-LARGEINTEGER-L1-1-0.DLL                       Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL                      Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-LIBRARYLOADER-L1-2-1.DLL                      Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-LIBRARYLOADER-L1-2-2.DLL                      Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-LIBRARYLOADER-L2-1-0.DLL                      Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-LOCALIZATION-L1-2-0.DLL                       Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-LOCALIZATION-L2-1-0.DLL                       Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-LOCALIZATION-OBSOLETE-L1-2-0.DLL              Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-LOCALIZATION-PRIVATE-L1-1-0.DLL               Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-MEMORY-L1-1-0.DLL                             Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-MEMORY-L1-1-1.DLL                             Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-MEMORY-L1-1-2.DLL                             Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-MEMORY-L1-1-3.DLL                             Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-NAMEDPIPE-L1-1-0.DLL                          Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-NAMEDPIPE-L1-2-1.DLL                          Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-NAMEDPIPE-L1-2-2.DLL                          Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-NAMESPACE-L1-1-0.DLL                          Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-NORMALIZATION-L1-1-0.DLL                      Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-PRIVATEPROFILE-L1-1-0.DLL                     Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-PROCESSENVIRONMENT-L1-1-0.DLL                 Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-PROCESSENVIRONMENT-L1-2-0.DLL                 Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-PROCESSSNAPSHOT-L1-1-0.DLL                    Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL                     Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-PROCESSTHREADS-L1-1-1.DLL                     Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-PROCESSTHREADS-L1-1-2.DLL                     Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-PROCESSTHREADS-L1-1-3.DLL                     Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-PROCESSTOPOLOGY-L1-1-0.DLL                    Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-PROFILE-L1-1-0.DLL                            Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-PSAPI-ANSI-L1-1-0.DLL                         Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-PSAPI-L1-1-0.DLL                              Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-REALTIME-L1-1-0.DLL                           Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL                           Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-RTLSUPPORT-L1-1-0.DLL                         Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-SIDEBYSIDE-L1-1-0.DLL                         Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-STRING-L1-1-0.DLL                             Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-STRING-L2-1-0.DLL                             Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-STRING-OBSOLETE-L1-1-0.DLL                    Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-STRINGANSI-L1-1-0.DLL                         Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-SYNCH-L1-1-0.DLL                              Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-SYNCH-L1-2-0.DLL                              Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-SYNCH-L1-2-1.DLL                              Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL                            Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-SYSINFO-L1-2-0.DLL                            Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-SYSINFO-L1-2-1.DLL                            Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-SYSINFO-L1-2-3.DLL                            Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-SYSTEMTOPOLOGY-L1-1-0.DLL                     Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-SYSTEMTOPOLOGY-L1-1-1.DLL                     Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-THREADPOOL-LEGACY-L1-1-0.DLL                  Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-THREADPOOL-PRIVATE-L1-1-0.DLL                 Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-TIMEZONE-L1-1-0.DLL                           Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-UTIL-L1-1-0.DLL                               Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-WINDOWSERRORREPORTING-L1-1-0.DLL              Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-WINDOWSERRORREPORTING-L1-1-1.DLL              Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-WINDOWSERRORREPORTING-L1-1-2.DLL              Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-WOW64-L1-1-0.DLL                              Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-WOW64-L1-1-1.DLL                              Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-XSTATE-L2-1-0.DLL                             Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-CORE-XSTATE-L2-1-1.DLL                             Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-EVENTING-PROVIDER-L1-1-0.DLL                       Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-GDI-INTERNAL-UAP-L1-1-0.DLL                        Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-SECURITY-APPCONTAINER-L1-1-0.DLL                   Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-SECURITY-BASE-L1-1-0.DLL                           Error opening file. The system cannot find the file specified (2).
+[ ? ]  API-MS-WIN-SECURITY-BASE-L1-2-0.DLL                           Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-APPMODEL-RUNTIME-INTERNAL-L1-1-2.DLL               Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-APPMODEL-RUNTIME-L1-1-1.DLL                        Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-CORE-COM-L1-1-0.DLL                                Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-CORE-CRT-L1-1-0.DLL                                Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-CORE-CRT-L2-1-0.DLL                                Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-CORE-ERRORHANDLING-L1-1-2.DLL                      Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-CORE-INTERLOCKED-L1-1-0.DLL                        Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-CORE-MISC-L1-1-0.DLL                               Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-CORE-REGISTRY-PRIVATE-L1-1-0.DLL                   Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-CORE-THREADPOOL-L1-2-0.DLL                         Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-CORE-VERSION-L1-1-0.DLL                            Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-CRT-PRIVATE-L1-1-0.DLL                             Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-CRT-RUNTIME-L1-1-0.DLL                             Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-CRT-STRING-L1-1-0.DLL                              Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-DEVICES-CONFIG-L1-1-1.DLL                          Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-DEVICES-QUERY-L1-1-0.DLL                           Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-DOWNLEVEL-KERNEL32-L1-1-0.DLL                      Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-EVENTING-CLASSICPROVIDER-L1-1-0.DLL                Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-EVENTING-OBSOLETE-L1-1-0.DLL                       Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-POWER-BASE-L1-1-0.DLL                              Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-POWER-SETTING-L1-1-0.DLL                           Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-SECURITY-BASE-L1-2-1.DLL                           Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-SECURITY-GROUPPOLICY-L1-1-0.DLL                    Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-SECURITY-ISOLATIONPOLICY-L1-2-0.DLL                Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-SECURITY-LSALOOKUP-L1-1-0.DLL                      Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-SECURITY-LSAPOLICY-L1-1-0.DLL                      Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-SECURITY-SDDL-L1-1-0.DLL                           Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-SERVICE-MANAGEMENT-L1-1-0.DLL                      Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-SERVICE-MANAGEMENT-L2-1-0.DLL                      Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-SERVICE-PRIVATE-L1-1-0.DLL                         Error opening file. The system cannot find the file specified (2).
+[D? ]  API-MS-WIN-SERVICE-WINSVC-L1-1-0.DLL                          Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-ONECORE-APPMODEL-STATEREPOSITORY-CACHE-L1-1-0.DLL      Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-ONECORE-APPMODEL-STATEREPOSITORY-INTERNAL-L1-1-1.DLL   Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-ADVAPI32-NPUSERNAME-L1-1-0.DLL                     Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-ADVAPI32-NTMARTA-L1-1-0.DLL                        Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-ADVAPI32-REGISTRY-L1-1-0.DLL                       Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-ADVAPI32-REGISTRY-L1-1-1.DLL                       Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-APPMODEL-APPEXECUTIONALIAS-L1-1-0.DLL              Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-APPMODEL-APPEXECUTIONALIAS-L1-1-1.DLL              Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-APPMODEL-DAXCORE-L1-1-0.DLL                        Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-APPXDEPLOYMENTCLIENT-APPXDEPLOY-L1-1-0.DLL         Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-APPXDEPLOYMENTCLIENT-APPXDEPLOYONECORE-L1-1-0.DLL  Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-AUTHZ-CONTEXT-L1-1-0.DLL                           Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-CORE-WINRT-REMOTE-L1-1-0.DLL                       Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-EDPUTIL-POLICY-L1-1-0.DLL                          Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-FECLIENT-ENCRYPTEDFILE-L1-1-0.DLL                  Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-CLIPPING-L1-1-0.DLL                            Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-DC-CREATE-L1-1-0.DLL                           Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-DC-L1-2-0.DLL                                  Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-DC-L1-2-1.DLL                                  Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-DRAW-L1-1-0.DLL                                Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-DRAW-L1-1-1.DLL                                Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-DRAW-L1-1-2.DLL                                Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-DRAW-L1-1-3.DLL                                Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-FONT-L1-1-0.DLL                                Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-FONT-L1-1-1.DLL                                Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-FONT-L1-1-2.DLL                                Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-FONT-L1-1-3.DLL                                Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-INTERNAL-DESKTOP-L1-1-0.DLL                    Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-INTERNAL-DESKTOP-L1-1-1.DLL                    Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-INTERNAL-DESKTOP-L1-1-2.DLL                    Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-INTERNAL-DESKTOP-L1-1-3.DLL                    Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-METAFILE-L1-1-0.DLL                            Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-METAFILE-L1-1-1.DLL                            Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-METAFILE-L1-1-2.DLL                            Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-PATH-L1-1-0.DLL                                Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-PRINT-L1-1-0.DLL                               Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-PRIVATE-L1-1-0.DLL                             Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GDI-WCS-L1-1-0.DLL                                 Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-GPAPI-GROUPPOLICY-L1-1-0.DLL                       Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-KERNEL32-APPCOMPAT-L1-1-0.DLL                      Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-KERNEL32-DATETIME-L1-1-0.DLL                       Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-KERNEL32-ERRORHANDLING-L1-1-0.DLL                  Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-KERNEL32-FILE-L1-1-0.DLL                           Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-KERNEL32-QUIRKS-L1-1-0.DLL                         Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-KERNEL32-QUIRKS-L1-1-1.DLL                         Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-KERNEL32-REGISTRY-L1-1-0.DLL                       Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-KERNEL32-SIDEBYSIDE-L1-1-0.DLL                     Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-KERNELBASE-PROCESSTHREAD-L1-1-0.DLL                Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-MRMCORER-RESMANAGER-L1-1-0.DLL                     Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-NETWORKING-WCMAPI-L1-1-0.DLL                       Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-NTDSAPI-ACTIVEDIRECTORYCLIENT-L1-1-0.DLL           Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-NTDSAPI-ACTIVEDIRECTORYCLIENT-L1-1-1.DLL           Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-NTUSER-MESSAGE-L1-1-0.DLL                          Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-NTUSER-STRING-L1-1-0.DLL                           Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-NTUSER-SYNCH-L1-1-0.DLL                            Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-NTUSER-WINDOW-L1-1-0.DLL                           Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-PROFILE-EXTENDER-L1-1-0.DLL                        Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-RPC-SSL-L1-1-0.DLL                                 Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-RTCORE-NTUSER-SYSPARAMS-L1-1-0.DLL                 Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-RTCORE-NTUSER-WINDOW-EXT-L1-1-0.DLL                Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-SECURITY-CAPAUTHZ-L1-1-1.DLL                       Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-SECURITY-EFSWRT-L1-1-0.DLL                         Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-SHELL32-SHELLCOM-L1-1-0.DLL                        Error opening file. The system cannot find the file specified (2).
+[D? ]  EXT-MS-WIN-WINRT-DEVICE-ACCESS-L1-1-0.DLL                     Error opening file. The system cannot find the file specified (2).
+[  6]  GDI32.DLL                                                     03/18/2019 10:44p  12/04/2046  9:23p    147,912  A      0x0002F763     0x0002F763     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x00026000    Not Loaded  10.0.18362.1    10.0.18362.1    10.0       14.15       10.0    10.0
+[  6]  KERNEL32.DLL                                                  06/09/2020 11:16a  09/28/2079  4:55p    722,072  A      0x000B6E98     0x000B6E98     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x000B2000    Not Loaded  10.0.18362.900  10.0.18362.900  10.0       14.15       10.0    10.0
+[  6]  KERNELBASE.DLL                                                05/14/2020  7:23a  02/25/2068  2:39p  2,769,000  A      0x002AF5B4     0x002AF5B4     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x002A4000    Not Loaded  10.0.18362.815  10.0.18362.815  10.0       14.15       10.0    10.0
+[  6]  NTDLL.DLL                                                     05/14/2020  7:23a  12/17/2064  9:10a  1,999,968  A      0x001ED368     0x001ED368     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x001F0000    Not Loaded  10.0.18362.815  10.0.18362.815  10.0       14.15       10.0    10.0
+[  6]  USER32.DLL                                                    05/14/2020  7:23a  03/18/1998  4:23p  1,656,904  A      0x001A0C5F     0x001A0C5F     x64  GUI        CV,Unknown  0x0000000180000000  Unknown      0x00194000    Not Loaded  10.0.18362.836  10.0.18362.836  10.0       14.15       10.0    10.0
+[  6]  WIN32U.DLL                                                    06/09/2020 11:16a  04/08/2014  7:09a    127,064  A      0x00023F96     0x00023F96     x64  GUI        CV,Unknown  0x0000000180000000  Unknown      0x00021000    Not Loaded  10.0.18362.900  10.0.18362.900  10.0       14.15       10.0    10.0
+[D 6]  BCRYPT.DLL                                                    08/14/2019  4:48a  07/19/2066 10:08p    144,376  A      0x0002F62E     0x0002F62E     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x00026000    Not Loaded  10.0.18362.267  10.0.18362.267  10.0       14.15       10.0    10.0
+[D 6]  BCRYPTPRIMITIVES.DLL                                          05/14/2020  7:23a  11/12/2071  5:49p    524,208  A      0x0008E1D6     0x0008E1D6     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x00080000    Not Loaded  10.0.18362.836  10.0.18362.836  10.0       14.15       10.0    10.0
+[D 6]  CABINET.DLL                                                   03/18/2019 10:44p  09/17/2048  5:23p    146,200  A      0x00028520     0x00028520     x64  GUI        CV,Unknown  0x0000000180000000  Unknown      0x00029000    Not Loaded  5.0.1.1         5.0.1.1         10.0       14.15       10.0    10.0
+[D 6]  CFGMGR32.DLL                                                  10/04/2019  1:36p  05/23/2063  8:04p    293,344  A      0x000542D0     0x000542D0     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x0004A000    Not Loaded  10.0.18362.387  10.0.18362.387  10.0       14.15       10.0    10.0
+[D 6]  CRYPT32.DLL                                                   01/15/2020 12:47a  06/25/1977  8:25a  1,330,952  A      0x00152CFE     0x00152CFE     x64  GUI        CV,Unknown  0x0000000180000000  Unknown      0x00149000    Not Loaded  10.0.18362.592  10.0.18362.592  10.0       14.15       10.0    10.0
+[D 6]  CRYPTBASE.DLL                                                 03/18/2019 10:44p  07/15/2105  6:07p     33,848  A      0x0000FC85     0x0000FC85     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x0000C000    Not Loaded  10.0.18362.1    10.0.18362.1    10.0       14.15       10.0    10.0
+[D 6]  CRYPTSP.DLL                                                   03/18/2019 10:44p  10/02/2057  7:33p     80,112  A      0x000209A8     0x000209A8     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x00017000    Not Loaded  10.0.18362.1    10.0.18362.1    10.0       14.15       10.0    10.0
+[D 6]  DEVOBJ.DLL                                                    10/04/2019  1:36p  07/25/2031  6:10p    159,112  A      0x00034410     0x00034410     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x0002A000    Not Loaded  10.0.18362.387  10.0.18362.387  10.0       14.15       10.0    10.0
+[D 6]  DEVRTL.DLL                                                    10/04/2019  1:36p  07/06/2014  2:28p     59,904  A      0x00010209     0x00010209     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x00013000    Not Loaded  10.0.18362.387  10.0.18362.387  10.0       14.15       10.0    10.0
+[D 6]  DHCPCSVC.DLL                                                  05/14/2020  7:23a  10/05/2034 12:39a     92,672  A      0x000242BD     0x000242BD     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x0001C000    Not Loaded  10.0.18362.815  10.0.18362.815  10.0       14.15       10.0    10.0
+[D 6]  DHCPCSVC6.DLL                                                 05/14/2020  7:23a  07/10/2060 10:46a     68,096  A      0x0001DF9C     0x0001DF9C     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x00016000    Not Loaded  10.0.18362.815  10.0.18362.815  10.0       14.15       10.0    10.0
+[D 6]  DNSAPI.DLL                                                    05/14/2020  7:23a  08/12/2066  9:12a    822,272  A      0x000C9905     0x000C9905     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x000CB000    Not Loaded  10.0.18362.815  10.0.18362.815  10.0       14.15       10.0    10.0
+[D 6]  DPAPI.DLL                                                     03/18/2019 10:44p  08/22/2076  4:13p     15,872  A      0x0000AA0C     0x0000AA0C     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x0000A000    Not Loaded  10.0.18362.1    10.0.18362.1    10.0       14.15       10.0    10.0
+[D 6]  DSPARSE.DLL                                                   03/18/2019 10:44p  12/18/2012  9:22p     30,208  A      0x0000BB16     0x0000BB16     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x0000C000    Not Loaded  10.0.18362.1    10.0.18362.1    10.0       14.15       10.0    10.0
+[D 6]  IPHLPAPI.DLL                                                  03/18/2019 10:44p  11/23/2012  3:14p    229,528  A      0x0003DB3F     0x0003DB3F     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x0003A000    Not Loaded  10.0.18362.1    10.0.18362.1    10.0       14.15       10.0    10.0
+[D 6]  MSASN1.DLL                                                    03/18/2019 10:44p  08/14/2091  9:47a     63,040  A      0x000134F9     0x000134F9     x64  GUI        CV,Unknown  0x0000000180000000  Unknown      0x00012000    Not Loaded  10.0.18362.1    10.0.18362.1    10.0       14.15       10.0    10.0
+[D 6]  MSIMG32.DLL                                                   05/14/2020  7:23a  03/05/2063  4:03p      8,192  A      0x00002795     0x00002795     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x00007000    Not Loaded  10.0.18362.836  10.0.18362.836  10.0       14.15       10.0    6.0
+[D 6]  MSVCRT.DLL                                                    03/18/2019 10:44p  08/25/2100  2:27a    638,072  A      0x000A591E     0x000A591E     x64  GUI        CV,Unknown  0x0000000110100000  Unknown      0x0009E000    Not Loaded  7.0.18362.1     10.0.18362.1    10.0       14.15       10.0    10.0
+[D 6]  NCRYPT.DLL                                                    03/18/2019 10:44p  05/15/1995 10:14p    144,840  A      0x00025C7D     0x00025C7D     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x00026000    Not Loaded  10.0.18362.1    10.0.18362.1    10.0       14.15       10.0    10.0
+[D 6]  NSI.DLL                                                       11/13/2019  1:15p  01/28/2033  2:49p     24,792  A      0x00007190     0x00007190     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x00008000    Not Loaded  10.0.18362.449  10.0.18362.449  10.0       14.15       10.0    10.0
+[D 6]  NTASN1.DLL                                                    03/18/2019 10:44p  09/27/2098  7:30p    241,128  A      0x0003B5A6     0x0003B5A6     x64  GUI        CV,Unknown  0x0000000180000000  Unknown      0x0003B000    Not Loaded  10.0.18362.1    10.0.18362.1    10.0       14.15       10.0    10.0
+[D 6]  PROFAPI.DLL                                                   03/11/2020 11:45p  07/25/2077  3:10p    133,256  A      0x0002A692     0x0002A692     x64  GUI        CV,Unknown  0x0000000180000000  Unknown      0x00023000    Not Loaded  10.0.18362.693  10.0.18362.693  10.0       14.15       10.0    10.0
+[D 6]  RPCRT4.DLL                                                    02/13/2020  6:46p  07/14/1987  9:55p  1,170,960  A      0x00125676     0x00125676     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x00120000    Not Loaded  10.0.18362.628  10.0.18362.628  10.0       14.15       10.0    10.0
+[D 6]  SAMLIB.DLL                                                    04/17/2020  6:30p  07/18/2081 12:07p    122,368  A      0x00027AEA     0x00027AEA     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x00023000    Not Loaded  10.0.18362.752  10.0.18362.752  10.0       14.15       10.0    10.0
+[D 6]  SSPICLI.DLL                                                   03/18/2019 10:44p  09/12/1989  4:24p    179,944  A      0x0003972A     0x0003972A     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x0002F000    Not Loaded  10.0.18362.1    10.0.18362.1    10.0       14.15       10.0    10.0
+[D 6]  WINNSI.DLL                                                    11/13/2019  1:15p  10/08/2003  1:48a     34,816  A      0x00009DA5     0x00009DA5     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x0000B000    Not Loaded  10.0.18362.449  10.0.18362.449  10.0       14.15       10.0    10.0
+[D 6]  WINSTA.DLL                                                    05/14/2020  7:23a  12/14/2007  7:27a    333,128  A      0x000561BE     0x000561BE     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x00056000    Not Loaded  10.0.18362.836  10.0.18362.836  10.0       14.15       10.0    10.0
+[D 6]  WS2_32.DLL                                                    10/04/2019  1:36p  10/23/2012  3:19a    442,704  A      0x00070793     0x00070793     x64  Console    CV,Unknown  0x0000000180000000  Unknown      0x0006F000    Not Loaded  10.0.18362.387  10.0.18362.387  10.0       14.15       10.0    10.0
+[   ]  RCEDIT-X86.EXE                                                06/29/2020  5:55p  09/30/2018  7:51p    945,664  A      0x00000000     0x000ED0E9     x86  Console    CV,Unknown  0x--------00400000  Unknown      0x000EE000    Not Loaded  0.2.0.0         0.2.0.0         0.0        14.15       5.1     5.1

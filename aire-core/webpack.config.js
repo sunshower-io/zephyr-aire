@@ -1,15 +1,22 @@
 const merge = require('webpack-merge');
 const flowDefaults = require('./webpack.generated.js');
+const path = require('path');
 
 module.exports = merge(flowDefaults, {
 
+    resolve: {
+        alias: {
+            "@aire": path.resolve(__dirname, "src/main/frontend/application/aire")
+        },
+        extensions: ['.js', '.ts', '.css']
+    },
     module: {
         rules: [
 
             {
                 test: require.resolve('mxgraph/javascript/mxClient'),
                 use: 'exports-loader?' +
-                    'mxClient,mxLog,mxObjectIdentity,mxDictionary,mxResources,mxEffects,mxUtils,mxConstants,mxEvent,mxClipboard,mxUrlConverter,mxVmlCanvas2D,mxStencilRegistry,' +
+                    'mxCell,mxClient,mxLog,mxObjectIdentity,mxDictionary,mxResources,mxEffects,mxUtils,mxConstants,mxEvent,mxClipboard,mxUrlConverter,mxVmlCanvas2D,mxStencilRegistry,' +
                     'mxMarker,mxHierarchicalEdgeStyle,mxCellPath,mxPerimeter,mxEdgeStyle,mxStyleRegistry,mxCodecRegistry,mxGenericChangeCodec,mxStylesheetCodec,mxDefaultToolbarCodec,' +
                     'mxGraph,mxRubberband,mxHierarchicalLayout,mxFastOrganicLayout,mxGraphModel,mxPanningHandler,mxKeyHandler,mxParallelEdgeLayout,mxLayoutManager,mxCompactTreeLayout,' +
                     'mxPrintPreview,mxToolbar,mxOutline,mxCellTracker,mxCellOverlay,mxImage,mxLoadResources,mxPopupMenu,mxCylinder,mxRectangle,mxCellRenderer,mxVertexHandler,mxPoint,' +

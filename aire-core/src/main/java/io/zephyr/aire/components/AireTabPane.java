@@ -21,6 +21,7 @@ import lombok.val;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 @CssImport("./styles/aire/components/aire-tabs.css")
 public class AireTabPane extends Article
@@ -67,6 +68,8 @@ public class AireTabPane extends Article
   public AireTabPane() {
     this(TabPlacement.TOP);
   }
+
+
 
   public Tab addTab(String title, Component component) {
     val tab = new Tab(title);

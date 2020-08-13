@@ -1,16 +1,19 @@
 package io.zephyr.aire;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.Uses;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Section;
 import com.vaadin.flow.router.*;
 import io.zephyr.aire.api.Container;
 import io.zephyr.aire.api.Location;
 import io.zephyr.aire.components.*;
+import io.zephyr.aire.designer.AireDesigner;
+import io.zephyr.aire.designer.AirePalette;
 import io.zephyr.aire.elements.*;
 import io.zephyr.aire.layout.AireApplicationViewport;
 import com.vaadin.flow.component.dependency.CssImport;
-import io.zephyr.aire.views.UploadPluginCallToAction;
 import io.zephyr.kernel.core.Kernel;
 import lombok.val;
 
@@ -58,8 +61,28 @@ public class MainView extends AireApplicationViewport {
   }
 
   private void checkDefaults() {
-    if (kernel.getModuleManager().getModules().size() == 1) { // aire's the only one installed
-      addContent(new UploadPluginCallToAction(kernel));
-    }
+
+    val aside = new AireAsideDrawerMenu();
+
+    val paletteContainer = new Section();
+
+    val paletteButton = new Button();
+    paletteButton.setIcon(AireIcon.icon("palette"));
+    aside.add(paletteButton, paletteContainer);
+    setSecondaryNavigation(aside);
+
+    val palette = new AirePalette();
+    paletteContainer.add(new Button("schnorp"));
+    paletteContainer.add(palette);
+
+    val designer = new AireDesigner();
+    addContent(designer);
+    //
+    //      palette.addEventListener()
+    //    addContent(new AireDesigner());
+    //    //    if (kernel.getModuleManager().getModules().size() == 1) { // aire's the only one
+    // installed
+    //    //      addContent(new UploadPluginCallToAction(kernel));
+    //    //    }
   }
 }

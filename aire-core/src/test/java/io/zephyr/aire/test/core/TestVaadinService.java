@@ -2,10 +2,8 @@ package io.zephyr.aire.test.core;
 
 import com.github.mvysny.kaributesting.v10.MockInstantiator;
 import com.github.mvysny.kaributesting.v10.MockService;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.di.Instantiator;
 import com.vaadin.flow.function.DeploymentConfiguration;
-import com.vaadin.flow.server.Command;
 import com.vaadin.flow.server.ServiceException;
 import com.vaadin.flow.server.VaadinServlet;
 import com.vaadin.flow.spring.SpringInstantiator;
@@ -22,7 +20,6 @@ public class TestVaadinService extends MockService {
     super(servlet, deploymentConfiguration);
     this.context = context;
   }
-
 
   @Override
   protected Instantiator createInstantiator() throws ServiceException {

@@ -6,13 +6,13 @@ import {
   mxEvent,
   mxGeometry,
   mxUtils
-}                                from "mxgraph/javascript/mxClient";
-import {Element, ElementPayload} from "@aire/designer/core/element";
-import {ImageTypes}              from "@aire/designer/core/image";
-import {ElementConverter}        from "@aire/designer/core/element-converter";
-import {Property}                from "@aire/inject/convert-property";
-import {locateGraph}             from "@aire/designer/utilities/graph-locator";
-import {DefaultElementFactory}   from "@aire/designer/core/element-factory";
+}                                                                                  from "mxgraph/javascript/mxClient";
+import {Element, ElementPayload}                                                   from "@aire/designer/core/element";
+import {ImageTypes}                                                                from "@aire/designer/core/image";
+import {ElementConverter}                                                          from "@aire/designer/core/element-converter";
+import {Property}                                                                  from "@aire/inject/convert-property";
+import {locateGraph}                                                               from "@aire/designer/utilities/graph-locator";
+import {DefaultElementFactory}                                                     from "@aire/designer/core/element-factory";
 
 @customElement('aire-palette-element')
 class AirePaletteElement extends LitElement {
@@ -21,6 +21,7 @@ class AirePaletteElement extends LitElement {
   @Property({
     converter : ElementConverter
   })
+
   private model : Element;
 
 
@@ -37,6 +38,7 @@ class AirePaletteElement extends LitElement {
   public render() : TemplateResult {
     let el = this.model,
       image = el.getImage(ImageTypes.Palette);
+    console.log(this.model);
     return html`
       <img src="${image.source}"
           width="${image.width === -1 ? undefined : image.width}"

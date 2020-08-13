@@ -6,7 +6,6 @@ import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Div;
 import io.aire.designer.Images;
 import io.aire.designer.Vertex;
-import lombok.val;
 
 @Tag("aire-palette")
 @JsModule("application/aire/designer/elements/palette.ts")
@@ -15,22 +14,17 @@ public class AirePalette extends Div {
 
   public AirePalette() {
 
-    val el = new Vertex();
-    var image = Images.palette("icons/icon-dark.svg");
+    addElement("icons/icon-dark.svg", "icons/angellist.svg");
+    addElement("icons/angellist.svg", "icons/icon-dark.svg");
+  }
+
+  private void addElement(String paletteIcon, String elementIcon) {
+    var el = new Vertex();
+    var image = Images.palette(paletteIcon);
     el.addImage(image);
 
-    image = Images.element("icons/angellist.svg");
+    image = Images.element(elementIcon);
     el.addImage(image);
-
     add(new AirePaletteElement(el));
-
-    //    val el = new CellModelElement<>();
-    //    el.setPaletteIcon("icons/icon-dark.svg");
-    //
-    //    add(new AirePaletteElement(el));
-    //
-    //    val el2 = new CellModelElement<>();
-    //    el2.setPaletteIcon("icons/angellist.svg");
-    //    add(new AirePaletteElement(el2));
   }
 }

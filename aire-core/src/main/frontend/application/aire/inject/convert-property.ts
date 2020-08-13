@@ -17,14 +17,16 @@ export function Property<T, U>(descriptor : PropertyConversionDescriptor<T, U>) 
      */
     let converter = new descriptor.converter();
     Object.defineProperty(target, propertyKey, {
-      set : (value) => {
+      set : function (value) {
         let result = converter.convert(value);
-        target["_p" + propertyKey] = result;
+        this["_p" + propertyKey] = result;
       },
-      get : () => {
-        return target["_p" + propertyKey];
+      get : function () {
+        return this["_p" + propertyKey];
       }
     });
+
+    console.log(target);
     return property(target)(propertyKey);
   };
 

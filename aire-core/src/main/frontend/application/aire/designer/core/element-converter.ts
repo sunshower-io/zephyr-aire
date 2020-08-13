@@ -19,7 +19,6 @@ export class ElementConverter implements Converter<ElementPayload, Element>{
   }
 
   static createImage(image : ImagePayload) : Image {
-    console.log(image);
     let result = new Image();
     result.type = new BaseImageType(image.type.toLowerCase());
     result.width = image.width;

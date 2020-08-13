@@ -27,6 +27,9 @@ declare module "mxgraph/javascript/mxClient" {
     }
 
     export module mxEvent {
+
+      function getClientX(event:mxEvent): number;
+      function getClientY(event: mxEvent): number;
       function addMouseWheelListener(any:any): void;
       function consume(any:any) : void;
       function disableContextMenu(container: HTMLElement) : void;

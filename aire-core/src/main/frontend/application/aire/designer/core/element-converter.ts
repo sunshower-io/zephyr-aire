@@ -1,15 +1,14 @@
 import {Element, ElementPayload, ImagePayload} from "@aire/designer/core/element";
 import {Vertex}                                from "@aire/designer/core/vertex";
 import {BaseImageType, Image}                  from "@aire/designer/core/image";
+import {Converter}                             from "@aire/inject/convert-property";
 
 
-export class ElementConverter {
+export class ElementConverter implements Converter<ElementPayload, Element>{
 
   public static convert(value : ElementPayload) : Element {
-
     return ElementConverter.createVertex(value);
   }
-
 
   static createVertex(value : ElementPayload) : Element {
     let result = new Vertex();
@@ -20,11 +19,16 @@ export class ElementConverter {
   }
 
   static createImage(image : ImagePayload) : Image {
+    console.log(image);
     let result = new Image();
     result.type = new BaseImageType(image.type.toLowerCase());
     result.width = image.width;
     result.height = image.height;
     result.source = image.source;
     return result;
+  }
+
+  convert(value : ElementPayload) : Element {
+    return ElementConverter.convert(value);
   }
 }

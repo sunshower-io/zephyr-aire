@@ -830,6 +830,7 @@ declare module "mxgraph/javascript/mxClient" {
 
     getConnectionPoint(vertex : Layer, constraint : mxConnectionConstraint) : mxPoint;
 
+    importCells(cells : mxCell[], x : number, y : number, target:mxCell);
   }
 
   export class mxUndoManager {

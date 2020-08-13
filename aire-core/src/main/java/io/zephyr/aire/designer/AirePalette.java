@@ -1,12 +1,11 @@
 package io.zephyr.aire.designer;
 
-import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.shared.Registration;
-import io.zephyr.aire.designer.model.CellModelElement;
+import io.aire.designer.Images;
+import io.aire.designer.Vertex;
 import lombok.val;
 
 @Tag("aire-palette")
@@ -15,13 +14,19 @@ import lombok.val;
 public class AirePalette extends Div {
 
   public AirePalette() {
-    val el = new CellModelElement<>();
-    el.setPaletteIcon("icons/icon-dark.svg");
 
+    val el = new Vertex();
+    val image = Images.palette("icons/icon-dark.svg");
+    el.addImage(image);
     add(new AirePaletteElement(el));
 
-    val el2 = new CellModelElement<>();
-    el2.setPaletteIcon("icons/angellist.svg");
-    add(new AirePaletteElement(el2));
+    //    val el = new CellModelElement<>();
+    //    el.setPaletteIcon("icons/icon-dark.svg");
+    //
+    //    add(new AirePaletteElement(el));
+    //
+    //    val el2 = new CellModelElement<>();
+    //    el2.setPaletteIcon("icons/angellist.svg");
+    //    add(new AirePaletteElement(el2));
   }
 }

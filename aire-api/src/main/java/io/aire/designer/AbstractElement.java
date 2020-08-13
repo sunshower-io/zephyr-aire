@@ -1,45 +1,73 @@
 package io.aire.designer;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AbstractElement implements Element {
 
+  /**
+   * encapsulated state:
+   *
+   * <p>each of these fields is modifiable via the relevant accessors
+   */
+  private Alignment verticalAlignment;
+
+  private Alignment horizontalAlignment;
+
+  /**
+   * inherited state:
+   *
+   * <p>each of these fields should be accessible, yet unmodifiable except via the underlying data
+   * structures to subclasses of @AbstractElement
+   */
+  protected final ElementStyle style;
+  /** what type of element are we? */
+  protected final Category category;
+
   /** this map contains the set of images used by various designer components for this element */
-  private Map<ImageType, Image> images;
+  protected final Map<ImageType, Image> images;
 
   /** this map contains the set of overlays applied to this element */
-  private List<ElementOverlay> overlays;
+  protected final List<ElementOverlay> overlays;
+
+  protected AbstractElement(Category category) {
+    this(category, ElementStyles.newStyle());
+  }
+
+  protected AbstractElement(Category category, ElementStyle style) {
+    this.style = style;
+    this.category = category;
+    this.images = defaultImages();
+    this.overlays = defaultOverlays();
+  }
 
   @Override
   public Image addImage(Image image) {
-    return null;
+    return images.put(image.getType(), image);
   }
 
   @Override
   public Image removeImage(Image image) {
-    return null;
+    return images.remove(image.getType());
   }
 
   @Override
   public boolean hasImageWithRole(ImageType imageType) {
-    return false;
+    return images.containsKey(imageType);
   }
 
   @Override
   public List<Image> getImages() {
-    return null;
+    return List.copyOf(images.values());
   }
 
   @Override
   public Category getCategory() {
-    return null;
+    return category;
   }
 
   @Override
   public ElementStyle getStyle() {
-    return null;
+    return style;
   }
 
   @Override
@@ -48,18 +76,30 @@ public class AbstractElement implements Element {
   }
 
   @Override
-  public void setHorizontalAlignment(Alignment alignment) {}
-
-  @Override
-  public Alignment getHorizontalAlignment() {
-    return null;
+  public void setHorizontalAlignment(Alignment alignment) {
+    this.horizontalAlignment = alignment;
   }
 
   @Override
-  public void setVerticalAlignment(Alignment alignment) {}
+  public Alignment getHorizontalAlignment() {
+    return horizontalAlignment;
+  }
+
+  @Override
+  public void setVerticalAlignment(Alignment alignment) {
+    this.verticalAlignment = alignment;
+  }
 
   @Override
   public Alignment getVerticalAlignment() {
-    return null;
+    return verticalAlignment;
+  }
+
+  protected List<ElementOverlay> defaultOverlays() {
+    return new ArrayList<>();
+  }
+
+  private Map<ImageType, Image> defaultImages() {
+    return new HashMap<>();
   }
 }

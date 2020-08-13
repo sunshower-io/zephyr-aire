@@ -65,7 +65,11 @@ export class DefaultElementFactory implements ElementFactory {
       template = this.template,
       cell = new mxCell('coolbeans', geometry);
     console.log(this.template);
-    cell.setStyle(`${mxConstants.STYLE_IMAGE}=${template.getImage(ImageTypes.Palette).source};${mxConstants.STYLE_SHAPE}=${mxConstants.SHAPE_IMAGE}`);
+
+    let image = template.getImage(ImageTypes.Element) || template.getImage(ImageTypes.Palette),
+      source = image && image.source;
+
+    cell.setStyle(`${mxConstants.STYLE_IMAGE}=${source};${mxConstants.STYLE_SHAPE}=${mxConstants.SHAPE_IMAGE}`);
     cell.setVertex(true);
     graph.importCells([cell], x, y, parent);
 

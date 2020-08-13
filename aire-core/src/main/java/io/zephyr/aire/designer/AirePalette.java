@@ -16,8 +16,12 @@ public class AirePalette extends Div {
   public AirePalette() {
 
     val el = new Vertex();
-    val image = Images.palette("icons/icon-dark.svg");
+    var image = Images.palette("icons/icon-dark.svg");
     el.addImage(image);
+
+    image = Images.element("icons/angellist.svg");
+    el.addImage(image);
+
     add(new AirePaletteElement(el));
 
     //    val el = new CellModelElement<>();

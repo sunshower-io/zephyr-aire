@@ -1,17 +1,27 @@
 package io.aire.designer;
 
-public interface Element {
+import java.util.Collection;
+import java.util.List;
 
-  void setHorizontalAlignment(Alignment alignment);
+public interface Element extends Alignable {
 
-  Alignment getHorizontalAlignment();
+  enum Category {
+    Edge,
+    Vertex
+  }
 
+  Image addImage(Image image);
 
-  void setVerticalAlignment(Alignment alignment);
+  Image removeImage(Image image);
 
+  boolean hasImageWithRole(ImageType imageType);
 
-  Alignment getVerticalAlignment();
+  List<Image> getImages();
+
+  Category getCategory();
 
   ElementStyle getStyle();
 
+
+  Collection<ElementOverlay> getOverlays();
 }

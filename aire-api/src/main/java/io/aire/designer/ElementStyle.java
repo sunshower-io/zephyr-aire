@@ -6,45 +6,48 @@ import java.util.*;
 
 public interface ElementStyle {
 
-  enum StyleKey {
-    Perimter("perimeter"),
+  StyleKey<String> TextDirection =
+      new BaseStyleKey<>(
+          "textDirection", StyleValidators.stringEnumerationValidator("TEXT_DIRECTION_DEFAULT"));
 
-    SourcePort("sourcePort"),
-    TargetPort("targetPort"),
-    PortConstraint("portConstraint"),
-    PortConstraintRotation("portConstraintRotation"),
-    SourcePortConstraint("sourcePortConstraint"),
-    TargetPortConstraint("targetPortConstraint"),
-    Opacity("opacity"),
-    FillOpacity("fillOpacity"),
-    StrokeOpacity("strokeOpacity"),
-    TextOpacity("textOpacity"),
-    TextDirection(
-        "textDirection",
-        Set.of(
-            "TEXT_DIRECTION_DEFAULT",
-            "TEXT_DIRECTION_AUTO",
-            "TEXT_DIRECTION_RTL",
-            "TEXT_DIRECTION_LTR"));
-
-    final String key;
-    final boolean enumerable;
-    final Set<String> values;
-
-    StyleKey(String key) {
-      this(key, Collections.emptySet());
-    }
-
-    StyleKey(String value, Set<String> values) {
-      this.key = value;
-      this.values = values;
-      this.enumerable = !values.isEmpty();
-    }
-
-    public String getKey() {
-      return key;
-    }
-  }
+  //  enum StyleKey {
+  //    Perimeter("perimeter"),
+  //    SourcePort("sourcePort"),
+  //    TargetPort("targetPort"),
+  //    PortConstraint("portConstraint"),
+  //    PortConstraintRotation("portConstraintRotation"),
+  //    SourcePortConstraint("sourcePortConstraint"),
+  //    TargetPortConstraint("targetPortConstraint"),
+  //    Opacity("opacity"),
+  //    FillOpacity("fillOpacity"),
+  //    StrokeOpacity("strokeOpacity"),
+  //    TextOpacity("textOpacity"),
+  //    TextDirection(
+  //        "textDirection",
+  //        Set.of(
+  //            "TEXT_DIRECTION_DEFAULT",
+  //            "TEXT_DIRECTION_AUTO",
+  //            "TEXT_DIRECTION_RTL",
+  //            "TEXT_DIRECTION_LTR"));
+  //
+  //    final String key;
+  //    final boolean enumerable;
+  //    final Set<String> values;
+  //
+  //    StyleKey(String key) {
+  //      this(key, Collections.emptySet());
+  //    }
+  //
+  //    StyleKey(String value, Set<String> values) {
+  //      this.key = value;
+  //      this.values = values;
+  //      this.enumerable = !values.isEmpty();
+  //    }
+  //
+  //    public String getKey() {
+  //      return key;
+  //    }
+  //  }
 
   String setStyle(String key, String value);
 
@@ -54,13 +57,13 @@ public interface ElementStyle {
     return getStyle(key.getKey());
   }
 
-  default String setStyle(StyleKey style, String value) {
-    if (style.enumerable && !style.values.contains(value)) {
-      throw new IllegalArgumentException(
-          String.format(
-              "Error: Style with key '%s' has permitted values %s, of which '%s' is not one",
-              style.getKey(), style.values, value));
-    }
+  default <T> String setStyle(StyleKey<T> style, String value) {
+    //    if (style.enumerable && !style.values.contains(value)) {
+    //      throw new IllegalArgumentException(
+    //          String.format(
+    //              "Error: Style with key '%s' has permitted values %s, of which '%s' is not one",
+    //              style.getKey(), style.values, value));
+    //    }
     return setStyle(style.getKey(), value);
   }
 
@@ -69,7 +72,7 @@ public interface ElementStyle {
     return this;
   }
 
-  default ElementStyle set(StyleKey key, String value) {
+  default <T> ElementStyle set(StyleKey<T> key, String value) {
     setStyle(key, value);
     return this;
   }

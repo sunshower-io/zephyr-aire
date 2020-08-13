@@ -7,7 +7,7 @@ public interface Element extends Alignable {
 
   enum Category {
     Edge,
-    Vertex
+    Vertex;
   }
 
   Image addImage(Image image);
@@ -21,7 +21,6 @@ public interface Element extends Alignable {
   Category getCategory();
 
   ElementStyle getStyle();
-
 
   Collection<ElementOverlay> getOverlays();
 }

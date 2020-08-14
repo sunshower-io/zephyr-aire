@@ -13,6 +13,18 @@ public interface ElementStyle {
 
   Collection<String> verticalAlignments = Set.of("ALIGN_TOP", "ALIGN_MIDDLE", "ALIGN_BOTTOM");
 
+  Collection<String> arrows =
+      Set.of(
+          "ARROW_CLASSIC",
+          "ARROW_CLASSIC_THIN",
+          "ARROW_BLOCK",
+          "ARROW_BLOCK_THIN",
+          "ARROW_OPEN",
+          "ARROW_OPEN_THIN",
+          "ARROW_OVAL",
+          "ARROW_DIAMOND",
+          "ARROW_DIAMOND_THIN");
+
   StyleKey<String> Perimeter =
       new BaseStyleKey<>(
           "perimeter",
@@ -22,7 +34,7 @@ public interface ElementStyle {
               "mxPerimeter.RhombusPerimeter",
               "mxPerimeter.TrianglePerimeter",
               "mxPerimeter.HexagonPerimeter")); // TODO determine if we can get rid of mxPerimeter;
-                                                // add support for custom Perimeters
+  // add support for custom Perimeters
 
   StyleKey<String> SourcePort = new BaseStyleKey<>("sourcePort", StyleValidators.noop());
 
@@ -226,7 +238,11 @@ public interface ElementStyle {
 
   StyleKey<Float> Segment = new BaseStyleKey<>("segment", StyleValidators.noop());
 
-  //TODO EndArrow, StartArrow
+  StyleKey<String> EndArrow =
+      new BaseStyleKey<>("endArrow", StyleValidators.stringEnumerationValidator(arrows));
+
+  StyleKey<String> StartArrow =
+      new BaseStyleKey<>("StartArrow", StyleValidators.stringEnumerationValidator(arrows));
 
   StyleKey<Integer> EndSize = new BaseStyleKey<>("endSize", StyleValidators.noop());
 
@@ -240,8 +256,6 @@ public interface ElementStyle {
 
   StyleKey<Integer> StartFill =
       new BaseStyleKey<>("startFill", 1, StyleValidators.integerEnumerationValidator(0, 1));
-
-
 
   String setStyle(String key, String value);
 

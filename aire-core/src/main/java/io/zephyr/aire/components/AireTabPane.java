@@ -27,7 +27,8 @@ import java.util.function.Supplier;
 public class AireTabPane extends Article
     implements RouterLayout, AireComponent, ComponentEventListener<Tabs.SelectedChangeEvent> {
 
-  public enum TabPlacement {
+
+    public enum TabPlacement {
     TOP,
     BOTTOM,
     LEFT,
@@ -69,9 +70,12 @@ public class AireTabPane extends Article
     this(TabPlacement.TOP);
   }
 
+  public void addTab(Component o) {
+    val tab = new Tab(o);
+    tabs.add(tab);
+  }
 
-
-  public Tab addTab(String title, Component component) {
+  public Tab addTab(String title, Supplier<Component> component) {
     val tab = new Tab(title);
     components.put(tab, new ComponentDescriptor(false, component, null));
     tabs.add(tab);
@@ -120,11 +124,14 @@ public class AireTabPane extends Article
   }
 
   private void updateTab(ComponentDescriptor next) {
+    if (next == null) {
+      return;
+    }
     // use default routing mechanism for routes
     if (!next.isRoute) {
       Component nextInstance;
       if (next.instance != null) {
-        nextInstance = next.instance;
+        nextInstance = next.instance.get();
       } else {
         nextInstance = Instantiator.get(UI.getCurrent()).createComponent(next.componentType);
       }
@@ -187,7 +194,7 @@ public class AireTabPane extends Article
   @AllArgsConstructor
   static class ComponentDescriptor {
     final boolean isRoute;
-    final Component instance;
+    final Supplier<Component> instance;
     final Class<? extends Component> componentType;
   }
 

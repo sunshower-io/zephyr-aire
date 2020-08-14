@@ -1,11 +1,18 @@
 import {PolymerElement}  from "@polymer/polymer/polymer-element";
 import {StampedTemplate} from "@polymer/polymer/interfaces";
 import {mxGraph}         from "mxgraph/javascript/mxClient";
+import {Designer}        from "@aire/designer/core/designer";
+import Inject            from "@aire/inject/inject";
+import {DesignerManager} from "@aire/designer/core/designer-manager";
 
 
 class AireDesigner extends PolymerElement {
 
-  private graph : mxGraph;
+  private graph : Designer;
+
+  @Inject
+  private designerManager : DesignerManager;
+
 
   constructor() {
     super();
@@ -15,12 +22,6 @@ class AireDesigner extends PolymerElement {
     return {
       id : String
     };
-  }
-
-
-  addElement(el : any) {
-    // let cell = new RenderableVertex(el, 20, 30, 200, 200, "sup");
-    // cell.addTo(this.designer.getCanvas());
   }
 
   _attachDom(dom : StampedTemplate | null) : ShadowRoot | null {
@@ -34,8 +35,15 @@ class AireDesigner extends PolymerElement {
 
   ready() : void {
     super.ready();
-    let designer = new mxGraph(this);
-    this.graph = designer;
+    console.log(this.id);
+    let designer = this.designerManager.focus(this.id);
+    if (!designer) {
+      let designer = new Designer(this.id, this);
+      this.graph = designer;
+      this.designerManager.register(designer);
+    } else {
+      this.graph = new Designer(this.id, this, designer.getModel());
+    }
   }
 
 

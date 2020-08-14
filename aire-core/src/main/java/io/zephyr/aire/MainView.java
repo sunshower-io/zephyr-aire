@@ -5,10 +5,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.Uses;
-import com.vaadin.flow.component.html.Anchor;
-import com.vaadin.flow.component.html.Article;
-import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Section;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.*;
@@ -25,6 +22,7 @@ import lombok.val;
 
 import javax.inject.Inject;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Route
@@ -81,6 +79,8 @@ public class MainView extends AireApplicationViewport {
   private void checkDefaults() {
 
     val tabPanel = new AireTabPane();
+
+    tabPanel.setTabPlacement(AireTabPane.TabPanelPlacement.BOTTOM);
     val button = new Button(new Icon(VaadinIcon.PLUS));
     val buttonTab = new AireTab(AireTab.TabPlacement.END, button);
     val count = new AtomicInteger();
@@ -88,7 +88,18 @@ public class MainView extends AireApplicationViewport {
         (ComponentEventListener<ClickEvent<Button>>)
             buttonClickEvent -> {
               val id = "Test " + count.incrementAndGet();
-              val tab = tabPanel.addTab(id, () -> new AireDesigner(id));
+              val toolbar = new AireToolbar();
+              val addGridButton = new Button(AireIcon.icon("border-all"));
+              toolbar.add(addGridButton);
+
+              
+
+              val div = new Div();
+              div.getClassNames().addAll(Set.of("expand", "flex"));
+              div.add(toolbar);
+              div.add(new AireDesigner(id));
+
+              val tab = tabPanel.addTab(id, () -> div);
               tabPanel.activate(tab);
             });
 

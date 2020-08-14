@@ -21,7 +21,6 @@ public class AireDesigner extends Div {
   final String id;
 
   public AireDesigner(String id) {
-    addClassName("expand");
     this.id = id;
     ID.set(this, id);
   }

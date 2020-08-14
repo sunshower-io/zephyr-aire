@@ -35,6 +35,15 @@ article.aire-tabs {
 
   &.bottom {
     flex-direction: column-reverse;
+    vaadin-tabs {
+      box-shadow: inset 0 1px 0 0 var(--lumo-contrast-10pct)
+    }
+    vaadin-tab {
+      &:before, &:after {
+        top:0;
+        bottom: unset;
+      }
+    }
   }
 
   &.left, &.right {

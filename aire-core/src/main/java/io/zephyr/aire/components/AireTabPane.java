@@ -20,6 +20,7 @@ import lombok.val;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Supplier;
 
 @CssImport("./styles/aire/components/aire-tabs.css")
@@ -47,8 +48,13 @@ public class AireTabPane extends Article
 
   private TabPanelPlacement placement;
 
+  public AireTabPane() {
+    this(TabPanelPlacement.TOP);
+  }
+
   public AireTabPane(TabPanelPlacement placement) {
-    getClassNames().add(CLASS_NAME);
+    getClassNames().addAll(Set.of(CLASS_NAME, placement.name().toLowerCase()));
+
     this.tabs = new AireTabs();
     decorate(tabs);
     this.tabContainer = new Nav();
@@ -61,10 +67,6 @@ public class AireTabPane extends Article
 
     this.components = new HashMap<>();
     this.locations = new CompactTrieMap<>(new RegexStringAnalyzer("/"));
-  }
-
-  public AireTabPane() {
-    this(TabPanelPlacement.TOP);
   }
 
   public void addTab(Component o) {

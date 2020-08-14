@@ -22,3 +22,13 @@ article, article.horizontal {
   display: flex;
   flex-direction: row;
 }
+
+.flex {
+  display:flex;
+  &.row{
+    flex-direction: row;
+  }
+  &, &.column {
+    flex-direction: column;
+  }
+}

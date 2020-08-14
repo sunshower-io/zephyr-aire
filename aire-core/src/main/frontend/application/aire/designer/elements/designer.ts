@@ -1,6 +1,5 @@
 import {PolymerElement}  from "@polymer/polymer/polymer-element";
 import {StampedTemplate} from "@polymer/polymer/interfaces";
-import {mxGraph}         from "mxgraph/javascript/mxClient";
 import {Designer}        from "@aire/designer/core/designer";
 import Inject            from "@aire/inject/inject";
 import {DesignerManager} from "@aire/designer/core/designer-manager";

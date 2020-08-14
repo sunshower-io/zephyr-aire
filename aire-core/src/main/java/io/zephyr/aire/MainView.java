@@ -82,16 +82,17 @@ public class MainView extends AireApplicationViewport {
 
     val tabPanel = new AireTabPane();
     val button = new Button(new Icon(VaadinIcon.PLUS));
+    val buttonTab = new AireTab(AireTab.TabPlacement.END, button);
     val count = new AtomicInteger();
-    val elements = new HashMap<String, Component>();
     button.addClickListener(
         (ComponentEventListener<ClickEvent<Button>>)
             buttonClickEvent -> {
               val id = "Test " + count.incrementAndGet();
-              tabPanel.addTab(id, () -> new AireDesigner(id));
+              val tab = tabPanel.addTab(id, () -> new AireDesigner(id));
+              tabPanel.activate(tab);
             });
 
-    tabPanel.addTab(button);
+    tabPanel.addTab(buttonTab);
 
     val aside = new AireAsideDrawerMenu();
 

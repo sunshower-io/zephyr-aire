@@ -11,7 +11,6 @@ import com.vaadin.flow.di.Instantiator;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.server.Command;
 import io.aire.core.AireComponent;
 import io.sunshower.gyre.CompactTrieMap;
 import io.sunshower.gyre.RegexStringAnalyzer;
@@ -26,19 +25,17 @@ import java.util.function.Supplier;
 @CssImport("./styles/aire/components/aire-tabs.css")
 public class AireTabPane extends Article
     implements RouterLayout, AireComponent, ComponentEventListener<Tabs.SelectedChangeEvent> {
+  static final String CLASS_NAME = "aire-tabs";
 
-
-    public enum TabPlacement {
+  public enum TabPanelPlacement {
     TOP,
     BOTTOM,
     LEFT,
     RIGHT
   }
 
-  static final String CLASS_NAME = "aire-tabs";
-
   /** immutable state */
-  private final Tabs tabs;
+  private final AireTabs tabs;
 
   private final Section contents;
   private final Nav tabContainer;
@@ -48,11 +45,11 @@ public class AireTabPane extends Article
   /** mutable state */
   private Component current;
 
-  private TabPlacement placement;
+  private TabPanelPlacement placement;
 
-  public AireTabPane(TabPlacement placement) {
+  public AireTabPane(TabPanelPlacement placement) {
     getClassNames().add(CLASS_NAME);
-    this.tabs = new Tabs();
+    this.tabs = new AireTabs();
     decorate(tabs);
     this.tabContainer = new Nav();
     this.contents = new Section();
@@ -67,12 +64,16 @@ public class AireTabPane extends Article
   }
 
   public AireTabPane() {
-    this(TabPlacement.TOP);
+    this(TabPanelPlacement.TOP);
   }
 
   public void addTab(Component o) {
-    val tab = new Tab(o);
-    tabs.add(tab);
+    if (!(o instanceof Tab)) {
+      val tab = new Tab(o);
+      tabs.add(tab);
+    } else {
+      tabs.add((Component) o);
+    }
   }
 
   public Tab addTab(String title, Supplier<Component> component) {
@@ -83,7 +84,12 @@ public class AireTabPane extends Article
   }
 
   public void activate(Tab tab) {
-    access(() -> updateTab(components.get(tab)));
+    access(
+        () -> {
+          val tabComponent = components.get(tab);
+          updateTab(tabComponent);
+          tabs.setSelectedTab(tab);
+        });
   }
 
   public Tab addTab(String title, Class<? extends Component> componentType) {
@@ -105,7 +111,7 @@ public class AireTabPane extends Article
     }
   }
 
-  public void setTabPlacement(TabPlacement placement) {
+  public void setTabPlacement(TabPanelPlacement placement) {
     val classlist = getClassNames();
     val previousPlacement = this.placement;
     if (previousPlacement != null) {
@@ -164,7 +170,7 @@ public class AireTabPane extends Article
     return componentType.isAnnotationPresent(Route.class);
   }
 
-  private void updateTabOrientation(TabPlacement placement) {
+  private void updateTabOrientation(TabPanelPlacement placement) {
     switch (placement) {
       case LEFT:
       case RIGHT:

@@ -9,6 +9,10 @@ public class AbstractElement implements Element {
    *
    * <p>each of these fields is modifiable via the relevant accessors
    */
+  private String id;
+
+  private ElementType type;
+
   private Alignment verticalAlignment;
 
   private Alignment horizontalAlignment;
@@ -29,6 +33,8 @@ public class AbstractElement implements Element {
   /** this map contains the set of overlays applied to this element */
   protected final List<ElementOverlay> overlays;
 
+  protected final Map<String, String> properties;
+
   protected AbstractElement(Category category) {
     this(category, ElementStyles.newStyle());
   }
@@ -38,6 +44,27 @@ public class AbstractElement implements Element {
     this.category = category;
     this.images = defaultImages();
     this.overlays = defaultOverlays();
+    this.properties = new HashMap<>();
+  }
+
+  @Override
+  public String getId() {
+    return id;
+  }
+
+  @Override
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  @Override
+  public ElementType getType() {
+    return type;
+  }
+
+  @Override
+  public void setType(ElementType type) {
+    this.type = type;
   }
 
   @Override
@@ -101,5 +128,20 @@ public class AbstractElement implements Element {
 
   private Map<ImageType, Image> defaultImages() {
     return new HashMap<>();
+  }
+
+  @Override
+  public void setProperty(String key, String value) {
+    properties.put(key, value);
+  }
+
+  @Override
+  public String getProperty(String key) {
+    return properties.get(key);
+  }
+
+  @Override
+  public boolean hasProperty(String key) {
+    return properties.containsKey(key);
   }
 }

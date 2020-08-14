@@ -3,12 +3,20 @@ package io.aire.designer;
 import java.util.Collection;
 import java.util.List;
 
-public interface Element extends Alignable {
+public interface Element extends PropertyAware, Alignable {
 
   enum Category {
     Edge,
-    Vertex
+    Vertex;
   }
+
+  String getId();
+
+  void setId(String id);
+
+  ElementType getType();
+
+  void setType(ElementType type);
 
   Image addImage(Image image);
 
@@ -21,7 +29,6 @@ public interface Element extends Alignable {
   Category getCategory();
 
   ElementStyle getStyle();
-
 
   Collection<ElementOverlay> getOverlays();
 }

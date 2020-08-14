@@ -19,8 +19,18 @@ class AireDesigner extends PolymerElement {
 
   static get properties() {
     return {
-      id : String
+      id          : String,
+      connectable : {
+        type     : Boolean,
+        notify   : true,
+        observer : 'onConnectableChanged'
+      },
     };
+  }
+
+  onConnectableChanged(newValue : boolean, oldValue : boolean) : void {
+    console.log("Connectable changed", newValue, oldValue);
+    this.graph.setConnectable(newValue);
   }
 
   _attachDom(dom : StampedTemplate | null) : ShadowRoot | null {
@@ -34,7 +44,6 @@ class AireDesigner extends PolymerElement {
 
   ready() : void {
     super.ready();
-    console.log(this.id);
     let designer = this.designerManager.focus(this.id);
     if (!designer) {
       let designer = new Designer(this.id, this);

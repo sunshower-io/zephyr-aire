@@ -90,12 +90,17 @@ public class MainView extends AireApplicationViewport {
               val id = "Test " + count.incrementAndGet();
               val toolbar = new AireToolbar();
               val addGridButton = new Button(AireIcon.icon("border-all"));
+              val setConnectableButton = new Button(AireIcon.icon("arrows-alt-v"));
               val designer = new AireDesigner(id);
+              setConnectableButton.addClickListener(
+                  click -> designer.setConnectable(!designer.isConnectable()));
+
               addGridButton.addClickListener(
                   click -> {
-                    System.out.println("Connectable: " + designer.isConnectable());
-                    designer.setConnectable(!designer.isConnectable());
+                    designer.addGrid();
                   });
+              toolbar.add(setConnectableButton);
+              ;
               toolbar.add(addGridButton);
 
               val div = new Div();

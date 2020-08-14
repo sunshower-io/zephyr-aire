@@ -3,11 +3,15 @@ import {StampedTemplate} from "@polymer/polymer/interfaces";
 import {Designer}        from "@aire/designer/core/designer";
 import Inject            from "@aire/inject/inject";
 import {DesignerManager} from "@aire/designer/core/designer-manager";
+import {DefaultGrid}     from "@aire/designer/ext/grid";
 
+
+let COUNT = 0;
 
 class AireDesigner extends PolymerElement {
 
   private graph : Designer;
+
 
   @Inject
   private designerManager : DesignerManager;
@@ -25,12 +29,24 @@ class AireDesigner extends PolymerElement {
         notify   : true,
         observer : 'onConnectableChanged'
       },
+      gridEnabled : {
+        type     : Boolean,
+        notify   : true,
+        observer : 'onGridEnabledChanged'
+      }
     };
   }
 
-  onConnectableChanged(newValue : boolean, oldValue : boolean) : void {
-    console.log("Connectable changed", newValue, oldValue);
-    this.graph.setConnectable(newValue);
+
+  public get designer() : Designer {
+    return this.designerManager.focus(this.id);
+  }
+
+  public set designer(designer : Designer) {
+    let dm = this.designerManager;
+    this.graph = designer;
+    dm.register(designer);
+    dm.focus(this.id);
   }
 
   _attachDom(dom : StampedTemplate | null) : ShadowRoot | null {
@@ -43,15 +59,32 @@ class AireDesigner extends PolymerElement {
   }
 
   ready() : void {
+    let id = this.id,
+      designer = this.designer;
+    this.designer = !!designer ?
+                    new Designer(id, this, designer.getModel()) :
+                    new Designer(id, this);
+    console.log("UPDATED DESIGNER");
     super.ready();
-    let designer = this.designerManager.focus(this.id);
-    if (!designer) {
-      let designer = new Designer(this.id, this);
-      this.graph = designer;
-      this.designerManager.register(designer);
+  }
+
+  /**
+   * various handlers for implementing toolbars, etc.
+   */
+
+  private onGridEnabledChanged(newValue : boolean, oldValue : boolean) : void {
+    let graph = this.designer;
+    if (newValue) {
+      console.log("ADDING", graph.grids);
+      graph.addGrid(DefaultGrid);
+      console.log("GRIDS", graph.grids);
     } else {
-      this.graph = new Designer(this.id, this, designer.getModel());
+      graph.removeGrid(DefaultGrid);
     }
+  }
+
+  private onConnectableChanged(newValue : boolean, oldValue : boolean) : void {
+    this.designer.setConnectable(newValue);
   }
 
 

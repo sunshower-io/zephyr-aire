@@ -75,7 +75,11 @@ declare module "mxgraph/javascript/mxClient" {
 
   export class mxGraphView {
 
+
+
     constructor(g : mxGraph);
+
+    validateBackground(): void;
 
     x0 : number;
     y0 : number;

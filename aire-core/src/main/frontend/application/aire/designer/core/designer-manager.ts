@@ -11,7 +11,6 @@ export class DesignerManager {
 
 
   constructor() {
-    console.log("new designermanager");
     this.designers = new Map<string, Designer>();
   }
 
@@ -24,8 +23,6 @@ export class DesignerManager {
   }
 
   public register(designer : Designer) : Designer {
-    console.log("REGISTERING" + designer.id);
-    console.log("REG", this.designers);
     let existing = this.designers.get(designer.id);
     if (existing) {
       this.unregister(existing.id);
@@ -42,8 +39,6 @@ export class DesignerManager {
   }
 
   public focus(id : string) : Designer {
-    console.log("FOC", this.designers);
-    console.log("ID", id);
     let designer = this.designers.get(id);
     this.focused = designer;
     return designer;

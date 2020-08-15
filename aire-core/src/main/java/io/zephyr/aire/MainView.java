@@ -92,7 +92,21 @@ public class MainView extends AireApplicationViewport {
               val addGridButton = new Button(AireIcon.icon("border-all"));
               toolbar.add(addGridButton);
 
-              
+              toolbar.add(new Button(AireIcon.icon("drafting-compass")));
+              toolbar.add(new Button(AireIcon.icon("layer-group")));
+
+              val group = new AireToolbarGroup();
+              group.add(new Button(AireIcon.icon("seedling")));
+              group.add(new Button(AireIcon.icon("heart")));
+              toolbar.add(group);
+
+              toolbar.add(new Button(AireIcon.icon("drafting-compass")));
+              toolbar.add(new Button(AireIcon.icon("layer-group")));
+
+              val group2 = new AireToolbarGroup();
+              group2.add(new Button(AireIcon.icon("frog")));
+              group2.add(new Button(AireIcon.icon("fire")));
+              toolbar.add(group2);
 
               val div = new Div();
               div.getClassNames().addAll(Set.of("expand", "flex"));

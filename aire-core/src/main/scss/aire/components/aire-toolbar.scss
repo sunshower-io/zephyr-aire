@@ -1,3 +1,59 @@
+@import "../layout/aire-layout-variables";
+
+$left-shadow: inset 1px 0px 0px 0px var(--lumo-contrast-10pct);
+$bottom-shadow: inset 0 -1px 0px 0px var(--lumo-contrast-10pct);
+$right-shadow: inset -1px 0px 0px 0px var(--lumo-contrast-10pct);
+
 aire-toolbar, .aire-toolbar {
-  display:block;
+
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: $bottom-shadow;
+
+  vaadin-button {
+    margin:0;
+    background-color: unset;
+    border-radius: unset;
+
+    svg {
+      color: $dark-gray-2;
+    }
+
+    //TODO figure out how best to do in java
+    &:active, &:focus, &.active {
+      svg {
+        color: $secondary-nav-background;
+      }
+    }
+
+  }
+
+  aire-toolbar-group {
+    display:flex;
+
+    &:after {
+      content: ' ';
+      height: 50%;
+      margin-top: 12.5%;
+      background-color: var(--lumo-contrast-10pct);
+      width: 1px;
+    }
+  }
+
+  aire-toolbar-group:last-child {
+    &:after {
+      display:none;
+    }
+  }
+
+  vaadin-button + aire-toolbar-group {
+    &:before {
+      content: ' ';
+      height: 50%;
+      margin-top: 12.5%;
+      background-color: var(--lumo-contrast-10pct);
+      width: 1px;
+    }
+  }
+
 }

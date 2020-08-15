@@ -6,14 +6,14 @@ export interface GridOptions {
 
   dash? : number[];
 
-  border?: boolean;
+  border? : boolean;
   gridSize? : number;
 }
 
 export const DefaultOuterGrid : GridOptions = {
   strokeStyle : "#A2A2A2",
   gridSize    : 200,
-  border: true
+  border      : true
 };
 
 export const DefaultInnerGrid : GridOptions = {
@@ -87,11 +87,10 @@ export class Grid {
     canvas.style.bottom = paddingPx;
     canvas.style.right = paddingPx;
     canvas.style.zIndex = '-1';
-    if(this.options.border) {
+    if (this.options.border) {
       canvas.style.borderRight = '1px solid ' + this.options.strokeStyle;
       canvas.style.borderBottom = '1px solid ' + this.options.strokeStyle;
     }
-    // canvas.style.height = '100%';
   }
 
 
@@ -108,7 +107,7 @@ export class Grid {
       bounds = graph.getGraphBounds(),
       padding = Grid.padding,
       width = Math.max(bounds.x + bounds.width, graph.container.clientWidth) - 2 * padding,
-      height = Math.max(bounds.y + bounds.height, graph.container.clientHeight) -  2 * padding,
+      height = Math.max(bounds.y + bounds.height, graph.container.clientHeight) - 2 * padding,
       sizeChanged = width != currentWidth || height != currentHeight;
 
     if (
@@ -127,7 +126,7 @@ export class Grid {
       if (!sizeChanged) {
         context.clearRect(0, 0, width, height);
       } else {
-        this.canvas.setAttribute('width',  String(width));
+        this.canvas.setAttribute('width', String(width));
         this.canvas.setAttribute('height', String(height));
       }
 

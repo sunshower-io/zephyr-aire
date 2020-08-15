@@ -26,8 +26,8 @@ export class DesignerManager {
     let existing = this.designers.get(designer.id);
     if (existing) {
       this.unregister(existing.id);
+      existing.dispose();
     }
-    console.log(this.designers);
     this.designers.set(designer.id, designer);
     return existing;
   }

@@ -2,6 +2,8 @@ declare module "mxgraph/javascript/mxClient" {
 
     export class mxEvent {
 
+        static readonly SIZE                    : string;
+
         static readonly CELLS_RESIZED           : string;
 
         static readonly CELLS_ADDED             : string;

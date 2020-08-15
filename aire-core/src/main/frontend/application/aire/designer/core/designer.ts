@@ -1,31 +1,65 @@
 import {
   mxGraph,
   mxGraphModel
-}                          from "mxgraph/javascript/mxClient";
-import {Grid, GridOptions} from "@aire/designer/ext/grid";
+}                                         from "mxgraph/javascript/mxClient";
+import {Grid, GridOptions}                from "@aire/designer/ext/grid";
+import {Disposable, registerGridListener} from "@aire/designer/core/resize-events";
 
-export class Designer extends mxGraph {
+export class Designer extends mxGraph implements Disposable {
 
-  public id : string;
+  /**
+   * the set of grids applied to this designer (may be null)
+   * @private
+   */
   private _grids : Grid[];
 
-  constructor(id : string, target : HTMLElement, model? : mxGraphModel) {
+  /**
+   *
+   * @private the registration for grid resize events
+   */
+  private gridResizeEventRegistration : Disposable;
+
+  /**
+   *
+   * @param id the ID
+   * @param target
+   * @param model
+   */
+  constructor(
+    public readonly id : string,
+    private readonly target : HTMLElement,
+    model? : mxGraphModel
+  ) {
     super(target, model);
     this.id = id;
   }
 
 
+  public dispose() {
+    if (this.gridResizeEventRegistration) {
+      this.gridResizeEventRegistration.dispose();
+    }
+  }
+
   public get grids() : Grid[] {
     return this._grids = this._grids || [];
   }
 
-  public addGrids(...gridSpecs : GridOptions[]) : void {
+  /**
+   *
+   * @param gridSpecs the grid specifications to add
+   */
+  public addGrids(...gridSpecs : GridOptions[]) {
+    if (this.gridResizeEventRegistration) {
+      this.gridResizeEventRegistration.dispose();
+    }
     let grids = this.grids;
     for (let gridSpec of gridSpecs) {
       let grid = new Grid(this, gridSpec);
       grids.push(grid);
       grid.draw();
     }
+    this.gridResizeEventRegistration = registerGridListener(this);
   }
 
   removeGrids(...gridOpts : GridOptions[]) : void {
@@ -46,6 +80,9 @@ export class Designer extends mxGraph {
           }
         }
       }
+    }
+    if (!this.grids.length && this.gridResizeEventRegistration) {
+      this.gridResizeEventRegistration.dispose();
     }
     return;
   }

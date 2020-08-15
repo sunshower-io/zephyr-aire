@@ -26,6 +26,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Route
+@PageTitle("Zephyr - Home")
 @Location("home")
 @Container(":main")
 @CssImport("./styles/aire/layout/aire-structure.css")

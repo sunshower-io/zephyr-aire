@@ -13,4 +13,4 @@ jobs:
       - name: Add to board
         uses: srggrs/assign-one-project-github-action@1.1.0
         with:
-          project: 'https://github.com/sunshower-io/zephyr/projects/1'
+          project: 'https://github.com/orgs/sunshower-io/projects/2'

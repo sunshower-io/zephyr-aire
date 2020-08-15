@@ -7,8 +7,7 @@ export class DesignerManager {
 
   private _focused : Designer;
 
-  private designers : Map<string, Designer>;
-
+  private readonly designers : Map<string, Designer>;
 
   constructor() {
     this.designers = new Map<string, Designer>();

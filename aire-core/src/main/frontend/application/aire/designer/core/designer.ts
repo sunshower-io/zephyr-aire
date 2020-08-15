@@ -1,9 +1,10 @@
 import {
   mxGraph,
-  mxGraphModel
-}                                         from "mxgraph/javascript/mxClient";
+  mxGraphModel, mxRubberband
+} from "mxgraph/javascript/mxClient";
 import {Grid, GridOptions}                from "@aire/designer/ext/grid";
 import {Disposable, registerGridListener} from "@aire/designer/core/resize-events";
+
 
 export class Designer extends mxGraph implements Disposable {
 
@@ -19,6 +20,7 @@ export class Designer extends mxGraph implements Disposable {
    */
   private gridResizeEventRegistration : Disposable;
 
+
   /**
    *
    * @param id the ID
@@ -31,7 +33,13 @@ export class Designer extends mxGraph implements Disposable {
     model? : mxGraphModel
   ) {
     super(target, model);
-    this.id = id;
+    // this.panningHandler.ignoreCell = true;
+    // this.panningHandler.previewEnabled = true;
+    new mxRubberband(this);
+    this.setPanning(true);
+    this.panningHandler.useLeftButtonForPanning = false;
+
+    console.log("SUP");
   }
 
 
@@ -62,7 +70,7 @@ export class Designer extends mxGraph implements Disposable {
     this.gridResizeEventRegistration = registerGridListener(this);
   }
 
-  removeGrids(...gridOpts : GridOptions[]) : void {
+  public removeGrids(...gridOpts : GridOptions[]) : void {
     let grids = this.grids,
       removed = 0,
       len = (grids && grids.length) || 0,

@@ -4,17 +4,28 @@ import {Designer}                           from "@aire/designer/core/designer";
 import Inject                               from "@aire/inject/inject";
 import {DesignerManager}                    from "@aire/designer/core/designer-manager";
 import {DefaultInnerGrid, DefaultOuterGrid} from "@aire/designer/ext/grid";
+import {ExtendingDesigner}                  from "@aire/designer/core/ext/extending-designer";
+import {mxEvent}                            from "mxgraph/javascript/mxClient";
+import {Disposable}                         from "@aire/designer/core/resize-events";
+import {debounce}                           from "@aire/core/lang";
+import {registerEvent}                      from "@aire/core/events";
 
-
-let COUNT = 0;
 
 class AireDesigner extends PolymerElement {
 
-  private graph : Designer;
 
-
+  /**
+   * injected fields
+   */
   @Inject
   private designerManager : DesignerManager;
+
+
+  /**
+   * @private
+   */
+  private graph : Designer;
+  private resizeListenerRegistration : Disposable;
 
 
   constructor() {
@@ -58,9 +69,28 @@ class AireDesigner extends PolymerElement {
     super.focus(options);
   }
 
+
+  connectedCallback() {
+    this.resizeListenerRegistration = registerEvent(
+      'resize',
+      window,
+      this.updateSize.bind(this),
+      {timeout : 100}
+    );
+    this.updateSize();
+    super.connectedCallback();
+  }
+
+  disconnectedCallback() {
+    this.resizeListenerRegistration.dispose();
+    super.disconnectedCallback();
+  }
+
   ready() : void {
     let id = this.id,
       designer = this.designer;
+    mxEvent.disableContextMenu(this);
+
     this.designer = !!designer ?
                     new Designer(id, this, designer.getModel()) :
                     new Designer(id, this);
@@ -84,6 +114,10 @@ class AireDesigner extends PolymerElement {
     this.designer.setConnectable(newValue);
   }
 
+  private updateSize() : void {
+
+
+  }
 
 }
 

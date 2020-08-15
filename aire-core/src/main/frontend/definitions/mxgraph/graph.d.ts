@@ -77,6 +77,7 @@ declare module "mxgraph/javascript/mxClient" {
 
 
 
+    graph: mxGraph;
     constructor(g : mxGraph);
 
     validateBackground(): void;
@@ -99,6 +100,8 @@ declare module "mxgraph/javascript/mxClient" {
     getGraphBounds() : mxRectangle;
 
     setGraphBounds(bounds : mxRectangle) : void;
+
+    getBackgroundPageBounds() : mxRectangle;
 
     getBounds(cells : Layer[]) : any;
 
@@ -178,6 +181,9 @@ declare module "mxgraph/javascript/mxClient" {
   }
 
   export class mxPanningHandler {
+    ignoreCell: boolean;
+    previewEnabled: boolean;
+    useLeftButtonForPanning: boolean
 
   }
 
@@ -198,6 +204,8 @@ declare module "mxgraph/javascript/mxClient" {
   }
 
   export class mxGraph implements Connectable {
+
+    panningHandler: mxPanningHandler;
 
     labelsVisible : boolean;
 
@@ -228,7 +236,7 @@ declare module "mxgraph/javascript/mxClient" {
     autoTranslate : boolean;
 
     minimumGraphSize : mxRectangle;
-    container : Element;
+    container : HTMLElement;
     view : mxGraphView;
     model : mxGraphModel;
     graphHandler : mxGraphHandler;
@@ -248,16 +256,17 @@ declare module "mxgraph/javascript/mxClient" {
 
     getCellStyle(cell : Layer) : mxStylesheet;
 
+    getPreferredPageSize(bounds: mxRectangle, width:number, height:number) : mxRectangle;
 
     setCellStyles(key : string, value : string, cells? : mxCell[]) : void;
 
     createEdge(parent : mxCell, id : string, value : any, source : mxCell, target : mxCell) : mxCell;
 
-    getPageSize() : mxRectangle;
 
     getPageView() : mxRectangle;
 
     getPageLayout() : mxRectangle;
+    createGraphView(): mxGraphView;
 
     getPagePadding() : mxPoint;
 

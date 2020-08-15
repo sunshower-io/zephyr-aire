@@ -1,9 +1,9 @@
-import {PolymerElement}  from "@polymer/polymer/polymer-element";
-import {StampedTemplate} from "@polymer/polymer/interfaces";
-import {Designer}        from "@aire/designer/core/designer";
-import Inject            from "@aire/inject/inject";
-import {DesignerManager} from "@aire/designer/core/designer-manager";
-import {DefaultGrid}     from "@aire/designer/ext/grid";
+import {PolymerElement}                     from "@polymer/polymer/polymer-element";
+import {StampedTemplate}                    from "@polymer/polymer/interfaces";
+import {Designer}                           from "@aire/designer/core/designer";
+import Inject                               from "@aire/inject/inject";
+import {DesignerManager}                    from "@aire/designer/core/designer-manager";
+import {DefaultInnerGrid, DefaultOuterGrid} from "@aire/designer/ext/grid";
 
 
 let COUNT = 0;
@@ -64,7 +64,6 @@ class AireDesigner extends PolymerElement {
     this.designer = !!designer ?
                     new Designer(id, this, designer.getModel()) :
                     new Designer(id, this);
-    console.log("UPDATED DESIGNER");
     super.ready();
   }
 
@@ -75,11 +74,9 @@ class AireDesigner extends PolymerElement {
   private onGridEnabledChanged(newValue : boolean, oldValue : boolean) : void {
     let graph = this.designer;
     if (newValue) {
-      console.log("ADDING", graph.grids);
-      graph.addGrid(DefaultGrid);
-      console.log("GRIDS", graph.grids);
+      graph.addGrids(DefaultInnerGrid, DefaultOuterGrid);
     } else {
-      graph.removeGrid(DefaultGrid);
+      graph.removeGrids(DefaultInnerGrid, DefaultOuterGrid);
     }
   }
 

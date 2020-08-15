@@ -6,30 +6,36 @@ export interface GridOptions {
 
   dash? : number[];
 
+  border?: boolean;
   gridSize? : number;
 }
 
-export const DefaultGrid : GridOptions = {
-  strokeStyle : "#2A2A2A",
-  gridSize    : 40,
-  dash        : [10, 20, 10]
+export const DefaultOuterGrid : GridOptions = {
+  strokeStyle : "#A2A2A2",
+  gridSize    : 200,
+  border: true
 };
+
+export const DefaultInnerGrid : GridOptions = {
+  strokeStyle : "#BCBCBC",
+  gridSize    : 40
+};
+
 
 export class Grid {
   private canvas : HTMLCanvasElement;
+
+
+  static readonly padding : number = 16;
 
   constructor(
     private readonly graph : mxGraph,
     private readonly options : GridOptions
   ) {
     let canvas = document.createElement('canvas');
-    canvas.style.position = 'absolute';
-    canvas.style.top = '0px';
-    canvas.style.left = '0px';
-    canvas.style.zIndex = '-1';
-    canvas.style.height = '100%';
     graph.container.appendChild(canvas);
     this.canvas = canvas;
+    this.setStyle(canvas);
     this.acceptCanvasEvents(canvas);
   }
 
@@ -57,19 +63,35 @@ export class Grid {
       width = 0,
       height = 0,
       translate = {x : null, y : null},
-      context = this.canvas.getContext('2d'),
-      canvas = this.canvas,
-      isContainerEvent = mxGraphView.prototype.isContainerEvent;
+      context = this.canvas.getContext('2d');
 
     context.fillStyle = 'rgba(255, 255, 255, 0.5)';
 
-    mxGraphView.prototype.isContainerEvent = function (e : Event) {
-      return (
-        isContainerEvent.apply(this, arguments) ||
-        mxEvent.getSource(e) == canvas
-      );
-    };
+    // mxGraphView.prototype.isContainerEvent = function (e : Event) {
+    //   return (
+    //     isContainerEvent.apply(this, arguments) ||
+    //     mxEvent.getSource(e) == canvas
+    //   );
+    // };
     this.paintGrid(translate, scale, width, height, gridSize, context);
+  }
+
+  private setStyle(canvas : HTMLCanvasElement) {
+    let padding = Grid.padding,
+      paddingPx = padding + 'px';
+
+    canvas.style.position = 'absolute';
+    canvas.style.top = paddingPx;
+    canvas.style.left = paddingPx;
+
+    canvas.style.bottom = paddingPx;
+    canvas.style.right = paddingPx;
+    canvas.style.zIndex = '-1';
+    if(this.options.border) {
+      canvas.style.borderRight = '1px solid ' + this.options.strokeStyle;
+      canvas.style.borderBottom = '1px solid ' + this.options.strokeStyle;
+    }
+    // canvas.style.height = '100%';
   }
 
 
@@ -84,8 +106,9 @@ export class Grid {
     let graph = this.graph,
       options = this.options,
       bounds = graph.getGraphBounds(),
-      width = Math.max(bounds.x + bounds.width, graph.container.clientWidth),
-      height = Math.max(bounds.y + bounds.height, graph.container.clientHeight),
+      padding = Grid.padding,
+      width = Math.max(bounds.x + bounds.width, graph.container.clientWidth) - 2 * padding,
+      height = Math.max(bounds.y + bounds.height, graph.container.clientHeight) -  2 * padding,
       sizeChanged = width != currentWidth || height != currentHeight;
 
     if (
@@ -98,14 +121,14 @@ export class Grid {
       scale = graph.view.scale;
       translate = graph.view.translate.clone();
       gridSize = options.gridSize;
-      currentWidth = width;
-      currentHeight = height;
+      // currentWidth = width;
+      // currentHeight = height;
 
       if (!sizeChanged) {
         context.clearRect(0, 0, width, height);
       } else {
-        this.canvas.setAttribute('width', '' + width);
-        this.canvas.setAttribute('height', '' + height);
+        this.canvas.setAttribute('width',  String(width));
+        this.canvas.setAttribute('height', String(height));
       }
 
       let translateX = translate.x,
@@ -135,15 +158,15 @@ export class Grid {
 
       context.beginPath();
 
-      for (let x = xs; x <= xe; x += stepping) {
+      for (let x = xs; x <= xe + 1; x += stepping) {
         x = Math.round((x - translateX) / stepping) * stepping + translateX;
-        var ix = Math.round(x);
+        let ix = Math.round(x);
 
         context.moveTo(ix + 0.5, iys + 0.5);
         context.lineTo(ix + 0.5, iye + 0.5);
       }
 
-      for (let y = ys; y <= ye; y += stepping) {
+      for (let y = ys; y <= ye + 1; y += stepping) {
         y = Math.round((y - translateY) / stepping) * stepping + translateY;
         let iy = Math.round(y);
 
@@ -164,9 +187,8 @@ export class Grid {
 
     let mxGraphViewValidateBackground = mxGraphView.prototype.validateBackground;
     let repaint = () => {
-      console.log("REPAINT");
       this.draw();
-    }
+    };
     mxGraphView.prototype.validateBackground = function () {
       mxGraphViewValidateBackground.apply(this, arguments);
       repaint();

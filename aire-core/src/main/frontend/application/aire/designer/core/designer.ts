@@ -19,25 +19,34 @@ export class Designer extends mxGraph {
     return this._grids = this._grids || [];
   }
 
-  public addGrid(gridSpec : GridOptions) : void {
-    let grids = this.grids,
-      grid = new Grid(this, gridSpec);
-    grids.push(grid);
-    grid.draw();
+  public addGrids(...gridSpecs : GridOptions[]) : void {
+    let grids = this.grids;
+    for (let gridSpec of gridSpecs) {
+      let grid = new Grid(this, gridSpec);
+      grids.push(grid);
+      grid.draw();
+    }
   }
 
-  removeGrid(grid : GridOptions) : GridOptions {
+  removeGrids(...gridOpts : GridOptions[]) : void {
     let grids = this.grids,
-      len = (grids && grids.length) || 0;
-    while (len--) {
-      let g = grids[len];
-      if (g.hasOptions(grid)) {
+      removed = 0,
+      len = (grids && grids.length) || 0,
+      toRemove = gridOpts.length;
 
-        g.destroy();
-        grids.splice(len, 1);
-        return grid;
+    while (len--) {
+      for (let grid of gridOpts) {
+        let g = grids[len];
+        if (g && g.hasOptions(grid)) {
+          g.destroy();
+          grids.splice(len, 1);
+          removed++;
+          if (removed === toRemove) {
+            return;
+          }
+        }
       }
     }
-    return null;
+    return;
   }
 }

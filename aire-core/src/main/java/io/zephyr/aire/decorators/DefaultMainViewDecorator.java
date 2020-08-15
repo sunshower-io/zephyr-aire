@@ -6,16 +6,9 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.RouterLink;
 import io.zephyr.aire.MainView;
-import io.zephyr.aire.api.Extension;
-import io.zephyr.aire.api.LocationManager;
-import io.zephyr.aire.api.ViewDecorator;
-import io.zephyr.aire.api.ViewManager;
-import io.zephyr.aire.elements.AireButton;
-import io.zephyr.aire.elements.BreadCrumb;
-import io.zephyr.aire.layout.AireApplicationViewport;
+import io.zephyr.aire.components.controls.AireButton;
+import io.zephyr.aire.components.layouts.AireApplicationViewport;
 import lombok.val;
-
-import javax.inject.Inject;
 
 public class DefaultMainViewDecorator {
 

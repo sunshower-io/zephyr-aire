@@ -1,8 +1,7 @@
 package io.zephyr.aire.reflect;
 
-import io.zephyr.aire.MainView;
 import io.zephyr.aire.api.Slot;
-import io.zephyr.aire.layout.AireApplicationViewport;
+import io.zephyr.aire.components.layouts.AireApplicationViewport;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 

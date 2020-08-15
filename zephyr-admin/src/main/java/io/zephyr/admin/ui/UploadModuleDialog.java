@@ -1,15 +1,14 @@
 package io.zephyr.admin.ui;
 
 import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.MultiFileMemoryBuffer;
-import io.zephyr.aire.elements.AireFooter;
-import io.zephyr.aire.elements.AireHeader;
-import io.zephyr.aire.elements.AirePanel;
+import io.zephyr.aire.components.layouts.AireFooter;
+import io.zephyr.aire.components.layouts.AireHeader;
+import io.zephyr.aire.components.layouts.AirePanel;
 import io.zephyr.common.io.Files;
 import io.zephyr.kernel.core.Kernel;
 import lombok.val;
@@ -18,7 +17,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.nio.file.attribute.FileAttribute;
 
 public class UploadModuleDialog extends Dialog {
 

@@ -9,8 +9,7 @@ import com.vaadin.flow.router.Route;
 import io.zephyr.aire.MainView;
 import io.zephyr.aire.api.Decorate;
 import io.zephyr.aire.api.Undecorate;
-import io.zephyr.aire.components.AireAsideDrawerMenu;
-import io.zephyr.aire.layout.AireApplicationViewport;
+import io.zephyr.aire.components.layouts.AireAsideDrawerMenu;
 import lombok.val;
 import org.springframework.stereotype.Component;
 

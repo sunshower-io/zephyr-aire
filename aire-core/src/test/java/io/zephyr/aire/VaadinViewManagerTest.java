@@ -4,10 +4,9 @@ import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Header;
 import io.zephyr.aire.api.*;
-import io.zephyr.aire.elements.AireHeader;
+import io.zephyr.aire.components.layouts.AireHeader;
 import io.zephyr.aire.test.*;
 import lombok.val;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
 

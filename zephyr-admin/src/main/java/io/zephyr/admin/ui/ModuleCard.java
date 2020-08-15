@@ -5,10 +5,10 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
-import io.zephyr.aire.components.AireIconCard;
-import io.zephyr.aire.elements.AirePanel;
-import io.zephyr.aire.elements.FontAwesome;
-import io.zephyr.aire.elements.ModuleResource;
+import io.zephyr.aire.components.layouts.AireIconCard;
+import io.zephyr.aire.components.layouts.AirePanel;
+import io.zephyr.aire.common.FontAwesome;
+import io.zephyr.aire.common.ModuleResource;
 import io.zephyr.kernel.Module;
 import lombok.val;
 

@@ -6,7 +6,7 @@ import io.zephyr.admin.ui.PluginExtension;
 import io.zephyr.admin.ui.PluginListPage;
 import io.zephyr.admin.ui.PluginTopologyPage;
 import io.zephyr.aire.api.ViewContext;
-import io.zephyr.aire.elements.FontAwesome;
+import io.zephyr.aire.common.FontAwesome;
 import io.zephyr.aire.servlet.AireVaadinServlet;
 import lombok.val;
 import org.springframework.context.ApplicationListener;

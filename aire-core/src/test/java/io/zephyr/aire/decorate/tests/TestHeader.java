@@ -1,9 +1,8 @@
 package io.zephyr.aire.decorate.tests;
 
 import io.zephyr.aire.api.Slot;
-import io.zephyr.aire.elements.AireHeader;
+import io.zephyr.aire.components.layouts.AireHeader;
 import lombok.Getter;
-import lombok.Setter;
 
 public class TestHeader extends AireHeader {
 

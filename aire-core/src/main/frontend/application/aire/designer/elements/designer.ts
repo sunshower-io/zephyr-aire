@@ -105,6 +105,7 @@ class AireDesigner extends PolymerElement {
     let graph = this.designer;
     if (newValue) {
       graph.addGrids(DefaultInnerGrid, DefaultOuterGrid);
+      this.designer.setSnapEnabled(true);
     } else {
       graph.removeGrids(DefaultInnerGrid, DefaultOuterGrid);
     }

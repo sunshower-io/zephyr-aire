@@ -64,7 +64,6 @@ export class DefaultElementFactory implements ElementFactory {
     let geometry = new mxGeometry(0, 0, 120, 120),
       template = this.template,
       cell = new mxCell('coolbeans', geometry);
-    console.log(this.template);
 
     let image = template.getImage(ImageTypes.Element) || template.getImage(ImageTypes.Palette),
       source = image && image.source;

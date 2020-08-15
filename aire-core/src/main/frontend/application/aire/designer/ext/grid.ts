@@ -26,11 +26,11 @@ export class Grid {
   private canvas : HTMLCanvasElement;
 
 
-  static readonly padding : number = 16;
+  static readonly padding : number = 20;
 
   constructor(
     private readonly graph : mxGraph,
-    private readonly options : GridOptions
+    public readonly options : GridOptions
   ) {
     let canvas = document.createElement('canvas');
     graph.container.appendChild(canvas);

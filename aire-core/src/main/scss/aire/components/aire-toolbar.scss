@@ -19,10 +19,9 @@ aire-toolbar, .aire-toolbar {
       color: $dark-gray-2;
     }
 
-    //TODO figure out how best to do in java
     &:active, &:focus, &.active {
       svg {
-        color: $secondary-nav-background;
+        color: $primary-nav-background;
       }
     }
 

@@ -100,13 +100,15 @@ public class MainView extends AireApplicationViewport {
                     designer.addGrid();
                   });
               toolbar.add(setConnectableButton);
-              ;
               toolbar.add(addGridButton);
 
               val div = new Div();
               div.getClassNames().addAll(Set.of("expand", "flex"));
               div.add(toolbar);
-              div.add(designer);
+              val designerParent = new Div();
+              designerParent.getClassNames().addAll(Set.of("expand", "flex"));
+              designerParent.add(designer);
+              div.add(designerParent);
 
               val tab = tabPanel.addTab(id, () -> div);
               tabPanel.activate(tab);

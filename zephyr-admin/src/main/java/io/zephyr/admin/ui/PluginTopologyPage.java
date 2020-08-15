@@ -4,6 +4,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Article;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import io.zephyr.aire.MainView;
 import io.zephyr.aire.api.Decorate;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 @Decorate
 @Undecorate
 @Component
+@PageTitle("Zephyr Admin - Topology")
 @Route(value = "topology", layout = PluginManagementPage.class)
 public class PluginTopologyPage extends Article {
   private AireAsideDrawerMenu instance;

@@ -16,6 +16,12 @@ public class AireDesigner extends Div {
   static final PropertyDescriptor<String, String> ID =
       PropertyDescriptors.propertyWithDefault("id", "_unregistered");
 
+  static final PropertyDescriptor<Boolean, Boolean> CONNECTABLE =
+      PropertyDescriptors.propertyWithDefault("connectable", false);
+
+  static final PropertyDescriptor<Boolean, Boolean> GRID_ENABLED =
+      PropertyDescriptors.propertyWithDefault("gridEnabled", false);
+
   static final AtomicInteger generator = new AtomicInteger();
 
   final String id;
@@ -29,7 +35,19 @@ public class AireDesigner extends Div {
     this("designer-" + generator.incrementAndGet());
   }
 
+  public void setConnectable(boolean connectable) {
+    CONNECTABLE.set(this, connectable);
+  }
+
+  public boolean isConnectable() {
+    return CONNECTABLE.get(this);
+  }
+
   public String getDesignerId() {
     return id;
+  }
+
+  public void addGrid() {
+    GRID_ENABLED.set(this, !GRID_ENABLED.get(this));
   }
 }

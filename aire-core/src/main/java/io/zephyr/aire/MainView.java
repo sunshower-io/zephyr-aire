@@ -26,6 +26,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Route
+@PageTitle("Zephyr - Home")
 @Location("home")
 @Container(":main")
 @CssImport("./styles/aire/layout/aire-structure.css")
@@ -90,28 +91,25 @@ public class MainView extends AireApplicationViewport {
               val id = "Test " + count.incrementAndGet();
               val toolbar = new AireToolbar();
               val addGridButton = new AireToggleButton(AireIcon.icon("border-all"));
+              val setConnectableButton = new AireToggleButton(AireIcon.icon("arrows-alt-v"));
+              val designer = new AireDesigner(id);
+              setConnectableButton.addClickListener(
+                  click -> designer.setConnectable(!designer.isConnectable()));
+
+              addGridButton.addClickListener(
+                  click -> {
+                    designer.addGrid();
+                  });
+              toolbar.add(setConnectableButton);
               toolbar.add(addGridButton);
-
-              toolbar.add(new AireToggleButton(AireIcon.icon("drafting-compass")));
-              toolbar.add(new AireToggleButton(AireIcon.icon("layer-group")));
-
-              val group = new AireToolbarGroup();
-              group.add(new AireToggleButton(AireIcon.icon("seedling")));
-              group.add(new AireToggleButton(AireIcon.icon("heart")));
-              toolbar.add(group);
-
-              toolbar.add(new AireToggleButton(AireIcon.icon("drafting-compass")));
-              toolbar.add(new AireToggleButton(AireIcon.icon("layer-group")));
-
-              val group2 = new AireToolbarGroup();
-              group2.add(new AireToggleButton(AireIcon.icon("frog")));
-              group2.add(new AireToggleButton(AireIcon.icon("fire")));
-              toolbar.add(group2);
 
               val div = new Div();
               div.getClassNames().addAll(Set.of("expand", "flex"));
               div.add(toolbar);
-              div.add(new AireDesigner(id));
+              val designerParent = new Div();
+              designerParent.getClassNames().addAll(Set.of("expand", "flex"));
+              designerParent.add(designer);
+              div.add(designerParent);
 
               val tab = tabPanel.addTab(id, () -> div);
               tabPanel.activate(tab);

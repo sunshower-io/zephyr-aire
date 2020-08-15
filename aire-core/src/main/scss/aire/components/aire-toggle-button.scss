@@ -1,0 +1,26 @@
+@import "../layout/aire-layout-variables";
+
+.aire-toggle-button {
+  margin:0;
+  background-color: unset;
+  border-radius: unset;
+
+  svg {
+    color: $dark-gray-2;
+  }
+
+  &:hover {
+    svg {
+      color: $secondary-nav-background;
+    }
+  }
+
+  &:active, &:focus, &.active {
+    background-color: $secondary-nav-background;
+
+    svg {
+      color: $white;
+    }
+  }
+
+}

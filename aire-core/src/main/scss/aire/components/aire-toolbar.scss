@@ -18,13 +18,6 @@ aire-toolbar, .aire-toolbar {
     svg {
       color: $dark-gray-2;
     }
-
-    &:active, &:focus, &.active {
-      svg {
-        color: $primary-nav-background;
-      }
-    }
-
   }
 
   aire-toolbar-group {

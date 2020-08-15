@@ -89,23 +89,23 @@ public class MainView extends AireApplicationViewport {
             buttonClickEvent -> {
               val id = "Test " + count.incrementAndGet();
               val toolbar = new AireToolbar();
-              val addGridButton = new Button(AireIcon.icon("border-all"));
+              val addGridButton = new AireToggleButton(AireIcon.icon("border-all"));
               toolbar.add(addGridButton);
 
-              toolbar.add(new Button(AireIcon.icon("drafting-compass")));
-              toolbar.add(new Button(AireIcon.icon("layer-group")));
+              toolbar.add(new AireToggleButton(AireIcon.icon("drafting-compass")));
+              toolbar.add(new AireToggleButton(AireIcon.icon("layer-group")));
 
               val group = new AireToolbarGroup();
-              group.add(new Button(AireIcon.icon("seedling")));
-              group.add(new Button(AireIcon.icon("heart")));
+              group.add(new AireToggleButton(AireIcon.icon("seedling")));
+              group.add(new AireToggleButton(AireIcon.icon("heart")));
               toolbar.add(group);
 
-              toolbar.add(new Button(AireIcon.icon("drafting-compass")));
-              toolbar.add(new Button(AireIcon.icon("layer-group")));
+              toolbar.add(new AireToggleButton(AireIcon.icon("drafting-compass")));
+              toolbar.add(new AireToggleButton(AireIcon.icon("layer-group")));
 
               val group2 = new AireToolbarGroup();
-              group2.add(new Button(AireIcon.icon("frog")));
-              group2.add(new Button(AireIcon.icon("fire")));
+              group2.add(new AireToggleButton(AireIcon.icon("frog")));
+              group2.add(new AireToggleButton(AireIcon.icon("fire")));
               toolbar.add(group2);
 
               val div = new Div();

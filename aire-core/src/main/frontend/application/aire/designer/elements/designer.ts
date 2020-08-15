@@ -7,7 +7,7 @@ import {DefaultInnerGrid, DefaultOuterGrid} from "@aire/designer/ext/grid";
 import {mxEvent}                            from "mxgraph/javascript/mxClient";
 import {Disposable}                         from "@aire/designer/core/resize-events";
 import {registerEvent}                      from "@aire/core/events";
-import {dom}                                from "@aire/core/dom";
+import {createEvent, dom}                   from "@aire/core/dom";
 import siblings = dom.siblings;
 
 
@@ -34,17 +34,53 @@ class AireDesigner extends PolymerElement {
 
   static get properties() {
     return {
-      id          : String,
+
+      /**
+       * the context-unique identifier for this designer
+       */
+      id : String,
+
+      /**
+       * determine whether this graph allows connections between nodes
+       */
       connectable : {
         type     : Boolean,
         notify   : true,
         observer : 'onConnectableChanged'
       },
+
+
+      /**
+       * determine whether the grid is enabled
+       */
       gridEnabled : {
         type     : Boolean,
         notify   : true,
         observer : 'onGridEnabledChanged'
+      },
+
+
+      /**
+       * determine whether guides are enabled for this grid
+       */
+
+      guidesEnabled : {
+        type     : Boolean,
+        notify   : true,
+        observer : 'onGuidesEnabledChanged'
+      },
+
+      /**
+       * determine whether nodes are snapped to this grid
+       */
+
+      gridSnapEnabled : {
+        type     : Boolean,
+        notify   : true,
+        observer : 'onGridSnapEnabledChanged'
       }
+
+
     };
   }
 
@@ -91,21 +127,39 @@ class AireDesigner extends PolymerElement {
       designer = this.designer;
     mxEvent.disableContextMenu(this);
 
-    this.designer = !!designer ?
-                    new Designer(id, this, designer.getModel()) :
-                    new Designer(id, this);
+    designer = !!designer ?
+               new Designer(id, this, designer.getModel()) :
+               new Designer(id, this);
+
+    this.registerEvents(designer);
+    this.designer = designer;
     super.ready();
+  }
+
+
+  private registerEvents(designer : Designer) : void {
+    designer.model.addListener(mxEvent.CHANGE, (sender, event) => {
+      let evt = createEvent('model-changed', {});
+      this.dispatchEvent(evt);
+    });
   }
 
   /**
    * various handlers for implementing toolbars, etc.
    */
 
+  private onGuidesEnabledChanged(newValue : boolean, oldValue : boolean) : void {
+    this.designer.setGuidesEnabled(newValue);
+  }
+
+  private onGridSnapEnabledChanged(newValue : boolean, oldValue : boolean) : void {
+    this.designer.setSnapEnabled(newValue);
+  }
+
   private onGridEnabledChanged(newValue : boolean, oldValue : boolean) : void {
     let graph = this.designer;
     if (newValue) {
       graph.addGrids(DefaultInnerGrid, DefaultOuterGrid);
-      this.designer.setSnapEnabled(true);
     } else {
       graph.removeGrids(DefaultInnerGrid, DefaultOuterGrid);
     }

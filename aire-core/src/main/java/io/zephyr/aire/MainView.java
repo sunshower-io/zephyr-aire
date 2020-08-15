@@ -96,10 +96,21 @@ public class MainView extends AireApplicationViewport {
 
               addGridButton.addClickListener(
                   click -> {
-                    designer.addGrid();
+                    designer.setGridEnabled(!designer.isGridEnabled());
                   });
+
+              val setGuidesEnabledButton = new AireToggleButton(AireIcon.icon("ruler"));
+              setGuidesEnabledButton.addClickListener(
+                  click -> designer.setGuidesEnabled(!designer.isGuidesEnabled()));
+
+              val setGridSnapEnabledButton = new AireToggleButton(AireIcon.icon("border-style"));
+              setGridSnapEnabledButton.addClickListener(
+                  click -> designer.setGridSnapEnabled(!designer.isGridSnapEnabled()));
+
               toolbar.add(setConnectableButton);
               toolbar.add(addGridButton);
+              toolbar.add(setGuidesEnabledButton);
+              toolbar.add(setGridSnapEnabledButton);
 
               val div = new Div();
               div.getClassNames().addAll(Set.of("expand", "flex"));
@@ -107,6 +118,13 @@ public class MainView extends AireApplicationViewport {
               div.add(designer);
 
               val tab = tabPanel.addTab(id, () -> div);
+
+              designer.addModelChangedListener(
+                  changed -> {
+                    tab.setLabel(tab.getLabel() + " *");
+                    tab.getClassNames().addAll(Set.of("bold", "underline"));
+                  });
+
               tabPanel.activate(tab);
             });
 

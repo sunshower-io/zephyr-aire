@@ -104,7 +104,7 @@ public class ModuleInfoPane extends Composite<Article>
     val startButton = createButton(buttons, "play", ModuleLifecycle.Actions.Activate);
     group.add(startButton);
     startButton.addClassName("success");
-    val removeButton = createButton(buttons, "minus-octagon", ModuleLifecycle.Actions.Activate);
+    val removeButton = createButton(buttons, "exclamation-circle", ModuleLifecycle.Actions.Activate);
     removeButton.addClassName("error");
     group.add(removeButton);
 

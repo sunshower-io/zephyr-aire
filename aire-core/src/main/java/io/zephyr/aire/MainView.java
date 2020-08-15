@@ -90,8 +90,8 @@ public class MainView extends AireApplicationViewport {
             buttonClickEvent -> {
               val id = "Test " + count.incrementAndGet();
               val toolbar = new AireToolbar();
-              val addGridButton = new Button(AireIcon.icon("border-all"));
-              val setConnectableButton = new Button(AireIcon.icon("arrows-alt-v"));
+              val addGridButton = new AireToggleButton(AireIcon.icon("border-all"));
+              val setConnectableButton = new AireToggleButton(AireIcon.icon("arrows-alt-v"));
               val designer = new AireDesigner(id);
               setConnectableButton.addClickListener(
                   click -> designer.setConnectable(!designer.isConnectable()));

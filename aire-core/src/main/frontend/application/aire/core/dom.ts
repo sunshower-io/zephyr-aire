@@ -16,6 +16,40 @@ export namespace dom {
     return document.querySelector(s);
   }
 
+  export module siblings {
+
+    export function reducePrevious<T>(el : Element, i : T, f : (sib : Element, aggregate : T) => T) : T {
+      let t : T = i;
+      for (let psib = el.previousElementSibling; psib; psib = psib.previousElementSibling) {
+        t = f(psib, t);
+      }
+      return t;
+    }
+
+    export function reduceNext<T>(el : Element, i : T, f : (sib : Element, aggregate : T) => T) : T {
+      let t : T = i;
+      for (let nsib = el.nextElementSibling; nsib; nsib = nsib.nextElementSibling) {
+        t = f(nsib, t);
+      }
+      return t;
+    }
+
+    export function previous(el : Element) : Element[] {
+      return reducePrevious(el, [], (e : Element, t : Element[]) => {
+        t.push(e);
+        return t;
+      });
+    }
+
+    export function next(el : Element) : Element[] {
+      return reduceNext(el, [], (e : Element, t : Element[]) => {
+        t.push(e);
+        return t;
+      });
+    }
+  }
+
+
   export function isAncestor(test : Element, target : Element) {
     if (test === target) {
       return true;

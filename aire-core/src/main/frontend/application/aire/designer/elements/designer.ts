@@ -4,11 +4,11 @@ import {Designer}                           from "@aire/designer/core/designer";
 import Inject                               from "@aire/inject/inject";
 import {DesignerManager}                    from "@aire/designer/core/designer-manager";
 import {DefaultInnerGrid, DefaultOuterGrid} from "@aire/designer/ext/grid";
-import {ExtendingDesigner}                  from "@aire/designer/core/ext/extending-designer";
 import {mxEvent}                            from "mxgraph/javascript/mxClient";
 import {Disposable}                         from "@aire/designer/core/resize-events";
-import {debounce}                           from "@aire/core/lang";
 import {registerEvent}                      from "@aire/core/events";
+import {dom}                                from "@aire/core/dom";
+import siblings = dom.siblings;
 
 
 class AireDesigner extends PolymerElement {
@@ -114,9 +114,26 @@ class AireDesigner extends PolymerElement {
     this.designer.setConnectable(newValue);
   }
 
+
+  /**
+   * mxGraph doesn't play super well with non-absolute positioning or without specifying sizes for the
+   * graph container, so we go through all the predecessors and successors of this DOM node, sum their heights/widths
+   * and set the top/bottom/left/right css properties
+   * @private
+   */
   private updateSize() : void {
+    let hsum = (sib : HTMLElement, i : [number, number]) => {
+        let [h, w] = i;
+        console.log(sib, sib.offsetWidth);
+        return [h + sib.offsetHeight, w + sib.offsetWidth];
+      },
 
-
+      //todo: this works for flex-orientation: column but not for row yet
+      [pheights,] =
+        siblings.reducePrevious(this, [0, 0], hsum),
+      [nheights,] = siblings.reduceNext(this, [0, 0], hsum);
+    this.style.top = pheights + 'px';
+    this.style.bottom = nheights + 'px';
   }
 
 }

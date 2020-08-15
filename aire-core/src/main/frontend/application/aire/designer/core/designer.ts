@@ -33,21 +33,23 @@ export class Designer extends mxGraph implements Disposable {
     model? : mxGraphModel
   ) {
     super(target, model);
-    // this.panningHandler.ignoreCell = true;
-    // this.panningHandler.previewEnabled = true;
     new mxRubberband(this);
     this.setPanning(true);
+    this.setResizeContainer(false);
     this.panningHandler.useLeftButtonForPanning = false;
-
-    console.log("SUP");
   }
 
+
+  /**
+   * clean up resources
+   */
 
   public dispose() {
     if (this.gridResizeEventRegistration) {
       this.gridResizeEventRegistration.dispose();
     }
   }
+
 
   public get grids() : Grid[] {
     return this._grids = this._grids || [];

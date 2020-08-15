@@ -106,10 +106,7 @@ public class MainView extends AireApplicationViewport {
               val div = new Div();
               div.getClassNames().addAll(Set.of("expand", "flex"));
               div.add(toolbar);
-              val designerParent = new Div();
-              designerParent.getClassNames().addAll(Set.of("expand", "flex"));
-              designerParent.add(designer);
-              div.add(designerParent);
+              div.add(designer);
 
               val tab = tabPanel.addTab(id, () -> div);
               tabPanel.activate(tab);

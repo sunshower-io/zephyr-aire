@@ -261,6 +261,8 @@ declare module "mxgraph/javascript/mxClient" {
     setCellStyles(key : string, value : string, cells? : mxCell[]) : void;
 
     createEdge(parent : mxCell, id : string, value : any, source : mxCell, target : mxCell) : mxCell;
+    setResizeContainer(resize: boolean) : void;
+    isResizeContainer() : boolean;
 
 
     getPageView() : mxRectangle;

@@ -119,9 +119,16 @@ public class MainView extends AireApplicationViewport {
 
               val tab = tabPanel.addTab(id, () -> div);
 
+              val saveButton = new AireToggleButton(AireIcon.icon("save"));
+              saveButton.addClickListener(click -> {
+              });
+              toolbar.add(saveButton);
+
               designer.addModelChangedListener(
                   changed -> {
-                    tab.setLabel(tab.getLabel() + " *");
+                    if (!tab.getLabel().contains("*")) {
+                      tab.setLabel(tab.getLabel() + " *");
+                    }
                     tab.getClassNames().addAll(Set.of("bold", "underline"));
                   });
 

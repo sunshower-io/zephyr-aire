@@ -1,15 +1,18 @@
-import {PolymerElement}                     from "@polymer/polymer/polymer-element";
-import {StampedTemplate}                    from "@polymer/polymer/interfaces";
-import {Designer}                           from "@aire/designer/core/designer";
-import Inject                               from "@aire/inject/inject";
-import {DesignerManager}                    from "@aire/designer/core/designer-manager";
-import {DefaultInnerGrid, DefaultOuterGrid} from "@aire/designer/ext/grid";
-import {mxEvent}                            from "mxgraph/javascript/mxClient";
-import {Disposable}                         from "@aire/designer/core/resize-events";
-import {registerEvent}                      from "@aire/core/events";
-import {createEvent, dom}                   from "@aire/core/dom";
+import {PolymerElement}                          from "@polymer/polymer/polymer-element";
+import {StampedTemplate}                         from "@polymer/polymer/interfaces";
+import {Designer}                                from "@aire/designer/core/designer";
+import Inject                                    from "@aire/inject/inject";
+import {DesignerManager}                         from "@aire/designer/core/designer-manager";
+import {DefaultInnerGrid, DefaultOuterGrid}      from "@aire/designer/ext/grid";
+import {mxEvent, mxGraphModel, mxCodec, mxUtils} from "mxgraph/javascript/mxClient";
+import {Disposable}                              from "@aire/designer/core/resize-events";
+import {registerEvent}                           from "@aire/core/events";
+import {createEvent, dom}                        from "@aire/core/dom";
 import siblings = dom.siblings;
 
+class Model extends mxGraphModel {
+
+}
 
 class AireDesigner extends PolymerElement {
 
@@ -35,10 +38,18 @@ class AireDesigner extends PolymerElement {
   static get properties() {
     return {
 
+
       /**
        * the context-unique identifier for this designer
        */
       id : String,
+
+
+      model : {
+        type     : Model,
+        notify   : true,
+        observer : 'onDesignerModelChanged'
+      },
 
       /**
        * determine whether this graph allows connections between nodes
@@ -85,6 +96,12 @@ class AireDesigner extends PolymerElement {
   }
 
 
+  public set designerModel(model : mxGraphModel) {
+    this.designer.model = model;
+    (this as any).model = model;
+  }
+
+
   public get designer() : Designer {
     return this.designerManager.focus(this.id);
   }
@@ -94,7 +111,10 @@ class AireDesigner extends PolymerElement {
     this.graph = designer;
     dm.register(designer);
     dm.focus(this.id);
+    this.designerModel = designer.model;
   }
+
+
 
   _attachDom(dom : StampedTemplate | null) : ShadowRoot | null {
     document.body.append(dom as any);
@@ -138,8 +158,11 @@ class AireDesigner extends PolymerElement {
 
 
   private registerEvents(designer : Designer) : void {
+
     designer.model.addListener(mxEvent.CHANGE, (sender, event) => {
-      let evt = createEvent('model-changed', {});
+      let evt = createEvent('model-changed', {}),
+        self = this as any;
+      self.designerModel = designer.model;
       this.dispatchEvent(evt);
     });
   }
@@ -147,6 +170,21 @@ class AireDesigner extends PolymerElement {
   /**
    * various handlers for implementing toolbars, etc.
    */
+
+  onDesignerModelChanged(newValue : mxGraphModel, oldValue : mxGraphModel) : void {
+    (this as any).$server.setModel(this.writeModel(newValue));
+    this.designerModel = newValue;
+  }
+
+  private writeModel(model : mxGraphModel) : string {
+    let encoder = new mxCodec(),
+      node = encoder.encode(model),
+      root = mxUtils.getXml(node),
+      result = new XMLSerializer().serializeToString(node);
+    return result;
+  }
+
+
 
   private onGuidesEnabledChanged(newValue : boolean, oldValue : boolean) : void {
     this.designer.setGuidesEnabled(newValue);

@@ -1,6 +1,7 @@
 /// <reference path="./geometry.d.ts" />
 /// <reference path="./graph.d.ts" />
 /// <reference path="./cell.d.ts" />
+/// <reference path="./codec.d.ts" />
 /// <reference path="./utils.d.ts" />
 /// <reference path="./constants.d.ts" />
 declare module "mxgraph/javascript/mxClient" {

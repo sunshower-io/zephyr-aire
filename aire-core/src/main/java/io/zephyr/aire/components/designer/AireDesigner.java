@@ -35,6 +35,7 @@ public class AireDesigner extends Div {
   static final AtomicInteger generator = new AtomicInteger();
 
   final String id;
+  private String model;
 
   public AireDesigner(String id) {
     this.id = id;
@@ -83,6 +84,17 @@ public class AireDesigner extends Div {
 
   public void setGridSnapEnabled(boolean snapEnabled) {
     GRID_SNAP_ENABLED.set(this, snapEnabled);
+  }
+
+  @ClientCallable
+  private String getModel() {
+    return this.model;
+  }
+
+  @ClientCallable
+  private void setModel(String model) {
+    System.out.println(this.model);
+    this.model = model;
   }
 
   /** listeners */

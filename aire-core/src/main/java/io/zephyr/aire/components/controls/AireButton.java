@@ -20,6 +20,7 @@ public class AireButton extends Composite<Button> {
     getContent().setIcon(image);
   }
 
+
   public AireButton(Icon icon) {
     this();
     getContent().setIcon(icon);

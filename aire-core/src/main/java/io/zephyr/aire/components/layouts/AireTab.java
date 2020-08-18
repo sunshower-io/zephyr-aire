@@ -2,10 +2,11 @@ package io.zephyr.aire.components.layouts;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.tabs.Tab;
+import io.zephyr.aire.components.controls.HasTooltip;
 
 import java.util.Objects;
 
-public class AireTab extends Tab {
+public class AireTab extends Tab implements HasTooltip {
 
   public enum TabPlacement {
     /** place a tab after all tabs with a lower placement */

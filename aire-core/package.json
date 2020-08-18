@@ -48,9 +48,9 @@
     "simple-button": "github:SimpleElements/simple-button",
     "@vaadin/vaadin-date-time-picker": "1.1.0",
     "@vaadin/router": "1.7.2",
+    "reflect-metadata": "0.1.13",
     "lit-element": "^2.3.1",
-    "tsyringe": "4.3.0",
-    "reflect-metadata": "0.1.13"
+    "tsyringe": "4.3.0"
   },
   "devDependencies": {
     "awesome-typescript-loader": "5.2.1",

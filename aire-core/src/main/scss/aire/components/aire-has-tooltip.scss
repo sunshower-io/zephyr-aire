@@ -1,0 +1,7 @@
+.aire-has-tooltip {
+  position: relative;
+
+  &:hover aire-tooltip {
+    display: block;
+  }
+}

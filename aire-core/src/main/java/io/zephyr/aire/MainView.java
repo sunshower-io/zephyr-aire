@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Location("home")
 @Container(":main")
 @CssImport("./styles/aire/layout/aire-structure.css")
-@Uses(AireButton.class)
+@Uses(AireToggleButton.class)
 @Uses(AireCallToAction.class)
 @Uses(AireFooter.class)
 @Uses(AireHeader.class)
@@ -80,7 +80,7 @@ public class MainView extends AireApplicationViewport {
     val tabPanel = new AireTabPane();
 
     tabPanel.setTabPlacement(AireTabPane.TabPanelPlacement.BOTTOM);
-    val button = new Button(new Icon(VaadinIcon.PLUS));
+    val button = new AireButton(new Icon(VaadinIcon.PLUS));
     val buttonTab = new AireTab(AireTab.TabPlacement.END, button);
     val count = new AtomicInteger();
     button.addClickListener(
@@ -89,6 +89,7 @@ public class MainView extends AireApplicationViewport {
               val id = "Test " + count.incrementAndGet();
               val toolbar = new AireToolbar();
               val addGridButton = new AireToggleButton(AireIcon.icon("border-all"));
+              addGridButton.addTooltip(new AireTooltip("Toggle background grid on and off"));
               val setConnectableButton = new AireToggleButton(AireIcon.icon("arrows-alt-v"));
               val designer = new AireDesigner(id);
               setConnectableButton.addClickListener(

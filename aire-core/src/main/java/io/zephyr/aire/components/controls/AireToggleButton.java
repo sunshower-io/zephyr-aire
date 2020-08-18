@@ -8,7 +8,7 @@ import io.zephyr.aire.components.layouts.AireUtilities;
 import lombok.val;
 
 @CssImport("./styles/aire/components/aire-toggle-button.css")
-public class AireToggleButton extends Button {
+public class AireToggleButton extends Button implements HasTooltip {
 
     static final String CLASS_NAME = "aire-toggle-button";
 
@@ -25,4 +25,13 @@ public class AireToggleButton extends Button {
         AireUtilities.toggleClass(button, ACTIVE_CLASS_NAME);
     }
 
+    @Override
+    public void removeAll() {
+        super.removeAll();
+    }
+
+    @Override
+    public void remove(Component... components) {
+        super.remove(components);
+    }
 }

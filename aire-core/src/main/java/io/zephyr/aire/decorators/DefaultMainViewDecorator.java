@@ -22,7 +22,6 @@ public class DefaultMainViewDecorator {
     component.getFooter().add(button);
 
     button
-        .getContent()
         .addClickListener(
             t -> {
               UI.getCurrent().navigate("plugins");

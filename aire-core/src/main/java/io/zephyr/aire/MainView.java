@@ -66,15 +66,6 @@ public class MainView extends AireApplicationViewport {
     getHeader().add(button);
   }
 
-  public static class TestDesigner extends AbstractAireContainer<Article> {
-    public TestDesigner() {
-      getElement().getClassList().add("expand");
-
-      val designer = new AireDesigner();
-      add(designer);
-    }
-  }
-
   private void checkDefaults() {
 
     val tabPanel = new AireTabPane();
@@ -120,8 +111,7 @@ public class MainView extends AireApplicationViewport {
               val tab = tabPanel.addTab(id, () -> div);
 
               val saveButton = new AireToggleButton(AireIcon.icon("save"));
-              saveButton.addClickListener(click -> {
-              });
+              saveButton.addClickListener(click -> {});
               toolbar.add(saveButton);
 
               designer.addModelChangedListener(
@@ -151,6 +141,8 @@ public class MainView extends AireApplicationViewport {
 
     addContent(tabPanel);
 
+    tabPanel.add(new AireBeanForm<>(Test.class));
+
     //
     //      palette.addEventListener()
     //    addContent(new AireDesigner());
@@ -158,5 +150,14 @@ public class MainView extends AireApplicationViewport {
     // installed
     //    //      addContent(new UploadPluginCallToAction(kernel));
     //    //    }
+  }
+
+  public static class Test {
+    @AireBeanForm.FormField(
+        options = AireBeanForm.Text.Email.class,
+        validation = @AireBeanForm.FieldValidation(type = AireBeanForm.Validations.REGEXP, value = "*"))
+    private String whatever;
+
+    private boolean coolbean;
   }
 }

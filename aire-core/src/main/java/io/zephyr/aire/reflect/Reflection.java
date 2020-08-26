@@ -316,6 +316,16 @@ public class Reflection {
         && SETTER_PREFIX.matcher(m.getName()).find();
   }
 
+  @SuppressWarnings("unchecked")
+  public static <T, U> U fieldValue(String fieldName, Class<T> type, T instance) {
+    try {
+      val field = type.getDeclaredField(fieldName);
+      return (U) field.get(instance);
+    } catch (Exception ex) {
+      throw new RuntimeException(ex);
+    }
+  }
+
   static class UnreconciledPropertyDescriptor {
 
     private String alias;

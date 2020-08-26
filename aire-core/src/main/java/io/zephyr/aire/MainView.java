@@ -141,6 +141,10 @@ public class MainView extends AireApplicationViewport {
 
     addContent(tabPanel);
 
+
+    val form = new AireBeanForm<Test>(Test.class);
+
+    val reg = form.addOnDirtyListener();
     tabPanel.add(new AireBeanForm<>(Test.class));
 
     //

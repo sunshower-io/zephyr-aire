@@ -1,5 +1,8 @@
 @import "../layout/aire-layout-variables";
 
+$button-width: $secondary-nav-width;
+$nav-height: calc(#{$button-width - 2px});
+
 aire-aside, .aire-aside {
   position: relative;
 
@@ -12,7 +15,7 @@ aire-aside, .aire-aside {
 
   & > section {
     position: absolute;
-    right: 40px;
+    right: $button-width;
     height: 100%;
     width: 360px;
     background-color: $white;
@@ -91,13 +94,15 @@ aire-aside, .aire-aside {
 
     nav, .aire-nav {
       [role=button] {
-        height: calc(#{$secondary-nav-width - 2px});
-        max-height: calc(#{$secondary-nav-width - 2px});
+        height: $nav-height;
+        max-height: $nav-height;
+        width: $button-width;
+        max-width: $button-width;
       }
 
       width: 100%;
       background-color: $white;
-      height: calc(#{$secondary-nav-width - 2px});
+      height: $nav-height;
       border-bottom: 1px solid $lightest-purple;
     }
   }

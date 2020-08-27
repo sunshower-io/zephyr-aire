@@ -98,6 +98,16 @@ public class Reflection {
     callback.onTraversalComplete();
   }
 
+  public static <T> T instantiate(Class<T> type) {
+    try {
+    val ctor = type.getDeclaredConstructor();
+    return ctor.newInstance();
+    } catch(Exception ex) {
+      throw new RuntimeException(ex); //todo @josiah make not suck
+    }
+
+  }
+
   public static <T> void traverseProperties(
       Class<?> startClass,
       Class<?> stopClass,

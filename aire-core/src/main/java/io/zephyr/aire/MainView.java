@@ -10,6 +10,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.*;
 import io.zephyr.aire.api.Container;
 import io.zephyr.aire.api.Location;
+import io.zephyr.aire.components.AireSize;
 import io.zephyr.aire.components.controls.*;
 import io.zephyr.aire.components.layouts.*;
 import io.zephyr.aire.components.designer.AireDesigner;
@@ -162,6 +163,19 @@ public class MainView extends AireApplicationViewport {
         validation = @AireBeanForm.FieldValidation(type = AireBeanForm.Validations.REGEXP, value = "*"))
     private String whatever;
 
+    @AireBeanForm.FormField
     private boolean coolbean;
+
+    @AireBeanForm.FormField(name="SubTest")
+    private SubTest sub;
+
+    public static class SubTest {
+
+        @AireBeanForm.FormField
+        private int myNumber;
+
+        @AireBeanForm.FormField
+        private AireSize size;
+    }
   }
 }

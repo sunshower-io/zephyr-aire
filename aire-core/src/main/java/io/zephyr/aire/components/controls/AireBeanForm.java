@@ -1,12 +1,11 @@
 package io.zephyr.aire.components.controls;
 
-import com.vaadin.flow.component.BlurNotifier;
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.ComponentEvent;
-import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.select.Select;
@@ -24,11 +23,14 @@ import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 import java.util.Date;
 
+@CssImport("./styles/aire/components/aire-bean-form.css")
 public class AireBeanForm<T> extends VerticalLayout {
 
   private T instance;
   private final Class<T> type;
-  private boolean root = true;
+  private int level = 0;
+
+  static final String CLASS_NAME = "aire-bean-form";
 
   public interface FieldType {}
 
@@ -42,7 +44,6 @@ public class AireBeanForm<T> extends VerticalLayout {
 
   public static final class Options implements FieldType {
     public static final class RadioButtons implements FieldType {}
-    public static final class Checkboxes implements FieldType {}
     public static final class Select implements FieldType {}
   }
 
@@ -54,6 +55,8 @@ public class AireBeanForm<T> extends VerticalLayout {
     Class<? extends FieldType> options() default Defaults.class;
 
     FieldValidation[] validation() default {};
+
+    String name() default "";
   }
 
   public enum Validations {
@@ -69,23 +72,24 @@ public class AireBeanForm<T> extends VerticalLayout {
   }
 
   public AireBeanForm(Class<T> type) {
-    this(type, null, true);
+    this(type, null, 0);
   }
 
   public AireBeanForm(Class<T> type, T instance) {
-    this(type, instance, true);
+    this(type, instance, 0);
   }
 
-  private AireBeanForm(Class<T> type, T instance, boolean root) {
+  private AireBeanForm(Class<T> type, T instance, int level) {
     this.type = type;
-    this.root = root;
+    this.level = level;
     this.instance = instance;
+    this.setSpacing(false);
+    this.addClassName(CLASS_NAME);
     doLayout();
   }
 
   @SuppressWarnings({"unchecked", "rawtypes"})
   protected void doLayout() {
-
     for (val field : type.getDeclaredFields()) {
       try {
         val fieldType = field.getType();
@@ -107,35 +111,58 @@ public class AireBeanForm<T> extends VerticalLayout {
         } else if (Boolean.class.isAssignableFrom(fieldType) || boolean.class.isAssignableFrom(fieldType)) {
           addField(field, Checkbox.class, fieldType);
         } else if (Number.class.isAssignableFrom(fieldType) || int.class.isAssignableFrom(fieldType)) {
-          addField(field, NumberField.class, fieldType);
+          val numField = new NumberField();
+          numField.setLabel(getFieldName(field));
+          add(numField);
+
+          //TODO fix
+//          addField(field, NumberField.class, fieldType);
         } else if (Date.class.isAssignableFrom(fieldType)) {
           addField(field, DatePicker.class, fieldType);
         } else if (Enum.class.isAssignableFrom(fieldType)) {
           val values = fieldType.getEnumConstants();
           if (option.isAssignableFrom(AireBeanForm.Options.Select.class)) {
-              val select = new Select<>();
-              select.setLabel(getFieldName(field));
-              select.setItemLabelGenerator(Object::toString);
-              select.setItems(values);
-              if (instance != null) {
-                select.setValue(getFieldValue(field).toString());
-              }
-              add(select);
+            val select = new Select<>();
+            select.setLabel(getFieldName(field));
+            select.setItemLabelGenerator(Object::toString);
+            select.setItems(values);
+            if (instance != null) {
+              select.setValue(getFieldValue(field).toString());
+            }
+            add(select);
           } else {
-              val group = new RadioButtonGroup<>();
-              group.setLabel(getFieldName(field));
-              group.setItems(values);
-              group.setRenderer(new TextRenderer<>(Object::toString));
+            val group = new RadioButtonGroup<>();
+            group.setLabel(getFieldName(field));
+            group.setItems(values);
+            group.setRenderer(new TextRenderer<>(Object::toString));
             if (instance != null) {
               group.setValue(getFieldValue(field).toString());
             }
-              add(group);
+            add(group);
           }
         } else {
-          if (instance != null) {
-            add(new AireBeanForm(field.getType(), getFieldValue(field), false));
+          HtmlContainer header;
+          if (level == 0) {
+            header = new H1();
+          } else if (level == 1) {
+            header = new H2();
+          } else if (level == 2) {
+            header = new H3();
+          } else if (level == 3) {
+            header = new H4();
+          } else if (level == 4) {
+            header = new H5();
           } else {
-            add(new AireBeanForm<>(field.getClass(), null, false));
+            header = new H6();
+          }
+
+          header.setText(getFieldName(field));
+          add(header);
+
+          if (instance != null) {
+            add(new AireBeanForm(field.getType(), getFieldValue(field), level + 1));
+          } else {
+            add(new AireBeanForm<>(field.getType(), null, level + 1));
           }
         }
 
@@ -144,11 +171,14 @@ public class AireBeanForm<T> extends VerticalLayout {
       }
 
     }
-    if (root) {
-      val save = new Button("Save " + type.getName());
-      add(save);
+    if (level == 0) {
+      val buttonGroup = new Div();
+      buttonGroup.addClassName("aire-button-group");
+      val save = new Button("Save");
       val cancel = new Button("Cancel");
-      add(cancel);
+      buttonGroup.add(save);
+      buttonGroup.add(cancel);
+      add(buttonGroup);
     }
   }
 
@@ -160,26 +190,33 @@ public class AireBeanForm<T> extends VerticalLayout {
     }
   }
 
+  //TODO refactor this into internationalized awesomeness
   protected String getFieldName(Field field) {
-    return field.getName();
+    val annotation = field.getAnnotation(AireBeanForm.FormField.class);
+    if (annotation.name().equals("")) {
+      return field.getName();
+    } else {
+      return annotation.name();
+    }
+
   }
 
   protected <U extends Component, V> void addField(Field field, Class<U> fieldType, Class<V> valueType) {
     try {
-    val formField = Reflection.instantiate(fieldType);
+      val formField = Reflection.instantiate(fieldType);
 
-    val setLabel = fieldType.getDeclaredMethod("setLabel", String.class);
-    setLabel.invoke(formField, getFieldName(field));
+      val setLabel = fieldType.getDeclaredMethod("setLabel", String.class);
+      setLabel.invoke(formField, getFieldName(field));
 
-    val addBlurListener = fieldType.getDeclaredMethod("addBlurListener", ComponentEventListener.class);
-    addBlurListener.invoke(formField, new InternalTextFieldBlurListener(getFieldName(field)));
+//      val addBlurListener = fieldType.getDeclaredMethod("addBlurListener", ComponentEventListener.class);
+//      addBlurListener.invoke(formField, new InternalTextFieldBlurListener(getFieldName(field)));
 
-    if (instance != null) {
-      val setValue = fieldType.getDeclaredMethod("setValue", valueType);
-      setValue.invoke(formField, getFieldValue(field));
-    }
+      if (instance != null) {
+        val setValue = fieldType.getDeclaredMethod("setValue", valueType);
+        setValue.invoke(formField, getFieldValue(field));
+      }
 
-    add(formField);
+      add(formField);
     } catch(Exception ex) {
       //TODO handle
     }
@@ -187,7 +224,7 @@ public class AireBeanForm<T> extends VerticalLayout {
 
 
   public <T, U> Registration addOnDirtyListener(
-      ComponentEventListener<ComponentEvent<AireBeanForm<T>>> listener) {
+          ComponentEventListener<ComponentEvent<AireBeanForm<T>>> listener) {
     //    return addListener(OnDirtyEvent.class,  listener);
     return null;
   }
@@ -207,7 +244,7 @@ public class AireBeanForm<T> extends VerticalLayout {
   }
 
   class InternalTextFieldBlurListener
-      implements ComponentEventListener<BlurNotifier.BlurEvent<TextField>> {
+          implements ComponentEventListener<BlurNotifier.BlurEvent<TextField>> {
 
     final String fieldName;
 
@@ -218,11 +255,11 @@ public class AireBeanForm<T> extends VerticalLayout {
     @Override
     public void onComponentEvent(BlurNotifier.BlurEvent<TextField> textFieldBlurEvent) {
       dispatch(
-          new OnDirtyEvent<>(
-              AireBeanForm.this,
-              fieldName,
-              getFieldValue(fieldName),
-              textFieldBlurEvent.getSource().getValue()));
+              new OnDirtyEvent<>(
+                      AireBeanForm.this,
+                      fieldName,
+                      getFieldValue(fieldName),
+                      textFieldBlurEvent.getSource().getValue()));
     }
 
     private <T, U> void dispatch(OnDirtyEvent<T, U> event) {

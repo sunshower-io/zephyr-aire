@@ -30,7 +30,7 @@ public class AireBeanForm<T> extends VerticalLayout {
   private final Class<T> type;
   private int level = 0;
 
-  static final String CLASS_NAME = "aire-bean-form";
+  private static final String CLASS_NAME = "aire-bean-form";
 
   public interface FieldType {}
 
@@ -56,7 +56,8 @@ public class AireBeanForm<T> extends VerticalLayout {
 
     FieldValidation[] validation() default {};
 
-    String name() default "";
+    FieldName name() default @FieldName;
+
   }
 
   public enum Validations {
@@ -71,6 +72,17 @@ public class AireBeanForm<T> extends VerticalLayout {
     String value() default "_NONE_";
   }
 
+  public enum NamePolicies {
+    TRANSLATION,
+    STRING
+  }
+
+  public @interface FieldName {
+    NamePolicies type() default NamePolicies.STRING;
+
+    String value() default "";
+  }
+
   public AireBeanForm(Class<T> type) {
     this(type, null, 0);
   }
@@ -83,6 +95,7 @@ public class AireBeanForm<T> extends VerticalLayout {
     this.type = type;
     this.level = level;
     this.instance = instance;
+    this.setPadding(this.level == 0);
     this.setSpacing(false);
     this.addClassName(CLASS_NAME);
     doLayout();
@@ -190,15 +203,19 @@ public class AireBeanForm<T> extends VerticalLayout {
     }
   }
 
-  //TODO refactor this into internationalized awesomeness
   protected String getFieldName(Field field) {
     val annotation = field.getAnnotation(AireBeanForm.FormField.class);
-    if (annotation.name().equals("")) {
+    val name = annotation.name();
+
+    if (name.value().equals("")) {
       return field.getName();
     } else {
-      return annotation.name();
+      if (name.type().equals(NamePolicies.STRING)) {
+        return name.value();
+      } else {
+        return getTranslation(name.value());
+      }
     }
-
   }
 
   protected <U extends Component, V> void addField(Field field, Class<U> fieldType, Class<V> valueType) {

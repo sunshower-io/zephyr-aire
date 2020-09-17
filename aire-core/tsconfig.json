@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-
     "sourceMap": true,
     "inlineSources": true,
     "module": "esNext",
@@ -17,7 +16,9 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "paths": {
-      "@aire/*": ["src/main/frontend/application/aire/*"]
+      "@aire/*": [
+        "src/main/frontend/application/aire/*"
+      ]
     },
     "typeRoots": [
       "node_modules/@types",
@@ -40,10 +41,12 @@
     "build"
   ],
   "awesomeTypescriptLoaderOptions": {
-    "ignoreDiagnostics": [6196]
+    "ignoreDiagnostics": [
+      6196
+    ]
   },
   "include": [
     "./src/main/frontend/application/**/*.ts"
-//    "frontend/**/*.ts", "frontend/index.js"
+    //    "frontend/**/*.ts", "frontend/index.js"
   ]
 }

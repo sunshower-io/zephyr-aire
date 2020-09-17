@@ -10,6 +10,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.*;
 import io.zephyr.aire.api.Container;
 import io.zephyr.aire.api.Location;
+import io.zephyr.aire.components.AireSize;
 import io.zephyr.aire.components.controls.*;
 import io.zephyr.aire.components.layouts.*;
 import io.zephyr.aire.components.designer.AireDesigner;
@@ -142,10 +143,10 @@ public class MainView extends AireApplicationViewport {
     addContent(tabPanel);
 
 
-    val form = new AireBeanForm<Test>(Test.class);
+//    val form = new AireBeanForm<Test>(Test.class);
 
 //    val reg = form.addOnDirtyListener();
-    tabPanel.add(new AireBeanForm<>(Test.class));
+//    tabPanel.add(form);
 
     //
     //      palette.addEventListener()
@@ -156,12 +157,25 @@ public class MainView extends AireApplicationViewport {
     //    //    }
   }
 
-  public static class Test {
-    @AireBeanForm.FormField(
-        options = AireBeanForm.Text.Email.class,
-        validation = @AireBeanForm.FieldValidation(type = AireBeanForm.Validations.REGEXP, value = "*"))
-    private String whatever;
+    public static class Test {
+        @AireBeanForm.FormField(
+                options = AireBeanForm.Text.Email.class,
+                validation = @AireBeanForm.FieldValidation(type = AireBeanForm.Validations.REGEXP, value = "*"))
+        private String whatever;
 
-    private boolean coolbean;
-  }
+        @AireBeanForm.FormField
+        private boolean coolbean;
+
+        @AireBeanForm.FormField(name=@AireBeanForm.FieldName(value="SubTest"))
+        private SubTest sub;
+
+        public static class SubTest {
+
+            @AireBeanForm.FormField
+            private int myNumber;
+
+            @AireBeanForm.FormField
+            private AireSize size;
+        }
+    }
 }

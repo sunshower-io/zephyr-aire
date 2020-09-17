@@ -68,7 +68,16 @@ public class ElementXPathMatcher {
     }
 
     if (!endOfExpression()) {
-      throw new RuntimeException("Expected EOL, didn't get it");
+      if (!stack.isEmpty()) {
+        doMatch(results, stack.peek());
+      } else {
+
+//        val rest = readAll();
+//
+//        // TODO recurse
+//        throw new RuntimeException(
+//            String.format("Expected EOL, got '%s' instead you lovely baloo", rest));
+      }
     }
   }
 
@@ -98,6 +107,14 @@ public class ElementXPathMatcher {
           .flatMap(child -> child.getComponent().stream())
           .forEach(child -> matchSilently(results, child));
     }
+  }
+
+  private String readAll() throws IOException {
+    val b = new StringBuilder();
+    for (int ch = 0; !(ch == -1 || ch == 65535); ch = reader.read()) {
+      b.append((char) ch);
+    }
+    return b.toString();
   }
 
   private boolean endOfExpression() throws IOException {

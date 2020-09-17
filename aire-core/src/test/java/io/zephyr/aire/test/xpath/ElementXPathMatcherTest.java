@@ -4,6 +4,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
+import io.zephyr.aire.test.Element;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 
@@ -58,6 +59,23 @@ class ElementXPathMatcherTest {
 
     val results = m.match(div);
     assertEquals(results.size(), 1);
+  }
+
+  @Test
+  void ensureDirectChildIsSelectable() {
+      val expr = new ElementXPathMatcher("//*[@class='aire-bean-form']/*[@class='aire-bean-form']");
+      val body = new Div();
+
+      val container = new Div();
+      container.addClassName("aire-bean-form");
+      val intermediateChild = new Div();
+      intermediateChild.addClassName("aire-bean-form");
+
+      container.add(intermediateChild);
+      body.add(container);
+      val results = expr.match(body);
+      assertEquals(results.get(results.size() - 1), intermediateChild);
+
   }
 
   @Test

@@ -14,6 +14,7 @@ import com.vaadin.flow.data.renderer.TextRenderer;
 import com.vaadin.flow.shared.Registration;
 import io.zephyr.aire.reflect.Reflection;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import lombok.val;
 
 import java.lang.annotation.ElementType;
@@ -21,6 +22,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @CssImport("./styles/aire/components/aire-bean-form.css")
@@ -31,6 +34,8 @@ public class AireBeanForm<T> extends VerticalLayout {
   private int level = 0;
 
   private static final String CLASS_NAME = "aire-bean-form";
+  private static final String TEXT_CLASS_NAME = "aire-text-field";
+  private static final String NUMBER_CLASS_NAME = "aire-number-field";
 
   public interface FieldType {}
 
@@ -123,13 +128,18 @@ public class AireBeanForm<T> extends VerticalLayout {
           }
         } else if (Boolean.class.isAssignableFrom(fieldType) || boolean.class.isAssignableFrom(fieldType)) {
           addField(field, Checkbox.class, fieldType);
-        } else if (Number.class.isAssignableFrom(fieldType) || int.class.isAssignableFrom(fieldType)) {
-          val numField = new NumberField();
-          numField.setLabel(getFieldName(field));
+        } else if (BigDecimal.class.isAssignableFrom(fieldType)) {
+          val numField = setUpField(field, BigDecimalField.class);
+          if (instance != null) {
+            numField.setValue(((BigDecimal) getFieldValue(field)));
+          }
           add(numField);
-
-          //TODO fix
-//          addField(field, NumberField.class, fieldType);
+        } else if (Number.class.isAssignableFrom(fieldType) || int.class.isAssignableFrom(fieldType)) {
+          val numField = setUpField(field, new NumberField());
+          if (instance != null) {
+            numField.setValue(((Number) getFieldValue(field)).doubleValue());
+          }
+          add(numField);
         } else if (Date.class.isAssignableFrom(fieldType)) {
           addField(field, DatePicker.class, fieldType);
         } else if (Enum.class.isAssignableFrom(fieldType)) {
@@ -218,15 +228,31 @@ public class AireBeanForm<T> extends VerticalLayout {
     }
   }
 
-  protected <U extends Component, V> void addField(Field field, Class<U> fieldType, Class<V> valueType) {
+  private AbstractNumberField setUpField(Field field, AbstractNumberField numberField) {
+    numberField.setLabel(getFieldName(field));
+    numberField.setClassName(NUMBER_CLASS_NAME);
+    return numberField;
+  }
+
+  @SneakyThrows
+  private <U extends Component> U setUpField(Field field, Class<U> fieldType) {
+    val formField = Reflection.instantiate(fieldType);
+
+    val setLabel = fieldType.getDeclaredMethod("setLabel", String.class); //this isn't working for NumberField and IntegerField, despite having setLabel
+    setLabel.invoke(formField, getFieldName(field));
+
+    if (GeneratedVaadinNumberField.class.isAssignableFrom(fieldType) || BigDecimalField.class.isAssignableFrom(fieldType)) {
+      ((HasStyle) formField).setClassName(NUMBER_CLASS_NAME);
+    } else if (GeneratedVaadinTextField.class.isAssignableFrom(fieldType)) {
+      ((HasStyle) formField).setClassName(TEXT_CLASS_NAME);
+    }
+
+    return formField;
+  }
+
+  private <U extends Component, V> void addField(Field field, Class<U> fieldType, Class<V> valueType) {
     try {
-      val formField = Reflection.instantiate(fieldType);
-
-      val setLabel = fieldType.getDeclaredMethod("setLabel", String.class);
-      setLabel.invoke(formField, getFieldName(field));
-
-//      val addBlurListener = fieldType.getDeclaredMethod("addBlurListener", ComponentEventListener.class);
-//      addBlurListener.invoke(formField, new InternalTextFieldBlurListener(getFieldName(field)));
+      val formField = setUpField(field, fieldType);
 
       if (instance != null) {
         val setValue = fieldType.getDeclaredMethod("setValue", valueType);

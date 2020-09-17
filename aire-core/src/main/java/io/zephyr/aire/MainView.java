@@ -143,10 +143,10 @@ public class MainView extends AireApplicationViewport {
     addContent(tabPanel);
 
 
-    val form = new AireBeanForm<Test>(Test.class);
+//    val form = new AireBeanForm<Test>(Test.class);
 
 //    val reg = form.addOnDirtyListener();
-    tabPanel.add(form);
+//    tabPanel.add(form);
 
     //
     //      palette.addEventListener()
@@ -157,25 +157,25 @@ public class MainView extends AireApplicationViewport {
     //    //    }
   }
 
-  public static class Test {
-    @AireBeanForm.FormField(
-        options = AireBeanForm.Text.Email.class,
-        validation = @AireBeanForm.FieldValidation(type = AireBeanForm.Validations.REGEXP, value = "*"))
-    private String whatever;
-
-    @AireBeanForm.FormField
-    private boolean coolbean;
-
-    @AireBeanForm.FormField(name="SubTest")
-    private SubTest sub;
-
-    public static class SubTest {
+    public static class Test {
+        @AireBeanForm.FormField(
+                options = AireBeanForm.Text.Email.class,
+                validation = @AireBeanForm.FieldValidation(type = AireBeanForm.Validations.REGEXP, value = "*"))
+        private String whatever;
 
         @AireBeanForm.FormField
-        private int myNumber;
+        private boolean coolbean;
 
-        @AireBeanForm.FormField
-        private AireSize size;
+        @AireBeanForm.FormField(name=@AireBeanForm.FieldName(value="SubTest"))
+        private SubTest sub;
+
+        public static class SubTest {
+
+            @AireBeanForm.FormField
+            private int myNumber;
+
+            @AireBeanForm.FormField
+            private AireSize size;
+        }
     }
-  }
 }

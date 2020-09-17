@@ -8,10 +8,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.select.Select;
-import com.vaadin.flow.component.textfield.EmailField;
-import com.vaadin.flow.component.textfield.PasswordField;
-import com.vaadin.flow.component.textfield.TextArea;
-import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.component.textfield.*;
 import io.zephyr.aire.MainView;
 import io.zephyr.aire.api.ComponentDefinition;
 import io.zephyr.aire.components.AireSize;
@@ -19,6 +16,7 @@ import io.zephyr.aire.test.*;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -76,29 +74,25 @@ class AireBeanFormTest {
         assertEquals(2, forms.size());
     }
 
-    @Test
-    void ensureOuterFormGetsButtons(@Element("/*[@class='aire-bean-form']/div[@class='aire-button-group']") Div div) {
+    //TODO "Expected EOL, didn't get it"
+    @ViewTest(MainView.class)
+    @EditView(withMethods = "basicSetup")
+    void ensureOuterFormGetsButtons(@Elements("//*[@class='aire-bean-form']/div[@class='aire-button-group']") List<Div> divs) {
+        assertEquals(1, divs.size());
+        val div = divs.get(0);
         val buttons = div.getChildren().filter(button -> button instanceof Button).map(button -> ((Button) button).getText()).collect(Collectors.toList());
         assertEquals(1, buttons.stream().filter(text -> text.equals("Save")).count());
         assertEquals(1, buttons.stream().filter(text -> text.equals("Cancel")).count());
     }
 
-    //TODO Josiah "Expected EOL, didn't get it"
-//    @Test
-//    void ensureSubFormDoesNotGetButtons(@Element("/*[@class='aire-bean-form']/*[@class='aire-bean-form']") AireBeanForm form) {
-//        assertNotNull(form);
-//        val classes = form.getChildren().filter(div -> div instanceof Div).map(div -> ((Div) div).getClassName()).filter(className -> className.equals("aire-button-group")).count();
-//        assertEquals(0, classes);
-//    }
 
-
-    //TODO Josiah "Expected EOL, didn't get it"
-//    @ViewTest(MainView.class)
-//    @EditView(withMethods = "basicSetup")
-//    void ensureSubClassFieldsGetRendered(@Element("/*[@class='aire-bean-form']/*[@class='aire-bean-form']") AireBeanForm form) {
-//        val displayable = form.getChildren().filter(field -> field instanceof TextField).map(field -> (TextField) field);
-//        assertEquals(1, displayable.count());
-//    }
+    //TODO "Expected EOL, didn't get it"
+    @ViewTest(MainView.class)
+    @EditView(withMethods = "basicSetup")
+    void ensureSubClassFieldsGetRendered(@Element("//*[@class='aire-bean-form']/*[@class='aire-bean-form']") AireBeanForm form) {
+        val displayable = form.getChildren().filter(field -> field instanceof TextField).map(field -> (TextField) field);
+        assertEquals(1, displayable.count());
+    }
 
     @ViewTest(MainView.class)
     @EditView(withMethods = "basicSetup")
@@ -142,10 +136,23 @@ class AireBeanFormTest {
         assertEquals(1, fields.count());
     }
 
-    //TODO test numbers
+    //TODO  "Expected EOL, didn't get it"
+    @ViewTest(MainView.class)
+    @EditView(withMethods = "basicSetup")
+    void ensureBigDecimalFieldsCanBeAdded(@Element("//vaadin-big-decimal-field") BigDecimalField field) {
+        assertTrue(field.hasClassName("aire-number-field"));
+    }
 
-    @Test
-    void ensureDateCanBeAdded() {
+    //TODO  "Expected EOL, didn't get it"
+    @ViewTest(MainView.class)
+    @EditView(withMethods = "basicSetup")
+    void ensureNumberFieldsCanBeAdded(@Elements("//vaadin-number-field") List<NumberField> fields) {
+        assertEquals(1, fields.stream().filter(field -> field.getLabel().equals("thisIsANumber")).count());
+        assertEquals(1, fields.stream().filter(field -> field.getLabel().equals("thisIsAnInt")).count());
+    }
+
+  @Test
+  void ensureDateCanBeAdded() {
         val form = new AireBeanForm<>(TestFormClass.class);
         val fields = form.getChildren().filter(field -> field instanceof DatePicker);
         assertEquals(1, fields.count());
@@ -164,7 +171,6 @@ class AireBeanFormTest {
         val fields = form.getChildren().filter(field -> field instanceof RadioButtonGroup);
         assertEquals(1, fields.count());
     }
-
 
 
 
@@ -202,6 +208,15 @@ class AireBeanFormTest {
 
         @AireBeanForm.FormField(options = AireBeanForm.Options.Select.class)
         private AireSize otherSize;
+
+        @AireBeanForm.FormField
+        private BigDecimal theBiggestDecimal;
+
+        @AireBeanForm.FormField
+        private Number thisIsANumber;
+
+        @AireBeanForm.FormField
+        private Integer thisIsAnInt;
 
         static class SubTest {
 

@@ -68,6 +68,8 @@ public class ElementXPathMatcher {
     }
 
     if (!endOfExpression()) {
+
+      //TODO recurse
       throw new RuntimeException("Expected EOL, didn't get it");
     }
   }

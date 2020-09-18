@@ -8,6 +8,8 @@ import io.zephyr.aire.test.Element;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 
+import java.util.stream.Collectors;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ElementXPathMatcherTest {
@@ -76,6 +78,26 @@ class ElementXPathMatcherTest {
       val results = expr.match(body);
       assertEquals(results.get(results.size() - 1), intermediateChild);
 
+  }
+
+  @Test
+  void ensureDirectChildWithDifferentSelectorIsSelectable() {
+    val expr = new ElementXPathMatcher("//*[@class='aire-bean-form']/div[@class='aire-button-group']");
+    val body = new Div();
+
+    val container = new Div();
+    container.addClassName("aire-bean-form");
+    val ancillaryChild = new Div();
+    ancillaryChild.addClassName("aire-bean-form");
+    val actualDesiredResult = new Div();
+    actualDesiredResult.addClassName("aire-button-group");
+
+    container.add(ancillaryChild);
+    container.add(actualDesiredResult);
+    body.add(container);
+    val results = expr.match(body);
+    val actual = results.stream().filter(result -> result.getElement().equals(actualDesiredResult.getElement())).collect(Collectors.toList());
+    assertEquals(1, actual.size());
   }
 
   @Test

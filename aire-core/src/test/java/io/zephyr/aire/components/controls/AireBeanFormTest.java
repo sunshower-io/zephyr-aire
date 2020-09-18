@@ -86,12 +86,12 @@ class AireBeanFormTest {
     }
 
 
-    //TODO "Expected EOL, didn't get it"
     @ViewTest(MainView.class)
     @EditView(withMethods = "basicSetup")
-    void ensureSubClassFieldsGetRendered(@Element("//*[@class='aire-bean-form']/*[@class='aire-bean-form']") AireBeanForm form) {
-        val displayable = form.getChildren().filter(field -> field instanceof TextField).map(field -> (TextField) field);
-        assertEquals(1, displayable.count());
+    void ensureSubClassFieldsGetRendered(@Elements("//*[@class='aire-bean-form']/*[@class='aire-bean-form']") List<AireBeanForm> forms) {
+        val form = forms.get(1); // TODO fix -- temporary fix until sub-selectors work properly
+        val displayable = form.getChildren().filter(field -> field instanceof TextField).map(field -> (TextField) field).collect(Collectors.toList());
+        assertEquals(1, displayable.size());
     }
 
     @ViewTest(MainView.class)

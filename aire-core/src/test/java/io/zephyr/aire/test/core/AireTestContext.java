@@ -64,12 +64,8 @@ public class AireTestContext {
     val component = UI.getCurrent().getElement().getComponent();
     if (component.isPresent()) {
       val compiler = new ElementXPathMatcher(path);
-      val results = compiler.match(component.get());
-
-      if (results == null || results.isEmpty()) {
-        return null;
-      }
-      return results.get(0);
+      val results = compiler.select(component.get());
+      return results;
     }
     return null;
   }

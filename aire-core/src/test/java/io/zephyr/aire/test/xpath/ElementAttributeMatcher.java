@@ -24,6 +24,11 @@ public class ElementAttributeMatcher implements ElementMatcher {
   }
 
   @Override
+  public Token getToken() {
+    return null;
+  }
+
+  @Override
   public boolean matches(HasElement element) {
     return tagMatcher.matches(element)
         && element

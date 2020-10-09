@@ -1,9 +1,7 @@
 package io.zephyr.aire.test.xpath;
 
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.*;
 import io.zephyr.aire.test.Element;
 import lombok.val;
 import org.junit.jupiter.api.Test;
@@ -16,6 +14,38 @@ class ElementXPathMatcherTest {
   void ensureRootSelectionWorks() {
     val results = new ElementXPathMatcher("/h1").match(new H1());
     assertEquals(results.size(), 1);
+  }
+
+  @Test
+  void ensureNestedSelectWorks() {
+    val root = new Div();
+    val first = new Div();
+    root.add(first);
+    val second = new Div();
+    first.add(second);
+
+    val fstmatch = new Div();
+    fstmatch.addClassName("aire-bean-form");
+    second.add(fstmatch);
+
+    val sndMatch = new Span();
+    sndMatch.addClassName("aire-bean-form");
+    fstmatch.add(sndMatch);
+
+    val query = "//*[@class='aire-bean-form']/*[@class='aire-bean-form']";
+    val result = new ElementXPathMatcher(query).select(root);
+    assertTrue(sndMatch == result);
+  }
+
+  @Test
+  void ensureRootSelectAllWorks() {
+    val fst = new Div();
+    val snd = new Div();
+    val thrd = new Div();
+    fst.add(snd);
+    snd.add(thrd);
+
+    assertEquals(new ElementXPathMatcher("//div").match(fst).size(), 3);
   }
 
   @Test
@@ -63,19 +93,24 @@ class ElementXPathMatcherTest {
 
   @Test
   void ensureDirectChildIsSelectable() {
-      val expr = new ElementXPathMatcher("//*[@class='aire-bean-form']/*[@class='aire-bean-form']");
-      val body = new Div();
+    val expr = new ElementXPathMatcher("//*[@class='aire-bean-form']/*[@class='aire-bean-form']");
+    val body = new Div();
 
-      val container = new Div();
-      container.addClassName("aire-bean-form");
-      val intermediateChild = new Div();
-      intermediateChild.addClassName("aire-bean-form");
+    val container = new Div();
+    container.addClassName("aire-bean-form");
+    val intermediateChild = new Div();
+    intermediateChild.addClassName("aire-bean-form");
 
-      container.add(intermediateChild);
-      body.add(container);
-      val results = expr.match(body);
-      assertEquals(results.get(results.size() - 1), intermediateChild);
+    container.add(intermediateChild);
+    body.add(container);
+    val results = expr.match(body);
+    assertEquals(results.get(results.size() - 1), intermediateChild);
+  }
 
+  @Test
+  void ensureNestedScenarioWorks() {
+
+      //todo
   }
 
   @Test
@@ -93,6 +128,35 @@ class ElementXPathMatcherTest {
 
     val results = m.match(root);
     assertEquals(results.size(), 1);
+  }
+
+  @Test
+  void ensureNestedElementWithClassSelectorCanBeSelected() {
+    val root = new Div();
+    val firstLevel = new Div();
+    root.add(firstLevel);
+
+    val secondLevel = new Div();
+    firstLevel.add(secondLevel);
+
+    val firstBeanForm = new Div();
+    secondLevel.add(firstBeanForm);
+    firstBeanForm.addClassName("aire-bean-form");
+
+    val buttonGroupContainer = new Div();
+    val firstChild = new Button();
+    val secondChild = new Button();
+
+    buttonGroupContainer.addClassName("aire-button-group");
+    buttonGroupContainer.add(firstChild);
+    buttonGroupContainer.add(secondChild);
+
+    firstBeanForm.add(buttonGroupContainer);
+
+    val query = "//*[@class='aire-bean-form']/div[@class='aire-button-group']";
+    val matched = new ElementXPathMatcher(query).select(root);
+    assertTrue(matched instanceof Div);
+    assertEquals(matched.getElement().getChildCount(), 2);
   }
 
   @Test

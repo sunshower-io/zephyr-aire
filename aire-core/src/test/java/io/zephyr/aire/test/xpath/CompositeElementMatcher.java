@@ -15,8 +15,13 @@ public class CompositeElementMatcher implements ElementMatcher {
   }
 
   @Override
+  public Token getToken() {
+    return null;
+  }
+
+  @Override
   public boolean matches(HasElement element) {
-    boolean result = true;
+    boolean result;
     for (val matcher : matchers) {
       result = matcher.matches(element);
       if (!result) {
@@ -24,10 +29,20 @@ public class CompositeElementMatcher implements ElementMatcher {
       }
     }
     return true;
-    //    return matchers.stream().allMatch(t -> t.matches(element));
   }
 
   public void add(ElementMatcher matcher) {
     matchers.add(matcher);
+  }
+
+  @Override
+  public String toString() {
+    val result = new StringBuilder();
+    result.append("Matcher[type=composite, values={\n");
+    for (val matcher : matchers) {
+      result.append("\t").append(matcher.toString()).append("\n");
+    }
+    result.append("}]");
+    return result.toString();
   }
 }

@@ -1,5 +1,6 @@
 package io.zephyr.aire.test.xpath;
 
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import lombok.val;
 
@@ -8,14 +9,28 @@ import java.io.PushbackReader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Stack;
 
 public class ElementXPathMatcher {
 
+  private int regionEnd;
+  private int regionStart;
+
   final PushbackReader reader;
+  final StringBuilder program;
 
   public ElementXPathMatcher(String expression) {
+    this.program = new StringBuilder();
     this.reader = new PushbackReader(new StringReader(expression), 100);
+  }
+
+  public HasElement select(HasElement root) {
+    val result = match(root);
+    if (result.isEmpty()) {
+      return null;
+    }
+    return result.get(result.size() - 1);
   }
 
   public List<HasElement> match(HasElement root) {
@@ -38,6 +53,7 @@ public class ElementXPathMatcher {
 
   private void doMatch(List<HasElement> results, HasElement current) throws IOException {
     if (isRoot()) {
+      results.clear(); // clear out match context
       selectFrom(results, current);
     } else if (isDocumentSelection()) {
       selectDocumentElements(results, current);
@@ -68,30 +84,38 @@ public class ElementXPathMatcher {
     }
 
     if (!endOfExpression()) {
-      if (!stack.isEmpty()) {
-        doMatch(results, stack.peek());
-      } else {
-
-//        val rest = readAll();
-//
-//        // TODO recurse
-//        throw new RuntimeException(
-//            String.format("Expected EOL, got '%s' instead you lovely baloo", rest));
+      if (!results.isEmpty()) {
+        val subsequentMatchContext = results.get(results.size() - 1);
+        subsequentMatchContext
+            .getElement()
+            .getChildren()
+            .flatMap(t -> t.getComponent().stream())
+            .forEach(t -> doMatchUnchecked(results, t));
       }
+    }
+  }
+
+  private void doMatchUnchecked(List<HasElement> results, Component t) {
+    try {
+      doMatch(results, t);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
   }
 
   private boolean isDocumentSelection() throws IOException {
 
-    int fst = reader.read();
+    int fst = read();
     if (fst == '/') {
-      int snd = reader.read();
+      int snd = read();
       if (snd == '/') {
+        sync();
         return true;
       }
-      reader.unread(snd);
+      unread(snd);
     }
-    reader.unread(fst);
+    unread(fst);
+    sync();
     return false;
   }
 
@@ -118,18 +142,19 @@ public class ElementXPathMatcher {
   }
 
   private boolean endOfExpression() throws IOException {
-    int ch = reader.read();
+    int ch = read();
     if (ch == -1 || ch == 65535) {
       return true;
     }
-    reader.unread(ch);
+    unread(ch);
+    sync();
     return false;
   }
 
   private ElementMatcher readElementMatcher() throws IOException {
 
-    val ch = reader.read();
-    reader.unread(ch);
+    val ch = read();
+    unread(ch);
 
     if (ch == '*') {
       return resolveWildcardMatcher();
@@ -137,19 +162,21 @@ public class ElementXPathMatcher {
     if (Character.isLetterOrDigit(ch)) {
       return readNameElementMatcher();
     }
+    sync();
     throw new RuntimeException("Nope");
   }
 
   private ElementMatcher readNameElementMatcher() throws IOException {
     StringBuilder b = readIdentifier();
-    val nameMatcher = new NameElementMatcher(b.toString());
+    val nameMatcher =
+        new NameElementMatcher(new Token(program, regionStart, regionEnd), b.toString());
     chomp();
     if (peek() == '[') {
-      reader.read();
+      read();
       val result = new CompositeElementMatcher();
       result.add(nameMatcher);
       readAttributeMatchers(result);
-      int ch = reader.read();
+      int ch = read();
       if (ch != ']') {
         throw new RuntimeException("Expected ']' to close attribute list");
       }
@@ -160,20 +187,21 @@ public class ElementXPathMatcher {
 
   private ElementMatcher resolveWildcardMatcher() throws IOException {
     var matcher = new CompositeElementMatcher();
-    matcher.add(new AllElementMatcher());
-    reader.read();
+    matcher.add(new AllElementMatcher(new Token(program, regionStart, regionEnd)));
+    read();
     chomp();
 
-    int ch = reader.read();
+    int ch = read();
 
     if (ch == '[') {
       readAttributeMatchers(matcher);
     }
 
-    ch = reader.read();
+    ch = read();
     if (ch != ']') {
       throw new RuntimeException("Expected ']' to close attribute list");
     }
+    sync();
 
     return matcher;
   }
@@ -188,17 +216,21 @@ public class ElementXPathMatcher {
     chomp();
 
     if (peek() == '@') {
-      reader.read();
+      read();
       if (peek() == '*') {
-        reader.read();
-        matcher.add(new AnyAttributeMatcher());
+        read();
+        matcher.add(new AnyAttributeMatcher(new Token(program, regionStart, regionEnd)));
       } else {
         val attribute = readIdentifier().toString();
         val operator = readOperator();
         if (operator == null) {
-          matcher.add(new AttributeExistenceElementMatcher(attribute));
+          matcher.add(
+              new AttributeExistenceElementMatcher(
+                  new Token(program, regionStart, regionEnd), attribute));
         } else {
-          matcher.add(new AttributeBinaryOperator(operator, attribute, readValue()));
+          matcher.add(
+              new AttributeBinaryOperator(
+                  new Token(program, regionStart, regionEnd), operator, attribute, readValue()));
         }
       }
     }
@@ -217,32 +249,33 @@ public class ElementXPathMatcher {
     int ch;
     val buffer = new StringBuilder();
     do {
-      ch = reader.read();
+      ch = read();
       buffer.append((char) ch);
     } while (ch != ']');
-    reader.unread(ch);
+    unread(ch);
     return buffer.toString();
   }
 
   private String readStringLiteral() throws IOException {
-    reader.read();
+    read();
     val result = new StringBuilder();
     int ch;
     do {
-      ch = reader.read();
+      ch = read();
       result.append((char) ch);
     } while (ch != '\'');
     result.deleteCharAt(result.length() - 1);
+    sync();
     return result.toString();
   }
 
   private Operator readOperator() throws IOException {
     chomp();
 
-    int fst = reader.read();
+    int fst = read();
 
     if (fst == ']') {
-      reader.unread(fst);
+      unread(fst);
       return null;
     }
 
@@ -260,42 +293,73 @@ public class ElementXPathMatcher {
   }
 
   private int peek() throws IOException {
-    int result = reader.read();
-    reader.unread(result);
+    int result = read();
+    unread(result);
     return result;
   }
 
   private void chomp() throws IOException {
     int ch;
     do {
-      ch = reader.read();
+      ch = read();
     } while (Character.isWhitespace(ch));
-    reader.unread(ch);
+    unread(ch);
+    sync();
   }
 
   private StringBuilder readIdentifier() throws IOException {
     StringBuilder b = new StringBuilder();
     int ch;
     do {
-      ch = reader.read();
+      ch = read();
       b.append((char) ch);
-    } while (Character.isLetterOrDigit(ch));
-    reader.unread(ch);
+    } while (isIdentifiedCharacter(ch));
+    unread(ch);
     b.deleteCharAt(b.length() - 1);
+    sync();
     return b;
   }
 
+  private boolean isIdentifiedCharacter(int ch) {
+    if (Character.isLetterOrDigit(ch)) {
+      return true;
+    }
+    switch ((char) ch) {
+      case '-':
+      case '_':
+        return true;
+    }
+    return false;
+  }
+
   private boolean isRoot() throws IOException {
-    int ch = reader.read();
+    int ch = read();
     if (ch == '/') {
-      int sch = reader.read();
+      int sch = read();
       if (sch != '/') {
-        reader.unread(sch);
+        unread(sch);
         return true;
       }
-      reader.unread(sch);
+      unread(sch);
     }
-    reader.unread(ch);
+    unread(ch);
     return false;
+  }
+
+  private int read() throws IOException {
+    regionEnd++;
+    int ch = reader.read();
+    program.append((char) ch);
+    return ch;
+  }
+
+  private void unread(int ch) throws IOException {
+    program.deleteCharAt(regionEnd - 1);
+    regionEnd--;
+    reader.unread(ch);
+  }
+
+  private void sync() {
+    regionStart = regionEnd;
   }
 }

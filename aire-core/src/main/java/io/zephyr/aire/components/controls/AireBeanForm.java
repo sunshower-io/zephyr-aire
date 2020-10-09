@@ -42,13 +42,15 @@ public class AireBeanForm<T> extends VerticalLayout {
   public static final class Text implements FieldType {
 
     public static final class Email implements FieldType {}
-    public static final class TextArea implements  FieldType {}
-    public static final class Password implements FieldType {}
 
+    public static final class TextArea implements FieldType {}
+
+    public static final class Password implements FieldType {}
   }
 
   public static final class Options implements FieldType {
     public static final class RadioButtons implements FieldType {}
+
     public static final class Select implements FieldType {}
   }
 
@@ -62,7 +64,6 @@ public class AireBeanForm<T> extends VerticalLayout {
     FieldValidation[] validation() default {};
 
     FieldName name() default @FieldName;
-
   }
 
   public enum Validations {
@@ -114,7 +115,7 @@ public class AireBeanForm<T> extends VerticalLayout {
         val annotation = field.getAnnotation(AireBeanForm.FormField.class);
         val option = annotation.options();
 
-        //TODO validations
+        // TODO validations
 
         if (String.class.isAssignableFrom(fieldType)) {
           if (option.isAssignableFrom(AireBeanForm.Text.Email.class)) {
@@ -126,7 +127,8 @@ public class AireBeanForm<T> extends VerticalLayout {
           } else {
             addField(field, TextField.class, fieldType);
           }
-        } else if (Boolean.class.isAssignableFrom(fieldType) || boolean.class.isAssignableFrom(fieldType)) {
+        } else if (Boolean.class.isAssignableFrom(fieldType)
+            || boolean.class.isAssignableFrom(fieldType)) {
           addField(field, Checkbox.class, fieldType);
         } else if (BigDecimal.class.isAssignableFrom(fieldType)) {
           val numField = setUpField(field, BigDecimalField.class);
@@ -134,7 +136,8 @@ public class AireBeanForm<T> extends VerticalLayout {
             numField.setValue(((BigDecimal) getFieldValue(field)));
           }
           add(numField);
-        } else if (Number.class.isAssignableFrom(fieldType) || int.class.isAssignableFrom(fieldType)) {
+        } else if (Number.class.isAssignableFrom(fieldType)
+            || int.class.isAssignableFrom(fieldType)) {
           val numField = setUpField(field, new NumberField());
           if (instance != null) {
             numField.setValue(((Number) getFieldValue(field)).doubleValue());
@@ -190,9 +193,8 @@ public class AireBeanForm<T> extends VerticalLayout {
         }
 
       } catch (NullPointerException nex) {
-        //not on that field
+        // not on that field
       }
-
     }
     if (level == 0) {
       val buttonGroup = new Div();
@@ -238,10 +240,16 @@ public class AireBeanForm<T> extends VerticalLayout {
   private <U extends Component> U setUpField(Field field, Class<U> fieldType) {
     val formField = Reflection.instantiate(fieldType);
 
-    val setLabel = fieldType.getDeclaredMethod("setLabel", String.class); //this isn't working for NumberField and IntegerField, despite having setLabel
+    val setLabel =
+        fieldType.getDeclaredMethod(
+            "setLabel",
+            String
+                .class); // this isn't working for NumberField and IntegerField, despite having
+                         // setLabel
     setLabel.invoke(formField, getFieldName(field));
 
-    if (GeneratedVaadinNumberField.class.isAssignableFrom(fieldType) || BigDecimalField.class.isAssignableFrom(fieldType)) {
+    if (GeneratedVaadinNumberField.class.isAssignableFrom(fieldType)
+        || BigDecimalField.class.isAssignableFrom(fieldType)) {
       ((HasStyle) formField).setClassName(NUMBER_CLASS_NAME);
     } else if (GeneratedVaadinTextField.class.isAssignableFrom(fieldType)) {
       ((HasStyle) formField).setClassName(TEXT_CLASS_NAME);
@@ -250,7 +258,8 @@ public class AireBeanForm<T> extends VerticalLayout {
     return formField;
   }
 
-  private <U extends Component, V> void addField(Field field, Class<U> fieldType, Class<V> valueType) {
+  private <U extends Component, V> void addField(
+      Field field, Class<U> fieldType, Class<V> valueType) {
     try {
       val formField = setUpField(field, fieldType);
 
@@ -260,14 +269,13 @@ public class AireBeanForm<T> extends VerticalLayout {
       }
 
       add(formField);
-    } catch(Exception ex) {
-      //TODO handle
+    } catch (Exception ex) {
+      // TODO handle
     }
   }
 
-
   public <T, U> Registration addOnDirtyListener(
-          ComponentEventListener<ComponentEvent<AireBeanForm<T>>> listener) {
+      ComponentEventListener<ComponentEvent<AireBeanForm<T>>> listener) {
     //    return addListener(OnDirtyEvent.class,  listener);
     return null;
   }
@@ -287,7 +295,7 @@ public class AireBeanForm<T> extends VerticalLayout {
   }
 
   class InternalTextFieldBlurListener
-          implements ComponentEventListener<BlurNotifier.BlurEvent<TextField>> {
+      implements ComponentEventListener<BlurNotifier.BlurEvent<TextField>> {
 
     final String fieldName;
 
@@ -298,11 +306,11 @@ public class AireBeanForm<T> extends VerticalLayout {
     @Override
     public void onComponentEvent(BlurNotifier.BlurEvent<TextField> textFieldBlurEvent) {
       dispatch(
-              new OnDirtyEvent<>(
-                      AireBeanForm.this,
-                      fieldName,
-                      getFieldValue(fieldName),
-                      textFieldBlurEvent.getSource().getValue()));
+          new OnDirtyEvent<>(
+              AireBeanForm.this,
+              fieldName,
+              getFieldValue(fieldName),
+              textFieldBlurEvent.getSource().getValue()));
     }
 
     private <T, U> void dispatch(OnDirtyEvent<T, U> event) {
@@ -313,6 +321,4 @@ public class AireBeanForm<T> extends VerticalLayout {
   private <T> T getFieldValue(String fieldName) {
     return Reflection.fieldValue(fieldName, type, instance);
   }
-
-
 }

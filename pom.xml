@@ -25,6 +25,7 @@
         <module>aire-api</module>
         <module>aire-core</module>
         <module>zephyr-admin</module>
+        <module>aire-docs/aire-docs-core</module>
 	<!--  <module>aire-installers/aire-windows-installer</module> -->
     </modules>
 

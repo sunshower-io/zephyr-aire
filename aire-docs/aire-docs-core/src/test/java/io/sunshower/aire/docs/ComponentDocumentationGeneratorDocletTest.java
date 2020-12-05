@@ -1,5 +1,6 @@
 package io.sunshower.aire.docs;
 
+import io.sunshower.aire.docs.core.AireDocumentationTest;
 import org.junit.jupiter.api.Test;
 
 import javax.tools.DocumentationTool;
@@ -10,6 +11,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@AireDocumentationTest
 class ComponentDocumentationGeneratorDocletTest {
 
   @Test
@@ -21,8 +23,7 @@ class ComponentDocumentationGeneratorDocletTest {
           "-sourcepath",
           "./src/test/java",
           "-subpackages",
-          "io.sunshower.aire.docs.examples",
-          "io.sunshower.aire.docs.examples",
+          "io.sunshower.aire.docs",
         };
     DocumentationTool.DocumentationTask task =
         systemDocumentationTool.getTask(

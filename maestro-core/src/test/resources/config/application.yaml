@@ -1,0 +1,13 @@
+
+
+
+persistence:
+  connections:
+    - name: primary configuration
+      description: Primary (read/write, unpooled) connection
+      autocommit: false
+      driver: org.h2.Driver
+      url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
+      username: sa
+      password: sa
+      mode: READ_WRITE

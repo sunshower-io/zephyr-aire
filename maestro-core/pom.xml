@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.zephyr.aire</groupId>
+        <artifactId>aire-parent</artifactId>
+        <version>2.0.0-SNAPSHOT</version>
+        <relativePath>../aire-parent</relativePath>
+    </parent>
+
+    <groupId>com.motorefi.maestro</groupId>
+    <artifactId>maestro-core</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>maestro-core</name>
+    <url>http://www.motorefi.com</url>
+
+    <repositories>
+        <repository>
+            <id>maven-central</id>
+            <name>maven-central</name>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
+    </repositories>
+
+    <properties>
+        <aire.version>2.0.0-SNAPSHOT</aire.version>
+        <hibernate.version>5.4.25.Final</hibernate.version>
+        <h2.version>1.4.200</h2.version>
+        <snakeyaml.version>1.27</snakeyaml.version>
+        <hikari-cp.version>3.4.5</hikari-cp.version>
+    </properties>
+
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${vaadin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>${hikari-cp.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>${snakeyaml.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zephyr.aire</groupId>
+            <artifactId>aire-api</artifactId>
+            <version>${aire.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>io.zephyr.aire</groupId>
+            <artifactId>aire-core</artifactId>
+            <version>${aire.version}</version>
+            <scope>test</scope>
+            <type>test-jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zephyr.aire</groupId>
+            <artifactId>aire-core</artifactId>
+            <version>${aire.version}</version>
+            <scope>provided</scope>
+            <classifier>classes</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.mvysny.kaributesting</groupId>
+            <artifactId>karibu-testing-v10</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>gyre-api</artifactId>
+            <version>${zephyr.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>zephyr-main</artifactId>
+            <version>${zephyr.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.esotericsoftware.yamlbeans</groupId>
+            <artifactId>yamlbeans</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.modules</groupId>
+            <artifactId>jboss-modules</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>kernel-test-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>kernel-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>sunshower-yaml-reader</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>kernel-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.zafarkhaja</groupId>
+            <artifactId>java-semver</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>kernel-core</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>io.zephyr</groupId>
+            <artifactId>spring-embedded-plugin</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spring-boot-starter</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-testbench</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>

@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project>
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.zephyr</groupId>
     <artifactId>zephyr-aire</artifactId>
@@ -7,7 +9,6 @@
     <properties>
         <zephyr.version>2.0.39.Final</zephyr.version>
     </properties>
-
 
     <distributionManagement>
         <repository>
@@ -18,16 +19,17 @@
             <id>sunshower-snapshots</id>
             <url>http://artifacts.sunshower.io/repository/sunshower-snapshots</url>
         </snapshotRepository>
-
     </distributionManagement>
+
     <modules>
         <module>aire-parent</module>
         <module>aire-api</module>
         <module>aire-core</module>
         <module>zephyr-admin</module>
         <module>aire-docs/aire-docs-core</module>
-	<!--  <module>aire-installers/aire-windows-installer</module> -->
-    </modules>
+        <!--  <module>aire-installers/aire-windows-installer</module> -->
 
+        <module>maestro-core</module>
+    </modules>
 
 </project>

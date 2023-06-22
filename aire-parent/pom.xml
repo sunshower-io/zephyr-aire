@@ -45,7 +45,7 @@
         <vaadin.version>16.0.0</vaadin.version>
         <zephyr.version>2.0.39.Final</zephyr.version>
         <vaadin-html-components.version>3.1.1</vaadin-html-components.version>
-        <vaadin-flow-server.version>3.1.1</vaadin-flow-server.version>
+        <vaadin-flow-server.version>9.1.2</vaadin-flow-server.version>
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
         <sass-maven-plugin.version>3.7.2</sass-maven-plugin.version>
         <maven-war-plugin.version>3.2.3</maven-war-plugin.version>
